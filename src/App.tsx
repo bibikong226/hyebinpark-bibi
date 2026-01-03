@@ -240,7 +240,7 @@ const App = () => {
             </motion.div>
           </div>
           {/* RIGHT: INTERACTIVE JIGSAW -> ASSEMBLED -> FULL PROFILE REVEAL */}
-          <div className="w-full md:w-1/2 h-[60vh] md:h-full relative flex items-center justify-start md:ml-4">
+          <div className="w-full md:w-1/2 h-[60vh] md:h-full relative flex items-center justify-center md:ml-20">
             <div 
               className="relative w-[380px] h-[280px] md:w-[440px] md:h-[320px]"
               onMouseEnter={() => setIsHovering(true)}
@@ -268,14 +268,14 @@ const App = () => {
                     style={{ willChange: "transform", zIndex: 10 - i }}
                   >
                     <div 
-                      className="w-[120px] h-[120px] md:w-[140px] md:h-[140px] flex items-center justify-center p-3"
+                      className="w-[120px] h-[120px] md:w-[140px] md:h-[140px] flex items-center justify-center"
                       style={{ 
                         clipPath: `path("${JIGSAW_PATHS[p.variant]}")`,
                         WebkitClipPath: `path("${JIGSAW_PATHS[p.variant]}")`,
                         backgroundColor: p.color,
                       }}
                     >
-                      <span className="text-[10px] md:text-[12px] font-extrabold tracking-[0.05em] text-white text-center leading-snug drop-shadow-lg select-none" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.4)' }}>
+                      <span className="text-[10px] md:text-[12px] font-extrabold tracking-[0.02em] text-white text-center leading-snug select-none px-2" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.4)' }}>
                         {p.label}
                       </span>
                     </div>
@@ -286,17 +286,26 @@ const App = () => {
               {/* Full profile photo (visible after assembled state) */}
               <motion.div
                 className="absolute inset-0 flex items-center justify-center"
-                initial={{ opacity: 0, scale: 0.92 }}
+                initial={{ opacity: 0, scale: 0.85, y: 30 }}
                 animate={{ 
                   opacity: animationPhase === 'photo' ? 1 : 0, 
-                  scale: animationPhase === 'photo' ? 1 : 0.92,
+                  scale: animationPhase === 'photo' ? 1 : 0.85,
+                  y: animationPhase === 'photo' ? 0 : 30,
                 }}
-                transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+                transition={{ 
+                  duration: 0.9, 
+                  ease: [0.16, 1, 0.3, 1],
+                }}
               >
-                <img 
+                <motion.img 
                   src={profilePhoto} 
                   alt="Hyebin Park" 
                   className="w-[400px] h-[500px] md:w-[480px] md:h-[600px] object-cover object-top"
+                  initial={{ filter: 'blur(10px)' }}
+                  animate={{ 
+                    filter: animationPhase === 'photo' ? 'blur(0px)' : 'blur(10px)',
+                  }}
+                  transition={{ duration: 0.7, delay: 0.1 }}
                 />
               </motion.div>
             </div>
