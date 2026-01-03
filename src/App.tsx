@@ -12,20 +12,20 @@ import profilePhoto from "@/assets/profile-photo.jpg";
  * - Restored Testimonial Carousel
  */
 
-// Jigsaw paths - tabs/holes match so pieces interlock cleanly (base 120, tab depth 40)
+// Jigsaw paths - smaller tabs/holes (base 120, tab depth 20)
 const JIGSAW_PATHS = {
   // Top-left: top flat, left flat, right tab, bottom tab
-  P1: "M0,0 L120,0 L120,30 C120,30 160,30 160,60 C160,90 120,90 120,90 L120,120 L90,120 C90,120 90,160 60,160 C30,160 30,120 30,120 L0,120 Z",
+  P1: "M0,0 L120,0 L120,45 C120,45 140,45 140,60 C140,75 120,75 120,75 L120,120 L75,120 C75,120 75,140 60,140 C45,140 45,120 45,120 L0,120 Z",
   // Top-middle: top flat, left hole, right tab, bottom tab
-  P2: "M0,0 L120,0 L120,30 C120,30 160,30 160,60 C160,90 120,90 120,90 L120,120 L90,120 C90,120 90,160 60,160 C30,160 30,120 30,120 L0,120 L0,90 C0,90 40,90 40,60 C40,30 0,30 0,30 Z",
+  P2: "M0,0 L120,0 L120,45 C120,45 140,45 140,60 C140,75 120,75 120,75 L120,120 L75,120 C75,120 75,140 60,140 C45,140 45,120 45,120 L0,120 L0,75 C0,75 20,75 20,60 C20,45 0,45 0,45 Z",
   // Top-right: top flat, left hole, right flat, bottom tab
-  P3: "M0,0 L120,0 L120,120 L90,120 C90,120 90,160 60,160 C30,160 30,120 30,120 L0,120 L0,90 C0,90 40,90 40,60 C40,30 0,30 0,30 Z",
+  P3: "M0,0 L120,0 L120,120 L75,120 C75,120 75,140 60,140 C45,140 45,120 45,120 L0,120 L0,75 C0,75 20,75 20,60 C20,45 0,45 0,45 Z",
   // Bottom-left: top hole, left flat, right tab, bottom flat
-  P4: "M0,0 L30,0 C30,0 30,40 60,40 C90,40 90,0 90,0 L120,0 L120,30 C120,30 160,30 160,60 C160,90 120,90 120,90 L120,120 L0,120 Z",
+  P4: "M0,0 L45,0 C45,0 45,20 60,20 C75,20 75,0 75,0 L120,0 L120,45 C120,45 140,45 140,60 C140,75 120,75 120,75 L120,120 L0,120 Z",
   // Bottom-middle: top hole, left hole, right tab, bottom flat
-  P5: "M0,0 L30,0 C30,0 30,40 60,40 C90,40 90,0 90,0 L120,0 L120,30 C120,30 160,30 160,60 C160,90 120,90 120,90 L120,120 L0,120 L0,90 C0,90 40,90 40,60 C40,30 0,30 0,30 Z",
+  P5: "M0,0 L45,0 C45,0 45,20 60,20 C75,20 75,0 75,0 L120,0 L120,45 C120,45 140,45 140,60 C140,75 120,75 120,75 L120,120 L0,120 L0,75 C0,75 20,75 20,60 C20,45 0,45 0,45 Z",
   // Bottom-right: top hole, left hole, right flat, bottom flat
-  P6: "M0,0 L30,0 C30,0 30,40 60,40 C90,40 90,0 90,0 L120,0 L120,120 L0,120 L0,90 C0,90 40,90 40,60 C40,30 0,30 0,30 Z",
+  P6: "M0,0 L45,0 C45,0 45,20 60,20 C75,20 75,0 75,0 L120,0 L120,120 L0,120 L0,75 C0,75 20,75 20,60 C20,45 0,45 0,45 Z",
 };
 
 const PuzzlePiece = ({ variant, color, isResolved, className, style = {}, label, imgPos }) => {
@@ -268,19 +268,18 @@ const App = () => {
                     style={{ willChange: "transform", zIndex: (Math.floor(i / 3) * 10) + (i % 3) }}
                   >
                     <div 
-                      className="w-[160px] h-[160px] relative"
+                      className="w-[140px] h-[140px] relative"
                       style={{ 
                         clipPath: `path("${JIGSAW_PATHS[p.variant]}")`,
                         WebkitClipPath: `path("${JIGSAW_PATHS[p.variant]}")`,
                         background: `linear-gradient(145deg, ${p.color}, ${p.color}dd)`,
                       }}
                     >
-                      {/* Center text in the main 120x120 body (ignore tabs) */}
                       <div className="absolute left-0 top-0 w-[120px] h-[120px] flex flex-col items-center justify-center">
-                        <span className="text-[12px] md:text-[14px] font-black tracking-wide text-white text-center leading-none select-none drop-shadow-sm">
+                        <span className="text-[13px] md:text-[15px] font-black tracking-wide text-white text-center leading-none select-none drop-shadow-sm">
                           {p.label[0]}
                         </span>
-                        <span className="text-[9px] md:text-[11px] font-bold tracking-wider text-white/90 text-center leading-none select-none mt-1 drop-shadow-sm">
+                        <span className="text-[10px] md:text-[12px] font-bold tracking-wider text-white/90 text-center leading-none select-none mt-1.5 drop-shadow-sm">
                           {p.label[1]}
                         </span>
                       </div>
