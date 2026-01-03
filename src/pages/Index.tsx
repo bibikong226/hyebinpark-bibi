@@ -11,11 +11,11 @@ const Index = () => {
       <section className="min-h-[90vh] flex flex-col relative overflow-hidden">
         {/* Background Name Treatment - Very subtle, positioned as background layer */}
         <div 
-          className="absolute inset-0 flex items-start justify-center pt-24 md:pt-32 select-none pointer-events-none"
+          className="absolute inset-0 flex items-start justify-center pt-20 md:pt-28 select-none pointer-events-none"
           aria-hidden="true"
         >
           <span 
-            className="font-sans text-[20vw] md:text-[18vw] lg:text-[16vw] font-bold tracking-[0.15em] uppercase whitespace-nowrap text-foreground/[0.03]"
+            className="font-sans text-[24vw] md:text-[22vw] lg:text-[20vw] font-bold tracking-[0.3em] uppercase whitespace-nowrap text-foreground/[0.06]"
           >
             HYEBIN PARK
           </span>
