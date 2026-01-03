@@ -23,200 +23,119 @@ const PuzzleShape = ({
 }) => {
   // viewBox: 0 0 100 100
   // These are "jigsaw-ish" paths with tabs/slots for a modern illustrated look.
+  // Interlocking puzzle piece paths based on 2x3 grid like the reference image
   const getPath = () => {
     switch (variant) {
+      // Top-left: tab right, tab bottom
       case "P1":
         return `
-          M18 18
-          Q18 12 24 12
-          H36
-          Q38 12 38 16
-          C38 22 50 22 50 16
-          Q50 12 52 12
-          H76
-          Q82 12 82 18
-          V34
-          Q82 38 78 38
-          C72 38 72 50 78 50
-          Q82 50 82 54
-          V76
-          Q82 82 76 82
-          H60
-          Q58 82 58 78
-          C58 72 46 72 46 78
-          Q46 82 44 82
-          H24
-          Q18 82 18 76
-          V60
-          Q18 58 22 58
-          C28 58 28 46 22 46
-          Q18 46 18 44
-          V24
-          Q18 20 14 20
-          C8 20 8 8 14 8
-          Q18 8 18 18
+          M 5 5
+          H 40
+          C 40 5, 40 15, 50 15
+          C 60 15, 60 5, 60 5
+          H 95
+          V 40
+          C 95 40, 105 40, 105 50
+          C 105 60, 95 60, 95 60
+          V 95
+          H 60
+          C 60 95, 60 105, 50 105
+          C 40 105, 40 95, 40 95
+          H 5
+          V 5
           Z
         `;
+      // Top-middle: slot left, tab right, tab bottom
       case "P2":
         return `
-          M18 18
-          Q18 12 24 12
-          H30
-          Q32 12 32 16
-          C32 22 44 22 44 16
-          Q44 12 46 12
-          H76
-          Q82 12 82 18
-          V28
-          Q82 30 78 30
-          C72 30 72 42 78 42
-          Q82 42 82 44
-          V48
-          Q82 50 86 50
-          C92 50 92 62 86 62
-          Q82 62 82 64
-          V76
-          Q82 82 76 82
-          H66
-          Q64 82 64 78
-          C64 72 52 72 52 78
-          Q52 82 50 82
-          H46
-          Q44 82 44 86
-          C44 92 32 92 32 86
-          Q32 82 30 82
-          H24
-          Q18 82 18 76
-          V70
-          Q18 68 22 68
-          C28 68 28 56 22 56
-          Q18 56 18 54
-          V24
-          Q18 22 22 22
-          C28 22 28 10 22 10
-          Q18 10 18 8
+          M 5 5
+          H 40
+          C 40 5, 40 15, 50 15
+          C 60 15, 60 5, 60 5
+          H 95
+          V 40
+          C 95 40, 105 40, 105 50
+          C 105 60, 95 60, 95 60
+          V 95
+          H 60
+          C 60 95, 60 105, 50 105
+          C 40 105, 40 95, 40 95
+          H 5
+          V 60
+          C 5 60, -5 60, -5 50
+          C -5 40, 5 40, 5 40
+          V 5
           Z
         `;
+      // Top-right: slot left, tab bottom
       case "P3":
         return `
-          M16 20
-          Q16 12 24 12
-          H40
-          Q42 12 42 16
-          C42 22 54 22 54 16
-          Q54 12 56 12
-          H76
-          Q84 12 84 20
-          V40
-          Q84 42 80 42
-          C74 42 74 54 80 54
-          Q84 54 84 56
-          V76
-          Q84 84 76 84
-          H56
-          Q54 84 54 80
-          C54 74 42 74 42 80
-          Q42 84 40 84
-          H24
-          Q16 84 16 76
-          V56
-          Q16 54 20 54
-          C26 54 26 42 20 42
-          Q16 42 16 40
-          V30
-          Q16 28 12 28
-          C6 28 6 16 12 16
-          Q16 16 16 20
+          M 5 5
+          H 95
+          V 95
+          H 60
+          C 60 95, 60 105, 50 105
+          C 40 105, 40 95, 40 95
+          H 5
+          V 60
+          C 5 60, -5 60, -5 50
+          C -5 40, 5 40, 5 40
+          V 5
           Z
         `;
+      // Bottom-left: slot top, tab right
       case "P4":
         return `
-          M18 18
-          Q18 12 24 12
-          H28
-          Q30 12 30 16
-          C30 22 42 22 42 16
-          Q42 12 44 12
-          H76
-          Q82 12 82 18
-          V30
-          Q82 32 78 32
-          C72 32 72 44 78 44
-          Q82 44 82 46
-          V50
-          Q82 52 86 52
-          C92 52 92 64 86 64
-          Q82 64 82 66
-          V76
-          Q82 82 76 82
-          H60
-          Q58 82 58 78
-          C58 72 46 72 46 78
-          Q46 82 44 82
-          H24
-          Q18 82 18 76
-          V62
-          Q18 60 22 60
-          C28 60 28 48 22 48
-          Q18 48 18 46
-          V24
-          Q18 22 22 22
-          C28 22 28 10 22 10
-          Q18 10 18 8
+          M 5 5
+          H 40
+          C 40 5, 40 -5, 50 -5
+          C 60 -5, 60 5, 60 5
+          H 95
+          V 40
+          C 95 40, 105 40, 105 50
+          C 105 60, 95 60, 95 60
+          V 95
+          H 5
+          V 5
           Z
         `;
+      // Bottom-middle: slot top, slot left, tab right
       case "P5":
         return `
-          M14 22
-          Q14 12 24 12
-          H76
-          Q86 12 86 22
-          V34
-          Q86 38 82 38
-          C76 38 76 50 82 50
-          Q86 50 86 54
-          V76
-          Q86 86 76 86
-          H60
-          Q58 86 58 82
-          C58 76 46 76 46 82
-          Q46 86 44 86
-          H24
-          Q14 86 14 76
-          V60
-          Q14 58 18 58
-          C24 58 24 46 18 46
-          Q14 46 14 44
-          V22
+          M 5 5
+          H 40
+          C 40 5, 40 -5, 50 -5
+          C 60 -5, 60 5, 60 5
+          H 95
+          V 40
+          C 95 40, 105 40, 105 50
+          C 105 60, 95 60, 95 60
+          V 95
+          H 5
+          V 60
+          C 5 60, -5 60, -5 50
+          C -5 40, 5 40, 5 40
+          V 5
           Z
         `;
+      // Bottom-right: slot top, slot left
       case "P6":
         return `
-          M20 20
-          Q20 12 28 12
-          H72
-          Q80 12 80 20
-          V30
-          Q80 32 76 32
-          C70 32 70 44 76 44
-          Q80 44 80 46
-          V72
-          Q80 80 72 80
-          H58
-          Q56 80 56 76
-          C56 70 44 70 44 76
-          Q44 80 42 80
-          H28
-          Q20 80 20 72
-          V58
-          Q20 56 24 56
-          C30 56 30 44 24 44
-          Q20 44 20 42
-          V20
+          M 5 5
+          H 40
+          C 40 5, 40 -5, 50 -5
+          C 60 -5, 60 5, 60 5
+          H 95
+          V 95
+          H 5
+          V 60
+          C 5 60, -5 60, -5 50
+          C -5 40, 5 40, 5 40
+          V 5
           Z
         `;
       default:
-        return `M18 18 H82 V82 H18 Z`;
+        return `M 5 5 H 95 V 95 H 5 Z`;
     }
   };
   return <div className={`relative ${className}`} style={{
@@ -240,35 +159,19 @@ const App = () => {
   const [hovered, setHovered] = useState(false);
 
   // Define a precise 2x3 grid for the pieces to snap into upon hover.
-  const finalGrid = [{
-    x: 64,
-    y: 78
-  },
-  // col 1 row 1
-  {
-    x: 184,
-    y: 78
-  },
-  // col 2 row 1
-  {
-    x: 304,
-    y: 78
-  },
-  // col 3 row 1
-  {
-    x: 64,
-    y: 204
-  },
-  // col 1 row 2
-  {
-    x: 184,
-    y: 204
-  },
-  // col 2 row 2
-  {
-    x: 304,
-    y: 204
-  } // col 3 row 2
+  // Adjusted for bigger pieces (w-48 h-48 = 192px on md)
+  const pieceSize = 140; // approximate piece size for spacing
+  const gap = -20; // negative gap for interlocking
+  const startX = 20;
+  const startY = 40;
+  
+  const finalGrid = [
+    { x: startX, y: startY }, // col 1 row 1
+    { x: startX + pieceSize + gap, y: startY }, // col 2 row 1
+    { x: startX + (pieceSize + gap) * 2, y: startY }, // col 3 row 1
+    { x: startX, y: startY + pieceSize + gap }, // col 1 row 2
+    { x: startX + pieceSize + gap, y: startY + pieceSize + gap }, // col 2 row 2
+    { x: startX + (pieceSize + gap) * 2, y: startY + pieceSize + gap }, // col 3 row 2
   ];
   const puzzlePieces = [{
     id: 1,
@@ -429,7 +332,7 @@ I turn ambiguity into structured, usable products that drive business impact.</p
               }} style={{
                 willChange: "transform"
               }}>
-                    <PuzzleShape variant={p.variant} text={p.text} color={p.color} className="w-36 h-36 md:w-44 md:h-44" />
+                    <PuzzleShape variant={p.variant} text={p.text} color={p.color} className="w-40 h-40 md:w-48 md:h-48" />
                   </motion.div>;
             })}
 
