@@ -1,260 +1,207 @@
-import React, { useRef } from "react";
-import { motion } from "framer-motion";
+import React, { useRef, useState, useEffect } from "react";
+import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 /**
  * PORTFOLIO HOMEPAGE - HYEBIN PARK
- * - Name is the largest element in hero
- * - Illustrated jigsaw puzzle pieces
- * - Default: messy / Hover: staggered fit
- * - Centered overlay for outcome text
- * - High-end strategic aesthetic
+ * - Massive Identity Branding
+ * - Smaller Interlocking Jigsaw Puzzle (Solid -> Profile Reveal)
+ * - Automatic Loop + Hover Assembly
+ * - Project Cards with Left-to-Right "Impact" Background Fill
+ * - Restored Testimonial Carousel
  */
 
-const PuzzleShape = ({
-  variant,
-  text,
-  color,
-  className
-}: {
-  variant: string;
-  text: string;
-  color: string;
-  className?: string;
-}) => {
-  // viewBox: 0 0 100 100
-  // These are "jigsaw-ish" paths with tabs/slots for a modern illustrated look.
-  // Interlocking puzzle piece paths based on 2x3 grid like the reference image
-  const getPath = () => {
-    switch (variant) {
-      // Top-left: tab right, tab bottom
-      case "P1":
-        return `
-          M 5 5
-          H 40
-          C 40 5, 40 15, 50 15
-          C 60 15, 60 5, 60 5
-          H 95
-          V 40
-          C 95 40, 105 40, 105 50
-          C 105 60, 95 60, 95 60
-          V 95
-          H 60
-          C 60 95, 60 105, 50 105
-          C 40 105, 40 95, 40 95
-          H 5
-          V 5
-          Z
-        `;
-      // Top-middle: slot left, tab right, tab bottom
-      case "P2":
-        return `
-          M 5 5
-          H 40
-          C 40 5, 40 15, 50 15
-          C 60 15, 60 5, 60 5
-          H 95
-          V 40
-          C 95 40, 105 40, 105 50
-          C 105 60, 95 60, 95 60
-          V 95
-          H 60
-          C 60 95, 60 105, 50 105
-          C 40 105, 40 95, 40 95
-          H 5
-          V 60
-          C 5 60, -5 60, -5 50
-          C -5 40, 5 40, 5 40
-          V 5
-          Z
-        `;
-      // Top-right: slot left, tab bottom
-      case "P3":
-        return `
-          M 5 5
-          H 95
-          V 95
-          H 60
-          C 60 95, 60 105, 50 105
-          C 40 105, 40 95, 40 95
-          H 5
-          V 60
-          C 5 60, -5 60, -5 50
-          C -5 40, 5 40, 5 40
-          V 5
-          Z
-        `;
-      // Bottom-left: slot top, tab right
-      case "P4":
-        return `
-          M 5 5
-          H 40
-          C 40 5, 40 -5, 50 -5
-          C 60 -5, 60 5, 60 5
-          H 95
-          V 40
-          C 95 40, 105 40, 105 50
-          C 105 60, 95 60, 95 60
-          V 95
-          H 5
-          V 5
-          Z
-        `;
-      // Bottom-middle: slot top, slot left, tab right
-      case "P5":
-        return `
-          M 5 5
-          H 40
-          C 40 5, 40 -5, 50 -5
-          C 60 -5, 60 5, 60 5
-          H 95
-          V 40
-          C 95 40, 105 40, 105 50
-          C 105 60, 95 60, 95 60
-          V 95
-          H 5
-          V 60
-          C 5 60, -5 60, -5 50
-          C -5 40, 5 40, 5 40
-          V 5
-          Z
-        `;
-      // Bottom-right: slot top, slot left
-      case "P6":
-        return `
-          M 5 5
-          H 40
-          C 40 5, 40 -5, 50 -5
-          C 60 -5, 60 5, 60 5
-          H 95
-          V 95
-          H 5
-          V 60
-          C 5 60, -5 60, -5 50
-          C -5 40, 5 40, 5 40
-          V 5
-          Z
-        `;
-      default:
-        return `M 5 5 H 95 V 95 H 5 Z`;
-    }
-  };
-  return <div className={`relative ${className}`} style={{
-    filter: "drop-shadow(0px 12px 18px rgba(0,0,0,0.08))"
-  }}>
-      <svg className="absolute inset-0" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-        {/* Main fill with modern color */}
-        <path d={getPath()} fill={color} stroke="rgba(0,0,0,0.14)" strokeWidth="1.2" />
-        {/* Subtle highlight stroke for a designed feel */}
-        <path d={getPath()} fill="none" stroke="rgba(255,255,255,0.55)" strokeWidth="1" />
-      </svg>
-      <div className="relative z-10 h-full w-full flex items-center justify-center px-3">
-        <span className="text-[11px] md:text-sm font-bold uppercase tracking-[0.15em] text-white text-center leading-tight drop-shadow-md select-none">
-          {text}
-        </span>
-      </div>
-    </div>;
+const JIGSAW_PATHS = {
+  P1: "M0,0 H55 C65,12 75,12 85,0 H110 V50 C100,60 100,75 110,85 V110 H0 V0 Z", // Top Left
+  P2: "M0,0 H55 C65,-12 75,-12 85,0 H110 V50 C120,60 120,75 110,85 V110 H85 C75,120 65,120 55,110 H0 V85 C12,75 12,60 0,50 V0 Z", // Top Mid
+  P3: "M0,0 H110 V110 H85 C75,98 65,98 55,110 H0 V85 C12,75 12,60 0,50 V0 Z", // Top Right
+  P4: "M0,0 H55 C65,12 75,12 85,0 H110 V110 H0 V85 C-12,75 -12,60 0,50 V0 Z", // Bot Left
+  P5: "M0,0 H55 C65,-12 75,-12 85,0 H110 V110 H85 C75,98 65,98 55,110 H0 V85 C-12,75 -12,60 0,50 V0 Z", // Bot Mid
+  P6: "M0,0 H110 V110 H0 V85 C12,75 12,60 0,50 V0 Z", // Bot Right
 };
-const App = () => {
-  const heroRef = useRef<HTMLElement>(null);
 
-  // Define a precise 2x3 grid - pieces are always assembled
-  // Piece size matches the actual rendered size for proper interlocking
-  const pieceSize = 120; // base piece size
-  const overlapOffset = 10; // how much pieces overlap to interlock
-  const startX = 0;
-  const startY = 20;
-  
-  const grid = [
-    { x: startX, y: startY }, // col 1 row 1
-    { x: startX + pieceSize - overlapOffset, y: startY }, // col 2 row 1
-    { x: startX + (pieceSize - overlapOffset) * 2, y: startY }, // col 3 row 1
-    { x: startX, y: startY + pieceSize - overlapOffset }, // col 1 row 2
-    { x: startX + pieceSize - overlapOffset, y: startY + pieceSize - overlapOffset }, // col 2 row 2
-    { x: startX + (pieceSize - overlapOffset) * 2, y: startY + pieceSize - overlapOffset }, // col 3 row 2
-  ];
+const PuzzlePiece = ({ variant, color, isResolved, className, style = {}, label, imgPos }) => {
+  return (
+    <motion.div 
+      className={`absolute overflow-hidden ${className}`}
+      style={{ 
+        ...style,
+        clipPath: `path("${JIGSAW_PATHS[variant]}")`,
+        WebkitClipPath: `path("${JIGSAW_PATHS[variant]}")`,
+      }}
+    >
+      {/* Background Color Layer (Shown when scattered) */}
+      <motion.div 
+        className="absolute inset-0 z-10"
+        style={{ backgroundColor: color }}
+        animate={{ opacity: isResolved ? 0 : 1 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      />
+      {/* Profile Image Layer (Revealed ONLY when resolved) */}
+      <motion.div 
+        className="absolute inset-0 z-0 bg-cover bg-no-repeat"
+        style={{ 
+          backgroundImage: `url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=1000')`, 
+          backgroundPosition: imgPos,
+          backgroundSize: '330px 220px', // Matches 3x2 pieces of 110px each
+        }}
+        animate={{ opacity: isResolved ? 1 : 0, scale: isResolved ? 1 : 1.1 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      />
+      {/* Text Label (Hidden when resolved) */}
+      <motion.div 
+        className="relative z-20 h-full w-full flex items-center justify-center p-4"
+        animate={{ opacity: isResolved ? 0 : 1 }}
+        transition={{ duration: 0.3 }}
+      >
+        <span className="text-[7px] md:text-[8px] font-bold uppercase tracking-[0.2em] text-white text-center leading-tight drop-shadow-md select-none">
+          {label}
+        </span>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+const App = () => {
+  const [isAssembled, setIsAssembled] = useState(false);
+  const [cursorActive, setCursorActive] = useState(false);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [isTestimonialHovered, setIsTestimonialHovered] = useState(false);
+
+  const mouseX = useMotionValue(-100);
+  const mouseY = useMotionValue(-100);
+  const cursorX = useSpring(mouseX, { damping: 30, stiffness: 250 });
+  const cursorY = useSpring(mouseY, { damping: 30, stiffness: 250 });
+
+  useEffect(() => {
+    const moveMouse = (e) => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+    };
+    window.addEventListener("mousemove", moveMouse);
+    return () => window.removeEventListener("mousemove", moveMouse);
+  }, []);
+
+  // Automatic Assembly Loop
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsAssembled(prev => !prev);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Testimonial Auto-scroll
+  useEffect(() => {
+    let interval;
+    if (!isTestimonialHovered) {
+      interval = setInterval(() => {
+        setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+      }, 3500); 
+    }
+    return () => clearInterval(interval);
+  }, [isTestimonialHovered]);
+
   const puzzlePieces = [
-    { id: 1, text: "User Needs", variant: "P1", color: "#FF6B6B", pos: grid[0], initial: { x: -150, y: -100, rotate: -45 }, delay: 0.3 },
-    { id: 2, text: "Data Complexity", variant: "P2", color: "#4D96FF", pos: grid[1], initial: { x: 50, y: -180, rotate: 30 }, delay: 0.5 },
-    { id: 3, text: "Business Goals", variant: "P3", color: "#6BCB77", pos: grid[2], initial: { x: 200, y: -80, rotate: 60 }, delay: 0.7 },
-    { id: 4, text: "Tech Constraints", variant: "P4", color: "#FFD93D", pos: grid[3], initial: { x: -120, y: 250, rotate: -60 }, delay: 0.9 },
-    { id: 5, text: "Edge Cases", variant: "P5", color: "#B983FF", pos: grid[4], initial: { x: 80, y: 280, rotate: 45 }, delay: 1.1 },
-    { id: 6, text: "Emerging Tech", variant: "P6", color: "#FF8FAB", pos: grid[5], initial: { x: 250, y: 200, rotate: -30 }, delay: 1.3 },
+    { id: 1, label: "User Needs", variant: "P1", color: "#FF6B6B", messy: { x: -30, y: -40, r: -15 }, final: { x: 0, y: 0, r: 0 }, imgPos: "0% 0%" },
+    { id: 2, label: "Data Complexity", variant: "P2", color: "#4D96FF", messy: { x: 130, y: -20, r: 25 }, final: { x: 110, y: 0, r: 0 }, imgPos: "50% 0%" },
+    { id: 3, label: "Business Goals", variant: "P3", color: "#6BCB77", messy: { x: 260, y: -60, r: 10 }, final: { x: 220, y: 0, r: 0 }, imgPos: "100% 0%" },
+    { id: 4, label: "Tech Constraints", variant: "P4", color: "#FFD93D", messy: { x: -60, y: 130, r: -35 }, final: { x: 0, y: 110, r: 0 }, imgPos: "0% 100%" },
+    { id: 5, label: "Edge Cases", variant: "P5", color: "#B983FF", messy: { x: 110, y: 170, r: 12 }, final: { x: 110, y: 110, r: 0 }, imgPos: "50% 100%" },
+    { id: 6, label: "Emerging Tech", variant: "P6", color: "#FF8FAB", messy: { x: 280, y: 140, r: -20 }, final: { x: 220, y: 110, r: 0 }, imgPos: "100% 100%" },
   ];
-  return <div className="bg-[#ffffff] text-[#121212] selection:bg-indigo-100 overflow-x-hidden font-sans">
+
+  const projects = [
+    { title: "Neuroflow AI", desc: "Enterprise Algorithm UX", year: "2024", color: "#FEE2E2", accent: "#E11D48", impact: "Increased workflow efficiency by 42%" },
+    { title: "Vault Protocol", desc: "Crypto Trust Architecture", year: "2023", color: "#E0E7FF", accent: "#4F46E5", impact: "Secured $200M+ in digital assets" },
+    { title: "Lumina Labs", desc: "Research Visualization", year: "2024", color: "#D1FAE5", accent: "#059669", impact: "Reduced data ambiguity by 60%" },
+    { title: "Ether Custody", desc: "Institutional Security", year: "2023", color: "#FEF3C7", accent: "#D97706", impact: "Onboarded 15 tier-1 global banks" },
+    { title: "Veritas Identity", desc: "Digital Sovereign UX", year: "2022", color: "#CFFAFE", accent: "#0891B2", impact: "Zero identity breaches in 2 years" },
+    { title: "Nexus Systems", desc: "Multi-modal AI Suite", year: "2024", color: "#F3E8FF", accent: "#9333EA", impact: "Adopted by 50+ enterprise teams" },
+  ];
+
+  const testimonials = [
+    { id: "t1", author: "Sarah Jenkins", role: "Director of Product, Paradigm AI", text: "Hyebin has a rare ability to bridge technical complexity with human-centered strategy. She makes sense of the chaos in our enterprise workflows." },
+    { id: "t2", author: "David Chen", role: "CTO, BlockVault", text: "Working across crypto workflows is notoriously difficult, but Hyebin's systematic approach provided the clarity we needed to scale our custody platform." },
+    { id: "t3", author: "Elena Rossi", role: "Lead UX Researcher, Lumina", text: "She doesn't just design interfaces; she designs systems. Her research-backed insight is the most valuable asset in our AI product cycle." },
+    { id: "t4", author: "Marcus Thorne", role: "Founder, Veritas Identity", text: "The human touch Hyebin brings to emerging technologies is unparalleled. She turns cold algorithms into warm, usable experiences." },
+  ];
+
+  const nextTestimonial = () => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+  const prevTestimonial = () => setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+
+  return (
+    <div className="bg-[#ffffff] text-[#121212] selection:bg-indigo-100 overflow-x-hidden font-sans cursor-none">
+      
+      {/* MAGNETIC VIEW CURSOR */}
+      <motion.div
+        style={{ x: cursorX, y: cursorY }}
+        className={`fixed top-0 left-0 pointer-events-none z-[999] flex items-center justify-center transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ease-out ${cursorActive ? 'w-14 h-14 bg-white shadow-xl border border-zinc-100' : 'w-4 h-4 bg-black'}`}
+      >
+        <AnimatePresence>
+          {cursorActive && (
+            <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="text-[9px] font-black tracking-widest text-black">VIEW</motion.span>
+          )}
+        </AnimatePresence>
+      </motion.div>
+
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 flex justify-between items-center px-8 md:px-16 py-10">
+      <nav className="fixed top-0 w-full z-50 flex justify-between items-center px-8 md:px-16 py-10 mix-blend-difference text-white">
         <div className="font-semibold tracking-tight text-xl uppercase">Hyebin Park</div>
-        <div className="hidden md:flex gap-12 text-[10px] uppercase tracking-[0.3em] font-medium text-zinc-400">
-          <a href="#work" className="hover:text-black transition-all duration-300">Selected Work</a>
-          <a href="#about" className="hover:text-black transition-all duration-300">Approach</a>
-          <a href="#contact" className="hover:text-black transition-all duration-300">Contact</a>
+        <div className="hidden md:flex gap-12 text-[10px] uppercase tracking-[0.3em] font-medium">
+          <a href="#work" className="hover:opacity-60 transition-all">Work</a>
+          <a href="#about" className="hover:opacity-60 transition-all">Approach</a>
+          <a href="#contact" className="hover:opacity-60 transition-all">Contact</a>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section ref={heroRef} className="relative h-screen">
+      <section className="relative h-screen">
         <div className="sticky top-0 h-screen w-full flex flex-col md:flex-row items-center px-8 md:px-16">
-          {/* Subtle Grid Background */}
-          <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{
-          backgroundImage: "linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)",
-          backgroundSize: "100px 100px"
-        }} />
-
-          {/* Left: Branding & Message (Name as Hero) */}
+          <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: "linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)", backgroundSize: "100px 100px" }} />
           <div className="w-full md:w-3/5 z-10">
-            <motion.div initial={{
-            opacity: 0,
-            y: 20
-          }} animate={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 1.0,
-            ease: [0.16, 1, 0.3, 1]
-          }}>
-              <h2 className="text-xs uppercase tracking-[0.6em] text-zinc-400 mb-8 font-bold">
-                Strategic Product Designer
-              </h2>
-              <h1 className="text-[3.2rem] sm:text-[4.5rem] md:text-[5.5rem] font-light tracking-tighter leading-none mb-10 lg:text-8xl">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}>
+              <h1 className="text-[3.5rem] sm:text-[5rem] md:text-[6rem] lg:text-[7.5rem] font-light tracking-tighter leading-none mb-10 select-none text-zinc-900">
                 Hyebin Park
               </h1>
-              <h3 className="text-xl text-zinc-500 font-light leading-relaxed max-w-xl mb-8 md:text-5xl">Turn Complexity to Clarity<span className="font-serif italic text-indigo-600">
-complex, messy problems</span> into business impact.
+              <h3 className="text-xl md:text-2xl text-zinc-500 font-light leading-relaxed max-w-xl mb-8">
+                Turn <span className="font-serif italic text-indigo-600">Complexity</span> to Clarity
               </h3>
-              <p className="text-zinc-400 leading-relaxed max-w-lg font-light">From AI algorithms to crypto workflows,
-I turn ambiguity into structured, usable products that drive business impact.</p>
+              <p className="text-zinc-400 leading-relaxed max-w-lg font-light">
+                From AI algorithms to crypto workflows, I turn ambiguity into structured, usable products that drive business impact.
+              </p>
             </motion.div>
           </div>
-
-          {/* Right: Jigsaw Illustration - Always Assembled */}
+          {/* RIGHT: INTERACTIVE JIGSAW -> PROFILE REVEAL (Smaller, No Frame) */}
           <div className="w-full md:w-2/5 h-[60vh] md:h-full relative flex items-center justify-center">
-            <div className="relative w-full max-w-[500px] aspect-square">
-              {/* Puzzle Pieces - Auto-assemble animation */}
-              {puzzlePieces.map(p => (
-                <motion.div 
-                  key={p.id} 
+            <div 
+              className="relative w-[330px] h-[220px]"
+              onMouseEnter={() => setIsAssembled(true)}
+              onMouseLeave={() => setIsAssembled(false)}
+            >
+              {puzzlePieces.map((p, i) => (
+                <motion.div
+                  key={p.id}
                   className="absolute"
-                  initial={{ 
-                    opacity: 0, 
-                    scale: 0.6,
-                    x: p.initial.x,
-                    y: p.initial.y,
-                    rotate: p.initial.rotate,
+                  animate={{
+                    x: isAssembled ? p.final.x : p.messy.x,
+                    y: isAssembled ? p.final.y : p.messy.y,
+                    rotate: isAssembled ? 0 : p.messy.r,
                   }}
-                  animate={{ 
-                    opacity: 1, 
-                    scale: 1,
-                    x: p.pos.x,
-                    y: p.pos.y,
-                    rotate: 0,
+                  transition={{ 
+                    duration: 0.9, 
+                    ease: [0.16, 1, 0.3, 1], 
+                    delay: isAssembled ? i * 0.08 : 0 
                   }}
-                  transition={{
-                    duration: 1.2,
-                    ease: [0.16, 1, 0.3, 1],
-                    delay: p.delay,
-                  }}
+                  style={{ willChange: "transform", zIndex: i }}
                 >
-                  <PuzzleShape variant={p.variant} text={p.text} color={p.color} className="w-32 h-32 md:w-36 md:h-36" />
+                  <PuzzlePiece 
+                    variant={p.variant} 
+                    color={p.color} 
+                    label={p.label}
+                    isResolved={isAssembled}
+                    imgPos={p.imgPos}
+                    className="w-[110px] h-[110px]"
+                  />
                 </motion.div>
               ))}
             </div>
@@ -262,55 +209,111 @@ I turn ambiguity into structured, usable products that drive business impact.</p
         </div>
       </section>
 
-      {/* Selected Work Section */}
-      <section id="work" className="px-8 md:px-16 py-40 border-t border-zinc-100 bg-white">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-32 gap-10">
+      {/* WORK GRID */}
+      <section id="work" className="px-8 md:px-16 py-48 border-t border-zinc-100 bg-white">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-40 gap-10">
           <div className="max-w-2xl">
-            <h2 className="text-[10px] uppercase tracking-[0.6em] text-zinc-400 mb-8 font-black">Featured work</h2>
-            <p className="text-5xl md:text-7xl font-bold tracking-tighter leading-none">
-              Strategic <span className="italic font-serif font-light text-zinc-300">Outputs.</span>
-            </p>
-          </div>
-          <div className="text-[11px] uppercase tracking-[0.4em] font-black border-b-4 border-black pb-4 cursor-pointer hover:text-indigo-600 hover:border-indigo-600 transition-all duration-300">
-            Full case studies
+            <h2 className="text-[10px] uppercase tracking-[0.6em] text-zinc-400 mb-8 font-black">Selected Work</h2>
+            <p className="text-5xl md:text-8xl font-bold tracking-tighter leading-none">Strategic <span className="italic font-serif font-light text-zinc-300">Outputs.</span></p>
           </div>
         </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-40">
+          {projects.map((project, idx) => (
+            <motion.div key={idx} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              onMouseEnter={() => setCursorActive(true)} onMouseLeave={() => setCursorActive(false)}
+              className="group relative cursor-none"
+            >
+              <div className="aspect-[16/11] mb-10 relative overflow-hidden transition-all duration-700 rounded-sm border border-zinc-50 group-hover:shadow-2xl" style={{ backgroundColor: project.color }}>
+                <motion.div className="absolute inset-0 flex items-center justify-center" whileHover={{ scale: 1.1 }}>
+                  <div className="w-1/2 h-1/2 rounded-full border border-black/5 opacity-20 group-hover:opacity-40 transition-all duration-1000" />
+                </motion.div>
+                <div className="absolute top-0 left-0 w-full h-1 opacity-0 group-hover:opacity-100 transition-opacity" style={{ backgroundColor: project.accent }} />
+              </div>
+              <div className="space-y-4 px-2 relative z-10 transition-transform duration-500 group-hover:-translate-y-2">
+                <div className="flex justify-between items-baseline">
+                  <h3 className="text-3xl font-bold group-hover:text-zinc-900 leading-tight">{project.title}</h3>
+                  <span className="text-[10px] font-mono text-zinc-300">{project.year}</span>
+                </div>
+                <p className="text-xs uppercase tracking-[0.3em] font-bold text-zinc-400">{project.desc}</p>
+                <div className="mt-8 relative inline-block overflow-hidden rounded-md px-4 py-2">
+                    <div className="absolute inset-0 bg-zinc-100" />
+                    <div className="absolute inset-0 z-0 origin-left transition-transform duration-500 ease-out scale-x-0 group-hover:scale-x-100" style={{ backgroundColor: project.accent }} />
+                    <span className="relative z-10 text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500 group-hover:text-white">Impact: {project.impact}</span>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-48">
-          {[{
-          title: "Neuroflow AI",
-          desc: "Enterprise Algorithm UX",
-          year: "2024",
-          img: "bg-zinc-50"
-        }, {
-          title: "Vault Protocol",
-          desc: "Crypto Trust Architecture",
-          year: "2023",
-          img: "bg-zinc-100"
-        }].map((item, idx) => <motion.div key={idx} initial={{
-          opacity: 0,
-          y: 50
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true
-        }} className="group cursor-pointer">
-              <div className={`aspect-[16/10] ${item.img} mb-12 relative overflow-hidden rounded-sm transition-all duration-700`}>
-                <div className="absolute inset-0 bg-indigo-600/5 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-                   <div className="w-14 h-14 bg-white rounded-full shadow-lg flex items-center justify-center scale-0 group-hover:scale-100 transition-all duration-500">
-                      <div className="w-2.5 h-2.5 bg-indigo-600 rounded-full" />
-                   </div>
+      {/* TESTIMONIAL CAROUSEL SECTION */}
+      <section 
+        className="px-8 md:px-16 pt-32 pb-48 bg-zinc-900 text-white relative overflow-hidden"
+        onMouseEnter={() => setIsTestimonialHovered(true)}
+        onMouseLeave={() => setIsTestimonialHovered(false)}
+      >
+        <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-[0.02] flex items-center justify-center">
+            <h2 className="text-[25vw] font-black uppercase tracking-tighter select-none">Impact</h2>
+        </div>
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="flex flex-col items-center text-center mb-12">
+            <div className="flex items-center gap-6">
+               <div className="w-12 h-px bg-zinc-700" />
+               <span className="text-[10px] uppercase tracking-[0.6em] font-black text-indigo-400">Collaboration</span>
+               <div className="w-12 h-px bg-zinc-700" />
+            </div>
+          </div>
+          <div className="relative flex items-center justify-center min-h-[400px]">
+            <div className="absolute left-[-20px] md:left-4 lg:left-12 z-20">
+                <button 
+                  onClick={prevTestimonial}
+                  className="p-5 rounded-full border border-zinc-800 hover:border-indigo-500 text-zinc-500 hover:text-indigo-500 transition-all flex items-center justify-center bg-zinc-900/50 backdrop-blur-sm"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+            </div>
+            <div className="absolute right-[-20px] md:right-4 lg:right-12 z-20">
+                <button 
+                  onClick={nextTestimonial}
+                  className="p-5 rounded-full border border-zinc-800 hover:border-indigo-500 text-zinc-500 hover:text-indigo-500 transition-all flex items-center justify-center bg-zinc-900/50 backdrop-blur-sm"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+            </div>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentTestimonial}
+                initial={{ opacity: 0, scale: 0.98, y: 10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.98, y: -10 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-col items-center text-center space-y-12 max-w-4xl px-16"
+              >
+                <p className="text-2xl md:text-4xl lg:text-5xl font-light leading-[1.25] tracking-tight text-zinc-200 italic">
+                   "{testimonials[currentTestimonial].text}"
+                </p>
+                <div className="flex flex-col items-center">
+                    <div className="bg-zinc-800/50 rounded-md px-8 py-5 mb-6 text-center border border-zinc-800">
+                        <span className="block text-[13px] font-black uppercase tracking-[0.4em] text-zinc-300">
+                            {testimonials[currentTestimonial].author}
+                        </span>
+                        <span className="block text-[10px] font-mono uppercase tracking-widest text-zinc-500 mt-2">
+                            {testimonials[currentTestimonial].role}
+                        </span>
+                    </div>
+                    <div className="flex justify-center gap-3">
+                      {testimonials.map((_, i) => (
+                        <button 
+                          key={i} 
+                          onClick={() => setCurrentTestimonial(i)}
+                          className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${i === currentTestimonial ? 'bg-indigo-500 w-8' : 'bg-zinc-700 hover:bg-zinc-500'}`}
+                        />
+                      ))}
+                    </div>
                 </div>
-              </div>
-              <div className="flex justify-between items-end border-b border-zinc-100 pb-10 transition-all group-hover:border-indigo-100">
-                <div>
-                  <h3 className="text-4xl font-bold group-hover:text-indigo-600 transition-colors">{item.title}</h3>
-                  <p className="text-[11px] uppercase tracking-[0.4em] text-zinc-400 font-bold mt-4">{item.desc}</p>
-                </div>
-                <span className="text-[10px] font-mono text-zinc-300 uppercase tracking-widest">{item.year}</span>
-              </div>
-            </motion.div>)}
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
       </section>
 
@@ -318,14 +321,16 @@ I turn ambiguity into structured, usable products that drive business impact.</p
       <footer className="px-8 md:px-16 py-32 border-t border-zinc-100 flex flex-col md:flex-row justify-between items-center bg-[#fafafa]">
         <div>
           <div className="text-3xl font-black tracking-tighter uppercase mb-4">Hyebin Park</div>
-          <p className="text-[10px] text-zinc-400 tracking-[0.4em] uppercase font-medium">Strategic Product Design Portfolio 2024</p>
+          <p className="text-[10px] text-zinc-400 tracking-[0.4em] uppercase font-medium">Strategic Product Design Portfolio</p>
         </div>
-        <div className="flex gap-12 text-[10px] uppercase tracking-[0.4em] font-black">
+        <div className="flex gap-12 text-[10px] uppercase tracking-[0.4em] font-black text-zinc-400">
           <a href="#" className="hover:text-indigo-600 transition-colors">LinkedIn</a>
           <a href="#" className="hover:text-indigo-600 transition-colors">Read.cv</a>
           <a href="#" className="hover:text-indigo-600 transition-colors">Email</a>
         </div>
       </footer>
-    </div>;
+    </div>
+  );
 };
+
 export default App;
