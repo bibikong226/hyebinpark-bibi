@@ -2,95 +2,96 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Hyebin Park Portfolio - Warm, inviting design system */
+
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Warm cream/beige background palette */
+    --background: 40 33% 96%;
+    --foreground: 30 10% 15%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 40 25% 94%;
+    --card-foreground: 30 10% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 40 33% 96%;
+    --popover-foreground: 30 10% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Warm terracotta/coral primary */
+    --primary: 15 65% 55%;
+    --primary-foreground: 40 33% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Soft sage secondary */
+    --secondary: 150 15% 88%;
+    --secondary-foreground: 30 10% 20%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 40 20% 90%;
+    --muted-foreground: 30 8% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Warm accent - golden/amber */
+    --accent: 35 70% 60%;
+    --accent-foreground: 30 10% 15%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 35 20% 85%;
+    --input: 35 20% 88%;
+    --ring: 15 65% 55%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Portfolio specific tokens */
+    --puzzle-piece-1: 15 65% 55%;
+    --puzzle-piece-2: 35 70% 60%;
+    --puzzle-piece-3: 150 25% 65%;
+    --puzzle-piece-4: 200 35% 55%;
+    
+    --hero-gradient-start: 40 33% 96%;
+    --hero-gradient-end: 35 30% 92%;
+    
+    --shadow-warm: 30 30% 20%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 30 15% 10%;
+    --foreground: 40 20% 92%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 30 12% 14%;
+    --card-foreground: 40 20% 92%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 30 15% 10%;
+    --popover-foreground: 40 20% 92%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 15 60% 60%;
+    --primary-foreground: 30 15% 10%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 150 12% 20%;
+    --secondary-foreground: 40 20% 92%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 30 10% 18%;
+    --muted-foreground: 40 15% 60%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 35 65% 55%;
+    --accent-foreground: 30 15% 10%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 62% 40%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 30 10% 20%;
+    --input: 30 10% 22%;
+    --ring: 15 60% 60%;
+
+    --puzzle-piece-1: 15 55% 50%;
+    --puzzle-piece-2: 35 60% 50%;
+    --puzzle-piece-3: 150 20% 45%;
+    --puzzle-piece-4: 200 30% 45%;
+    
+    --hero-gradient-start: 30 15% 10%;
+    --hero-gradient-end: 30 12% 14%;
+    
+    --shadow-warm: 0 0% 0%;
   }
 }
 
@@ -100,6 +101,97 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-family: 'DM Sans', sans-serif;
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Instrument Serif', serif;
+  }
+}
+
+@layer components {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
+  }
+
+  .link-underline {
+    @apply relative inline-block;
+  }
+  
+  .link-underline::after {
+    content: '';
+    @apply absolute w-full scale-x-0 h-0.5 bottom-0 left-0 bg-primary origin-bottom-right transition-transform duration-300;
+  }
+  
+  .link-underline:hover::after {
+    @apply scale-x-100 origin-bottom-left;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+
+  .section-padding {
+    @apply px-6 py-16 md:px-12 md:py-24 lg:px-24;
+  }
+
+  .container-narrow {
+    @apply max-w-5xl mx-auto;
+  }
+
+  .container-wide {
+    @apply max-w-7xl mx-auto;
+  }
+}
+
+@layer utilities {
+  .animate-fade-up {
+    animation: fadeUp 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out forwards;
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+  .stagger-5 { animation-delay: 0.5s; }
 }
