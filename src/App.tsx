@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import profilePhoto from "@/assets/profile-photo.jpg";
 
 /**
  * PORTFOLIO HOMEPAGE - HYEBIN PARK
@@ -11,13 +12,16 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
  * - Restored Testimonial Carousel
  */
 
+// Jigsaw paths matching the reference image with rounded tabs
 const JIGSAW_PATHS = {
-  P1: "M0,0 H55 C65,12 75,12 85,0 H110 V50 C100,60 100,75 110,85 V110 H0 V0 Z", // Top Left
-  P2: "M0,0 H55 C65,-12 75,-12 85,0 H110 V50 C120,60 120,75 110,85 V110 H85 C75,120 65,120 55,110 H0 V85 C12,75 12,60 0,50 V0 Z", // Top Mid
-  P3: "M0,0 H110 V110 H85 C75,98 65,98 55,110 H0 V85 C12,75 12,60 0,50 V0 Z", // Top Right
-  P4: "M0,0 H55 C65,12 75,12 85,0 H110 V110 H0 V85 C-12,75 -12,60 0,50 V0 Z", // Bot Left
-  P5: "M0,0 H55 C65,-12 75,-12 85,0 H110 V110 H85 C75,98 65,98 55,110 H0 V85 C-12,75 -12,60 0,50 V0 Z", // Bot Mid
-  P6: "M0,0 H110 V110 H0 V85 C12,75 12,60 0,50 V0 Z", // Bot Right
+  // Top row: P1 has tab right, P2 has hole left + tab right, P3 has hole left
+  P1: "M0,0 H40 C40,0 45,0 45,0 L45,35 C45,35 45,50 55,50 C65,50 65,35 65,35 L65,0 C65,0 70,0 70,0 H110 V40 C110,40 110,45 110,45 L75,45 C75,45 60,45 60,55 C60,65 75,65 75,65 L110,65 V110 H0 V0 Z",
+  P2: "M0,40 L0,0 H40 L40,35 C40,35 40,50 50,50 C60,50 60,35 60,35 L60,0 H110 V40 L75,40 C75,40 60,40 60,50 C60,60 75,60 75,60 L110,60 V110 H70 L70,75 C70,75 70,60 60,60 C50,60 50,75 50,75 L50,110 H0 V70 L35,70 C35,70 50,70 50,60 C50,50 35,50 35,50 L0,50 V40 Z",
+  P3: "M0,40 L35,40 C35,40 50,40 50,50 C50,60 35,60 35,60 L0,60 V110 H110 V0 H70 L70,35 C70,35 70,50 60,50 C50,50 50,35 50,35 L50,0 H0 V40 Z",
+  // Bottom row: P4 has tab right + hole top, P5 has holes left/top + tab right, P6 has hole left/top
+  P4: "M0,0 H40 L40,35 C40,35 40,50 50,50 C60,50 60,35 60,35 L60,0 H110 V110 H0 V50 L35,50 C35,50 50,50 50,40 C50,30 35,30 35,30 L0,30 V0 Z",
+  P5: "M0,0 H50 L50,35 C50,35 50,50 60,50 C70,50 70,35 70,35 L70,0 H110 V110 H60 L60,75 C60,75 60,60 50,60 C40,60 40,75 40,75 L40,110 H0 V50 L35,50 C35,50 50,50 50,40 C50,30 35,30 35,30 L0,30 V0 Z",
+  P6: "M0,0 H60 L60,35 C60,35 60,50 50,50 C40,50 40,35 40,35 L40,0 H110 V110 H0 V50 L35,50 C35,50 50,50 50,40 C50,30 35,30 35,30 L0,30 V0 Z",
 };
 
 const PuzzlePiece = ({ variant, color, isResolved, className, style = {}, label, imgPos }) => {
@@ -41,9 +45,9 @@ const PuzzlePiece = ({ variant, color, isResolved, className, style = {}, label,
       <motion.div 
         className="absolute inset-0 z-0 bg-cover bg-no-repeat"
         style={{ 
-          backgroundImage: `url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=1000')`, 
+          backgroundImage: `url(${profilePhoto})`, 
           backgroundPosition: imgPos,
-          backgroundSize: '330px 220px', // Matches 3x2 pieces of 110px each
+          backgroundSize: '330px 330px', // Matches 3x2 pieces of 110px each
         }}
         animate={{ opacity: isResolved ? 1 : 0, scale: isResolved ? 1 : 1.1 }}
         transition={{ duration: 0.6, delay: 0.2 }}
