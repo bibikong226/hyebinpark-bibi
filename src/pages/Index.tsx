@@ -16,9 +16,10 @@ const Index = () => {
               className="absolute inset-x-0 top-0 pt-6 md:pt-8 select-none pointer-events-none"
               aria-hidden="true"
             >
-              <span className="block w-full text-center font-sans text-[clamp(88px,12vw,176px)] font-bold tracking-[0.22em] uppercase whitespace-nowrap text-foreground/[0.04] leading-none">
-                HYEBIN PARK
-              </span>
+              <div className="flex w-full items-baseline justify-between font-sans text-[clamp(96px,13vw,200px)] font-bold tracking-[0.26em] uppercase text-foreground/[0.04] leading-none whitespace-nowrap">
+                <span className="whitespace-nowrap">HYEBIN</span>
+                <span className="whitespace-nowrap">PARK</span>
+              </div>
             </div>
 
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full pt-24 md:pt-28 relative z-10">
