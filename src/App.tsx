@@ -268,22 +268,21 @@ const App = () => {
                     style={{ willChange: "transform", zIndex: 10 - i }}
                   >
                     <div 
-                      className="w-[120px] h-[120px] md:w-[140px] md:h-[140px] flex flex-col items-center justify-center relative"
+                      className="w-[120px] h-[120px] md:w-[140px] md:h-[140px] relative"
                       style={{ 
                         clipPath: `path("${JIGSAW_PATHS[p.variant]}")`,
                         WebkitClipPath: `path("${JIGSAW_PATHS[p.variant]}")`,
                         background: `linear-gradient(145deg, ${p.color}, ${p.color}dd)`,
-                        boxShadow: 'inset 0 2px 4px rgba(255,255,255,0.3), inset 0 -2px 4px rgba(0,0,0,0.1)',
                       }}
                     >
-                      {/* Illustration-like highlight */}
-                      <div className="absolute top-3 left-3 w-6 h-6 rounded-full bg-white/20" />
-                      <span className="text-[12px] md:text-[14px] font-black tracking-wide text-white text-center leading-none select-none drop-shadow-sm">
-                        {p.label[0]}
-                      </span>
-                      <span className="text-[9px] md:text-[11px] font-bold tracking-wider text-white/90 text-center leading-none select-none mt-1 drop-shadow-sm">
-                        {p.label[1]}
-                      </span>
+                      <div className="absolute inset-0 flex flex-col items-center justify-center">
+                        <span className="text-[12px] md:text-[14px] font-black tracking-wide text-white text-center leading-none select-none drop-shadow-sm">
+                          {p.label[0]}
+                        </span>
+                        <span className="text-[9px] md:text-[11px] font-bold tracking-wider text-white/90 text-center leading-none select-none mt-1 drop-shadow-sm">
+                          {p.label[1]}
+                        </span>
+                      </div>
                     </div>
                   </motion.div>
                 )
