@@ -21,8 +21,8 @@ const Index = () => {
           </span>
         </div>
 
-        <div className="w-full flex-1 flex items-center justify-center px-6 md:px-12 lg:px-24 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full max-w-6xl mx-auto">
+        <div className="w-full flex-1 flex items-center justify-center px-[4vw] md:px-[6vw] lg:px-[8vw] relative z-10">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full mx-auto">
             {/* Text Content */}
             <motion.div
               className="space-y-6 order-2 lg:order-1"
