@@ -71,10 +71,11 @@ const PuzzlePiece = ({ variant, color, isResolved, className, style = {}, label,
 };
 
 const App = () => {
-  const [isAssembled, setIsAssembled] = useState(false);
+  const [animationPhase, setAnimationPhase] = useState<'scattered' | 'assembling' | 'assembled' | 'photo'>('scattered');
   const [cursorActive, setCursorActive] = useState(false);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [isTestimonialHovered, setIsTestimonialHovered] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
 
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
@@ -93,31 +94,78 @@ const App = () => {
   // Track which pieces have appeared for sequential animation
   const [visiblePieces, setVisiblePieces] = useState<number[]>([]);
 
-  // Automatic Assembly Loop - slower timing
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIsAssembled(prev => !prev);
-      if (!isAssembled) {
-        setVisiblePieces([]);
-      }
-    }, 8000); // Slower loop
-    return () => clearInterval(interval);
-  }, [isAssembled]);
+  const puzzlePieces = [
+    { id: 1, label: "USER NEEDS", variant: "P1", color: "#F87171", messy: { x: -60, y: -80, r: -12 }, final: { x: 0, y: 0, r: 0 } },
+    { id: 2, label: "DATA INSIGHTS", variant: "P2", color: "#60A5FA", messy: { x: 160, y: -100, r: 18 }, final: { x: 130, y: 0, r: 0 } },
+    { id: 3, label: "BIZ GOALS", variant: "P3", color: "#4ADE80", messy: { x: 380, y: -50, r: 8 }, final: { x: 260, y: 0, r: 0 } },
+    { id: 4, label: "TECH CONSTRAINTS", variant: "P4", color: "#FACC15", messy: { x: -80, y: 200, r: -22 }, final: { x: 0, y: 130, r: 0 } },
+    { id: 5, label: "EDGE CASES", variant: "P5", color: "#C084FC", messy: { x: 140, y: 260, r: 15 }, final: { x: 130, y: 130, r: 0 } },
+    { id: 6, label: "AMBIGUITY", variant: "P6", color: "#FB7185", messy: { x: 400, y: 180, r: -10 }, final: { x: 260, y: 130, r: 0 } },
+  ];
 
-  // Sequential piece appearance
+  // Animation cycle: scattered -> assembling -> assembled -> photo -> scattered
   useEffect(() => {
-    if (!isAssembled) {
+    if (isHovering) {
+      setAnimationPhase('assembling');
+      const assembledTimer = setTimeout(() => setAnimationPhase('assembled'), 800);
+      const photoTimer = setTimeout(() => setAnimationPhase('photo'), 2000);
+      return () => {
+        clearTimeout(assembledTimer);
+        clearTimeout(photoTimer);
+      };
+    } else {
+      setAnimationPhase('scattered');
       setVisiblePieces([]);
-      const timers: NodeJS.Timeout[] = [];
-      puzzlePieces.forEach((_, i) => {
-        const timer = setTimeout(() => {
-          setVisiblePieces(prev => [...prev, i]);
-        }, 300 + i * 400); // Each piece appears 400ms apart
-        timers.push(timer);
-      });
-      return () => timers.forEach(t => clearTimeout(t));
     }
-  }, [isAssembled]);
+  }, [isHovering]);
+
+  // Auto loop when not hovering
+  useEffect(() => {
+    if (isHovering) return;
+    
+    let cancelled = false;
+    
+    const runCycle = async () => {
+      // Show pieces one by one
+      setVisiblePieces([]);
+      for (let i = 0; i < puzzlePieces.length; i++) {
+        if (cancelled) return;
+        await new Promise(r => setTimeout(r, 350));
+        setVisiblePieces(prev => [...prev, i]);
+      }
+      
+      // Wait a bit with all pieces visible
+      await new Promise(r => setTimeout(r, 2500));
+      if (cancelled) return;
+      
+      // Assemble pieces
+      setAnimationPhase('assembling');
+      await new Promise(r => setTimeout(r, 1000));
+      if (cancelled) return;
+      
+      // Show assembled puzzle
+      setAnimationPhase('assembled');
+      await new Promise(r => setTimeout(r, 1500));
+      if (cancelled) return;
+      
+      // Show photo
+      setAnimationPhase('photo');
+      await new Promise(r => setTimeout(r, 3000));
+      if (cancelled) return;
+      
+      // Reset to scattered
+      setAnimationPhase('scattered');
+      setVisiblePieces([]);
+      await new Promise(r => setTimeout(r, 500));
+      if (cancelled) return;
+      
+      // Restart cycle
+      runCycle();
+    };
+    
+    runCycle();
+    return () => { cancelled = true; };
+  }, [isHovering]);
 
   // Testimonial Auto-scroll
   useEffect(() => {
@@ -129,15 +177,6 @@ const App = () => {
     }
     return () => clearInterval(interval);
   }, [isTestimonialHovered]);
-
-  const puzzlePieces = [
-    { id: 1, label: "USER NEEDS", variant: "P1", color: "#F87171", messy: { x: -60, y: -80, r: -12 }, final: { x: 0, y: 0, r: 0 } },
-    { id: 2, label: "DATA INSIGHTS", variant: "P2", color: "#60A5FA", messy: { x: 160, y: -100, r: 18 }, final: { x: 130, y: 0, r: 0 } },
-    { id: 3, label: "BIZ GOALS", variant: "P3", color: "#4ADE80", messy: { x: 380, y: -50, r: 8 }, final: { x: 260, y: 0, r: 0 } },
-    { id: 4, label: "TECH CONSTRAINTS", variant: "P4", color: "#FACC15", messy: { x: -80, y: 200, r: -22 }, final: { x: 0, y: 130, r: 0 } },
-    { id: 5, label: "EDGE CASES", variant: "P5", color: "#C084FC", messy: { x: 140, y: 260, r: 15 }, final: { x: 130, y: 130, r: 0 } },
-    { id: 6, label: "AMBIGUITY", variant: "P6", color: "#FB7185", messy: { x: 400, y: 180, r: -10 }, final: { x: 260, y: 130, r: 0 } },
-  ];
 
   const projects = [
     { title: "Neuroflow AI", desc: "Enterprise Algorithm UX", year: "2024", color: "#FEE2E2", accent: "#E11D48", impact: "Increased workflow efficiency by 42%" },
@@ -200,72 +239,64 @@ const App = () => {
               </p>
             </motion.div>
           </div>
-          {/* RIGHT: INTERACTIVE JIGSAW -> FULL PROFILE REVEAL */}
+          {/* RIGHT: INTERACTIVE JIGSAW -> ASSEMBLED -> FULL PROFILE REVEAL */}
           <div className="w-full md:w-2/5 h-[60vh] md:h-full relative flex items-center justify-center">
             <div 
-              className="relative w-[420px] h-[320px] md:w-[480px] md:h-[380px]"
-              onMouseEnter={() => setIsAssembled(true)}
-              onMouseLeave={() => setIsAssembled(false)}
+              className="relative w-[420px] h-[340px] md:w-[500px] md:h-[420px]"
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
             >
-              {/* Scattered puzzle pieces (visible when not assembled) */}
-              <AnimatePresence>
-                {!isAssembled && puzzlePieces.map((p, i) => (
-                  visiblePieces.includes(i) && (
-                    <motion.div
-                      key={p.id}
-                      className="absolute"
-                      initial={{ opacity: 0, scale: 0.5, rotate: p.messy.r + 30 }}
-                      animate={{
-                        x: p.messy.x,
-                        y: p.messy.y,
-                        rotate: p.messy.r,
-                        opacity: 1,
-                        scale: 1,
+              {/* Puzzle pieces - scattered or assembling */}
+              {animationPhase !== 'photo' && puzzlePieces.map((p, i) => (
+                (visiblePieces.includes(i) || animationPhase === 'assembling' || animationPhase === 'assembled') && (
+                  <motion.div
+                    key={p.id}
+                    className="absolute"
+                    initial={{ opacity: 0, scale: 0.6 }}
+                    animate={{
+                      x: animationPhase === 'scattered' ? p.messy.x : p.final.x,
+                      y: animationPhase === 'scattered' ? p.messy.y : p.final.y,
+                      rotate: animationPhase === 'scattered' ? p.messy.r : 0,
+                      opacity: 1,
+                      scale: 1,
+                    }}
+                    transition={{ 
+                      duration: animationPhase === 'scattered' ? 0.6 : 0.8,
+                      ease: [0.25, 0.46, 0.45, 0.94], // Smooth natural easing
+                      delay: animationPhase === 'scattered' ? 0 : i * 0.1,
+                    }}
+                    style={{ willChange: "transform", zIndex: 10 - i }}
+                  >
+                    <div 
+                      className="w-[130px] h-[130px] md:w-[150px] md:h-[150px] flex items-center justify-center p-4 shadow-lg"
+                      style={{ 
+                        clipPath: `path("${JIGSAW_PATHS[p.variant]}")`,
+                        WebkitClipPath: `path("${JIGSAW_PATHS[p.variant]}")`,
+                        backgroundColor: p.color,
                       }}
-                      exit={{
-                        x: p.final.x,
-                        y: p.final.y,
-                        rotate: 0,
-                        opacity: 0,
-                        scale: 0.8,
-                      }}
-                      transition={{ 
-                        duration: 0.7, 
-                        ease: [0.34, 1.56, 0.64, 1], // Bouncy easing
-                      }}
-                      style={{ willChange: "transform", zIndex: 10 - i }}
                     >
-                      <div 
-                        className="w-[130px] h-[130px] md:w-[150px] md:h-[150px] flex items-center justify-center p-4 shadow-lg"
-                        style={{ 
-                          clipPath: `path("${JIGSAW_PATHS[p.variant]}")`,
-                          WebkitClipPath: `path("${JIGSAW_PATHS[p.variant]}")`,
-                          backgroundColor: p.color,
-                        }}
-                      >
-                        <span className="text-[9px] md:text-[11px] font-bold tracking-[0.1em] text-white text-center leading-tight drop-shadow-md select-none">
-                          {p.label}
-                        </span>
-                      </div>
-                    </motion.div>
-                  )
-                ))}
-              </AnimatePresence>
+                      <span className="text-[9px] md:text-[11px] font-bold tracking-[0.1em] text-white text-center leading-tight drop-shadow-md select-none">
+                        {p.label}
+                      </span>
+                    </div>
+                  </motion.div>
+                )
+              ))}
 
-              {/* Full profile photo (visible when assembled) - no glow/frame */}
+              {/* Full profile photo (visible after assembled state) */}
               <motion.div
                 className="absolute inset-0 flex items-center justify-center"
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 0, scale: 0.92 }}
                 animate={{ 
-                  opacity: isAssembled ? 1 : 0, 
-                  scale: isAssembled ? 1 : 0.95,
+                  opacity: animationPhase === 'photo' ? 1 : 0, 
+                  scale: animationPhase === 'photo' ? 1 : 0.92,
                 }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: isAssembled ? 0.2 : 0 }}
+                transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
               >
                 <img 
                   src={profilePhoto} 
                   alt="Hyebin Park" 
-                  className="w-[320px] h-[400px] md:w-[380px] md:h-[475px] object-cover object-top"
+                  className="w-[360px] h-[450px] md:w-[420px] md:h-[525px] object-cover object-top"
                 />
               </motion.div>
             </div>
