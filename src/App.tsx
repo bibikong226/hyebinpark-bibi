@@ -145,7 +145,7 @@ const App = () => {
       
       // Show assembled puzzle briefly then transition to photo
       setAnimationPhase('assembled');
-      await new Promise(r => setTimeout(r, 600));
+      await new Promise(r => setTimeout(r, 300));
       if (cancelled) return;
       
       // Show photo
