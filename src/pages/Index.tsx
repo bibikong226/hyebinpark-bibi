@@ -8,21 +8,20 @@ const Index = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="min-h-[90vh] flex items-center section-padding bg-gradient-to-b from-background to-card/30 relative overflow-hidden">
-        {/* Background Name Treatment */}
+      <section className="min-h-[90vh] flex flex-col section-padding bg-gradient-to-b from-background to-card/30 relative overflow-hidden">
+        {/* Background Name Treatment - Between header and content */}
         <div 
-          className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
+          className="w-full text-center py-8 select-none"
           aria-hidden="true"
         >
           <span 
-            className="text-[12vw] lg:text-[14vw] font-bold tracking-tight whitespace-nowrap"
-            style={{ color: 'rgba(0, 0, 0, 0.04)' }}
+            className="text-[18vw] md:text-[16vw] lg:text-[14vw] font-bold tracking-tighter whitespace-nowrap text-zinc-900/[0.06]"
           >
             HYEBIN PARK
           </span>
         </div>
 
-        <div className="container-wide w-full relative z-10">
+        <div className="container-wide w-full flex-1 flex items-center relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Text Content */}
             <motion.div
