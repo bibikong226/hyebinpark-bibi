@@ -173,12 +173,12 @@ const App = () => {
     { x: startX + (pieceSize - overlapOffset) * 2, y: startY + pieceSize - overlapOffset }, // col 3 row 2
   ];
   const puzzlePieces = [
-    { id: 1, text: "User Needs", variant: "P1", color: "#FF6B6B", pos: grid[0], delay: 0.0 },
-    { id: 2, text: "Data Complexity", variant: "P2", color: "#4D96FF", pos: grid[1], delay: 0.1 },
-    { id: 3, text: "Business Goals", variant: "P3", color: "#6BCB77", pos: grid[2], delay: 0.2 },
-    { id: 4, text: "Tech Constraints", variant: "P4", color: "#FFD93D", pos: grid[3], delay: 0.3 },
-    { id: 5, text: "Edge Cases", variant: "P5", color: "#B983FF", pos: grid[4], delay: 0.4 },
-    { id: 6, text: "Emerging Tech", variant: "P6", color: "#FF8FAB", pos: grid[5], delay: 0.5 },
+    { id: 1, text: "User Needs", variant: "P1", color: "#FF6B6B", pos: grid[0], initial: { x: -150, y: -100, rotate: -45 }, delay: 0.3 },
+    { id: 2, text: "Data Complexity", variant: "P2", color: "#4D96FF", pos: grid[1], initial: { x: 50, y: -180, rotate: 30 }, delay: 0.5 },
+    { id: 3, text: "Business Goals", variant: "P3", color: "#6BCB77", pos: grid[2], initial: { x: 200, y: -80, rotate: 60 }, delay: 0.7 },
+    { id: 4, text: "Tech Constraints", variant: "P4", color: "#FFD93D", pos: grid[3], initial: { x: -120, y: 250, rotate: -60 }, delay: 0.9 },
+    { id: 5, text: "Edge Cases", variant: "P5", color: "#B983FF", pos: grid[4], initial: { x: 80, y: 280, rotate: 45 }, delay: 1.1 },
+    { id: 6, text: "Emerging Tech", variant: "P6", color: "#FF8FAB", pos: grid[5], initial: { x: 250, y: 200, rotate: -30 }, delay: 1.3 },
   ];
   return <div className="bg-[#ffffff] text-[#121212] selection:bg-indigo-100 overflow-x-hidden font-sans">
       {/* Navigation */}
@@ -229,22 +229,29 @@ I turn ambiguity into structured, usable products that drive business impact.</p
           {/* Right: Jigsaw Illustration - Always Assembled */}
           <div className="w-full md:w-2/5 h-[60vh] md:h-full relative flex items-center justify-center">
             <div className="relative w-full max-w-[500px] aspect-square">
-              {/* Puzzle Pieces - Always interlocked */}
+              {/* Puzzle Pieces - Auto-assemble animation */}
               {puzzlePieces.map(p => (
                 <motion.div 
                   key={p.id} 
                   className="absolute"
-                  initial={{ opacity: 0, scale: 0.8 }}
+                  initial={{ 
+                    opacity: 0, 
+                    scale: 0.6,
+                    x: p.initial.x,
+                    y: p.initial.y,
+                    rotate: p.initial.rotate,
+                  }}
                   animate={{ 
                     opacity: 1, 
                     scale: 1,
                     x: p.pos.x,
                     y: p.pos.y,
+                    rotate: 0,
                   }}
                   transition={{
-                    duration: 0.6,
+                    duration: 1.2,
                     ease: [0.16, 1, 0.3, 1],
-                    delay: p.delay
+                    delay: p.delay,
                   }}
                 >
                   <PuzzleShape variant={p.variant} text={p.text} color={p.color} className="w-32 h-32 md:w-36 md:h-36" />
