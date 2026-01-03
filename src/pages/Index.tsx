@@ -15,7 +15,7 @@ const Index = () => {
           aria-hidden="true"
         >
           <span 
-            className="font-sans text-[18vw] md:text-[16vw] lg:text-[14vw] font-bold tracking-tighter whitespace-nowrap text-zinc-200"
+            className="font-serif text-[18vw] md:text-[16vw] lg:text-[14vw] font-medium tracking-tighter whitespace-nowrap text-zinc-200"
           >
             HYEBIN PARK
           </span>
