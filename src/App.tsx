@@ -95,12 +95,12 @@ const App = () => {
   const [visiblePieces, setVisiblePieces] = useState<number[]>([]);
 
   const puzzlePieces = [
-    { id: 1, label: ["USER", "NEEDS"], variant: "P1", color: "#374151", messy: { x: -60, y: -80, r: -12 }, final: { x: 0, y: 0, r: 0 } },
-    { id: 2, label: ["DATA", "COMPLEXITY"], variant: "P2", color: "#4F46E5", messy: { x: 160, y: -100, r: 18 }, final: { x: 120, y: 0, r: 0 } },
-    { id: 3, label: ["BUSINESS", "GOALS"], variant: "P3", color: "#6B7280", messy: { x: 380, y: -50, r: 8 }, final: { x: 240, y: 0, r: 0 } },
-    { id: 4, label: ["TECH", "CONSTRAINTS"], variant: "P4", color: "#1F2937", messy: { x: -80, y: 200, r: -22 }, final: { x: 0, y: 120, r: 0 } },
-    { id: 5, label: ["EDGE", "CASES"], variant: "P5", color: "#6366F1", messy: { x: 140, y: 260, r: 15 }, final: { x: 120, y: 120, r: 0 } },
-    { id: 6, label: ["EMERGING", "TECH"], variant: "P6", color: "#9CA3AF", messy: { x: 400, y: 180, r: -10 }, final: { x: 240, y: 120, r: 0 } },
+    { id: 1, label: ["USER", "NEEDS"], variant: "P1", color: "#F87171", messy: { x: -60, y: -80, r: -12 }, final: { x: 0, y: 0, r: 0 } },
+    { id: 2, label: ["DATA", "COMPLEXITY"], variant: "P2", color: "#60A5FA", messy: { x: 160, y: -100, r: 18 }, final: { x: 120, y: 0, r: 0 } },
+    { id: 3, label: ["BUSINESS", "GOALS"], variant: "P3", color: "#4ADE80", messy: { x: 380, y: -50, r: 8 }, final: { x: 240, y: 0, r: 0 } },
+    { id: 4, label: ["TECH", "CONSTRAINTS"], variant: "P4", color: "#FACC15", messy: { x: -80, y: 200, r: -22 }, final: { x: 0, y: 120, r: 0 } },
+    { id: 5, label: ["EDGE", "CASES"], variant: "P5", color: "#C084FC", messy: { x: 140, y: 260, r: 15 }, final: { x: 120, y: 120, r: 0 } },
+    { id: 6, label: ["EMERGING", "TECH"], variant: "P6", color: "#FB7185", messy: { x: 400, y: 180, r: -10 }, final: { x: 240, y: 120, r: 0 } },
   ];
 
   // Animation cycle: scattered -> assembling -> assembled -> photo -> scattered
@@ -268,17 +268,20 @@ const App = () => {
                     style={{ willChange: "transform", zIndex: 10 - i }}
                   >
                     <div 
-                      className="w-[120px] h-[120px] md:w-[140px] md:h-[140px] flex flex-col items-center justify-center"
+                      className="w-[120px] h-[120px] md:w-[140px] md:h-[140px] flex flex-col items-center justify-center relative"
                       style={{ 
                         clipPath: `path("${JIGSAW_PATHS[p.variant]}")`,
                         WebkitClipPath: `path("${JIGSAW_PATHS[p.variant]}")`,
-                        backgroundColor: p.color,
+                        background: `linear-gradient(145deg, ${p.color}, ${p.color}dd)`,
+                        boxShadow: 'inset 0 2px 4px rgba(255,255,255,0.3), inset 0 -2px 4px rgba(0,0,0,0.1)',
                       }}
                     >
-                      <span className="text-[11px] md:text-[13px] font-black tracking-wide text-white text-center leading-none select-none">
+                      {/* Illustration-like highlight */}
+                      <div className="absolute top-3 left-3 w-6 h-6 rounded-full bg-white/20" />
+                      <span className="text-[12px] md:text-[14px] font-black tracking-wide text-white text-center leading-none select-none drop-shadow-sm">
                         {p.label[0]}
                       </span>
-                      <span className="text-[9px] md:text-[10px] font-semibold tracking-widest text-white/80 text-center leading-none select-none mt-1">
+                      <span className="text-[9px] md:text-[11px] font-bold tracking-wider text-white/90 text-center leading-none select-none mt-1 drop-shadow-sm">
                         {p.label[1]}
                       </span>
                     </div>
