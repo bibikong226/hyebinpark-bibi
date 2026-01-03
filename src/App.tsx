@@ -228,14 +228,21 @@ const App = () => {
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: "linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)", backgroundSize: "100px 100px" }} />
           <div className="w-full md:w-1/2 z-10">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}>
-              <h1 className="text-[3.5rem] sm:text-[5rem] md:text-[6rem] lg:text-[7.5rem] font-light tracking-tighter leading-none mb-10 select-none text-zinc-900">
+              {/* Name - brand anchor */}
+              <p className="text-[2.5rem] sm:text-[3rem] md:text-[3.5rem] font-normal tracking-tight leading-none mb-7 select-none text-zinc-800">
                 Hyebin Park
+              </p>
+              
+              {/* Core statement - primary hero message */}
+              <h1 className="text-[3rem] sm:text-[4.5rem] md:text-[5.5rem] lg:text-[6.5rem] font-bold tracking-tight leading-[0.95] mb-8 select-none text-zinc-900">
+                Turn <span className="text-indigo-600">Complexity</span>
+                <br />
+                to Clarity
               </h1>
-              <h3 className="text-xl md:text-2xl text-zinc-500 font-light leading-relaxed max-w-xl mb-8">
-                Turn <span className="font-serif italic text-indigo-600">Complexity</span> to Clarity
-              </h3>
-              <p className="text-zinc-400 leading-relaxed max-w-lg font-light">
-                From AI algorithms to crypto workflows, I turn ambiguity into structured, usable products that drive business impact.
+              
+              {/* Supporting explanation */}
+              <p className="text-lg md:text-xl leading-[1.6] max-w-[540px] text-zinc-600">
+                From AI algorithms to crypto workflows, I design within complex systems — turning ambiguity into structured, usable products that drive real business impact.
               </p>
             </motion.div>
           </div>
