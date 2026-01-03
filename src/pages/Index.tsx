@@ -8,56 +8,62 @@ const Index = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="min-h-[90vh] flex flex-col section-padding bg-gradient-to-b from-background to-card/30 relative overflow-hidden">
-        {/* Background Name Treatment - Between header and content */}
+      <section className="min-h-[90vh] flex flex-col relative overflow-hidden">
+        {/* Background Name Treatment - Very subtle, positioned as background layer */}
         <div 
-          className="w-full text-center pt-8 pb-4 select-none"
+          className="absolute inset-0 flex items-start justify-center pt-24 md:pt-32 select-none pointer-events-none"
           aria-hidden="true"
         >
           <span 
-            className="font-sans text-[18vw] md:text-[16vw] lg:text-[14vw] font-bold tracking-tight uppercase whitespace-nowrap text-zinc-200"
+            className="font-sans text-[20vw] md:text-[18vw] lg:text-[16vw] font-bold tracking-[0.15em] uppercase whitespace-nowrap text-foreground/[0.03]"
           >
             HYEBIN PARK
           </span>
-          <p className="text-sm md:text-base text-muted-foreground tracking-widest uppercase mt-4">
-            Strategic Product Designer
-          </p>
         </div>
 
-        <div className="container-wide w-full flex-1 flex items-center relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="container-wide w-full flex-1 flex items-center section-padding relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center w-full">
             {/* Text Content */}
             <motion.div
-              className="space-y-8 order-2 lg:order-1"
+              className="space-y-10 order-2 lg:order-1"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
+              {/* Intro Line */}
+              <motion.p
+                className="text-sm md:text-base tracking-wide text-muted-foreground"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.2 }}
+              >
+                Hi, I am Hyebin Park. <span className="text-foreground/70">Strategic product designer.</span>
+              </motion.p>
               
               {/* Main Headline */}
               <motion.h1
-                className="leading-[1.1]"
+                className="leading-[1.05] space-y-1"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
               >
-                <span className="block text-xl md:text-2xl text-muted-foreground font-light mb-2">
+                <span className="block text-lg md:text-xl text-muted-foreground font-normal mb-3">
                   Turning
                 </span>
-                <span className="block font-serif text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-medium italic text-amber-700">
+                <span className="block font-serif text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-normal italic text-accent">
                   complexity
                 </span>
-                <span className="block text-xl md:text-2xl text-muted-foreground/60 font-light my-2">
+                <span className="block text-base md:text-lg text-muted-foreground/50 font-light my-3 md:my-4">
                   into
                 </span>
-                <span className="block font-serif text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-medium italic text-indigo-700">
+                <span className="block font-serif text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-normal italic text-primary">
                   clarity.
                 </span>
               </motion.h1>
               
               {/* Supporting Description */}
               <motion.p
-                className="text-base md:text-lg text-muted-foreground max-w-[480px] leading-relaxed"
+                className="text-lg md:text-xl text-muted-foreground max-w-md leading-relaxed"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
@@ -69,10 +75,10 @@ const Index = () => {
 
             {/* Puzzle Animation */}
             <motion.div
-              className="flex justify-center lg:justify-end order-1 lg:order-2"
-              initial={{ opacity: 0, scale: 0.9 }}
+              className="flex justify-center lg:justify-end order-1 lg:order-2 lg:-mr-8"
+              initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
             >
               <PuzzleAnimation />
             </motion.div>
