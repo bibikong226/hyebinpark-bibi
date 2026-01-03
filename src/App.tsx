@@ -362,104 +362,171 @@ const App = () => {
 
       {/* Hero Section */}
       <section className="relative h-screen">
-        <div className="sticky top-0 h-screen w-full flex flex-col md:flex-row items-center px-8 md:px-16">
-          <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{
-          backgroundImage: "linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)",
-          backgroundSize: "100px 100px"
-        }} />
-          <div className="w-full md:w-1/2 z-10">
-            <motion.div initial={{
-            opacity: 0,
-            y: 20
-          }} animate={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 1.0,
-            ease: [0.16, 1, 0.3, 1]
-          }}>
-              {/* Intro */}
-              <p className="text-lg md:text-xl text-zinc-500 mb-6">Hyebin Park. 
-Strategic product designer.</p>
-              
-              {/* Core statement */}
-              <h1 className="text-[3.5rem] sm:text-[5rem] md:text-[6rem] font-medium tracking-tight leading-[1.05] mb-10 select-none text-zinc-900 lg:text-8xl">
-                Turning
-                <br />
-                <span className="font-serif italic text-indigo-600">complexity</span>
-                <br />
-                into <span className="font-serif italic text-indigo-600">clarity.</span>
-              </h1>
-              
-              {/* Supporting explanation */}
-              <p className="text-lg md:text-xl leading-[1.6] max-w-[540px] text-zinc-600">From AI algorithms to crypto workflows,
-I turn ambiguity into structured, usable products 
-that drive real business impact.</p>
-            </motion.div>
-          </div>
-          {/* RIGHT: INTERACTIVE JIGSAW -> ASSEMBLED -> FULL PROFILE REVEAL */}
-          <div className="w-full md:w-1/2 h-[60vh] md:h-full relative flex items-center justify-center md:ml-20">
-            <div className="relative w-[420px] h-[320px] md:w-[480px] md:h-[360px]" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
-              {/* Puzzle pieces */}
-              <AnimatePresence>
-                {animationPhase !== 'photo' && puzzlePieces.map((p, i) => (visiblePieces.includes(i) || animationPhase === 'assembling' || animationPhase === 'assembled') && <motion.div key={p.id} className="absolute" initial={{
-                opacity: 0,
-                scale: 0.6
-              }} animate={{
-                x: animationPhase === 'scattered' ? p.messy.x : p.final.x,
-                y: animationPhase === 'scattered' ? p.messy.y : p.final.y,
-                rotate: animationPhase === 'scattered' ? p.messy.r : 0,
-                opacity: 1,
-                scale: 1
-              }} exit={{
-                opacity: 0,
-                scale: 1.02,
-                transition: {
-                  duration: 0.4,
-                  delay: i * 0.02
-                }
-              }} transition={{
-                duration: animationPhase === 'scattered' ? 0.6 : 0.8,
-                ease: [0.25, 0.46, 0.45, 0.94],
-                delay: animationPhase === 'scattered' ? 0 : i * 0.1
-              }} style={{
-                willChange: "transform",
-                zIndex: Math.floor(i / 3) * 10 + i % 3
-              }}>
-                      <div className="w-[140px] h-[140px] relative" style={{
-                  clipPath: `path("${JIGSAW_PATHS[p.variant]}")`,
-                  WebkitClipPath: `path("${JIGSAW_PATHS[p.variant]}")`,
-                  background: `linear-gradient(145deg, ${p.color}, ${p.color}dd)`
-                }}>
-                        <div className="absolute left-0 top-0 w-[120px] h-[120px] flex flex-col items-center justify-center">
-                          <span className="text-[13px] md:text-[15px] font-black tracking-wide text-white text-center leading-none select-none drop-shadow-sm">
-                            {p.label[0]}
-                          </span>
-                          <span className="text-[10px] md:text-[12px] font-bold tracking-wider text-white/90 text-center leading-none select-none mt-1.5 drop-shadow-sm">
-                            {p.label[1]}
-                          </span>
-                        </div>
-                      </div>
-                    </motion.div>)}
-              </AnimatePresence>
+        <div className="sticky top-0 h-screen w-full px-8 md:px-16 flex flex-col">
+          <div
+            className="absolute inset-0 opacity-[0.03] pointer-events-none"
+            style={{
+              backgroundImage:
+                "linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)",
+              backgroundSize: "100px 100px",
+            }}
+          />
 
-              {/* Full profile photo */}
-              <AnimatePresence>
-                {animationPhase === 'photo' && <motion.div className="absolute inset-0 flex items-center justify-center" initial={{
-                opacity: 0
-              }} animate={{
-                opacity: 1
-              }} exit={{
-                opacity: 0
-              }} transition={{
-                duration: 0.5,
-                ease: "easeOut"
-              }} style={{
-                zIndex: 20
-              }}>
-                    <img src={profilePhoto} alt="Hyebin Park" className="w-[400px] h-[500px] md:w-[480px] md:h-[600px] object-cover object-top" />
-                  </motion.div>}
-              </AnimatePresence>
+          {/* Background Name (between header and hero content) */}
+          <div className="relative z-10 pt-28 md:pt-32 pb-8 md:pb-12 bg-white">
+            <h2 className="text-[18vw] md:text-[14vw] lg:text-[12vw] font-black uppercase tracking-tighter leading-none text-zinc-200 select-none text-center">
+              HYEBIN PARK
+            </h2>
+          </div>
+
+          <div className="relative z-10 flex-1 w-full flex flex-col md:flex-row items-center">
+            <div className="w-full md:w-1/2">
+              <motion.div
+                initial={{
+                  opacity: 0,
+                  y: 20,
+                }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                transition={{
+                  duration: 1.0,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+              >
+                {/* Intro */}
+                <p className="text-lg md:text-xl text-zinc-500 mb-6">
+                  Hi, I am Hyebin Park. Strategic product designer.
+                </p>
+
+                {/* Core statement */}
+                <h1 className="text-[3.5rem] sm:text-[5rem] md:text-[6rem] font-medium tracking-tight leading-[1.05] mb-10 select-none text-zinc-900 lg:text-8xl">
+                  <span className="block text-xl sm:text-2xl md:text-3xl font-medium text-zinc-800">
+                    Turning
+                  </span>
+                  <span className="block font-serif italic text-indigo-600">
+                    complexity
+                  </span>
+                  <span className="block">
+                    <span className="text-xl sm:text-2xl md:text-3xl font-medium text-zinc-400">
+                      into{" "}
+                    </span>
+                    <span className="font-serif italic text-indigo-600">clarity.</span>
+                  </span>
+                </h1>
+
+                {/* Supporting explanation */}
+                <p className="text-lg md:text-xl leading-[1.6] max-w-[540px] text-zinc-600">
+                  From AI algorithms to crypto workflows, I turn ambiguity into structured,
+                  usable products that drive real business impact.
+                </p>
+              </motion.div>
+            </div>
+
+            {/* RIGHT: INTERACTIVE JIGSAW -> ASSEMBLED -> FULL PROFILE REVEAL */}
+            <div className="w-full md:w-1/2 h-[60vh] md:h-full relative flex items-center justify-center md:ml-20">
+              <div
+                className="relative w-[420px] h-[320px] md:w-[480px] md:h-[360px]"
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => setIsHovering(false)}
+              >
+                {/* Puzzle pieces */}
+                <AnimatePresence>
+                  {animationPhase !== "photo" &&
+                    puzzlePieces.map(
+                      (p, i) =>
+                        (visiblePieces.includes(i) ||
+                          animationPhase === "assembling" ||
+                          animationPhase === "assembled") && (
+                          <motion.div
+                            key={p.id}
+                            className="absolute"
+                            initial={{
+                              opacity: 0,
+                              scale: 0.6,
+                            }}
+                            animate={{
+                              x:
+                                animationPhase === "scattered" ? p.messy.x : p.final.x,
+                              y:
+                                animationPhase === "scattered" ? p.messy.y : p.final.y,
+                              rotate:
+                                animationPhase === "scattered" ? p.messy.r : 0,
+                              opacity: 1,
+                              scale: 1,
+                            }}
+                            exit={{
+                              opacity: 0,
+                              scale: 1.02,
+                              transition: {
+                                duration: 0.4,
+                                delay: i * 0.02,
+                              },
+                            }}
+                            transition={{
+                              duration: animationPhase === "scattered" ? 0.6 : 0.8,
+                              ease: [0.25, 0.46, 0.45, 0.94],
+                              delay: animationPhase === "scattered" ? 0 : i * 0.1,
+                            }}
+                            style={{
+                              willChange: "transform",
+                              zIndex: Math.floor(i / 3) * 10 + (i % 3),
+                            }}
+                          >
+                            <div
+                              className="w-[140px] h-[140px] relative"
+                              style={{
+                                clipPath: `path(\"${JIGSAW_PATHS[p.variant]}\")`,
+                                WebkitClipPath: `path(\"${JIGSAW_PATHS[p.variant]}\")`,
+                                background: `linear-gradient(145deg, ${p.color}, ${p.color}dd)`,
+                              }}
+                            >
+                              <div className="absolute left-0 top-0 w-[120px] h-[120px] flex flex-col items-center justify-center">
+                                <span className="text-[13px] md:text-[15px] font-black tracking-wide text-white text-center leading-none select-none drop-shadow-sm">
+                                  {p.label[0]}
+                                </span>
+                                <span className="text-[10px] md:text-[12px] font-bold tracking-wider text-white/90 text-center leading-none select-none mt-1.5 drop-shadow-sm">
+                                  {p.label[1]}
+                                </span>
+                              </div>
+                            </div>
+                          </motion.div>
+                        )
+                    )}
+                </AnimatePresence>
+
+                {/* Full profile photo */}
+                <AnimatePresence>
+                  {animationPhase === "photo" && (
+                    <motion.div
+                      className="absolute inset-0 flex items-center justify-center"
+                      initial={{
+                        opacity: 0,
+                      }}
+                      animate={{
+                        opacity: 1,
+                      }}
+                      exit={{
+                        opacity: 0,
+                      }}
+                      transition={{
+                        duration: 0.5,
+                        ease: "easeOut",
+                      }}
+                      style={{
+                        zIndex: 20,
+                      }}
+                    >
+                      <img
+                        src={profilePhoto}
+                        alt="Hyebin Park"
+                        className="w-[400px] h-[500px] md:w-[480px] md:h-[600px] object-cover object-top"
+                      />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </div>
           </div>
         </div>
