@@ -11,14 +11,17 @@ const Index = () => {
       <section className="min-h-[90vh] flex flex-col section-padding bg-gradient-to-b from-background to-card/30 relative overflow-hidden">
         {/* Background Name Treatment - Between header and content */}
         <div 
-          className="w-full text-center py-8 select-none"
+          className="w-full text-center pt-8 pb-4 select-none"
           aria-hidden="true"
         >
           <span 
-            className="text-[18vw] md:text-[16vw] lg:text-[14vw] font-bold tracking-tighter whitespace-nowrap text-zinc-900/[0.06]"
+            className="font-sans text-[18vw] md:text-[16vw] lg:text-[14vw] font-bold tracking-tighter whitespace-nowrap text-zinc-200"
           >
             HYEBIN PARK
           </span>
+          <p className="text-sm md:text-base text-muted-foreground tracking-widest uppercase mt-4">
+            Strategic Product Designer
+          </p>
         </div>
 
         <div className="container-wide w-full flex-1 flex items-center relative z-10">
@@ -30,15 +33,6 @@ const Index = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              {/* Intro Line */}
-              <motion.p
-                className="text-sm text-muted-foreground tracking-wide"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.2 }}
-              >
-                Hi, I am Hyebin Park. Strategic product designer.
-              </motion.p>
               
               {/* Main Headline */}
               <motion.h1
