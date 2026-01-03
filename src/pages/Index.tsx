@@ -68,8 +68,9 @@ const Index = () => {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
               >
-                From AI algorithms to crypto workflows, I turn ambiguity into structured, 
-                usable products that drive real business impact.
+                From AI algorithms to crypto workflows,<br />
+                I turn ambiguity into structured, usable products<br />
+                that drive real business impact.
               </motion.p>
             </motion.div>
 
