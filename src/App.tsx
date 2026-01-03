@@ -327,7 +327,7 @@ const App = () => {
             <p className="text-5xl md:text-8xl font-bold tracking-tighter leading-none">Strategic <span className="italic font-serif font-light text-zinc-300">Outputs.</span></p>
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-40">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-40">
           {projects.map((project, idx) => (
             <motion.div key={idx} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
               onMouseEnter={() => setCursorActive(true)} onMouseLeave={() => setCursorActive(false)}
