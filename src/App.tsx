@@ -98,7 +98,7 @@ const App = () => {
     { id: 1, label: ["USER", "NEEDS"], variant: "P1", color: "#F87171", messy: { x: -60, y: -80, r: -12 }, final: { x: 0, y: 0, r: 0 } },
     { id: 2, label: ["DATA", "COMPLEXITY"], variant: "P2", color: "#60A5FA", messy: { x: 160, y: -100, r: 18 }, final: { x: 120, y: 0, r: 0 } },
     { id: 3, label: ["BUSINESS", "GOALS"], variant: "P3", color: "#4ADE80", messy: { x: 380, y: -50, r: 8 }, final: { x: 240, y: 0, r: 0 } },
-    { id: 4, label: ["TECH", "CONSTRAINTS"], variant: "P4", color: "#FACC15", messy: { x: -80, y: 200, r: -22 }, final: { x: 0, y: 120, r: 0 } },
+    { id: 4, label: ["TECH", "CONSTRAINTS"], variant: "P4", color: "#F59E0B", messy: { x: -80, y: 200, r: -22 }, final: { x: 0, y: 120, r: 0 } },
     { id: 5, label: ["EDGE", "CASES"], variant: "P5", color: "#C084FC", messy: { x: 140, y: 260, r: 15 }, final: { x: 120, y: 120, r: 0 } },
     { id: 6, label: ["EMERGING", "TECH"], variant: "P6", color: "#FB7185", messy: { x: 400, y: 180, r: -10 }, final: { x: 240, y: 120, r: 0 } },
   ];
@@ -143,9 +143,9 @@ const App = () => {
       await new Promise(r => setTimeout(r, 1000));
       if (cancelled) return;
       
-      // Show assembled puzzle
+      // Show assembled puzzle briefly then transition to photo
       setAnimationPhase('assembled');
-      await new Promise(r => setTimeout(r, 1500));
+      await new Promise(r => setTimeout(r, 600));
       if (cancelled) return;
       
       // Show photo
