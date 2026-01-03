@@ -21,8 +21,8 @@ const Index = () => {
           </span>
         </div>
 
-        <div className="container-wide w-full flex-1 flex items-center section-padding relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center w-full">
+        <div className="w-full flex-1 flex items-center justify-center px-6 md:px-12 lg:px-24 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full max-w-6xl mx-auto">
             {/* Text Content */}
             <motion.div
               className="space-y-10 order-2 lg:order-1"
@@ -72,7 +72,7 @@ const Index = () => {
 
             {/* Puzzle Animation */}
             <motion.div
-              className="flex justify-center lg:justify-end order-1 lg:order-2 lg:-mr-8"
+              className="flex justify-center order-1 lg:order-2"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.3 }}
