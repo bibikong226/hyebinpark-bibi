@@ -228,21 +228,23 @@ const App = () => {
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: "linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)", backgroundSize: "100px 100px" }} />
           <div className="w-full md:w-1/2 z-10">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}>
-              {/* Name - brand anchor */}
-              <p className="text-[2.5rem] sm:text-[3rem] md:text-[3.5rem] font-normal tracking-tight leading-none mb-7 select-none text-zinc-800">
+              {/* Name - matching header style */}
+              <p className="font-semibold tracking-tight text-xl uppercase mb-12 text-zinc-900">
                 Hyebin Park
               </p>
               
               {/* Core statement - primary hero message */}
-              <h1 className="text-[3rem] sm:text-[4.5rem] md:text-[5.5rem] lg:text-[6.5rem] font-bold tracking-tight leading-[0.95] mb-8 select-none text-zinc-900">
-                Turn <span className="text-indigo-600">Complexity</span>
+              <h1 className="text-[3.5rem] sm:text-[5rem] md:text-[6rem] lg:text-[7rem] font-medium tracking-tight leading-[1.05] mb-10 select-none text-zinc-900">
+                Turning
                 <br />
-                to Clarity
+                complexity
+                <br />
+                into <span className="font-serif italic text-indigo-600">clarity.</span>
               </h1>
               
               {/* Supporting explanation */}
               <p className="text-lg md:text-xl leading-[1.6] max-w-[540px] text-zinc-600">
-                From AI algorithms to crypto workflows, I design within complex systems — turning ambiguity into structured, usable products that drive real business impact.
+                From AI algorithms to crypto workflows, I turn ambiguity into structured, usable products that drive real business impact.
               </p>
             </motion.div>
           </div>
