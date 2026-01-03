@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { motion } from "framer-motion";
 
 /**
@@ -147,8 +147,8 @@ const PuzzleShape = ({
         {/* Subtle highlight stroke for a designed feel */}
         <path d={getPath()} fill="none" stroke="rgba(255,255,255,0.55)" strokeWidth="1" />
       </svg>
-      <div className="relative z-10 h-full w-full flex items-center justify-center px-4">
-        <span className="text-[8px] md:text-[9.5px] font-bold uppercase tracking-[0.22em] text-white text-center leading-tight drop-shadow-sm select-none">
+      <div className="relative z-10 h-full w-full flex items-center justify-center px-3">
+        <span className="text-[11px] md:text-sm font-bold uppercase tracking-[0.15em] text-white text-center leading-tight drop-shadow-md select-none">
           {text}
         </span>
       </div>
@@ -156,114 +156,30 @@ const PuzzleShape = ({
 };
 const App = () => {
   const heroRef = useRef<HTMLElement>(null);
-  const [hovered, setHovered] = useState(false);
 
-  // Define a precise 2x3 grid for the pieces to snap into upon hover.
-  // Adjusted for bigger pieces (w-48 h-48 = 192px on md)
-  const pieceSize = 140; // approximate piece size for spacing
-  const gap = -20; // negative gap for interlocking
-  const startX = 20;
-  const startY = 40;
+  // Define a precise 2x3 grid - pieces are always assembled
+  // Piece size matches the actual rendered size for proper interlocking
+  const pieceSize = 120; // base piece size
+  const overlapOffset = 10; // how much pieces overlap to interlock
+  const startX = 0;
+  const startY = 20;
   
-  const finalGrid = [
+  const grid = [
     { x: startX, y: startY }, // col 1 row 1
-    { x: startX + pieceSize + gap, y: startY }, // col 2 row 1
-    { x: startX + (pieceSize + gap) * 2, y: startY }, // col 3 row 1
-    { x: startX, y: startY + pieceSize + gap }, // col 1 row 2
-    { x: startX + pieceSize + gap, y: startY + pieceSize + gap }, // col 2 row 2
-    { x: startX + (pieceSize + gap) * 2, y: startY + pieceSize + gap }, // col 3 row 2
+    { x: startX + pieceSize - overlapOffset, y: startY }, // col 2 row 1
+    { x: startX + (pieceSize - overlapOffset) * 2, y: startY }, // col 3 row 1
+    { x: startX, y: startY + pieceSize - overlapOffset }, // col 1 row 2
+    { x: startX + pieceSize - overlapOffset, y: startY + pieceSize - overlapOffset }, // col 2 row 2
+    { x: startX + (pieceSize - overlapOffset) * 2, y: startY + pieceSize - overlapOffset }, // col 3 row 2
   ];
-  const puzzlePieces = [{
-    id: 1,
-    text: "User Needs",
-    variant: "P1",
-    color: "#FF6B6B",
-    messy: {
-      x: "6vw",
-      y: "-14vh",
-      r: -28
-    },
-    final: {
-      ...finalGrid[0],
-      r: 0
-    },
-    delay: 0.0
-  }, {
-    id: 2,
-    text: "Data Complexity",
-    variant: "P2",
-    color: "#4D96FF",
-    messy: {
-      x: "28vw",
-      y: "-10vh",
-      r: 42
-    },
-    final: {
-      ...finalGrid[1],
-      r: 0
-    },
-    delay: 0.12
-  }, {
-    id: 3,
-    text: "Business Goals",
-    variant: "P3",
-    color: "#6BCB77",
-    messy: {
-      x: "18vw",
-      y: "22vh",
-      r: 140
-    },
-    final: {
-      ...finalGrid[2],
-      r: 0
-    },
-    delay: 0.24
-  }, {
-    id: 4,
-    text: "Tech Constraints",
-    variant: "P4",
-    color: "#FFD93D",
-    messy: {
-      x: "2vw",
-      y: "14vh",
-      r: -12
-    },
-    final: {
-      ...finalGrid[3],
-      r: 0
-    },
-    delay: 0.36
-  }, {
-    id: 5,
-    text: "Edge Cases",
-    variant: "P5",
-    color: "#B983FF",
-    messy: {
-      x: "34vw",
-      y: "26vh",
-      r: 96
-    },
-    final: {
-      ...finalGrid[4],
-      r: 0
-    },
-    delay: 0.48
-  }, {
-    id: 6,
-    text: "Emerging Tech",
-    variant: "P6",
-    color: "#FF8FAB",
-    messy: {
-      x: "14vw",
-      y: "34vh",
-      r: -78
-    },
-    final: {
-      ...finalGrid[5],
-      r: 0
-    },
-    delay: 0.60
-  }];
+  const puzzlePieces = [
+    { id: 1, text: "User Needs", variant: "P1", color: "#FF6B6B", pos: grid[0], delay: 0.0 },
+    { id: 2, text: "Data Complexity", variant: "P2", color: "#4D96FF", pos: grid[1], delay: 0.1 },
+    { id: 3, text: "Business Goals", variant: "P3", color: "#6BCB77", pos: grid[2], delay: 0.2 },
+    { id: 4, text: "Tech Constraints", variant: "P4", color: "#FFD93D", pos: grid[3], delay: 0.3 },
+    { id: 5, text: "Edge Cases", variant: "P5", color: "#B983FF", pos: grid[4], delay: 0.4 },
+    { id: 6, text: "Emerging Tech", variant: "P6", color: "#FF8FAB", pos: grid[5], delay: 0.5 },
+  ];
   return <div className="bg-[#ffffff] text-[#121212] selection:bg-indigo-100 overflow-x-hidden font-sans">
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 flex justify-between items-center px-8 md:px-16 py-10">
@@ -310,56 +226,30 @@ I turn ambiguity into structured, usable products that drive business impact.</p
             </motion.div>
           </div>
 
-          {/* Right: Interactive Jigsaw Illustration */}
+          {/* Right: Jigsaw Illustration - Always Assembled */}
           <div className="w-full md:w-2/5 h-[60vh] md:h-full relative flex items-center justify-center">
-            <div className="relative w-full max-w-[440px] aspect-square" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-              {/* Target Area Frame */}
-              <div className="absolute inset-10 rounded-[40px] bg-zinc-50/50 border border-zinc-200/50" />
-
-              {/* Puzzle Pieces */}
-              {puzzlePieces.map(p => {
-              const isLastPiece = p.id === 6;
-              return <motion.div key={p.id} className="absolute" initial={false} animate={{
-                x: hovered ? p.final.x : p.messy.x,
-                y: hovered ? p.final.y : p.messy.y,
-                rotate: hovered ? 0 : p.messy.r,
-                // Subtle "pop" effect for the completion moment on the last piece
-                scale: hovered ? isLastPiece ? [1, 1.08, 1] : 1 : 0.98
-              }} transition={{
-                duration: 0.95,
-                ease: [0.16, 1, 0.3, 1],
-                delay: hovered ? p.delay : 0
-              }} style={{
-                willChange: "transform"
-              }}>
-                    <PuzzleShape variant={p.variant} text={p.text} color={p.color} className="w-40 h-40 md:w-48 md:h-48" />
-                  </motion.div>;
-            })}
-
-              {/* OVERLAY OUTCOME TEXT: Centered Over the Puzzle */}
-              <motion.div initial={false} animate={{
-              opacity: hovered ? 1 : 0,
-              scale: hovered ? 1 : 0.95,
-              y: hovered ? 0 : 10
-            }} transition={{
-              duration: 0.5,
-              ease: [0.16, 1, 0.3, 1],
-              delay: hovered ? 1.0 : 0
-            }} className="absolute inset-0 flex items-center justify-center pointer-events-none z-30">
-                <div className="text-center bg-white/80 backdrop-blur-md px-10 py-7 rounded-[2rem] border border-zinc-200/60 shadow-2xl">
-                  <div className="text-[11px] uppercase tracking-[0.5em] font-black text-indigo-600 mb-2">
-                    Usable product
-                  </div>
-                  <div className="text-[11px] uppercase tracking-[0.5em] font-black text-zinc-900">
-                    Business impact
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Hover Prompt */}
-              <div className="absolute -bottom-10 left-0 w-full text-center text-[10px] uppercase tracking-[0.4em] text-zinc-300 font-bold">
-                {hovered ? "Complexity resolved" : "Hover to assemble pieces"}
-              </div>
+            <div className="relative w-full max-w-[500px] aspect-square">
+              {/* Puzzle Pieces - Always interlocked */}
+              {puzzlePieces.map(p => (
+                <motion.div 
+                  key={p.id} 
+                  className="absolute"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ 
+                    opacity: 1, 
+                    scale: 1,
+                    x: p.pos.x,
+                    y: p.pos.y,
+                  }}
+                  transition={{
+                    duration: 0.6,
+                    ease: [0.16, 1, 0.3, 1],
+                    delay: p.delay
+                  }}
+                >
+                  <PuzzleShape variant={p.variant} text={p.text} color={p.color} className="w-32 h-32 md:w-36 md:h-36" />
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
