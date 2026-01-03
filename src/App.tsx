@@ -12,20 +12,20 @@ import profilePhoto from "@/assets/profile-photo.jpg";
  * - Restored Testimonial Carousel
  */
 
-// Jigsaw paths with natural rounded tabs/notches - scaled for 130px pieces
+// Jigsaw paths - interlocking pieces that fit together (120px base)
 const JIGSAW_PATHS = {
-  // Top-left piece
-  P1: "M0,0 L50,0 C50,0 55,25 65,25 C75,25 80,0 80,0 L130,0 L130,50 C130,50 155,55 155,65 C155,75 130,80 130,80 L130,130 L0,130 Z",
-  // Top-center piece  
-  P2: "M0,50 C0,50 25,55 25,65 C25,75 0,80 0,80 L0,130 L50,130 C50,130 55,155 65,155 C75,155 80,130 80,130 L130,130 L130,80 C130,80 155,75 155,65 C155,55 130,50 130,50 L130,0 L80,0 C80,0 75,25 65,25 C55,25 50,0 50,0 L0,0 Z",
-  // Top-right piece
-  P3: "M0,50 C0,50 25,55 25,65 C25,75 0,80 0,80 L0,130 L50,130 C50,130 55,155 65,155 C75,155 80,130 80,130 L130,130 L130,0 L80,0 C80,0 75,25 65,25 C55,25 50,0 50,0 L0,0 Z",
-  // Bottom-left piece
-  P4: "M0,0 L50,0 C50,0 55,25 65,25 C75,25 80,0 80,0 L130,0 L130,50 C130,50 155,55 155,65 C155,75 130,80 130,80 L130,130 L0,130 L0,80 C0,80 25,75 25,65 C25,55 0,50 0,50 Z",
-  // Bottom-center piece
-  P5: "M0,50 C0,50 25,55 25,65 C25,75 0,80 0,80 L0,130 L130,130 L130,80 C130,80 155,75 155,65 C155,55 130,50 130,50 L130,0 L80,0 C80,0 75,25 65,25 C55,25 50,0 50,0 L0,0 Z",
-  // Bottom-right piece
-  P6: "M0,50 C0,50 25,55 25,65 C25,75 0,80 0,80 L0,130 L130,130 L130,0 L80,0 C80,0 75,25 65,25 C55,25 50,0 50,0 L0,0 Z",
+  // Top-left: flat top, flat left, tab right, tab bottom
+  P1: "M0,0 L120,0 L120,45 C120,45 140,50 140,60 C140,70 120,75 120,75 L120,120 L75,120 C75,120 70,140 60,140 C50,140 45,120 45,120 L0,120 Z",
+  // Top-center: flat top, notch left, tab right, tab bottom
+  P2: "M0,0 L120,0 L120,45 C120,45 140,50 140,60 C140,70 120,75 120,75 L120,120 L75,120 C75,120 70,140 60,140 C50,140 45,120 45,120 L0,120 L0,75 C0,75 -20,70 -20,60 C-20,50 0,45 0,45 Z",
+  // Top-right: flat top, notch left, flat right, tab bottom
+  P3: "M0,0 L120,0 L120,120 L75,120 C75,120 70,140 60,140 C50,140 45,120 45,120 L0,120 L0,75 C0,75 -20,70 -20,60 C-20,50 0,45 0,45 Z",
+  // Bottom-left: notch top, flat left, tab right, flat bottom
+  P4: "M0,0 L45,0 C45,0 50,-20 60,-20 C70,-20 75,0 75,0 L120,0 L120,45 C120,45 140,50 140,60 C140,70 120,75 120,75 L120,120 L0,120 Z",
+  // Bottom-center: notch top, notch left, tab right, flat bottom
+  P5: "M0,0 L45,0 C45,0 50,-20 60,-20 C70,-20 75,0 75,0 L120,0 L120,45 C120,45 140,50 140,60 C140,70 120,75 120,75 L120,120 L0,120 L0,75 C0,75 -20,70 -20,60 C-20,50 0,45 0,45 Z",
+  // Bottom-right: notch top, notch left, flat right, flat bottom
+  P6: "M0,0 L45,0 C45,0 50,-20 60,-20 C70,-20 75,0 75,0 L120,0 L120,120 L0,120 L0,75 C0,75 -20,70 -20,60 C-20,50 0,45 0,45 Z",
 };
 
 const PuzzlePiece = ({ variant, color, isResolved, className, style = {}, label, imgPos }) => {
@@ -96,11 +96,11 @@ const App = () => {
 
   const puzzlePieces = [
     { id: 1, label: "USER NEEDS", variant: "P1", color: "#F87171", messy: { x: -60, y: -80, r: -12 }, final: { x: 0, y: 0, r: 0 } },
-    { id: 2, label: "DATA INSIGHTS", variant: "P2", color: "#60A5FA", messy: { x: 160, y: -100, r: 18 }, final: { x: 130, y: 0, r: 0 } },
-    { id: 3, label: "BIZ GOALS", variant: "P3", color: "#4ADE80", messy: { x: 380, y: -50, r: 8 }, final: { x: 260, y: 0, r: 0 } },
-    { id: 4, label: "TECH CONSTRAINTS", variant: "P4", color: "#FACC15", messy: { x: -80, y: 200, r: -22 }, final: { x: 0, y: 130, r: 0 } },
-    { id: 5, label: "EDGE CASES", variant: "P5", color: "#C084FC", messy: { x: 140, y: 260, r: 15 }, final: { x: 130, y: 130, r: 0 } },
-    { id: 6, label: "AMBIGUITY", variant: "P6", color: "#FB7185", messy: { x: 400, y: 180, r: -10 }, final: { x: 260, y: 130, r: 0 } },
+    { id: 2, label: "DATA COMPLEXITY", variant: "P2", color: "#60A5FA", messy: { x: 160, y: -100, r: 18 }, final: { x: 120, y: 0, r: 0 } },
+    { id: 3, label: "BUSINESS GOALS", variant: "P3", color: "#4ADE80", messy: { x: 380, y: -50, r: 8 }, final: { x: 240, y: 0, r: 0 } },
+    { id: 4, label: "TECH CONSTRAINTS", variant: "P4", color: "#FACC15", messy: { x: -80, y: 200, r: -22 }, final: { x: 0, y: 120, r: 0 } },
+    { id: 5, label: "EDGE CASES", variant: "P5", color: "#C084FC", messy: { x: 140, y: 260, r: 15 }, final: { x: 120, y: 120, r: 0 } },
+    { id: 6, label: "EMERGING TECH", variant: "P6", color: "#FB7185", messy: { x: 400, y: 180, r: -10 }, final: { x: 240, y: 120, r: 0 } },
   ];
 
   // Animation cycle: scattered -> assembling -> assembled -> photo -> scattered
@@ -226,7 +226,7 @@ const App = () => {
       <section className="relative h-screen">
         <div className="sticky top-0 h-screen w-full flex flex-col md:flex-row items-center px-8 md:px-16">
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: "linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)", backgroundSize: "100px 100px" }} />
-          <div className="w-full md:w-3/5 z-10">
+          <div className="w-full md:w-1/2 z-10">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}>
               <h1 className="text-[3.5rem] sm:text-[5rem] md:text-[6rem] lg:text-[7.5rem] font-light tracking-tighter leading-none mb-10 select-none text-zinc-900">
                 Hyebin Park
@@ -240,9 +240,9 @@ const App = () => {
             </motion.div>
           </div>
           {/* RIGHT: INTERACTIVE JIGSAW -> ASSEMBLED -> FULL PROFILE REVEAL */}
-          <div className="w-full md:w-2/5 h-[60vh] md:h-full relative flex items-center justify-center">
+          <div className="w-full md:w-1/2 h-[60vh] md:h-full relative flex items-center justify-start md:-ml-16">
             <div 
-              className="relative w-[420px] h-[340px] md:w-[500px] md:h-[420px]"
+              className="relative w-[380px] h-[280px] md:w-[440px] md:h-[320px]"
               onMouseEnter={() => setIsHovering(true)}
               onMouseLeave={() => setIsHovering(false)}
             >
@@ -268,14 +268,14 @@ const App = () => {
                     style={{ willChange: "transform", zIndex: 10 - i }}
                   >
                     <div 
-                      className="w-[130px] h-[130px] md:w-[150px] md:h-[150px] flex items-center justify-center p-4 shadow-lg"
+                      className="w-[120px] h-[120px] md:w-[140px] md:h-[140px] flex items-center justify-center p-3"
                       style={{ 
                         clipPath: `path("${JIGSAW_PATHS[p.variant]}")`,
                         WebkitClipPath: `path("${JIGSAW_PATHS[p.variant]}")`,
                         backgroundColor: p.color,
                       }}
                     >
-                      <span className="text-[9px] md:text-[11px] font-bold tracking-[0.1em] text-white text-center leading-tight drop-shadow-md select-none">
+                      <span className="text-[10px] md:text-[12px] font-extrabold tracking-[0.05em] text-white text-center leading-snug drop-shadow-lg select-none" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.4)' }}>
                         {p.label}
                       </span>
                     </div>
@@ -296,7 +296,7 @@ const App = () => {
                 <img 
                   src={profilePhoto} 
                   alt="Hyebin Park" 
-                  className="w-[360px] h-[450px] md:w-[420px] md:h-[525px] object-cover object-top"
+                  className="w-[400px] h-[500px] md:w-[480px] md:h-[600px] object-cover object-top"
                 />
               </motion.div>
             </div>
