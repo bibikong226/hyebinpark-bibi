@@ -12,16 +12,20 @@ import profilePhoto from "@/assets/profile-photo.jpg";
  * - Restored Testimonial Carousel
  */
 
-// Jigsaw paths matching the reference image with rounded tabs
+// Jigsaw paths matching the reference image with rounded tabs/notches
 const JIGSAW_PATHS = {
-  // Top row: P1 has tab right, P2 has hole left + tab right, P3 has hole left
-  P1: "M0,0 H40 C40,0 45,0 45,0 L45,35 C45,35 45,50 55,50 C65,50 65,35 65,35 L65,0 C65,0 70,0 70,0 H110 V40 C110,40 110,45 110,45 L75,45 C75,45 60,45 60,55 C60,65 75,65 75,65 L110,65 V110 H0 V0 Z",
-  P2: "M0,40 L0,0 H40 L40,35 C40,35 40,50 50,50 C60,50 60,35 60,35 L60,0 H110 V40 L75,40 C75,40 60,40 60,50 C60,60 75,60 75,60 L110,60 V110 H70 L70,75 C70,75 70,60 60,60 C50,60 50,75 50,75 L50,110 H0 V70 L35,70 C35,70 50,70 50,60 C50,50 35,50 35,50 L0,50 V40 Z",
-  P3: "M0,40 L35,40 C35,40 50,40 50,50 C50,60 35,60 35,60 L0,60 V110 H110 V0 H70 L70,35 C70,35 70,50 60,50 C50,50 50,35 50,35 L50,0 H0 V40 Z",
-  // Bottom row: P4 has tab right + hole top, P5 has holes left/top + tab right, P6 has hole left/top
-  P4: "M0,0 H40 L40,35 C40,35 40,50 50,50 C60,50 60,35 60,35 L60,0 H110 V110 H0 V50 L35,50 C35,50 50,50 50,40 C50,30 35,30 35,30 L0,30 V0 Z",
-  P5: "M0,0 H50 L50,35 C50,35 50,50 60,50 C70,50 70,35 70,35 L70,0 H110 V110 H60 L60,75 C60,75 60,60 50,60 C40,60 40,75 40,75 L40,110 H0 V50 L35,50 C35,50 50,50 50,40 C50,30 35,30 35,30 L0,30 V0 Z",
-  P6: "M0,0 H60 L60,35 C60,35 60,50 50,50 C40,50 40,35 40,35 L40,0 H110 V110 H0 V50 L35,50 C35,50 50,50 50,40 C50,30 35,30 35,30 L0,30 V0 Z",
+  // Row 1: Top-left (tab right, tab bottom)
+  P1: "M0,0 H35 V0 H45 C45,0 45,20 55,20 C65,20 65,0 65,0 H100 V35 C100,35 120,35 120,45 C120,55 100,55 100,55 V100 H65 C65,100 65,120 55,120 C45,120 45,100 45,100 H0 V0 Z",
+  // Row 1: Top-center (hole left, tab right, tab bottom)
+  P2: "M0,35 C0,35 20,35 20,45 C20,55 0,55 0,55 V100 H35 C35,100 35,120 45,120 C55,120 55,100 55,100 H100 V55 C100,55 120,55 120,45 C120,35 100,35 100,35 V0 H55 C55,0 55,20 45,20 C35,20 35,0 35,0 H0 V35 Z",
+  // Row 1: Top-right (hole left, tab bottom)
+  P3: "M0,35 C0,35 20,35 20,45 C20,55 0,55 0,55 V100 H35 C35,100 35,120 45,120 C55,120 55,100 55,100 H100 V0 H55 C55,0 55,20 45,20 C35,20 35,0 35,0 H0 V35 Z",
+  // Row 2: Bottom-left (hole top, tab right)
+  P4: "M0,0 H45 C45,0 45,20 55,20 C65,20 65,0 65,0 H100 V35 C100,35 120,35 120,45 C120,55 100,55 100,55 V100 H0 V0 Z",
+  // Row 2: Bottom-center (hole left, hole top, tab right)
+  P5: "M0,35 C0,35 20,35 20,45 C20,55 0,55 0,55 V100 H100 V55 C100,55 120,55 120,45 C120,35 100,35 100,35 V0 H55 C55,0 55,20 45,20 C35,20 35,0 35,0 H0 V35 Z",
+  // Row 2: Bottom-right (hole left, hole top)
+  P6: "M0,35 C0,35 20,35 20,45 C20,55 0,55 0,55 V100 H100 V0 H55 C55,0 55,20 45,20 C35,20 35,0 35,0 H0 V35 Z",
 };
 
 const PuzzlePiece = ({ variant, color, isResolved, className, style = {}, label, imgPos }) => {
@@ -105,13 +109,17 @@ const App = () => {
     return () => clearInterval(interval);
   }, [isTestimonialHovered]);
 
+  // Puzzle piece size: 100x100 with 20px tabs, so effective grid is ~80px
+  const pieceSize = 100;
+  const gridStep = 80; // Account for overlapping tabs
+  
   const puzzlePieces = [
-    { id: 1, label: "User Needs", variant: "P1", color: "#FF6B6B", messy: { x: -30, y: -40, r: -15 }, final: { x: 0, y: 0, r: 0 }, imgPos: "0% 0%" },
-    { id: 2, label: "Data Complexity", variant: "P2", color: "#4D96FF", messy: { x: 130, y: -20, r: 25 }, final: { x: 110, y: 0, r: 0 }, imgPos: "50% 0%" },
-    { id: 3, label: "Business Goals", variant: "P3", color: "#6BCB77", messy: { x: 260, y: -60, r: 10 }, final: { x: 220, y: 0, r: 0 }, imgPos: "100% 0%" },
-    { id: 4, label: "Tech Constraints", variant: "P4", color: "#FFD93D", messy: { x: -60, y: 130, r: -35 }, final: { x: 0, y: 110, r: 0 }, imgPos: "0% 100%" },
-    { id: 5, label: "Edge Cases", variant: "P5", color: "#B983FF", messy: { x: 110, y: 170, r: 12 }, final: { x: 110, y: 110, r: 0 }, imgPos: "50% 100%" },
-    { id: 6, label: "Emerging Tech", variant: "P6", color: "#FF8FAB", messy: { x: 280, y: 140, r: -20 }, final: { x: 220, y: 110, r: 0 }, imgPos: "100% 100%" },
+    { id: 1, label: "User Needs", variant: "P1", color: "#E53935", messy: { x: -80, y: -60, r: -20 }, final: { x: 0, y: 0, r: 0 } },
+    { id: 2, label: "Data Complexity", variant: "P2", color: "#FB8C00", messy: { x: 180, y: -80, r: 25 }, final: { x: gridStep, y: 0, r: 0 } },
+    { id: 3, label: "Business Goals", variant: "P3", color: "#8E24AA", messy: { x: 340, y: -40, r: 15 }, final: { x: gridStep * 2, y: 0, r: 0 } },
+    { id: 4, label: "Tech Constraints", variant: "P4", color: "#43A047", messy: { x: -100, y: 180, r: -30 }, final: { x: 0, y: gridStep, r: 0 } },
+    { id: 5, label: "Edge Cases", variant: "P5", color: "#00ACC1", messy: { x: 160, y: 220, r: 20 }, final: { x: gridStep, y: gridStep, r: 0 } },
+    { id: 6, label: "Emerging Tech", variant: "P6", color: "#546E7A", messy: { x: 360, y: 160, r: -15 }, final: { x: gridStep * 2, y: gridStep, r: 0 } },
   ];
 
   const projects = [
@@ -175,39 +183,85 @@ const App = () => {
               </p>
             </motion.div>
           </div>
-          {/* RIGHT: INTERACTIVE JIGSAW -> PROFILE REVEAL (Smaller, No Frame) */}
+          {/* RIGHT: INTERACTIVE JIGSAW -> FULL PROFILE REVEAL */}
           <div className="w-full md:w-2/5 h-[60vh] md:h-full relative flex items-center justify-center">
             <div 
-              className="relative w-[330px] h-[220px]"
+              className="relative w-[340px] h-[280px] md:w-[400px] md:h-[320px]"
               onMouseEnter={() => setIsAssembled(true)}
               onMouseLeave={() => setIsAssembled(false)}
             >
-              {puzzlePieces.map((p, i) => (
-                <motion.div
-                  key={p.id}
-                  className="absolute"
-                  animate={{
-                    x: isAssembled ? p.final.x : p.messy.x,
-                    y: isAssembled ? p.final.y : p.messy.y,
-                    rotate: isAssembled ? 0 : p.messy.r,
-                  }}
-                  transition={{ 
-                    duration: 0.9, 
-                    ease: [0.16, 1, 0.3, 1], 
-                    delay: isAssembled ? i * 0.08 : 0 
-                  }}
-                  style={{ willChange: "transform", zIndex: i }}
-                >
-                  <PuzzlePiece 
-                    variant={p.variant} 
-                    color={p.color} 
-                    label={p.label}
-                    isResolved={isAssembled}
-                    imgPos={p.imgPos}
-                    className="w-[110px] h-[110px]"
+              {/* Scattered puzzle pieces (visible when not assembled) */}
+              <AnimatePresence>
+                {!isAssembled && puzzlePieces.map((p, i) => (
+                  <motion.div
+                    key={p.id}
+                    className="absolute"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{
+                      x: p.messy.x,
+                      y: p.messy.y,
+                      rotate: p.messy.r,
+                      opacity: 1,
+                      scale: 1,
+                    }}
+                    exit={{
+                      x: p.final.x,
+                      y: p.final.y,
+                      rotate: 0,
+                      opacity: 0,
+                      scale: 0.9,
+                    }}
+                    transition={{ 
+                      duration: 0.8, 
+                      ease: [0.16, 1, 0.3, 1], 
+                      delay: i * 0.05
+                    }}
+                    style={{ willChange: "transform", zIndex: i }}
+                  >
+                    <div 
+                      className="w-[100px] h-[100px] md:w-[120px] md:h-[120px] flex items-center justify-center p-3"
+                      style={{ 
+                        clipPath: `path("${JIGSAW_PATHS[p.variant]}")`,
+                        WebkitClipPath: `path("${JIGSAW_PATHS[p.variant]}")`,
+                        backgroundColor: p.color,
+                      }}
+                    >
+                      <span className="text-[8px] md:text-[10px] font-bold uppercase tracking-[0.15em] text-white text-center leading-tight drop-shadow-md select-none">
+                        {p.label}
+                      </span>
+                    </div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+
+              {/* Full profile photo (visible when assembled) */}
+              <motion.div
+                className="absolute inset-0 flex items-center justify-center"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ 
+                  opacity: isAssembled ? 1 : 0, 
+                  scale: isAssembled ? 1 : 0.9,
+                }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: isAssembled ? 0.3 : 0 }}
+              >
+                <div className="relative">
+                  <img 
+                    src={profilePhoto} 
+                    alt="Hyebin Park" 
+                    className="w-[280px] h-[350px] md:w-[320px] md:h-[400px] object-cover object-top rounded-lg shadow-2xl"
                   />
-                </motion.div>
-              ))}
+                  <motion.div 
+                    className="absolute inset-0 rounded-lg"
+                    initial={{ boxShadow: "0 0 0 0 rgba(99, 102, 241, 0)" }}
+                    animate={{ 
+                      boxShadow: isAssembled 
+                        ? "0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 2px rgba(99, 102, 241, 0.1)" 
+                        : "0 0 0 0 rgba(99, 102, 241, 0)" 
+                    }}
+                    transition={{ duration: 0.5, delay: 0.5 }}
+                  />
+                </div>
+              </motion.div>
             </div>
           </div>
         </div>
