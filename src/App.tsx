@@ -240,7 +240,7 @@ const App = () => {
             </motion.div>
           </div>
           {/* RIGHT: INTERACTIVE JIGSAW -> ASSEMBLED -> FULL PROFILE REVEAL */}
-          <div className="w-full md:w-1/2 h-[60vh] md:h-full relative flex items-center justify-start md:-ml-16">
+          <div className="w-full md:w-1/2 h-[60vh] md:h-full relative flex items-center justify-start md:ml-4">
             <div 
               className="relative w-[380px] h-[280px] md:w-[440px] md:h-[320px]"
               onMouseEnter={() => setIsHovering(true)}
