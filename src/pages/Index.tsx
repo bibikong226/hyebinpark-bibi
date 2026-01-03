@@ -42,22 +42,18 @@ const Index = () => {
               
               {/* Main Headline */}
               <motion.h1
-                className="leading-[1.05] space-y-1"
+                className="leading-[1.1] space-y-2"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
               >
-                <span className="block text-lg md:text-xl text-muted-foreground font-normal mb-3">
-                  Turning
+                <span className="block">
+                  <span className="text-lg md:text-xl text-muted-foreground font-normal mr-3">Turning</span>
+                  <span className="font-serif text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-normal italic text-accent">complexity</span>
                 </span>
-                <span className="block font-serif text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-normal italic text-accent">
-                  complexity
-                </span>
-                <span className="block text-base md:text-lg text-muted-foreground/50 font-light my-3 md:my-4">
-                  into
-                </span>
-                <span className="block font-serif text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-normal italic text-primary">
-                  clarity.
+                <span className="block">
+                  <span className="text-base md:text-lg text-muted-foreground/50 font-light mr-3">into</span>
+                  <span className="font-serif text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-normal italic text-primary">clarity.</span>
                 </span>
               </motion.h1>
               
