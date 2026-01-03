@@ -228,16 +228,16 @@ const App = () => {
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: "linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)", backgroundSize: "100px 100px" }} />
           <div className="w-full md:w-1/2 z-10">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}>
-              {/* Name - matching header style */}
-              <p className="font-semibold tracking-tight text-xl uppercase mb-12 text-zinc-900">
-                Hyebin Park
+              {/* Intro */}
+              <p className="text-lg md:text-xl text-zinc-500 mb-6">
+                Hi, I am Hyebin Park. Strategic product designer.
               </p>
               
-              {/* Core statement - primary hero message */}
+              {/* Core statement */}
               <h1 className="text-[3.5rem] sm:text-[5rem] md:text-[6rem] lg:text-[7rem] font-medium tracking-tight leading-[1.05] mb-10 select-none text-zinc-900">
                 Turning
                 <br />
-                complexity
+                <span className="font-serif italic text-indigo-600">complexity</span>
                 <br />
                 into <span className="font-serif italic text-indigo-600">clarity.</span>
               </h1>
