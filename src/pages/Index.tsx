@@ -11,7 +11,7 @@ const Index = () => {
       <section className="min-h-[90vh] flex flex-col relative overflow-hidden">
         {/* Background Name Treatment - Very subtle, positioned as background layer */}
         <div 
-          className="absolute inset-0 flex items-start justify-center pt-20 md:pt-28 select-none pointer-events-none"
+          className="absolute inset-0 flex items-start justify-center pt-8 md:pt-12 select-none pointer-events-none"
           aria-hidden="true"
         >
           <span 
