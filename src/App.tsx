@@ -246,9 +246,9 @@ const App = () => {
               onMouseEnter={() => setIsHovering(true)}
               onMouseLeave={() => setIsHovering(false)}
             >
-              {/* Puzzle pieces - scattered or assembling */}
-              {animationPhase !== 'photo' && puzzlePieces.map((p, i) => (
-                (visiblePieces.includes(i) || animationPhase === 'assembling' || animationPhase === 'assembled') && (
+              {/* Puzzle pieces - with crossfade to photo */}
+              {puzzlePieces.map((p, i) => (
+                (visiblePieces.includes(i) || animationPhase === 'assembling' || animationPhase === 'assembled' || animationPhase === 'photo') && (
                   <motion.div
                     key={p.id}
                     className="absolute"
@@ -257,13 +257,13 @@ const App = () => {
                       x: animationPhase === 'scattered' ? p.messy.x : p.final.x,
                       y: animationPhase === 'scattered' ? p.messy.y : p.final.y,
                       rotate: animationPhase === 'scattered' ? p.messy.r : 0,
-                      opacity: 1,
-                      scale: 1,
+                      opacity: animationPhase === 'photo' ? 0 : 1,
+                      scale: animationPhase === 'photo' ? 1.05 : 1,
                     }}
                     transition={{ 
-                      duration: animationPhase === 'scattered' ? 0.6 : 0.8,
-                      ease: [0.25, 0.46, 0.45, 0.94], // Smooth natural easing
-                      delay: animationPhase === 'scattered' ? 0 : i * 0.1,
+                      duration: animationPhase === 'photo' ? 0.6 : (animationPhase === 'scattered' ? 0.6 : 0.8),
+                      ease: [0.25, 0.46, 0.45, 0.94],
+                      delay: animationPhase === 'scattered' ? 0 : (animationPhase === 'photo' ? i * 0.03 : i * 0.1),
                     }}
                     style={{ willChange: "transform", zIndex: (Math.floor(i / 3) * 10) + (i % 3) }}
                   >
@@ -288,18 +288,18 @@ const App = () => {
                 )
               ))}
 
-              {/* Full profile photo (visible after assembled state) */}
+              {/* Full profile photo - crossfades with puzzle pieces */}
               <motion.div
                 className="absolute inset-0 flex items-center justify-center"
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 0 }}
                 animate={{ 
-                  opacity: animationPhase === 'photo' ? 1 : 0, 
-                  scale: animationPhase === 'photo' ? 1 : 0.95,
+                  opacity: (animationPhase === 'assembled' || animationPhase === 'photo') ? 1 : 0, 
                 }}
                 transition={{ 
-                  duration: 0.5, 
+                  duration: 0.8, 
                   ease: [0.4, 0, 0.2, 1],
                 }}
+                style={{ zIndex: animationPhase === 'photo' ? 20 : 0 }}
               >
                 <img 
                   src={profilePhoto} 
