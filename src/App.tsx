@@ -12,20 +12,20 @@ import profilePhoto from "@/assets/profile-photo.jpg";
  * - Restored Testimonial Carousel
  */
 
-// Jigsaw paths matching the reference image with rounded tabs/notches
+// Jigsaw paths with natural rounded tabs/notches - scaled for 130px pieces
 const JIGSAW_PATHS = {
-  // Row 1: Top-left (tab right, tab bottom)
-  P1: "M0,0 H35 V0 H45 C45,0 45,20 55,20 C65,20 65,0 65,0 H100 V35 C100,35 120,35 120,45 C120,55 100,55 100,55 V100 H65 C65,100 65,120 55,120 C45,120 45,100 45,100 H0 V0 Z",
-  // Row 1: Top-center (hole left, tab right, tab bottom)
-  P2: "M0,35 C0,35 20,35 20,45 C20,55 0,55 0,55 V100 H35 C35,100 35,120 45,120 C55,120 55,100 55,100 H100 V55 C100,55 120,55 120,45 C120,35 100,35 100,35 V0 H55 C55,0 55,20 45,20 C35,20 35,0 35,0 H0 V35 Z",
-  // Row 1: Top-right (hole left, tab bottom)
-  P3: "M0,35 C0,35 20,35 20,45 C20,55 0,55 0,55 V100 H35 C35,100 35,120 45,120 C55,120 55,100 55,100 H100 V0 H55 C55,0 55,20 45,20 C35,20 35,0 35,0 H0 V35 Z",
-  // Row 2: Bottom-left (hole top, tab right)
-  P4: "M0,0 H45 C45,0 45,20 55,20 C65,20 65,0 65,0 H100 V35 C100,35 120,35 120,45 C120,55 100,55 100,55 V100 H0 V0 Z",
-  // Row 2: Bottom-center (hole left, hole top, tab right)
-  P5: "M0,35 C0,35 20,35 20,45 C20,55 0,55 0,55 V100 H100 V55 C100,55 120,55 120,45 C120,35 100,35 100,35 V0 H55 C55,0 55,20 45,20 C35,20 35,0 35,0 H0 V35 Z",
-  // Row 2: Bottom-right (hole left, hole top)
-  P6: "M0,35 C0,35 20,35 20,45 C20,55 0,55 0,55 V100 H100 V0 H55 C55,0 55,20 45,20 C35,20 35,0 35,0 H0 V35 Z",
+  // Top-left piece
+  P1: "M0,0 L50,0 C50,0 55,25 65,25 C75,25 80,0 80,0 L130,0 L130,50 C130,50 155,55 155,65 C155,75 130,80 130,80 L130,130 L0,130 Z",
+  // Top-center piece  
+  P2: "M0,50 C0,50 25,55 25,65 C25,75 0,80 0,80 L0,130 L50,130 C50,130 55,155 65,155 C75,155 80,130 80,130 L130,130 L130,80 C130,80 155,75 155,65 C155,55 130,50 130,50 L130,0 L80,0 C80,0 75,25 65,25 C55,25 50,0 50,0 L0,0 Z",
+  // Top-right piece
+  P3: "M0,50 C0,50 25,55 25,65 C25,75 0,80 0,80 L0,130 L50,130 C50,130 55,155 65,155 C75,155 80,130 80,130 L130,130 L130,0 L80,0 C80,0 75,25 65,25 C55,25 50,0 50,0 L0,0 Z",
+  // Bottom-left piece
+  P4: "M0,0 L50,0 C50,0 55,25 65,25 C75,25 80,0 80,0 L130,0 L130,50 C130,50 155,55 155,65 C155,75 130,80 130,80 L130,130 L0,130 L0,80 C0,80 25,75 25,65 C25,55 0,50 0,50 Z",
+  // Bottom-center piece
+  P5: "M0,50 C0,50 25,55 25,65 C25,75 0,80 0,80 L0,130 L130,130 L130,80 C130,80 155,75 155,65 C155,55 130,50 130,50 L130,0 L80,0 C80,0 75,25 65,25 C55,25 50,0 50,0 L0,0 Z",
+  // Bottom-right piece
+  P6: "M0,50 C0,50 25,55 25,65 C25,75 0,80 0,80 L0,130 L130,130 L130,0 L80,0 C80,0 75,25 65,25 C55,25 50,0 50,0 L0,0 Z",
 };
 
 const PuzzlePiece = ({ variant, color, isResolved, className, style = {}, label, imgPos }) => {
@@ -90,17 +90,38 @@ const App = () => {
     return () => window.removeEventListener("mousemove", moveMouse);
   }, []);
 
-  // Automatic Assembly Loop
+  // Track which pieces have appeared for sequential animation
+  const [visiblePieces, setVisiblePieces] = useState<number[]>([]);
+
+  // Automatic Assembly Loop - slower timing
   useEffect(() => {
     const interval = setInterval(() => {
       setIsAssembled(prev => !prev);
-    }, 5000);
+      if (!isAssembled) {
+        setVisiblePieces([]);
+      }
+    }, 8000); // Slower loop
     return () => clearInterval(interval);
-  }, []);
+  }, [isAssembled]);
+
+  // Sequential piece appearance
+  useEffect(() => {
+    if (!isAssembled) {
+      setVisiblePieces([]);
+      const timers: NodeJS.Timeout[] = [];
+      puzzlePieces.forEach((_, i) => {
+        const timer = setTimeout(() => {
+          setVisiblePieces(prev => [...prev, i]);
+        }, 300 + i * 400); // Each piece appears 400ms apart
+        timers.push(timer);
+      });
+      return () => timers.forEach(t => clearTimeout(t));
+    }
+  }, [isAssembled]);
 
   // Testimonial Auto-scroll
   useEffect(() => {
-    let interval;
+    let interval: NodeJS.Timeout;
     if (!isTestimonialHovered) {
       interval = setInterval(() => {
         setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
@@ -109,17 +130,13 @@ const App = () => {
     return () => clearInterval(interval);
   }, [isTestimonialHovered]);
 
-  // Puzzle piece size: 100x100 with 20px tabs, so effective grid is ~80px
-  const pieceSize = 100;
-  const gridStep = 80; // Account for overlapping tabs
-  
   const puzzlePieces = [
-    { id: 1, label: "User Needs", variant: "P1", color: "#E53935", messy: { x: -80, y: -60, r: -20 }, final: { x: 0, y: 0, r: 0 } },
-    { id: 2, label: "Data Complexity", variant: "P2", color: "#FB8C00", messy: { x: 180, y: -80, r: 25 }, final: { x: gridStep, y: 0, r: 0 } },
-    { id: 3, label: "Business Goals", variant: "P3", color: "#8E24AA", messy: { x: 340, y: -40, r: 15 }, final: { x: gridStep * 2, y: 0, r: 0 } },
-    { id: 4, label: "Tech Constraints", variant: "P4", color: "#43A047", messy: { x: -100, y: 180, r: -30 }, final: { x: 0, y: gridStep, r: 0 } },
-    { id: 5, label: "Edge Cases", variant: "P5", color: "#00ACC1", messy: { x: 160, y: 220, r: 20 }, final: { x: gridStep, y: gridStep, r: 0 } },
-    { id: 6, label: "Emerging Tech", variant: "P6", color: "#546E7A", messy: { x: 360, y: 160, r: -15 }, final: { x: gridStep * 2, y: gridStep, r: 0 } },
+    { id: 1, label: "USER NEEDS", variant: "P1", color: "#F87171", messy: { x: -60, y: -80, r: -12 }, final: { x: 0, y: 0, r: 0 } },
+    { id: 2, label: "DATA INSIGHTS", variant: "P2", color: "#60A5FA", messy: { x: 160, y: -100, r: 18 }, final: { x: 130, y: 0, r: 0 } },
+    { id: 3, label: "BIZ GOALS", variant: "P3", color: "#4ADE80", messy: { x: 380, y: -50, r: 8 }, final: { x: 260, y: 0, r: 0 } },
+    { id: 4, label: "TECH CONSTRAINTS", variant: "P4", color: "#FACC15", messy: { x: -80, y: 200, r: -22 }, final: { x: 0, y: 130, r: 0 } },
+    { id: 5, label: "EDGE CASES", variant: "P5", color: "#C084FC", messy: { x: 140, y: 260, r: 15 }, final: { x: 130, y: 130, r: 0 } },
+    { id: 6, label: "AMBIGUITY", variant: "P6", color: "#FB7185", messy: { x: 400, y: 180, r: -10 }, final: { x: 260, y: 130, r: 0 } },
   ];
 
   const projects = [
@@ -186,81 +203,70 @@ const App = () => {
           {/* RIGHT: INTERACTIVE JIGSAW -> FULL PROFILE REVEAL */}
           <div className="w-full md:w-2/5 h-[60vh] md:h-full relative flex items-center justify-center">
             <div 
-              className="relative w-[340px] h-[280px] md:w-[400px] md:h-[320px]"
+              className="relative w-[420px] h-[320px] md:w-[480px] md:h-[380px]"
               onMouseEnter={() => setIsAssembled(true)}
               onMouseLeave={() => setIsAssembled(false)}
             >
               {/* Scattered puzzle pieces (visible when not assembled) */}
               <AnimatePresence>
                 {!isAssembled && puzzlePieces.map((p, i) => (
-                  <motion.div
-                    key={p.id}
-                    className="absolute"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{
-                      x: p.messy.x,
-                      y: p.messy.y,
-                      rotate: p.messy.r,
-                      opacity: 1,
-                      scale: 1,
-                    }}
-                    exit={{
-                      x: p.final.x,
-                      y: p.final.y,
-                      rotate: 0,
-                      opacity: 0,
-                      scale: 0.9,
-                    }}
-                    transition={{ 
-                      duration: 0.8, 
-                      ease: [0.16, 1, 0.3, 1], 
-                      delay: i * 0.05
-                    }}
-                    style={{ willChange: "transform", zIndex: i }}
-                  >
-                    <div 
-                      className="w-[100px] h-[100px] md:w-[120px] md:h-[120px] flex items-center justify-center p-3"
-                      style={{ 
-                        clipPath: `path("${JIGSAW_PATHS[p.variant]}")`,
-                        WebkitClipPath: `path("${JIGSAW_PATHS[p.variant]}")`,
-                        backgroundColor: p.color,
+                  visiblePieces.includes(i) && (
+                    <motion.div
+                      key={p.id}
+                      className="absolute"
+                      initial={{ opacity: 0, scale: 0.5, rotate: p.messy.r + 30 }}
+                      animate={{
+                        x: p.messy.x,
+                        y: p.messy.y,
+                        rotate: p.messy.r,
+                        opacity: 1,
+                        scale: 1,
                       }}
+                      exit={{
+                        x: p.final.x,
+                        y: p.final.y,
+                        rotate: 0,
+                        opacity: 0,
+                        scale: 0.8,
+                      }}
+                      transition={{ 
+                        duration: 0.7, 
+                        ease: [0.34, 1.56, 0.64, 1], // Bouncy easing
+                      }}
+                      style={{ willChange: "transform", zIndex: 10 - i }}
                     >
-                      <span className="text-[8px] md:text-[10px] font-bold uppercase tracking-[0.15em] text-white text-center leading-tight drop-shadow-md select-none">
-                        {p.label}
-                      </span>
-                    </div>
-                  </motion.div>
+                      <div 
+                        className="w-[130px] h-[130px] md:w-[150px] md:h-[150px] flex items-center justify-center p-4 shadow-lg"
+                        style={{ 
+                          clipPath: `path("${JIGSAW_PATHS[p.variant]}")`,
+                          WebkitClipPath: `path("${JIGSAW_PATHS[p.variant]}")`,
+                          backgroundColor: p.color,
+                        }}
+                      >
+                        <span className="text-[9px] md:text-[11px] font-bold tracking-[0.1em] text-white text-center leading-tight drop-shadow-md select-none">
+                          {p.label}
+                        </span>
+                      </div>
+                    </motion.div>
+                  )
                 ))}
               </AnimatePresence>
 
-              {/* Full profile photo (visible when assembled) */}
+              {/* Full profile photo (visible when assembled) - no glow/frame */}
               <motion.div
                 className="absolute inset-0 flex items-center justify-center"
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ 
                   opacity: isAssembled ? 1 : 0, 
-                  scale: isAssembled ? 1 : 0.9,
+                  scale: isAssembled ? 1 : 0.95,
                 }}
-                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: isAssembled ? 0.3 : 0 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: isAssembled ? 0.2 : 0 }}
               >
-                <div className="relative">
-                  <img 
-                    src={profilePhoto} 
-                    alt="Hyebin Park" 
-                    className="w-[280px] h-[350px] md:w-[320px] md:h-[400px] object-cover object-top rounded-lg shadow-2xl"
-                  />
-                  <motion.div 
-                    className="absolute inset-0 rounded-lg"
-                    initial={{ boxShadow: "0 0 0 0 rgba(99, 102, 241, 0)" }}
-                    animate={{ 
-                      boxShadow: isAssembled 
-                        ? "0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 2px rgba(99, 102, 241, 0.1)" 
-                        : "0 0 0 0 rgba(99, 102, 241, 0)" 
-                    }}
-                    transition={{ duration: 0.5, delay: 0.5 }}
-                  />
-                </div>
+                <img 
+                  src={profilePhoto} 
+                  alt="Hyebin Park" 
+                  className="w-[320px] h-[400px] md:w-[380px] md:h-[475px] object-cover object-top"
+                />
               </motion.div>
             </div>
           </div>
