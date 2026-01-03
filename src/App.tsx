@@ -272,7 +272,7 @@ const App = () => {
   ];
   const puzzlePieces = [{
     id: 1,
-    text: "What users say",
+    text: "User Needs",
     variant: "P1",
     color: "#FF6B6B",
     messy: {
@@ -287,7 +287,7 @@ const App = () => {
     delay: 0.0
   }, {
     id: 2,
-    text: "What data shows",
+    text: "Data Complexity",
     variant: "P2",
     color: "#4D96FF",
     messy: {
@@ -302,7 +302,7 @@ const App = () => {
     delay: 0.12
   }, {
     id: 3,
-    text: "What business wants",
+    text: "Business Goals",
     variant: "P3",
     color: "#6BCB77",
     messy: {
@@ -317,7 +317,7 @@ const App = () => {
     delay: 0.24
   }, {
     id: 4,
-    text: "What tech allows",
+    text: "Tech Constraints",
     variant: "P4",
     color: "#FFD93D",
     messy: {
@@ -332,7 +332,7 @@ const App = () => {
     delay: 0.36
   }, {
     id: 5,
-    text: "What breaks",
+    text: "Edge Cases",
     variant: "P5",
     color: "#B983FF",
     messy: {
@@ -347,7 +347,7 @@ const App = () => {
     delay: 0.48
   }, {
     id: 6,
-    text: "What we don't know",
+    text: "Emerging Tech",
     variant: "P6",
     color: "#FF8FAB",
     messy: {
@@ -429,7 +429,7 @@ I turn ambiguity into structured, usable products that drive business impact.</p
               }} style={{
                 willChange: "transform"
               }}>
-                    <PuzzleShape variant={p.variant} text={p.text} color={p.color} className="w-28 h-28 md:w-32 md:h-32" />
+                    <PuzzleShape variant={p.variant} text={p.text} color={p.color} className="w-36 h-36 md:w-44 md:h-44" />
                   </motion.div>;
             })}
 
