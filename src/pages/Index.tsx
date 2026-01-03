@@ -8,66 +8,70 @@ const Index = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="min-h-[90vh] flex items-center section-padding bg-gradient-to-b from-background to-card/30">
-        <div className="container-wide w-full">
+      <section className="min-h-[90vh] flex items-center section-padding bg-gradient-to-b from-background to-card/30 relative overflow-hidden">
+        {/* Background Name Treatment */}
+        <div 
+          className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
+          aria-hidden="true"
+        >
+          <span 
+            className="text-[12vw] lg:text-[14vw] font-bold tracking-tight whitespace-nowrap"
+            style={{ color: 'rgba(0, 0, 0, 0.04)' }}
+          >
+            HYEBIN PARK
+          </span>
+        </div>
+
+        <div className="container-wide w-full relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Text Content */}
             <motion.div
-              className="space-y-6 order-2 lg:order-1"
+              className="space-y-8 order-2 lg:order-1"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
+              {/* Intro Line */}
               <motion.p
-                className="text-muted-foreground tracking-wide"
+                className="text-sm text-muted-foreground tracking-wide"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2 }}
               >
-                Strategic Product Designer
+                Hi, I am Hyebin Park. Strategic product designer.
               </motion.p>
               
+              {/* Main Headline */}
               <motion.h1
-                className="font-serif text-4xl md:text-5xl lg:text-6xl leading-tight"
+                className="leading-[1.1]"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
               >
-                I design products that{" "}
-                <span className="text-primary italic">connect</span> people
-                and solve{" "}
-                <span className="text-accent italic">meaningful</span> problems
+                <span className="block text-xl md:text-2xl text-muted-foreground font-light mb-2">
+                  Turning
+                </span>
+                <span className="block font-serif text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-medium italic text-amber-700">
+                  complexity
+                </span>
+                <span className="block text-xl md:text-2xl text-muted-foreground/60 font-light my-2">
+                  into
+                </span>
+                <span className="block font-serif text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-medium italic text-indigo-700">
+                  clarity.
+                </span>
               </motion.h1>
               
+              {/* Supporting Description */}
               <motion.p
-                className="text-lg text-muted-foreground max-w-xl"
+                className="text-base md:text-lg text-muted-foreground max-w-[480px] leading-relaxed"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
               >
-                With 6+ years of experience, I craft intuitive digital experiences 
-                that balance user needs with business goals. Currently based in San Francisco.
+                From AI algorithms to crypto workflows, I turn ambiguity into structured, 
+                usable products that drive real business impact.
               </motion.p>
-
-              <motion.div
-                className="flex flex-wrap gap-4 pt-4"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-              >
-                <a
-                  href="#work"
-                  className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity"
-                >
-                  View my work
-                </a>
-                <a
-                  href="/contact"
-                  className="inline-flex items-center px-6 py-3 border border-border rounded-lg font-medium hover:bg-muted transition-colors"
-                >
-                  Get in touch
-                </a>
-              </motion.div>
             </motion.div>
 
             {/* Puzzle Animation */}
