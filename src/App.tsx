@@ -291,26 +291,20 @@ const App = () => {
               {/* Full profile photo (visible after assembled state) */}
               <motion.div
                 className="absolute inset-0 flex items-center justify-center"
-                initial={{ opacity: 0, scale: 0.85, y: 30 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ 
                   opacity: animationPhase === 'photo' ? 1 : 0, 
-                  scale: animationPhase === 'photo' ? 1 : 0.85,
-                  y: animationPhase === 'photo' ? 0 : 30,
+                  scale: animationPhase === 'photo' ? 1 : 0.95,
                 }}
                 transition={{ 
-                  duration: 0.9, 
-                  ease: [0.16, 1, 0.3, 1],
+                  duration: 0.5, 
+                  ease: [0.4, 0, 0.2, 1],
                 }}
               >
-                <motion.img 
+                <img 
                   src={profilePhoto} 
                   alt="Hyebin Park" 
                   className="w-[400px] h-[500px] md:w-[480px] md:h-[600px] object-cover object-top"
-                  initial={{ filter: 'blur(10px)' }}
-                  animate={{ 
-                    filter: animationPhase === 'photo' ? 'blur(0px)' : 'blur(10px)',
-                  }}
-                  transition={{ duration: 0.7, delay: 0.1 }}
                 />
               </motion.div>
             </div>
