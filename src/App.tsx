@@ -12,20 +12,20 @@ import profilePhoto from "@/assets/profile-photo.jpg";
  * - Restored Testimonial Carousel
  */
 
-// Jigsaw paths - interlocking pieces that fit together (120px base)
+// Jigsaw paths - classic rounded puzzle shapes (120px base)
 const JIGSAW_PATHS = {
-  // Top-left: flat top, flat left, tab right, tab bottom
-  P1: "M0,0 L120,0 L120,45 C120,45 140,50 140,60 C140,70 120,75 120,75 L120,120 L75,120 C75,120 70,140 60,140 C50,140 45,120 45,120 L0,120 Z",
-  // Top-center: flat top, notch left, tab right, tab bottom
-  P2: "M0,0 L120,0 L120,45 C120,45 140,50 140,60 C140,70 120,75 120,75 L120,120 L75,120 C75,120 70,140 60,140 C50,140 45,120 45,120 L0,120 L0,75 C0,75 -20,70 -20,60 C-20,50 0,45 0,45 Z",
-  // Top-right: flat top, notch left, flat right, tab bottom
-  P3: "M0,0 L120,0 L120,120 L75,120 C75,120 70,140 60,140 C50,140 45,120 45,120 L0,120 L0,75 C0,75 -20,70 -20,60 C-20,50 0,45 0,45 Z",
+  // Top-left: notch top, flat left, tab right, tab bottom
+  P1: "M0,0 L45,0 C45,0 45,20 60,20 C75,20 75,0 75,0 L120,0 L120,45 C120,45 140,45 140,60 C140,75 120,75 120,75 L120,120 L75,120 C75,120 75,140 60,140 C45,140 45,120 45,120 L0,120 Z",
+  // Top-center: notch top, notch left, tab right, tab bottom
+  P2: "M0,45 C0,45 20,45 20,60 C20,75 0,75 0,75 L0,0 L45,0 C45,0 45,20 60,20 C75,20 75,0 75,0 L120,0 L120,45 C120,45 140,45 140,60 C140,75 120,75 120,75 L120,120 L75,120 C75,120 75,140 60,140 C45,140 45,120 45,120 L0,120 Z",
+  // Top-right: notch top, notch left, flat right, tab bottom
+  P3: "M0,45 C0,45 20,45 20,60 C20,75 0,75 0,75 L0,0 L45,0 C45,0 45,20 60,20 C75,20 75,0 75,0 L120,0 L120,120 L75,120 C75,120 75,140 60,140 C45,140 45,120 45,120 L0,120 Z",
   // Bottom-left: notch top, flat left, tab right, flat bottom
-  P4: "M0,0 L45,0 C45,0 50,-20 60,-20 C70,-20 75,0 75,0 L120,0 L120,45 C120,45 140,50 140,60 C140,70 120,75 120,75 L120,120 L0,120 Z",
+  P4: "M0,0 L45,0 C45,0 45,-20 60,-20 C75,-20 75,0 75,0 L120,0 L120,45 C120,45 140,45 140,60 C140,75 120,75 120,75 L120,120 L0,120 Z",
   // Bottom-center: notch top, notch left, tab right, flat bottom
-  P5: "M0,0 L45,0 C45,0 50,-20 60,-20 C70,-20 75,0 75,0 L120,0 L120,45 C120,45 140,50 140,60 C140,70 120,75 120,75 L120,120 L0,120 L0,75 C0,75 -20,70 -20,60 C-20,50 0,45 0,45 Z",
+  P5: "M0,45 C0,45 20,45 20,60 C20,75 0,75 0,75 L0,0 L45,0 C45,0 45,-20 60,-20 C75,-20 75,0 75,0 L120,0 L120,45 C120,45 140,45 140,60 C140,75 120,75 120,75 L120,120 L0,120 Z",
   // Bottom-right: notch top, notch left, flat right, flat bottom
-  P6: "M0,0 L45,0 C45,0 50,-20 60,-20 C70,-20 75,0 75,0 L120,0 L120,120 L0,120 L0,75 C0,75 -20,70 -20,60 C-20,50 0,45 0,45 Z",
+  P6: "M0,45 C0,45 20,45 20,60 C20,75 0,75 0,75 L0,0 L45,0 C45,0 45,-20 60,-20 C75,-20 75,0 75,0 L120,0 L120,120 L0,120 Z",
 };
 
 const PuzzlePiece = ({ variant, color, isResolved, className, style = {}, label, imgPos }) => {
