@@ -246,67 +246,74 @@ const App = () => {
               onMouseEnter={() => setIsHovering(true)}
               onMouseLeave={() => setIsHovering(false)}
             >
-              {/* Puzzle pieces - with crossfade to photo */}
-              {puzzlePieces.map((p, i) => (
-                (visiblePieces.includes(i) || animationPhase === 'assembling' || animationPhase === 'assembled' || animationPhase === 'photo') && (
-                  <motion.div
-                    key={p.id}
-                    className="absolute"
-                    initial={{ opacity: 0, scale: 0.6 }}
-                    animate={{
-                      x: animationPhase === 'scattered' ? p.messy.x : p.final.x,
-                      y: animationPhase === 'scattered' ? p.messy.y : p.final.y,
-                      rotate: animationPhase === 'scattered' ? p.messy.r : 0,
-                      opacity: animationPhase === 'photo' ? 0 : 1,
-                      scale: animationPhase === 'photo' ? 1.05 : 1,
-                    }}
-                    transition={{ 
-                      duration: animationPhase === 'photo' ? 0.6 : (animationPhase === 'scattered' ? 0.6 : 0.8),
-                      ease: [0.25, 0.46, 0.45, 0.94],
-                      delay: animationPhase === 'scattered' ? 0 : (animationPhase === 'photo' ? i * 0.03 : i * 0.1),
-                    }}
-                    style={{ willChange: "transform", zIndex: (Math.floor(i / 3) * 10) + (i % 3) }}
-                  >
-                    <div 
-                      className="w-[140px] h-[140px] relative"
-                      style={{ 
-                        clipPath: `path("${JIGSAW_PATHS[p.variant]}")`,
-                        WebkitClipPath: `path("${JIGSAW_PATHS[p.variant]}")`,
-                        background: `linear-gradient(145deg, ${p.color}, ${p.color}dd)`,
+              {/* Puzzle pieces */}
+              <AnimatePresence>
+                {animationPhase !== 'photo' && puzzlePieces.map((p, i) => (
+                  (visiblePieces.includes(i) || animationPhase === 'assembling' || animationPhase === 'assembled') && (
+                    <motion.div
+                      key={p.id}
+                      className="absolute"
+                      initial={{ opacity: 0, scale: 0.6 }}
+                      animate={{
+                        x: animationPhase === 'scattered' ? p.messy.x : p.final.x,
+                        y: animationPhase === 'scattered' ? p.messy.y : p.final.y,
+                        rotate: animationPhase === 'scattered' ? p.messy.r : 0,
+                        opacity: 1,
+                        scale: 1,
                       }}
+                      exit={{
+                        opacity: 0,
+                        scale: 1.02,
+                        transition: { duration: 0.4, delay: i * 0.02 }
+                      }}
+                      transition={{ 
+                        duration: animationPhase === 'scattered' ? 0.6 : 0.8,
+                        ease: [0.25, 0.46, 0.45, 0.94],
+                        delay: animationPhase === 'scattered' ? 0 : i * 0.1,
+                      }}
+                      style={{ willChange: "transform", zIndex: (Math.floor(i / 3) * 10) + (i % 3) }}
                     >
-                      <div className="absolute left-0 top-0 w-[120px] h-[120px] flex flex-col items-center justify-center">
-                        <span className="text-[13px] md:text-[15px] font-black tracking-wide text-white text-center leading-none select-none drop-shadow-sm">
-                          {p.label[0]}
-                        </span>
-                        <span className="text-[10px] md:text-[12px] font-bold tracking-wider text-white/90 text-center leading-none select-none mt-1.5 drop-shadow-sm">
-                          {p.label[1]}
-                        </span>
+                      <div 
+                        className="w-[140px] h-[140px] relative"
+                        style={{ 
+                          clipPath: `path("${JIGSAW_PATHS[p.variant]}")`,
+                          WebkitClipPath: `path("${JIGSAW_PATHS[p.variant]}")`,
+                          background: `linear-gradient(145deg, ${p.color}, ${p.color}dd)`,
+                        }}
+                      >
+                        <div className="absolute left-0 top-0 w-[120px] h-[120px] flex flex-col items-center justify-center">
+                          <span className="text-[13px] md:text-[15px] font-black tracking-wide text-white text-center leading-none select-none drop-shadow-sm">
+                            {p.label[0]}
+                          </span>
+                          <span className="text-[10px] md:text-[12px] font-bold tracking-wider text-white/90 text-center leading-none select-none mt-1.5 drop-shadow-sm">
+                            {p.label[1]}
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  </motion.div>
-                )
-              ))}
+                    </motion.div>
+                  )
+                ))}
+              </AnimatePresence>
 
-              {/* Full profile photo - crossfades with puzzle pieces */}
-              <motion.div
-                className="absolute inset-0 flex items-center justify-center"
-                initial={{ opacity: 0 }}
-                animate={{ 
-                  opacity: (animationPhase === 'assembled' || animationPhase === 'photo') ? 1 : 0, 
-                }}
-                transition={{ 
-                  duration: 0.8, 
-                  ease: [0.4, 0, 0.2, 1],
-                }}
-                style={{ zIndex: animationPhase === 'photo' ? 20 : 0 }}
-              >
-                <img 
-                  src={profilePhoto} 
-                  alt="Hyebin Park" 
-                  className="w-[400px] h-[500px] md:w-[480px] md:h-[600px] object-cover object-top"
-                />
-              </motion.div>
+              {/* Full profile photo */}
+              <AnimatePresence>
+                {animationPhase === 'photo' && (
+                  <motion.div
+                    className="absolute inset-0 flex items-center justify-center"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
+                    style={{ zIndex: 20 }}
+                  >
+                    <img 
+                      src={profilePhoto} 
+                      alt="Hyebin Park" 
+                      className="w-[400px] h-[500px] md:w-[480px] md:h-[600px] object-cover object-top"
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
         </div>
