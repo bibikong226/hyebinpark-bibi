@@ -8,78 +8,76 @@ const Index = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="min-h-[90vh] flex flex-col relative overflow-hidden">
-        <div className="w-full flex-1 flex items-center justify-center">
-          <div className="mx-auto w-full max-w-6xl px-6 md:px-12 lg:px-16 py-16 md:py-24 relative">
-            {/* Background Name Treatment - Subtle backdrop, aligned to hero container */}
-            <div
-              className="absolute inset-x-0 top-0 pt-6 md:pt-8 select-none pointer-events-none"
-              aria-hidden="true"
-            >
-              <div className="flex w-full items-baseline justify-between font-sans text-[clamp(96px,13vw,200px)] font-bold tracking-[0.26em] uppercase text-foreground/[0.04] leading-none whitespace-nowrap">
-                <span className="whitespace-nowrap">HYEBIN</span>
-                <span className="whitespace-nowrap">PARK</span>
-              </div>
-            </div>
+      <section className="min-h-[80vh] flex items-center justify-center relative overflow-hidden py-12 md:py-16">
+        {/* Background Name Treatment - Decorative backdrop behind hero */}
+        <div
+          className="absolute inset-0 flex items-center justify-center select-none pointer-events-none overflow-hidden"
+          aria-hidden="true"
+        >
+          <span className="font-sans text-[clamp(80px,18vw,240px)] font-bold tracking-[0.15em] uppercase text-foreground/[0.03] leading-none whitespace-nowrap">
+            HYEBIN PARK
+          </span>
+        </div>
 
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full pt-24 md:pt-28 relative z-10">
-              {/* Text Content */}
-              <motion.div
-                className="space-y-6 order-2 lg:order-1"
+        {/* Hero Container - Centered, cohesive unit */}
+        <div className="relative z-10 w-full max-w-4xl mx-auto px-6 md:px-8">
+          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+            {/* Left: Text Content */}
+            <motion.div
+              className="flex-1 space-y-5 text-center lg:text-left order-2 lg:order-1"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              {/* Intro Line */}
+              <motion.p
+                className="text-sm md:text-base tracking-wide text-muted-foreground"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.2 }}
+              >
+                Hi, I am Hyebin Park. <span className="text-foreground/70">Strategic product designer.</span>
+              </motion.p>
+              
+              {/* Main Headline */}
+              <motion.h1
+                className="leading-[1.05]"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
+                transition={{ delay: 0.3 }}
               >
-                {/* Intro Line */}
-                <motion.p
-                  className="text-sm md:text-base tracking-wide text-muted-foreground"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.2 }}
-                >
-                  Hi, I am Hyebin Park. <span className="text-foreground/70">Strategic product designer.</span>
-                </motion.p>
-                
-                {/* Main Headline */}
-                <motion.h1
-                  className="leading-[1.05]"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                >
-                  <span className="flex items-baseline gap-2 flex-wrap">
-                    <span className="text-lg md:text-xl text-muted-foreground font-normal">Turning</span>
-                    <span className="font-serif text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-normal italic text-accent">complexity</span>
-                  </span>
-                  <span className="flex items-baseline gap-2 flex-wrap mt-1">
-                    <span className="text-base md:text-lg text-muted-foreground/50 font-light">into</span>
-                    <span className="font-serif text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-normal italic text-primary">clarity.</span>
-                  </span>
-                </motion.h1>
-                
-                {/* Supporting Description */}
-                <motion.p
-                  className="text-xl md:text-2xl text-muted-foreground max-w-lg leading-[1.6] pt-2"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.4 }}
-                >
-                  From AI algorithms to crypto workflows,<br />
-                  I turn ambiguity into structured, usable products<br />
-                  that drive real business impact.
-                </motion.p>
-              </motion.div>
+                <span className="flex items-baseline gap-2 flex-wrap justify-center lg:justify-start">
+                  <span className="text-lg md:text-xl text-muted-foreground font-normal">Turning</span>
+                  <span className="font-serif text-4xl md:text-5xl lg:text-6xl font-normal italic text-accent">complexity</span>
+                </span>
+                <span className="flex items-baseline gap-2 flex-wrap mt-1 justify-center lg:justify-start">
+                  <span className="text-base md:text-lg text-muted-foreground/50 font-light">into</span>
+                  <span className="font-serif text-4xl md:text-5xl lg:text-6xl font-normal italic text-primary">clarity.</span>
+                </span>
+              </motion.h1>
+              
+              {/* Supporting Description */}
+              <motion.p
+                className="text-lg md:text-xl text-muted-foreground max-w-md mx-auto lg:mx-0 leading-[1.6]"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
+              >
+                From AI algorithms to crypto workflows,<br className="hidden md:inline" />
+                I turn ambiguity into structured, usable products<br className="hidden md:inline" />
+                that drive real business impact.
+              </motion.p>
+            </motion.div>
 
-              {/* Puzzle Animation */}
-              <motion.div
-                className="flex justify-center lg:justify-start order-1 lg:order-2 lg:-ml-8"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-              >
-                <PuzzleAnimation />
-              </motion.div>
-            </div>
+            {/* Right: Portrait/Puzzle Animation */}
+            <motion.div
+              className="flex-shrink-0 order-1 lg:order-2"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            >
+              <PuzzleAnimation />
+            </motion.div>
           </div>
         </div>
       </section>
