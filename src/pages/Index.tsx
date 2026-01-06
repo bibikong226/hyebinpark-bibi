@@ -109,24 +109,66 @@ const Index = () => {
 
       {/* Testimonial Section */}
       <section className="section-padding bg-card/50">
-        <div className="container-narrow">
-          <motion.blockquote
-            className="text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <p className="font-serif text-2xl md:text-3xl lg:text-4xl italic leading-relaxed mb-8">
-              "Hyebin has an exceptional ability to translate complex problems into 
-              elegant, user-centered solutions. Her strategic thinking and attention 
-              to detail made her invaluable to our team."
-            </p>
-            <footer className="space-y-1">
-              <cite className="not-italic font-medium text-lg">Sarah Chen</cite>
-              <p className="text-muted-foreground">VP of Product, TechCorp</p>
-            </footer>
-          </motion.blockquote>
+        <div className="container-wide">
+          <div className="grid md:grid-cols-2 gap-8">
+            {[
+              {
+                id: "t1",
+                author: "David Rashid",
+                role: "CEO",
+                company: "Concord Systems",
+                text: "Hyebin quickly grasped the business model and technical constraints behind our platform.",
+                subtext: "She didn't just design screens. She transformed backend complexity into seamless, user-first flows that contributed to our business growth."
+              },
+              {
+                id: "t2",
+                author: "Elisa Vargas",
+                role: "Product Designer",
+                company: "JSTOR",
+                text: "Hyebin has a rare ability to connect deep research insights with thoughtful design decisions that drive real user impact.",
+                subtext: "Her user-centered thinking and clarity of intent made a lasting impression on our team."
+              },
+              {
+                id: "t3",
+                author: "Jae Hoon Shim",
+                role: "Product Strategy Manager",
+                company: "LINE+",
+                text: "Hyebin is one of the most dedicated and driven collaborators I've worked with.",
+                subtext: "She approaches every project with curiosity, a sharp eye for detail, and a user-first mindset. Her passion made our time together impactful."
+              },
+              {
+                id: "t4",
+                author: "Jong Hee Hong",
+                role: "Head of Global Communications",
+                company: "TikTok Korea",
+                text: "What always stands out with Hyebin is how she connects her creativity with real curiosity. She's always asking the right questions.",
+                subtext: "Her energy makes collaboration feel easy, and she's excellent at communicating her ideas."
+              },
+            ].map((testimonial, index) => (
+              <motion.blockquote
+                key={testimonial.id}
+                className="bg-background p-8 rounded-lg space-y-6"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <div className="space-y-4">
+                  <p className="font-serif text-lg italic leading-relaxed text-foreground">
+                    "{testimonial.text}
+                  </p>
+                  <p className="font-serif text-lg italic leading-relaxed text-foreground">
+                    {testimonial.subtext}"
+                  </p>
+                </div>
+                <footer className="space-y-1 pt-4 border-t border-border/50">
+                  <cite className="not-italic font-medium text-base block">{testimonial.author}</cite>
+                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                  <p className="text-sm text-primary">{testimonial.company}</p>
+                </footer>
+              </motion.blockquote>
+            ))}
+          </div>
         </div>
       </section>
 
