@@ -311,24 +311,28 @@ const App = () => {
   }];
   const testimonials = [{
     id: "t1",
-    author: "Sarah Jenkins",
-    role: "Director of Product, Paradigm AI",
-    text: "Hyebin has a rare ability to bridge technical complexity with human-centered strategy. She makes sense of the chaos in our enterprise workflows."
+    author: "David Rashid",
+    role: "CEO",
+    company: "Concord Systems",
+    text: "Hyebin quickly grasped the business model and technical constraints behind our platform.\n\nShe didn't just design screens. she transformed backend complexity into seamless, user-first flows that contributed to our busienss growth."
   }, {
     id: "t2",
-    author: "David Chen",
-    role: "CTO, BlockVault",
-    text: "Working across crypto workflows is notoriously difficult, but Hyebin's systematic approach provided the clarity we needed to scale our custody platform."
+    author: "Elisa Vargas",
+    role: "Product Designer",
+    company: "JSTOR",
+    text: "Hyebin has a rare ability to connect deep research insights with thoughtful design decisions that drive real user impact.\n\nHer user-centered thinking and clarity of intent made a lasting impression on our team."
   }, {
     id: "t3",
-    author: "Elena Rossi",
-    role: "Lead UX Researcher, Lumina",
-    text: "She doesn't just design interfaces; she designs systems. Her research-backed insight is the most valuable asset in our AI product cycle."
+    author: "Jae Hoon Shim",
+    role: "Product Strategy Manager",
+    company: "LINE+",
+    text: "Hyebin is one of the most dedicated and driven collaborators I've worked with.\n\nShe approaches every project with curiosity, a sharp eye for detail, and a user-first mindset. Her passion made our time together impactful."
   }, {
     id: "t4",
-    author: "Marcus Thorne",
-    role: "Founder, Veritas Identity",
-    text: "The human touch Hyebin brings to emerging technologies is unparalleled. She turns cold algorithms into warm, usable experiences."
+    author: "Jong Hee Hong",
+    role: "Head of Global Communications",
+    company: "TikTok Korea",
+    text: "What always stands out with Hyebin is how she connects her creativity with real curiosity. She's always asking the right questions.\n\nHer energy makes collaboration feel easy, and she's excellent at communicating her ideas."
   }];
   const nextTestimonial = () => setCurrentTestimonial(prev => (prev + 1) % testimonials.length);
   const prevTestimonial = () => setCurrentTestimonial(prev => (prev - 1 + testimonials.length) % testimonials.length);
@@ -570,7 +574,7 @@ const App = () => {
               duration: 0.5,
               ease: [0.16, 1, 0.3, 1]
             }} className="flex flex-col items-center text-center space-y-12 max-w-4xl px-16">
-                <p className="text-2xl md:text-4xl lg:text-5xl font-light leading-[1.25] tracking-tight text-zinc-200 italic">
+                <p className="text-2xl md:text-4xl lg:text-5xl font-light leading-[1.25] tracking-tight text-zinc-200 italic whitespace-pre-line">
                    "{testimonials[currentTestimonial].text}"
                 </p>
                 <div className="flex flex-col items-center">
@@ -580,6 +584,9 @@ const App = () => {
                         </span>
                         <span className="block text-[10px] font-mono uppercase tracking-widest text-zinc-500 mt-2">
                             {testimonials[currentTestimonial].role}
+                        </span>
+                        <span className="block text-[10px] font-mono uppercase tracking-widest text-zinc-500 mt-1">
+                            {testimonials[currentTestimonial].company}
                         </span>
                     </div>
                     <div className="flex justify-center gap-3">
