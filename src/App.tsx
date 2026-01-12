@@ -373,14 +373,14 @@ const App = () => {
         }} />
 
           {/* Background Name (between header and hero content) */}
-          <div className="relative z-10 pt-28 md:pt-32 pb-8 md:pb-12 bg-white">
+          <div className="relative z-10 pt-28 md:pt-32 pb-4 md:pb-6 bg-white">
             <h2 className="text-[18vw] md:text-[14vw] font-black uppercase tracking-tighter leading-none text-zinc-200 select-none text-center font-sans lg:text-9xl">
               HYEBIN PARK
             </h2>
           </div>
 
-          <div className="relative z-10 flex-1 w-full flex flex-col md:flex-row items-center">
-            <div className="w-full md:w-1/2">
+          <div className="relative z-10 flex-1 w-full flex flex-col md:flex-row items-start justify-between gap-4 md:gap-8">
+            <div className="w-full md:w-1/2 flex items-start">
               <motion.div initial={{
               opacity: 0,
               y: 20
@@ -391,11 +391,8 @@ const App = () => {
               duration: 1.0,
               ease: [0.16, 1, 0.3, 1]
             }}>
-                {/* Intro */}
-                
-
                 {/* Core statement */}
-                <h1 className="text-[3.5rem] sm:text-[5rem] md:text-[6rem] font-medium tracking-tight leading-[1.05] mb-10 select-none text-zinc-900 lg:text-8xl">
+                <h1 className="text-[3.5rem] sm:text-[5rem] md:text-[6rem] font-medium tracking-tight leading-[1.05] mb-6 select-none text-zinc-900 lg:text-8xl">
                   <span className="block text-xl sm:text-2xl font-medium text-zinc-800 md:text-6xl">
                     Turning
                   </span>
@@ -417,7 +414,7 @@ const App = () => {
             </div>
 
             {/* RIGHT: INTERACTIVE JIGSAW -> ASSEMBLED -> FULL PROFILE REVEAL */}
-            <div className="w-full md:w-1/2 h-[60vh] md:h-full relative flex items-center justify-center md:ml-20">
+            <div className="w-full md:w-1/2 h-[50vh] md:h-full relative flex items-start justify-end">
               <div className="relative w-[420px] h-[320px] md:w-[480px] md:h-[360px]" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
                 {/* Puzzle pieces */}
                 <AnimatePresence>
