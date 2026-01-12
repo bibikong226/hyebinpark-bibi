@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { motion, useInView } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
 
 interface PuzzlePieceProps {
   color: string;
@@ -63,14 +63,20 @@ export const PuzzleAnimation = () => {
   const [isCompleted, setIsCompleted] = useState(false);
   const [showGlow, setShowGlow] = useState(false);
   const [completedPieces, setCompletedPieces] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
+  // Trigger animation on hover or scroll into view
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsCompleted(true);
-    }, 800);
-
-    return () => clearTimeout(timer);
-  }, []);
+    if (isHovered || isInView) {
+      const timer = setTimeout(() => {
+        setIsCompleted(true);
+      }, 200);
+      return () => clearTimeout(timer);
+    }
+  }, [isHovered, isInView]);
 
   useEffect(() => {
     if (completedPieces >= 4) {
@@ -92,7 +98,7 @@ export const PuzzleAnimation = () => {
       finalX: 0,
       finalY: 0,
       rotation: -25,
-      delay: 0.2,
+      delay: 0.1,
     },
     {
       color: "hsl(var(--puzzle-piece-2))",
@@ -102,7 +108,7 @@ export const PuzzleAnimation = () => {
       finalX: 80,
       finalY: 0,
       rotation: 30,
-      delay: 0.4,
+      delay: 0.2,
     },
     {
       color: "hsl(var(--puzzle-piece-3))",
@@ -112,7 +118,7 @@ export const PuzzleAnimation = () => {
       finalX: 0,
       finalY: 80,
       rotation: -35,
-      delay: 0.6,
+      delay: 0.3,
     },
     {
       color: "hsl(var(--puzzle-piece-4))",
@@ -122,12 +128,16 @@ export const PuzzleAnimation = () => {
       finalX: 80,
       finalY: 80,
       rotation: 40,
-      delay: 0.8,
+      delay: 0.4,
     },
   ];
 
   return (
-    <div className="relative w-48 h-48 md:w-64 md:h-64">
+    <div 
+      ref={containerRef}
+      className="relative w-48 h-48 md:w-64 md:h-64 cursor-pointer"
+      onMouseEnter={() => setIsHovered(true)}
+    >
       {/* Glow effect when completed */}
       <motion.div
         className="absolute inset-0 rounded-2xl"
@@ -149,7 +159,7 @@ export const PuzzleAnimation = () => {
         />
       ))}
 
-      {/* Completion sparkle effect */}
+      {/* Completion sparkle effect - no loop */}
       {showGlow && (
         <motion.div
           className="absolute inset-0 flex items-center justify-center"
@@ -159,15 +169,9 @@ export const PuzzleAnimation = () => {
         >
           <motion.div
             className="w-4 h-4 rounded-full bg-accent"
-            animate={{
-              scale: [1, 1.5, 1],
-              opacity: [1, 0.5, 1],
-            }}
-            transition={{
-              duration: 1.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
+            initial={{ scale: 1, opacity: 1 }}
+            animate={{ scale: 1.5, opacity: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           />
         </motion.div>
       )}
