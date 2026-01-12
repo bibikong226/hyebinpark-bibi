@@ -1,4 +1,4 @@
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 
 interface PuzzlePieceProps {
@@ -64,19 +64,42 @@ export const PuzzleAnimation = () => {
   const [showGlow, setShowGlow] = useState(false);
   const [completedPieces, setCompletedPieces] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [hasScrolledPast, setHasScrolledPast] = useState(false);
   
   const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
-  // Trigger animation on hover or scroll into view
+  // Track if user has scrolled past the element, then scrolled back
   useEffect(() => {
-    if (isHovered || isInView) {
+    const handleScroll = () => {
+      if (!containerRef.current || isCompleted) return;
+      
+      const rect = containerRef.current.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      
+      // Check if element is below the viewport (user scrolled past it)
+      if (rect.top > viewportHeight) {
+        setHasScrolledPast(true);
+      }
+      
+      // If user scrolled past and now the element is back in view, trigger animation
+      if (hasScrolledPast && rect.top < viewportHeight && rect.bottom > 0) {
+        setIsCompleted(true);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [hasScrolledPast, isCompleted]);
+
+  // Trigger animation on hover
+  useEffect(() => {
+    if (isHovered && !isCompleted) {
       const timer = setTimeout(() => {
         setIsCompleted(true);
       }, 200);
       return () => clearTimeout(timer);
     }
-  }, [isHovered, isInView]);
+  }, [isHovered, isCompleted]);
 
   useEffect(() => {
     if (completedPieces >= 4) {
