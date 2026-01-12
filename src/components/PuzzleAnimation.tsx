@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 
 interface PuzzlePieceProps {
   color: string;
@@ -54,7 +54,9 @@ const PuzzlePiece = ({
         stiffness: 100,
         damping: 15,
       }}
-      onAnimationComplete={onComplete}
+      onAnimationComplete={() => {
+        if (isCompleted) onComplete?.();
+      }}
     />
   );
 };
@@ -64,43 +66,31 @@ export const PuzzleAnimation = () => {
   const [showGlow, setShowGlow] = useState(false);
   const [completedPieces, setCompletedPieces] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-  const [hasScrolledPast, setHasScrolledPast] = useState(false);
-  
-  const containerRef = useRef<HTMLDivElement>(null);
 
-  // Track if user has scrolled past the element, then scrolled back
+  // Trigger once when the user starts scrolling (prevents auto-play on load)
   useEffect(() => {
+    if (isCompleted) return;
+
     const handleScroll = () => {
-      if (!containerRef.current || isCompleted) return;
-      
-      const rect = containerRef.current.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-      
-      // Check if element is below the viewport (user scrolled past it)
-      if (rect.top > viewportHeight) {
-        setHasScrolledPast(true);
-      }
-      
-      // If user scrolled past and now the element is back in view, trigger animation
-      if (hasScrolledPast && rect.top < viewportHeight && rect.bottom > 0) {
+      if (window.scrollY > 24) {
         setIsCompleted(true);
       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [hasScrolledPast, isCompleted]);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isCompleted]);
 
-  // Trigger animation on hover
+  // Trigger on hover
   useEffect(() => {
-    if (isHovered && !isCompleted) {
-      const timer = setTimeout(() => {
-        setIsCompleted(true);
-      }, 200);
-      return () => clearTimeout(timer);
-    }
-  }, [isHovered, isCompleted]);
+    if (!isHovered || isCompleted) return;
 
+    const timer = window.setTimeout(() => {
+      setIsCompleted(true);
+    }, 200);
+
+    return () => window.clearTimeout(timer);
+  }, [isHovered, isCompleted]);
   useEffect(() => {
     if (completedPieces >= 4) {
       setShowGlow(true);
@@ -156,8 +146,7 @@ export const PuzzleAnimation = () => {
   ];
 
   return (
-    <div 
-      ref={containerRef}
+    <div
       className="relative w-48 h-48 md:w-64 md:h-64 cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
     >
