@@ -36,17 +36,37 @@ const ProjectDetail = () => {
             </Link>
 
             <div className="space-y-4 mb-12">
-              <p className="text-muted-foreground tracking-wide">{project.category}</p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {project.tags.map((tag, index) => (
+                  <span
+                    key={index}
+                    className="px-3 py-1 text-xs font-medium bg-muted text-muted-foreground rounded-full"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
               <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-tight">
                 {project.title}
               </h1>
               <p className="text-xl text-muted-foreground max-w-2xl">
                 {project.description}
               </p>
+              {/* Highlights */}
+              <div className="flex flex-wrap gap-2 mt-4">
+                {project.highlights.map((highlight, index) => (
+                  <span
+                    key={index}
+                    className="px-4 py-2 text-sm bg-primary/10 text-primary rounded-lg"
+                  >
+                    {highlight}
+                  </span>
+                ))}
+              </div>
             </div>
 
             {/* Project Meta */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pb-12 border-b border-border">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6 pb-12 border-b border-border">
               <div>
                 <p className="text-sm text-muted-foreground mb-1">Role</p>
                 <p className="font-medium">{project.role}</p>
@@ -58,10 +78,6 @@ const ProjectDetail = () => {
               <div>
                 <p className="text-sm text-muted-foreground mb-1">Team</p>
                 <p className="font-medium">{project.team}</p>
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground mb-1">Year</p>
-                <p className="font-medium">{project.year}</p>
               </div>
             </div>
           </motion.div>
