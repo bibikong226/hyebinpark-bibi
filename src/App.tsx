@@ -7,6 +7,7 @@ import logoTiktok from "@/assets/logo-tiktok.png";
 import logoGm from "@/assets/logo-gm.png";
 import logoNaver from "@/assets/logo-naver.png";
 import logoJstor from "@/assets/logo-jstor.png";
+import { projects } from "@/data/projects";
 
 /**
  * PORTFOLIO HOMEPAGE - HYEBIN PARK
@@ -271,49 +272,7 @@ const App = () => {
     }
     return () => clearInterval(interval);
   }, [isTestimonialHovered]);
-  const projects = [{
-    title: "Neuroflow AI",
-    desc: "Enterprise Algorithm UX",
-    year: "2024",
-    color: "#FEE2E2",
-    accent: "#E11D48",
-    impact: "Increased workflow efficiency by 42%"
-  }, {
-    title: "Vault Protocol",
-    desc: "Crypto Trust Architecture",
-    year: "2023",
-    color: "#E0E7FF",
-    accent: "#4F46E5",
-    impact: "Secured $200M+ in digital assets"
-  }, {
-    title: "Lumina Labs",
-    desc: "Research Visualization",
-    year: "2024",
-    color: "#D1FAE5",
-    accent: "#059669",
-    impact: "Reduced data ambiguity by 60%"
-  }, {
-    title: "Ether Custody",
-    desc: "Institutional Security",
-    year: "2023",
-    color: "#FEF3C7",
-    accent: "#D97706",
-    impact: "Onboarded 15 tier-1 global banks"
-  }, {
-    title: "Veritas Identity",
-    desc: "Digital Sovereign UX",
-    year: "2022",
-    color: "#CFFAFE",
-    accent: "#0891B2",
-    impact: "Zero identity breaches in 2 years"
-  }, {
-    title: "Nexus Systems",
-    desc: "Multi-modal AI Suite",
-    year: "2024",
-    color: "#F3E8FF",
-    accent: "#9333EA",
-    impact: "Adopted by 50+ enterprise teams"
-  }];
+  // Projects imported from @/data/projects
   const testimonials = [{
     id: "t1",
     author: "David Rashid",
@@ -527,7 +486,7 @@ const App = () => {
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-40">
-          {projects.map((project, idx) => <motion.div key={idx} initial={{
+          {projects.map((project, idx) => <motion.div key={project.id} initial={{
           opacity: 0,
           y: 50
         }} whileInView={{
@@ -536,30 +495,35 @@ const App = () => {
         }} viewport={{
           once: true
         }} onMouseEnter={() => setCursorActive(true)} onMouseLeave={() => setCursorActive(false)} className="group relative cursor-none">
-              <div className="aspect-[16/11] mb-10 relative overflow-hidden transition-all duration-700 rounded-sm border border-zinc-50 group-hover:shadow-2xl" style={{
-            backgroundColor: project.color
+              <div className="aspect-[16/11] mb-10 relative overflow-hidden transition-all duration-700 rounded-2xl border border-zinc-50 group-hover:shadow-2xl" style={{
+            backgroundColor: project.imageColor
           }}>
                 <motion.div className="absolute inset-0 flex items-center justify-center" whileHover={{
               scale: 1.1
             }}>
                   <div className="w-1/2 h-1/2 rounded-full border border-black/5 opacity-20 group-hover:opacity-40 transition-all duration-1000" />
                 </motion.div>
-                <div className="absolute top-0 left-0 w-full h-1 opacity-0 group-hover:opacity-100 transition-opacity" style={{
-              backgroundColor: project.accent
-            }} />
               </div>
               <div className="space-y-4 px-2 relative z-10 transition-transform duration-500 group-hover:-translate-y-2">
-                <div className="flex justify-between items-baseline">
-                  <h3 className="text-3xl font-bold group-hover:text-zinc-900 leading-tight">{project.title}</h3>
-                  <span className="text-[10px] font-mono text-zinc-300">{project.year}</span>
+                <h3 className="text-3xl font-bold group-hover:text-zinc-900 leading-tight">{project.title}</h3>
+                <p className="text-base text-zinc-600 leading-relaxed">{project.description}</p>
+                
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2 pt-2">
+                  {project.tags.map((tag, tagIdx) => (
+                    <span key={tagIdx} className="px-3 py-1 text-[10px] font-medium bg-zinc-100 text-zinc-600 rounded-full uppercase tracking-wider">
+                      {tag}
+                    </span>
+                  ))}
                 </div>
-                <p className="text-xs uppercase tracking-[0.3em] font-bold text-zinc-400">{project.desc}</p>
-                <div className="mt-8 relative inline-block overflow-hidden rounded-md px-4 py-2">
-                    <div className="absolute inset-0 bg-zinc-100" />
-                    <div className="absolute inset-0 z-0 origin-left transition-transform duration-500 ease-out scale-x-0 group-hover:scale-x-100" style={{
-                backgroundColor: project.accent
-              }} />
-                    <span className="relative z-10 text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500 group-hover:text-white">Impact: {project.impact}</span>
+                
+                {/* Highlights */}
+                <div className="space-y-2 pt-4">
+                  {project.highlights.map((highlight, hIdx) => (
+                    <div key={hIdx} className="px-4 py-3 text-sm bg-zinc-50 text-zinc-700 rounded-lg border border-zinc-100">
+                      {highlight}
+                    </div>
+                  ))}
                 </div>
               </div>
             </motion.div>)}
