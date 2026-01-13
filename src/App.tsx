@@ -498,11 +498,26 @@ const App = () => {
               <div className="aspect-[16/11] mb-10 relative overflow-hidden transition-all duration-700 rounded-2xl border border-zinc-50 group-hover:shadow-2xl" style={{
             backgroundColor: project.imageColor
           }}>
-                <motion.div className="absolute inset-0 flex items-center justify-center" whileHover={{
-              scale: 1.1
-            }}>
-                  <div className="w-1/2 h-1/2 rounded-full border border-black/5 opacity-20 group-hover:opacity-40 transition-all duration-1000" />
-                </motion.div>
+                {/* Thumbnail Section - Logo left, Mockup right */}
+                <div className="absolute left-6 md:left-10 top-1/2 -translate-y-1/2 z-10 max-w-[35%]">
+                  <img
+                    src={project.logo}
+                    alt={`${project.title} logo`}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-auto max-h-24 md:max-h-32 object-contain object-left"
+                  />
+                </div>
+
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[55%] h-[90%] flex items-center justify-end">
+                  <img
+                    src={project.mockup}
+                    alt={`${project.title} mockup`}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-auto object-contain object-right transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
               </div>
               <div className="space-y-4 px-2 relative z-10 transition-transform duration-500 group-hover:-translate-y-2">
                 <h3 className="text-3xl font-bold group-hover:text-zinc-900 leading-tight">{project.title}</h3>
