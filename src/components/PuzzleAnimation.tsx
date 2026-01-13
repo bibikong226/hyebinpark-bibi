@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
 
 interface PuzzlePieceProps {
   color: string;
@@ -54,9 +54,7 @@ const PuzzlePiece = ({
         stiffness: 100,
         damping: 15,
       }}
-      onAnimationComplete={() => {
-        if (isCompleted) onComplete?.();
-      }}
+      onAnimationComplete={onComplete}
     />
   );
 };
@@ -66,31 +64,20 @@ export const PuzzleAnimation = () => {
   const [showGlow, setShowGlow] = useState(false);
   const [completedPieces, setCompletedPieces] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
-  // Trigger once when the user starts scrolling (prevents auto-play on load)
+  // Trigger animation on hover or scroll into view
   useEffect(() => {
-    if (isCompleted) return;
-
-    const handleScroll = () => {
-      if (window.scrollY > 24) {
+    if (isHovered || isInView) {
+      const timer = setTimeout(() => {
         setIsCompleted(true);
-      }
-    };
+      }, 200);
+      return () => clearTimeout(timer);
+    }
+  }, [isHovered, isInView]);
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [isCompleted]);
-
-  // Trigger on hover
-  useEffect(() => {
-    if (!isHovered || isCompleted) return;
-
-    const timer = window.setTimeout(() => {
-      setIsCompleted(true);
-    }, 200);
-
-    return () => window.clearTimeout(timer);
-  }, [isHovered, isCompleted]);
   useEffect(() => {
     if (completedPieces >= 4) {
       setShowGlow(true);
@@ -146,7 +133,8 @@ export const PuzzleAnimation = () => {
   ];
 
   return (
-    <div
+    <div 
+      ref={containerRef}
       className="relative w-48 h-48 md:w-64 md:h-64 cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
     >
