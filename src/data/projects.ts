@@ -1,3 +1,14 @@
+import logoConcord from "@/assets/logo-concord.png";
+import mockupConcord from "@/assets/mockup-concord.png";
+import logoNurturly from "@/assets/logo-nurturly.png";
+import mockupNurturly from "@/assets/mockup-nurturly.png";
+import logoGm from "@/assets/logo-gm.png";
+import mockupGm from "@/assets/mockup-gm.png";
+import logoJstor from "@/assets/logo-jstor-new.png";
+import mockupJstor from "@/assets/mockup-jstor.png";
+import logoOpenoff from "@/assets/logo-openoff.png";
+import mockupOpenoff from "@/assets/mockup-openoff.png";
+
 export interface Project {
   id: string;
   title: string;
@@ -6,6 +17,8 @@ export interface Project {
   highlights: string[];
   imageColor: string;
   accentColor: string;
+  logo: string;
+  mockup: string;
   role: string;
   duration: string;
   team: string;
@@ -27,6 +40,8 @@ export const projects: Project[] = [
     ],
     imageColor: "hsl(350, 80%, 65%)",
     accentColor: "#BE123C",
+    logo: logoConcord,
+    mockup: mockupConcord,
     role: "Lead Product Designer",
     duration: "6 months",
     team: "2 designers, 4 engineers",
@@ -50,6 +65,8 @@ export const projects: Project[] = [
     ],
     imageColor: "hsl(350, 70%, 90%)",
     accentColor: "#F472B6",
+    logo: logoNurturly,
+    mockup: mockupNurturly,
     role: "Product Designer",
     duration: "3 months",
     team: "1 designer, 2 engineers",
@@ -72,6 +89,8 @@ export const projects: Project[] = [
     ],
     imageColor: "hsl(220, 15%, 15%)",
     accentColor: "#0891B2",
+    logo: logoGm,
+    mockup: mockupGm,
     role: "UX Designer",
     duration: "4 months",
     team: "3 designers, 5 engineers",
@@ -95,6 +114,8 @@ export const projects: Project[] = [
     ],
     imageColor: "hsl(35, 40%, 92%)",
     accentColor: "#059669",
+    logo: logoJstor,
+    mockup: mockupJstor,
     role: "UX Researcher",
     duration: "2 months",
     team: "2 researchers, 1 designer",
@@ -118,6 +139,8 @@ export const projects: Project[] = [
     ],
     imageColor: "hsl(270, 50%, 92%)",
     accentColor: "#7C3AED",
+    logo: logoOpenoff,
+    mockup: mockupOpenoff,
     role: "Product Designer",
     duration: "5 months",
     team: "1 designer, 3 engineers",
