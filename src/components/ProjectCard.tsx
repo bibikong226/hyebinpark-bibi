@@ -7,8 +7,9 @@ interface ProjectCardProps {
   title: string;
   description: string;
   tags: string[];
-  highlights: { text: string; color: string }[];
+  highlights: string[];
   imageColor: string;
+  accentColor: string;
   index: number;
 }
 
@@ -19,6 +20,7 @@ export const ProjectCard = ({
   tags,
   highlights,
   imageColor,
+  accentColor,
   index,
 }: ProjectCardProps) => {
   return (
@@ -60,15 +62,21 @@ export const ProjectCard = ({
             ))}
           </div>
 
-          {/* Highlights */}
+          {/* Highlights with hover fill effect */}
           <div className="flex flex-wrap gap-2">
             {highlights.map((highlight, highlightIndex) => (
               <div
                 key={highlightIndex}
-                className="px-4 py-2 text-sm rounded-md font-medium"
-                style={{ backgroundColor: highlight.color, color: 'white' }}
+                className="relative overflow-hidden px-4 py-2 text-sm rounded-md font-medium"
               >
-                {highlight.text}
+                <div className="absolute inset-0 bg-zinc-200" />
+                <div 
+                  className="absolute inset-0 z-0 origin-left transition-transform duration-500 ease-out scale-x-0 group-hover:scale-x-100" 
+                  style={{ backgroundColor: accentColor }} 
+                />
+                <span className="relative z-10 text-zinc-700 group-hover:text-white transition-colors duration-300">
+                  {highlight}
+                </span>
               </div>
             ))}
           </div>

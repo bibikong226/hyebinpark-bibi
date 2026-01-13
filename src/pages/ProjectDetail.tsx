@@ -58,9 +58,9 @@ const ProjectDetail = () => {
                   <span
                     key={index}
                     className="px-4 py-2 text-sm rounded-md font-medium"
-                    style={{ backgroundColor: highlight.color, color: 'white' }}
+                    style={{ backgroundColor: project.accentColor, color: 'white' }}
                   >
-                    {highlight.text}
+                    {highlight}
                   </span>
                 ))}
               </div>
