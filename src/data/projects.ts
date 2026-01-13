@@ -49,7 +49,7 @@ export const projects: Project[] = [
       "🎁 $5,000 funding secured",
     ],
     imageColor: "hsl(350, 70%, 90%)",
-    accentColor: "#E11D48",
+    accentColor: "#F472B6",
     role: "Product Designer",
     duration: "3 months",
     team: "1 designer, 2 engineers",
