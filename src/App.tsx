@@ -526,10 +526,10 @@ const App = () => {
                     alt={`${project.title} mockup`}
                     loading="lazy"
                     decoding="async"
-                    className={`object-contain transition-transform duration-700 ${
+                    className={`object-contain transition-transform duration-700 group-hover:scale-105 ${
                       project.id === 'concord' || project.id === 'openoff'
-                        ? 'max-h-[120%] max-w-[120%] scale-125 group-hover:scale-[1.30]'
-                        : 'max-h-full max-w-full group-hover:scale-105'
+                        ? 'max-h-[110%] max-w-[110%] scale-110'
+                        : 'max-h-full max-w-full'
                     }`}
                   />
                 </div>
