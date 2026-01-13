@@ -517,11 +517,18 @@ const App = () => {
                   ))}
                 </div>
                 
-                {/* Highlights */}
+                {/* Highlights with hover fill effect */}
                 <div className="space-y-2 pt-4">
                   {project.highlights.map((highlight, hIdx) => (
-                    <div key={hIdx} className="px-4 py-3 text-sm bg-zinc-50 text-zinc-700 rounded-lg border border-zinc-100">
-                      {highlight}
+                    <div key={hIdx} className="relative inline-block overflow-hidden rounded-lg px-4 py-3 w-full">
+                      <div className="absolute inset-0 bg-zinc-100" />
+                      <div 
+                        className="absolute inset-0 z-0 origin-left transition-transform duration-500 ease-out scale-x-0 group-hover:scale-x-100" 
+                        style={{ backgroundColor: project.imageColor }} 
+                      />
+                      <span className="relative z-10 text-sm text-zinc-700 group-hover:text-zinc-900 transition-colors duration-300">
+                        {highlight}
+                      </span>
                     </div>
                   ))}
                 </div>
