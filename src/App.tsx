@@ -442,11 +442,11 @@ const App = () => {
                     WebkitClipPath: `path(\"${JIGSAW_PATHS[p.variant]}\")`,
                     background: `linear-gradient(145deg, ${p.color}, ${p.color}dd)`
                   }}>
-                              <div className="absolute left-0 top-0 w-[120px] h-[120px] flex flex-col items-center justify-center">
-                                <span className="text-[13px] md:text-[15px] font-black tracking-wide text-white text-center leading-none select-none drop-shadow-sm">
+                              <div className="absolute left-[15px] top-[15px] w-[90px] h-[90px] flex flex-col items-center justify-center">
+                                <span className="text-[12px] md:text-[14px] font-black tracking-wide text-white text-center leading-none select-none drop-shadow-sm">
                                   {p.label[0]}
                                 </span>
-                                <span className="text-[10px] md:text-[12px] font-bold tracking-wider text-white/90 text-center leading-none select-none mt-1.5 drop-shadow-sm">
+                                <span className="text-[9px] md:text-[11px] font-bold tracking-wider text-white/90 text-center leading-none select-none mt-1.5 drop-shadow-sm">
                                   {p.label[1]}
                                 </span>
                               </div>
