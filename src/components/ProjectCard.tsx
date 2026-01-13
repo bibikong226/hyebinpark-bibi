@@ -7,7 +7,7 @@ interface ProjectCardProps {
   title: string;
   description: string;
   tags: string[];
-  highlights: string[];
+  highlights: { text: string; color: string }[];
   imageColor: string;
   index: number;
 }
@@ -61,13 +61,14 @@ export const ProjectCard = ({
           </div>
 
           {/* Highlights */}
-          <div className="space-y-2">
+          <div className="flex flex-wrap gap-2">
             {highlights.map((highlight, highlightIndex) => (
               <div
                 key={highlightIndex}
-                className="px-3 py-2 text-sm bg-foreground/10 text-foreground/90 rounded-lg inline-block mr-2"
+                className="px-4 py-2 text-sm rounded-md font-medium"
+                style={{ backgroundColor: highlight.color, color: 'white' }}
               >
-                {highlight}
+                {highlight.text}
               </div>
             ))}
           </div>
