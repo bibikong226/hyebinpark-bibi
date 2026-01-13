@@ -516,9 +516,9 @@ const App = () => {
                 </div>
 
                 {/* Mockup - larger for concord/openoff, standard for others */}
-                <div className={`absolute inset-0 flex items-center justify-center px-4 pb-4 ${
+                <div className={`absolute inset-0 flex items-center justify-center px-2 pb-2 ${
                   project.id === 'concord' || project.id === 'openoff' 
-                    ? 'pt-10 md:pt-12' 
+                    ? 'pt-6 md:pt-8' 
                     : 'pt-14 md:pt-16'
                 }`}>
                   <img
@@ -528,7 +528,7 @@ const App = () => {
                     decoding="async"
                     className={`object-contain transition-transform duration-700 group-hover:scale-105 ${
                       project.id === 'concord' || project.id === 'openoff'
-                        ? 'max-h-[95%] max-w-[95%]'
+                        ? 'max-h-[110%] max-w-[110%] scale-110'
                         : 'max-h-full max-w-full'
                     }`}
                   />
