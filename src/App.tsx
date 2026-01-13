@@ -509,13 +509,13 @@ const App = () => {
                   />
                 </div>
 
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[55%] h-[90%] flex items-center justify-end">
+                <div className="absolute right-4 top-1/2 -translate-y-1/2 w-[58%] h-[85%] flex items-center justify-center">
                   <img
                     src={project.mockup}
                     alt={`${project.title} mockup`}
                     loading="lazy"
                     decoding="async"
-                    className="h-full w-auto object-contain object-right transition-transform duration-700 group-hover:scale-105"
+                    className="max-h-full max-w-full object-contain transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
               </div>
