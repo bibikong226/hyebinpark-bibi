@@ -89,14 +89,25 @@ const ProjectDetail = () => {
       <section className="section-padding py-0">
         <div className="container-wide">
           <motion.div
-            className="aspect-[16/9] rounded-2xl overflow-hidden"
+            className="rounded-2xl overflow-hidden p-8 md:p-12"
             style={{ backgroundColor: project.imageColor }}
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="w-full h-full flex items-center justify-center">
-              <p className="text-background/50 text-lg">Project Hero Image</p>
+            <div className="flex flex-col items-center gap-8">
+              {/* Logo */}
+              <img 
+                src={project.logo} 
+                alt={`${project.title} logo`} 
+                className="h-12 md:h-16 w-auto object-contain"
+              />
+              {/* Mockup */}
+              <img 
+                src={project.mockup} 
+                alt={`${project.title} mockup`} 
+                className="w-full max-w-4xl object-contain rounded-lg"
+              />
             </div>
           </motion.div>
         </div>

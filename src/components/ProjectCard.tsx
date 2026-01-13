@@ -10,6 +10,8 @@ interface ProjectCardProps {
   highlights: string[];
   imageColor: string;
   accentColor: string;
+  logo: string;
+  mockup: string;
   index: number;
 }
 
@@ -21,6 +23,8 @@ export const ProjectCard = ({
   highlights,
   imageColor,
   accentColor,
+  logo,
+  mockup,
   index,
 }: ProjectCardProps) => {
   return (
@@ -38,6 +42,24 @@ export const ProjectCard = ({
           className="rounded-2xl overflow-hidden p-6 md:p-8 space-y-6"
           style={{ backgroundColor: imageColor }}
         >
+          {/* Logo */}
+          <div className="h-10 md:h-12">
+            <img 
+              src={logo} 
+              alt={`${title} logo`} 
+              className="h-full w-auto object-contain"
+            />
+          </div>
+
+          {/* Mockup Image */}
+          <div className="relative w-full aspect-[16/10] rounded-lg overflow-hidden">
+            <img 
+              src={mockup} 
+              alt={`${title} mockup`} 
+              className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+
           {/* Project Title */}
           <div className="space-y-1">
             <h3 className="font-serif text-2xl md:text-3xl text-foreground group-hover:text-primary transition-colors">
