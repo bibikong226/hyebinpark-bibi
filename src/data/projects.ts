@@ -88,7 +88,7 @@ export const projects: Project[] = [
       "🔮 Shaped future product strategy aligned with GM's 2030 roadmap",
     ],
     imageColor: "hsl(220, 15%, 15%)",
-    accentColor: "#0072CE",
+    accentColor: "#69B3E7",
     logo: logoGm,
     mockup: mockupGm,
     role: "UX Designer",
