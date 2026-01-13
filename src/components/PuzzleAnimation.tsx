@@ -49,10 +49,10 @@ const PuzzlePiece = ({
       }}
       transition={{
         delay: delay,
-        duration: 0.8,
+        duration: 1.5,
         type: "spring",
-        stiffness: 100,
-        damping: 15,
+        stiffness: 50,
+        damping: 20,
       }}
       onAnimationComplete={onComplete}
     />
