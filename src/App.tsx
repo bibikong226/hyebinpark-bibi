@@ -8,6 +8,7 @@ import logoGm from "@/assets/logo-gm.png";
 import logoNaver from "@/assets/logo-naver.png";
 import logoJstor from "@/assets/logo-jstor.png";
 import { projects } from "@/data/projects";
+import { ProjectCard } from "@/components/ProjectCard";
 
 /**
  * PORTFOLIO HOMEPAGE - HYEBIN PARK
@@ -485,58 +486,22 @@ const App = () => {
             <p className="text-5xl md:text-8xl font-bold tracking-tighter leading-none">Strategic <span className="italic font-serif font-light text-zinc-300">Outputs.</span></p>
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-40">
-          {projects.map((project, idx) => <motion.div key={project.id} initial={{
-          opacity: 0,
-          y: 50
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true
-        }} onMouseEnter={() => setCursorActive(true)} onMouseLeave={() => setCursorActive(false)} className="group relative cursor-none">
-              <div className="aspect-[16/11] mb-10 relative overflow-hidden transition-all duration-700 rounded-2xl border border-zinc-50 group-hover:shadow-2xl" style={{
-            backgroundColor: project.imageColor
-          }}>
-                <motion.div className="absolute inset-0 flex items-center justify-center" whileHover={{
-              scale: 1.1
-            }}>
-                  <div className="w-1/2 h-1/2 rounded-full border border-black/5 opacity-20 group-hover:opacity-40 transition-all duration-1000" />
-                </motion.div>
-              </div>
-              <div className="space-y-4 px-2 relative z-10 transition-transform duration-500 group-hover:-translate-y-2">
-                <h3 className="text-3xl font-bold group-hover:text-zinc-900 leading-tight">{project.title}</h3>
-                <p className="text-base text-zinc-600 leading-relaxed">{project.description}</p>
-                
-                {/* Tags */}
-                <div className="flex flex-wrap gap-2 pt-2">
-                  {project.tags.map((tag, tagIdx) => (
-                    <span key={tagIdx} className="px-3 py-1 text-[10px] font-medium bg-zinc-100 text-zinc-600 rounded-full uppercase tracking-wider">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                
-                {/* Highlights with hover fill effect */}
-                <div className="space-y-2 pt-4">
-                  {project.highlights.map((highlight, hIdx) => (
-                    <div 
-                      key={hIdx} 
-                      className="relative inline-block overflow-hidden rounded-md px-4 py-2 mr-2"
-                    >
-                      <div className="absolute inset-0 bg-zinc-200" />
-                      <div 
-                        className="absolute inset-0 z-0 origin-left transition-transform duration-500 ease-out scale-x-0 group-hover:scale-x-100" 
-                        style={{ backgroundColor: project.accentColor }} 
-                      />
-                      <span className="relative z-10 text-sm text-zinc-700 group-hover:text-white transition-colors duration-300 font-medium">
-                        {highlight}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>)}
+        <div className="grid grid-cols-1 gap-y-20">
+          {projects.map((project, idx) => (
+            <ProjectCard
+              key={project.id}
+              id={project.id}
+              title={project.title}
+              description={project.description}
+              tags={project.tags}
+              highlights={project.highlights}
+              imageColor={project.imageColor}
+              accentColor={project.accentColor}
+              logo={project.logo}
+              mockup={project.mockup}
+              index={idx}
+            />
+          ))}
         </div>
       </section>
 
