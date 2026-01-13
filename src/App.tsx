@@ -395,7 +395,7 @@ const App = () => {
                 
 
                 {/* Core statement */}
-                <h1 className="text-[3.5rem] sm:text-[5rem] md:text-[6rem] font-medium tracking-tight leading-[1.05] mb-10 select-none text-zinc-900 lg:text-8xl">
+                <h1 className="text-[3.5rem] sm:text-[5rem] md:text-[6rem] font-medium tracking-tight leading-[1.05] mb-10 select-none text-zinc-900 lg:text-8xl pl-[10vw] md:pl-[12vw]">
                   <span className="block text-xl sm:text-2xl font-medium text-zinc-800 md:text-6xl">
                     Turning
                   </span>
@@ -409,7 +409,7 @@ const App = () => {
                 </h1>
 
                 {/* Supporting explanation */}
-                <p className="text-lg md:text-xl leading-[1.6] max-w-[540px] text-zinc-600 ml-auto text-right">
+                <p className="text-lg md:text-xl leading-[1.6] max-w-[540px] text-zinc-600">
                   From AI algorithms to crypto workflows, I turn ambiguity into structured,
                   usable products that drive real business impact.
                 </p>
