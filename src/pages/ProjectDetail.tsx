@@ -57,9 +57,10 @@ const ProjectDetail = () => {
                 {project.highlights.map((highlight, index) => (
                   <span
                     key={index}
-                    className="px-4 py-2 text-sm bg-primary/10 text-primary rounded-lg"
+                    className="px-4 py-2 text-sm rounded-md font-medium"
+                    style={{ backgroundColor: highlight.color, color: 'white' }}
                   >
-                    {highlight}
+                    {highlight.text}
                   </span>
                 ))}
               </div>

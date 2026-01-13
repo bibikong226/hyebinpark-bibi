@@ -3,7 +3,7 @@ export interface Project {
   title: string;
   description: string;
   tags: string[];
-  highlights: string[];
+  highlights: { text: string; color: string }[];
   imageColor: string;
   role: string;
   duration: string;
@@ -21,8 +21,8 @@ export const projects: Project[] = [
     description: "A secure, high-speed OTC crypto trading and multi-wallet asset management platform for a $3.5M fintech startup",
     tags: ["Web3 Product Design", "Crypto UX", "B2B/B2C Platform"],
     highlights: [
-      "🏆 Scaled from MVP to $3.5M valuation with product-led growth",
-      "🧩 Unified complex crypto trades into one intuitive flow that serves both retail and institutional needs",
+      { text: "🏆 Scaled from MVP to $3.5M valuation with product-led growth", color: "#BE123C" },
+      { text: "🧩 Unified complex crypto trades into one intuitive flow that serves both retail and institutional needs", color: "#9F1239" },
     ],
     imageColor: "hsl(350, 80%, 65%)",
     role: "Lead Product Designer",
@@ -43,8 +43,8 @@ export const projects: Project[] = [
     description: "AI-driven platform that connects new moms to personalized resources and peer support",
     tags: ["AI Wellness", "Behavioral Health UX", "0→1 Platform Design"],
     highlights: [
-      "🏆 Runner-up + People's Choice Award @ +Tech Innovation Jam",
-      "🎁 $5,000 funding secured",
+      { text: "🏆 Runner-up + People's Choice Award @ +Tech Innovation Jam", color: "#E11D48" },
+      { text: "🎁 $5,000 funding secured", color: "#059669" },
     ],
     imageColor: "hsl(350, 70%, 90%)",
     role: "Product Designer",
@@ -65,7 +65,7 @@ export const projects: Project[] = [
     description: "UWB-powered infant monitoring system for Chevrolet, enabling predictive, sensor-driven safety for in-car parenting",
     tags: ["AutomotiveUX", "UWBTechnology", "PredictiveUX", "InfantSafety"],
     highlights: [
-      "🔮 Shaped future product strategy aligned with GM's 2030 roadmap",
+      { text: "🔮 Shaped future product strategy aligned with GM's 2030 roadmap", color: "#4F46E5" },
     ],
     imageColor: "hsl(220, 15%, 15%)",
     role: "UX Designer",
@@ -86,8 +86,8 @@ export const projects: Project[] = [
     description: "Improving JSTOR's AI chatbot UX for mobile research, citation, and accessible workflows",
     tags: ["EdTech", "AI UX", "Gen AI", "Cross-Device Design", "Conversational AI"],
     highlights: [
-      "💡 Uncovered systemic UX gaps in JSTOR's Gen AI tool and shared with the product team",
-      "🔍 Conducted heuristic + usability audit",
+      { text: "💡 Uncovered systemic UX gaps in JSTOR's Gen AI tool and shared with the product team", color: "#4F46E5" },
+      { text: "🔍 Conducted heuristic + usability audit", color: "#059669" },
     ],
     imageColor: "hsl(35, 40%, 92%)",
     role: "UX Researcher",
@@ -108,8 +108,8 @@ export const projects: Project[] = [
     description: "Real-Time Event Platform with Location-Based Discovery, QR Check-In, and Bump-to-Connect",
     tags: ["Real-Time Interaction", "Location-Based UX", "0→1 Launch", "Mobile Design"],
     highlights: [
-      "📈 250+ users onboarded with 30% engagement boost",
-      "📋 Informed by 243 survey responses and user insights",
+      { text: "📈 250+ users onboarded with 30% engagement boost", color: "#4F46E5" },
+      { text: "📋 Informed by 243 survey responses and user insights", color: "#4F46E5" },
     ],
     imageColor: "hsl(270, 50%, 92%)",
     role: "Product Designer",
