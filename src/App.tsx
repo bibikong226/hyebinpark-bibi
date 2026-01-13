@@ -268,7 +268,7 @@ const App = () => {
     if (!isTestimonialHovered) {
       interval = setInterval(() => {
         setCurrentTestimonial(prev => (prev + 1) % testimonials.length);
-      }, 3500);
+      }, 6000);
     }
     return () => clearInterval(interval);
   }, [isTestimonialHovered]);
