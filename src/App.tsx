@@ -505,18 +505,26 @@ const App = () => {
                     alt={`${project.title} logo`}
                     loading="lazy"
                     decoding="async"
-                    className="h-8 md:h-10 w-auto object-contain"
+                    className="h-10 md:h-14 w-auto object-contain"
                   />
                 </div>
 
-                {/* Mockup - larger and centered */}
-                <div className="absolute inset-0 flex items-center justify-center pt-14 md:pt-16 px-4 pb-4">
+                {/* Mockup - larger for concord/openoff, standard for others */}
+                <div className={`absolute inset-0 flex items-center justify-center px-4 pb-4 ${
+                  project.id === 'concord' || project.id === 'openoff' 
+                    ? 'pt-10 md:pt-12' 
+                    : 'pt-14 md:pt-16'
+                }`}>
                   <img
                     src={project.mockup}
                     alt={`${project.title} mockup`}
                     loading="lazy"
                     decoding="async"
-                    className="max-h-full max-w-full object-contain transition-transform duration-700 group-hover:scale-105"
+                    className={`object-contain transition-transform duration-700 group-hover:scale-105 ${
+                      project.id === 'concord' || project.id === 'openoff'
+                        ? 'max-h-[95%] max-w-[95%]'
+                        : 'max-h-full max-w-full'
+                    }`}
                   />
                 </div>
               </div>
