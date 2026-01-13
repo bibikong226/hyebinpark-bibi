@@ -528,7 +528,7 @@ const App = () => {
                     decoding="async"
                     className={`object-contain transition-transform duration-700 ${
                       project.id === 'concord' || project.id === 'openoff'
-                        ? 'max-h-[110%] max-w-[110%] scale-110 group-hover:scale-[1.20]'
+                        ? 'max-h-[105%] max-w-[105%] scale-[1.05] group-hover:scale-[1.12]'
                         : 'max-h-full max-w-full group-hover:scale-105'
                     }`}
                   />
