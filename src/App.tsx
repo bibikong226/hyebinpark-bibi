@@ -498,18 +498,19 @@ const App = () => {
               <div className="aspect-[16/11] mb-10 relative overflow-hidden transition-all duration-700 rounded-2xl border border-zinc-50 group-hover:shadow-2xl" style={{
             backgroundColor: project.imageColor
           }}>
-                {/* Thumbnail Section - Logo left, Mockup right */}
-                <div className="absolute left-6 md:left-10 top-1/2 -translate-y-1/2 z-10 max-w-[35%]">
+                {/* Logo at top-left corner */}
+                <div className="absolute left-5 md:left-8 top-5 md:top-6 z-10">
                   <img
                     src={project.logo}
                     alt={`${project.title} logo`}
                     loading="lazy"
                     decoding="async"
-                    className="w-full h-auto max-h-24 md:max-h-32 object-contain object-left"
+                    className="h-8 md:h-10 w-auto object-contain"
                   />
                 </div>
 
-                <div className="absolute right-4 top-1/2 -translate-y-1/2 w-[58%] h-[85%] flex items-center justify-center">
+                {/* Mockup - larger and centered */}
+                <div className="absolute inset-0 flex items-center justify-center pt-14 md:pt-16 px-4 pb-4">
                   <img
                     src={project.mockup}
                     alt={`${project.title} mockup`}
