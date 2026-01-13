@@ -395,7 +395,7 @@ const App = () => {
                 
 
                 {/* Core statement */}
-                <h1 className="text-[3.5rem] sm:text-[5rem] md:text-[6rem] font-medium tracking-tight leading-[1.05] mb-10 select-none text-zinc-900 lg:text-8xl pl-[10vw] md:pl-[12vw]">
+                <h1 className="text-[3.5rem] sm:text-[5rem] md:text-[6rem] font-medium tracking-tight leading-[1.05] mb-10 select-none text-zinc-900 lg:text-8xl">
                   <span className="block text-xl sm:text-2xl font-medium text-zinc-800 md:text-6xl">
                     Turning
                   </span>
