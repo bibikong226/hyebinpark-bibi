@@ -6,8 +6,6 @@ export interface Project {
   highlights: string[];
   imageColor: string;
   accentColor: string;
-  logo: string;
-  mockup: string;
   role: string;
   duration: string;
   team: string;
@@ -27,10 +25,8 @@ export const projects: Project[] = [
       "🏆 Scaled from MVP to $3.5M valuation with product-led growth",
       "🧩 Unified complex crypto trades into one intuitive flow that serves both retail and institutional needs",
     ],
-    imageColor: "hsl(0, 0%, 55%)",
+    imageColor: "hsl(350, 80%, 65%)",
     accentColor: "#BE123C",
-    logo: "logo-concord",
-    mockup: "mockup-concord",
     role: "Lead Product Designer",
     duration: "6 months",
     team: "2 designers, 4 engineers",
@@ -54,8 +50,6 @@ export const projects: Project[] = [
     ],
     imageColor: "hsl(350, 70%, 90%)",
     accentColor: "#F472B6",
-    logo: "logo-nurturly",
-    mockup: "mockup-nurturly",
     role: "Product Designer",
     duration: "3 months",
     team: "1 designer, 2 engineers",
@@ -78,8 +72,6 @@ export const projects: Project[] = [
     ],
     imageColor: "hsl(220, 15%, 15%)",
     accentColor: "#0891B2",
-    logo: "logo-gm",
-    mockup: "mockup-gm",
     role: "UX Designer",
     duration: "4 months",
     team: "3 designers, 5 engineers",
@@ -103,8 +95,6 @@ export const projects: Project[] = [
     ],
     imageColor: "hsl(35, 40%, 92%)",
     accentColor: "#059669",
-    logo: "logo-jstor-new",
-    mockup: "",
     role: "UX Researcher",
     duration: "2 months",
     team: "2 researchers, 1 designer",
@@ -128,8 +118,6 @@ export const projects: Project[] = [
     ],
     imageColor: "hsl(270, 50%, 92%)",
     accentColor: "#7C3AED",
-    logo: "logo-openoff",
-    mockup: "mockup-openoff",
     role: "Product Designer",
     duration: "5 months",
     team: "1 designer, 3 engineers",
