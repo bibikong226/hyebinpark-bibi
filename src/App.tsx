@@ -505,7 +505,13 @@ const App = () => {
                     alt={`${project.title} logo`}
                     loading="lazy"
                     decoding="async"
-                    className="h-10 md:h-14 w-auto object-contain"
+                    className={`w-auto object-contain ${
+                      project.id === 'gm' 
+                        ? 'h-14 md:h-20' 
+                        : project.id === 'nurturly' 
+                          ? 'h-8 md:h-10' 
+                          : 'h-10 md:h-14'
+                    }`}
                   />
                 </div>
 
