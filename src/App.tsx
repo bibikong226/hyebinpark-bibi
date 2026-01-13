@@ -420,7 +420,10 @@ const App = () => {
                 </p>
 
                 {/* Education & Experience badges */}
-                <div className="mt-8 pl-[10vw] md:pl-[12vw]">
+                <div className="mt-14 pl-[10vw] md:pl-[12vw]">
+                  {/* Divider line */}
+                  <div className="w-12 h-1 bg-indigo-600 mb-6"></div>
+                  
                   {/* Education */}
                   <div className="flex items-center gap-2 mb-4">
                     <span className="text-2xl">🎓</span>
