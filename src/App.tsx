@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { motion, AnimatePresence, useMotionValue, useSpring, useInView } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import profilePhoto from "@/assets/profile-photo.jpg";
 import logoLine from "@/assets/logo-line.png";
@@ -85,9 +85,6 @@ const App = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [isTestimonialHovered, setIsTestimonialHovered] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
-  const [hasAnimatedOnce, setHasAnimatedOnce] = useState(false);
-  const puzzleContainerRef = useRef<HTMLDivElement>(null);
-  const isPuzzleInView = useInView(puzzleContainerRef, { once: true, margin: "-100px" });
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
   const cursorX = useSpring(mouseX, {
@@ -217,12 +214,9 @@ const App = () => {
     }
   }, [isHovering]);
 
-  // Run animation once on scroll into view or on hover
+  // Auto loop when not hovering
   useEffect(() => {
-    // Only run if scrolled into view and hasn't animated yet, or on hover
-    const shouldAnimate = (isPuzzleInView && !hasAnimatedOnce) || isHovering;
-    if (!shouldAnimate) return;
-
+    if (isHovering) return;
     let cancelled = false;
     const runCycle = async () => {
       // Show pieces one by one
@@ -249,14 +243,23 @@ const App = () => {
 
       // Show photo
       setAnimationPhase('photo');
-      setHasAnimatedOnce(true);
-      // Stay on photo - no reset, no loop
+      await new Promise(r => setTimeout(r, 3000));
+      if (cancelled) return;
+
+      // Reset to scattered
+      setAnimationPhase('scattered');
+      setVisiblePieces([]);
+      await new Promise(r => setTimeout(r, 500));
+      if (cancelled) return;
+
+      // Restart cycle
+      runCycle();
     };
     runCycle();
     return () => {
       cancelled = true;
     };
-  }, [isPuzzleInView, isHovering, hasAnimatedOnce]);
+  }, [isHovering]);
 
   // Testimonial Auto-scroll
   useEffect(() => {
@@ -448,7 +451,7 @@ const App = () => {
 
             {/* RIGHT: INTERACTIVE JIGSAW -> ASSEMBLED -> FULL PROFILE REVEAL */}
             <div className="w-full md:w-1/2 h-[60vh] md:h-full relative flex items-center justify-center md:ml-20">
-              <div ref={puzzleContainerRef} className="relative w-[420px] h-[320px] md:w-[480px] md:h-[360px]" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
+              <div className="relative w-[420px] h-[320px] md:w-[480px] md:h-[360px]" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
                 {/* Puzzle pieces */}
                 <AnimatePresence>
                   {animationPhase !== "photo" && puzzlePieces.map((p, i) => (visiblePieces.includes(i) || animationPhase === "assembling" || animationPhase === "assembled") && <motion.div key={p.id} className="absolute" initial={{
