@@ -2,6 +2,11 @@ import React, { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import profilePhoto from "@/assets/profile-photo.jpg";
+import logoLine from "@/assets/logo-line.png";
+import logoTiktok from "@/assets/logo-tiktok.png";
+import logoGm from "@/assets/logo-gm.png";
+import logoNaver from "@/assets/logo-naver.png";
+import logoJstor from "@/assets/logo-jstor.png";
 
 /**
  * PORTFOLIO HOMEPAGE - HYEBIN PARK
@@ -431,23 +436,11 @@ const App = () => {
 
                   {/* Company logos */}
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-[#00B900] rounded-lg flex items-center justify-center">
-                      <span className="text-white text-xs font-bold">LINE</span>
-                    </div>
-                    <div className="w-10 h-10 bg-black rounded-lg flex items-center justify-center">
-                      <svg viewBox="0 0 24 24" className="w-5 h-5 text-white fill-current">
-                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
-                      </svg>
-                    </div>
-                    <div className="w-10 h-10 bg-[#0170CE] rounded-lg flex items-center justify-center">
-                      <span className="text-white text-sm font-bold">gm</span>
-                    </div>
-                    <div className="w-10 h-10 bg-[#03C75A] rounded-lg flex items-center justify-center">
-                      <span className="text-white text-[10px] font-bold">NAVER</span>
-                    </div>
-                    <div className="w-10 h-10 bg-[#8B4513] rounded-lg flex items-center justify-center">
-                      <span className="text-white text-lg">壽</span>
-                    </div>
+                    <img src={logoLine} alt="LINE" className="w-10 h-10 rounded-lg object-cover" />
+                    <img src={logoTiktok} alt="TikTok" className="w-10 h-10 rounded-lg object-cover" />
+                    <img src={logoGm} alt="GM" className="w-10 h-10 rounded-lg object-cover" />
+                    <img src={logoNaver} alt="NAVER" className="w-10 h-10 rounded-lg object-cover" />
+                    <img src={logoJstor} alt="JSTOR" className="w-10 h-10 rounded-lg object-cover" />
                   </div>
                 </div>
               </motion.div>
