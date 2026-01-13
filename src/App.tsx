@@ -507,7 +507,7 @@ const App = () => {
                     decoding="async"
                     className={`w-auto object-contain ${
                       project.id === 'gm' 
-                        ? 'h-14 md:h-20' 
+                        ? 'h-20 md:h-28' 
                         : project.id === 'nurturly' 
                           ? 'h-8 md:h-10' 
                           : 'h-10 md:h-14'
