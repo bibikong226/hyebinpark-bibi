@@ -3,11 +3,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
+const CV_LINK = "https://drive.google.com/file/d/1l2V4pQCjAZhIhLyRmVh3m2QTw87yLI6P/view?usp=sharing";
+
 const navLinks = [
   { href: "/#work", label: "WORK" },
   { href: "/#explore", label: "EXPLORE" },
   { href: "/about", label: "ABOUT" },
-  { href: "/cv", label: "CV" },
+  { href: CV_LINK, label: "CV", external: true },
 ];
 
 export const Navigation = () => {
@@ -57,7 +59,9 @@ export const Navigation = () => {
             <a
               key={link.href}
               href={link.href}
-              onClick={(e) => handleNavClick(e, link.href)}
+              onClick={(e) => !link.external && handleNavClick(e, link.href)}
+              target={link.external ? "_blank" : undefined}
+              rel={link.external ? "noopener noreferrer" : undefined}
               className="hover:opacity-60 transition-all"
             >
               {link.label}
@@ -97,9 +101,11 @@ export const Navigation = () => {
                     key={link.href}
                     href={link.href}
                     onClick={(e) => {
-                      handleNavClick(e, link.href);
+                      if (!link.external) handleNavClick(e, link.href);
                       setIsMenuOpen(false);
                     }}
+                    target={link.external ? "_blank" : undefined}
+                    rel={link.external ? "noopener noreferrer" : undefined}
                     className="text-2xl text-muted-foreground hover:text-foreground transition-colors"
                   >
                     {link.label}
