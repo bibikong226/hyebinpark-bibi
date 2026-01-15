@@ -2,37 +2,42 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import profilePhoto from "@/assets/profile-photo.jpg";
+import expMichigan from "@/assets/exp-michigan.png";
+import expConcord from "@/assets/exp-concord.png";
+import expLine from "@/assets/exp-line.png";
+import expTiktok from "@/assets/exp-tiktok.png";
+import expNaver from "@/assets/exp-naver.png";
 
 const experiences = [
   {
     period: "2024 – Present",
     title: "MS-HCI @ University of Michigan",
     description: "Blending UX research, design strategy, and emerging tech to create more human-centered products. From automotive UX to Generative AI and accessibility, I explore how technology can serve people better.",
-    emoji: "🎓"
+    image: expMichigan
   },
   {
     period: "2023 – Present",
     title: "UX Designer @ Concord AI",
     description: "Led the 0-to-1 design of Concord's first client-facing product, fostering close collaboration with C-level, product, and engineering stakeholders. My final design for the institutional OTC trading and asset management MVP increased user trust and trading speed.",
-    emoji: "🚀"
+    image: expConcord
   },
   {
     period: "2023",
     title: "Product Strategy Research Assistant @ LINE",
     description: "Explored how Generative AI, blockchain, and Web3 could evolve into user-centered products. Translated market trends, usability gaps, and interaction patterns into strategic insights.",
-    emoji: "💬"
+    image: expLine
   },
   {
     period: "2022",
     title: "Global Communications Intern @ TikTok",
     description: "Created digital content that helped creators navigate TikTok's tools. Worked across global cross-functional teams on campaigns like Internet Safety Month and TikTok Shop.",
-    emoji: "🎵"
+    image: expTiktok
   },
   {
     period: "2020 – 2021",
     title: "UX Research & Strategy Intern @ NAVER Corp",
     description: "Connected user insights with service and marketing strategies. Led qualitative research including interviews, FGIs, and social listening to uncover user needs and shape content.",
-    emoji: "🔍"
+    image: expNaver
   }
 ];
 
@@ -137,22 +142,29 @@ const About = () => {
             What I have been exploring and learning 🚀
           </motion.h2>
           
-          <div className="mt-16 space-y-12">
+          <div className="mt-16 space-y-16">
             {experiences.map((exp, index) => (
               <motion.div
                 key={exp.title}
-                className="grid md:grid-cols-4 gap-6 pb-12 border-b border-zinc-200 last:border-0"
+                className="grid md:grid-cols-3 gap-8 items-center"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
               >
-                <div className="flex items-start gap-3">
-                  <span className="text-2xl">{exp.emoji}</span>
-                  <span className="text-sm text-zinc-500 font-medium">{exp.period}</span>
+                {/* Image */}
+                <div className="md:col-span-1 flex justify-center">
+                  <img 
+                    src={exp.image} 
+                    alt={exp.title} 
+                    className="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover shadow-lg"
+                  />
                 </div>
-                <div className="md:col-span-3">
-                  <h3 className="text-xl font-semibold text-zinc-900 mb-3">{exp.title}</h3>
+                
+                {/* Content */}
+                <div className="md:col-span-2">
+                  <span className="text-sm text-indigo-600 font-medium">{exp.period}</span>
+                  <h3 className="text-xl md:text-2xl font-semibold text-zinc-900 mt-2 mb-4">{exp.title}</h3>
                   <p className="text-zinc-600 leading-relaxed">{exp.description}</p>
                 </div>
               </motion.div>
