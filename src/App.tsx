@@ -321,10 +321,11 @@ const App = () => {
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 flex justify-between items-center px-8 md:px-16 py-10 mix-blend-difference text-white">
         <div className="font-semibold tracking-tight text-xl uppercase">Hyebin Park</div>
-        <div className="hidden md:flex gap-12 text-[10px] uppercase tracking-[0.3em] font-medium">
+        <div className="hidden md:flex items-center gap-12 text-[10px] uppercase tracking-[0.3em] font-medium">
           <a href="#work" className="hover:opacity-60 transition-all">Work</a>
-          <a href="#about" className="hover:opacity-60 transition-all">Approach</a>
-          <a href="#contact" className="hover:opacity-60 transition-all">Contact</a>
+          <a href="#explore" className="hover:opacity-60 transition-all">Explore</a>
+          <a href="#about" className="hover:opacity-60 transition-all">About</a>
+          <a href="#contact" className="px-5 py-2 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-all normal-case text-sm tracking-normal font-medium mix-blend-normal">Contact</a>
         </div>
       </nav>
 
