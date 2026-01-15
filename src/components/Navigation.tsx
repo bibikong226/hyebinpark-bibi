@@ -4,9 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { href: "/", label: "Home" },
+  { href: "/#work", label: "Work" },
+  { href: "/#explore", label: "Explore" },
   { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
 ];
 
 export const Navigation = () => {
@@ -25,25 +25,20 @@ export const Navigation = () => {
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <Link
+            <a
               key={link.href}
-              to={link.href}
-              className={`relative text-sm tracking-wide transition-colors ${
-                isActive(link.href)
-                  ? "text-primary"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
+              href={link.href}
+              className="relative text-sm tracking-wide transition-colors text-muted-foreground hover:text-foreground"
             >
               {link.label}
-              {isActive(link.href) && (
-                <motion.div
-                  layoutId="activeNav"
-                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary"
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                />
-              )}
-            </Link>
+            </a>
           ))}
+          <Link
+            to="/contact"
+            className="px-5 py-2 bg-primary text-primary-foreground text-sm font-medium rounded-full hover:bg-primary/90 transition-colors"
+          >
+            Contact
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
@@ -68,19 +63,22 @@ export const Navigation = () => {
             >
               <div className="flex flex-col p-8 pt-20 gap-6">
                 {navLinks.map((link) => (
-                  <Link
+                  <a
                     key={link.href}
-                    to={link.href}
+                    href={link.href}
                     onClick={() => setIsMenuOpen(false)}
-                    className={`text-2xl font-serif ${
-                      isActive(link.href)
-                        ? "text-primary"
-                        : "text-muted-foreground hover:text-foreground"
-                    } transition-colors`}
+                    className="text-2xl font-serif text-muted-foreground hover:text-foreground transition-colors"
                   >
                     {link.label}
-                  </Link>
+                  </a>
                 ))}
+                <Link
+                  to="/contact"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="text-2xl font-serif text-primary font-medium"
+                >
+                  Contact
+                </Link>
               </div>
             </motion.div>
           )}
