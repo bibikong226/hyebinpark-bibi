@@ -42,8 +42,11 @@ export const Footer = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-8 md:px-16 bg-zinc-900 text-zinc-400 text-center text-sm">
-        <p>Strategic AI Product Designer</p>
+      <footer className="py-8 px-8 md:px-16 bg-zinc-900 text-zinc-400 text-sm">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+          <span className="font-semibold tracking-tight text-lg uppercase text-white">HYEBIN PARK</span>
+          <p>Strategic AI Product Designer</p>
+        </div>
       </footer>
     </>
   );
