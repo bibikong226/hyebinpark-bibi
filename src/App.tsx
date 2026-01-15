@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import profilePhoto from "@/assets/profile-photo.jpg";
 import logoLine from "@/assets/logo-line.png";
 import logoTiktok from "@/assets/logo-tiktok.png";
@@ -612,7 +613,14 @@ const App = () => {
               );
             }
 
-            return <motion.div {...commonMotionProps}>{cardInner}</motion.div>;
+            // Internal project page link (e.g., /nurturly)
+            return (
+              <motion.div {...commonMotionProps}>
+                <Link to={`/${project.id}`} className="block">
+                  {cardInner}
+                </Link>
+              </motion.div>
+            );
           })}
         </div>
       </section>
