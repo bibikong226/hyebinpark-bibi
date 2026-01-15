@@ -642,7 +642,7 @@ const App = () => {
       <footer className="px-8 md:px-16 py-32 border-t border-zinc-100 flex flex-col md:flex-row justify-between items-center bg-[#fafafa]">
         <div>
           <div className="text-3xl font-black tracking-tighter uppercase mb-4">Hyebin Park</div>
-          <p className="text-[10px] text-zinc-400 tracking-[0.4em] uppercase font-medium">Strategic Product Design Portfolio</p>
+          <p className="text-[10px] text-zinc-400 tracking-[0.4em] uppercase font-medium">Strategic AI Product Designer</p>
         </div>
         <div className="flex gap-12 text-[10px] uppercase tracking-[0.4em] font-black text-zinc-400">
           <a href="#" className="hover:text-indigo-600 transition-colors">LinkedIn</a>
