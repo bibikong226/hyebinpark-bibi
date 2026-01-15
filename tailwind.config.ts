@@ -16,7 +16,7 @@ export default {
       fontFamily: {
         serif: ['Instrument Serif', 'serif'],
         sans: ['DM Sans', 'sans-serif'],
-        playfair: ['Playfair Display', 'serif'],
+        lora: ['Lora', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",
