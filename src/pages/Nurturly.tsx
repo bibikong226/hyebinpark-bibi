@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Layout } from '@/components/Layout';
+import { SectionNav } from '@/components/SectionNav';
 import nurturlyLogo from '../assets/nurturly/nurturly-logo.png';
 import newMockupImage from '../assets/nurturly/new-mockup.png';
 import surveyChartClean from '../assets/nurturly/survey-chart-clean.png';
@@ -34,12 +35,30 @@ const fadeInUp = {
   transition: { duration: 0.5 }
 };
 
+const sections = [
+  { id: 'hero', label: 'Overview' },
+  { id: 'summary', label: 'Summary' },
+  { id: 'problem', label: 'Problem' },
+  { id: 'solution', label: 'Solution' },
+  { id: 'survey', label: 'Survey' },
+  { id: 'interviews', label: 'Interviews' },
+  { id: 'ethnography', label: 'Ethnography' },
+  { id: 'competitive', label: 'Analysis' },
+  { id: 'principles', label: 'Principles' },
+  { id: 'ideation', label: 'Ideation' },
+  { id: 'iterations', label: 'Iterations' },
+  { id: 'highfi', label: 'High-Fi' },
+  { id: 'result', label: 'Result' },
+  { id: 'reflection', label: 'Reflection' },
+];
+
 const Nurturly = () => {
   return (
     <Layout>
+      <SectionNav sections={sections} />
 
       {/* Hero Section */}
-      <section className="section-padding">
+      <section id="hero" className="section-padding">
         <div className="container-narrow text-center">
           <motion.img 
             src={nurturlyLogo} 
@@ -102,7 +121,7 @@ const Nurturly = () => {
       </section>
 
       {/* Summary Section */}
-      <section className="section-padding bg-card/50">
+      <section id="summary" className="section-padding bg-card/50">
         <div className="container-narrow">
           <motion.div {...fadeInUp}>
             <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">SUMMARY</p>
@@ -144,7 +163,7 @@ const Nurturly = () => {
       </section>
 
       {/* Problem Section */}
-      <section className="section-padding">
+      <section id="problem" className="section-padding">
         <div className="container-narrow">
           <motion.div {...fadeInUp}>
             <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">PROBLEM</p>
@@ -159,7 +178,7 @@ const Nurturly = () => {
       </section>
 
       {/* Solution Section */}
-      <section className="section-padding bg-foreground text-background">
+      <section id="solution" className="section-padding bg-foreground text-background">
         <div className="container-narrow">
           <motion.div className="mb-16" {...fadeInUp}>
             <p className="text-xs font-semibold uppercase tracking-wider opacity-80 mb-4">SOLUTION</p>
@@ -238,7 +257,7 @@ const Nurturly = () => {
       </section>
 
       {/* Survey Insights Section */}
-      <section className="section-padding">
+      <section id="survey" className="section-padding">
         <div className="container-narrow">
           <motion.div {...fadeInUp}>
             <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">SURVEY INSIGHTS</p>
@@ -266,7 +285,7 @@ const Nurturly = () => {
       </section>
 
       {/* Interview Insights Section */}
-      <section className="section-padding bg-card/50">
+      <section id="interviews" className="section-padding bg-card/50">
         <div className="container-narrow">
           <motion.div {...fadeInUp}>
             <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">INTERVIEW INSIGHTS</p>
@@ -289,7 +308,7 @@ const Nurturly = () => {
       </section>
 
       {/* Online Communities Section */}
-      <section className="section-padding">
+      <section id="ethnography" className="section-padding">
         <div className="container-narrow">
           <motion.div {...fadeInUp}>
             <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">DIGITAL ETHNOGRAPHY</p>
@@ -309,7 +328,7 @@ const Nurturly = () => {
       </section>
 
       {/* Competitive Analysis Section */}
-      <section className="section-padding bg-card/50">
+      <section id="competitive" className="section-padding bg-card/50">
         <div className="container-narrow">
           <motion.div {...fadeInUp}>
             <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">COMPETITIVE ANALYSIS</p>
@@ -326,7 +345,7 @@ const Nurturly = () => {
       </section>
 
       {/* Design Principles Section */}
-      <section className="section-padding">
+      <section id="principles" className="section-padding">
         <div className="container-narrow">
           <motion.div {...fadeInUp}>
             <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">DESIGN PRINCIPLES</p>
@@ -370,7 +389,7 @@ const Nurturly = () => {
       </section>
 
       {/* Ideation Section */}
-      <section className="section-padding">
+      <section id="ideation" className="section-padding">
         <div className="container-narrow">
           <motion.div {...fadeInUp}>
             <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">IDEATION</p>
@@ -396,7 +415,7 @@ const Nurturly = () => {
       </section>
 
       {/* Design Iterations Section */}
-      <section className="section-padding">
+      <section id="iterations" className="section-padding">
         <div className="container-wide">
           <motion.div {...fadeInUp}>
             <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">DESIGN ITERATIONS</p>
@@ -516,7 +535,7 @@ const Nurturly = () => {
       </section>
 
       {/* High-Fi Design Section */}
-      <section className="section-padding bg-card/50">
+      <section id="highfi" className="section-padding bg-card/50">
         <div className="container-wide">
           <motion.p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-8" {...fadeInUp}>HIGH-FI DESIGN</motion.p>
           
@@ -545,7 +564,7 @@ const Nurturly = () => {
       </section>
 
       {/* Result Section */}
-      <section className="section-padding">
+      <section id="result" className="section-padding">
         <div className="container-narrow">
           <motion.div {...fadeInUp}>
             <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">RESULT</p>
@@ -567,7 +586,7 @@ const Nurturly = () => {
       </section>
 
       {/* Reflection Section */}
-      <section className="section-padding bg-foreground text-background">
+      <section id="reflection" className="section-padding bg-foreground text-background">
         <div className="container-narrow">
           <motion.p className="text-xs font-semibold uppercase tracking-wider opacity-80 mb-4" {...fadeInUp}>REFLECTION</motion.p>
 
