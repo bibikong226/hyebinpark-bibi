@@ -324,7 +324,7 @@ const App = () => {
         <div className="hidden md:flex items-center gap-8 text-[10px] uppercase tracking-[0.3em] font-medium text-zinc-900">
           <a href="#work" className="hover:opacity-60 transition-all">Work</a>
           <a href="#explore" className="hover:opacity-60 transition-all">Explore</a>
-          <a href="#about" className="hover:opacity-60 transition-all">About</a>
+          <a href="/about" className="hover:opacity-60 transition-all">About</a>
           <a href="/cv" className="hover:opacity-60 transition-all">CV</a>
           <a href="https://www.linkedin.com/in/hyebinp/" target="_blank" rel="noopener noreferrer" className="px-5 py-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 transition-all normal-case text-sm tracking-normal font-medium">Contact</a>
         </div>
