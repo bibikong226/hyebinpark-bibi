@@ -33,10 +33,21 @@ export const Navigation = () => {
     }
   };
 
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (location.pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
     <header className="fixed top-0 w-full z-50 bg-background">
       <nav className="flex justify-between items-center px-8 md:px-16 py-8">
-        <Link to="/" className="font-semibold tracking-tight text-xl uppercase text-foreground">
+        <Link 
+          to="/" 
+          onClick={handleLogoClick}
+          className="font-semibold tracking-tight text-xl uppercase text-foreground"
+        >
           HYEBIN PARK
         </Link>
 
