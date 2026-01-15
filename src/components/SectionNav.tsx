@@ -42,7 +42,7 @@ export const SectionNav = ({ sections }: SectionNavProps) => {
 
   return (
     <motion.nav
-      className="fixed right-6 lg:right-10 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col gap-1 bg-background/80 backdrop-blur-sm rounded-lg p-3 border border-border/50 shadow-sm"
+      className="fixed right-6 lg:right-10 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col gap-1 bg-background/95 backdrop-blur-md rounded-lg p-3 border border-border/50 shadow-lg"
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5, delay: 0.5 }}

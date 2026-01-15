@@ -40,10 +40,7 @@ const sections = [
   { id: 'summary', label: 'Summary' },
   { id: 'problem', label: 'Problem' },
   { id: 'solution', label: 'Solution' },
-  { id: 'survey', label: 'Survey' },
-  { id: 'interviews', label: 'Interviews' },
-  { id: 'ethnography', label: 'Ethnography' },
-  { id: 'competitive', label: 'Analysis' },
+  { id: 'research', label: 'User Research' },
   { id: 'principles', label: 'Principles' },
   { id: 'ideation', label: 'Ideation' },
   { id: 'iterations', label: 'Iterations' },
@@ -256,8 +253,8 @@ const Nurturly = () => {
         </div>
       </section>
 
-      {/* Survey Insights Section */}
-      <section id="survey" className="section-padding">
+      {/* User Research Section */}
+      <section id="research" className="section-padding">
         <div className="container-narrow">
           <motion.div {...fadeInUp}>
             <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">SURVEY INSIGHTS</p>
@@ -285,7 +282,7 @@ const Nurturly = () => {
       </section>
 
       {/* Interview Insights Section */}
-      <section id="interviews" className="section-padding bg-card/50">
+      <section className="section-padding bg-card/50">
         <div className="container-narrow">
           <motion.div {...fadeInUp}>
             <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">INTERVIEW INSIGHTS</p>
@@ -308,7 +305,7 @@ const Nurturly = () => {
       </section>
 
       {/* Online Communities Section */}
-      <section id="ethnography" className="section-padding">
+      <section className="section-padding">
         <div className="container-narrow">
           <motion.div {...fadeInUp}>
             <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">DIGITAL ETHNOGRAPHY</p>
@@ -328,7 +325,7 @@ const Nurturly = () => {
       </section>
 
       {/* Competitive Analysis Section */}
-      <section id="competitive" className="section-padding bg-card/50">
+      <section className="section-padding bg-card/50">
         <div className="container-narrow">
           <motion.div {...fadeInUp}>
             <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">COMPETITIVE ANALYSIS</p>
