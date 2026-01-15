@@ -375,10 +375,11 @@ const App = () => {
                 </h1>
 
                 {/* Supporting explanation */}
-                <p className="text-lg md:text-xl leading-[1.6] max-w-[540px] text-zinc-600 pl-[10vw] md:pl-[12vw]">
+                <p className="text-lg md:text-xl leading-[1.6] max-w-[540px] text-zinc-600 pl-[10vw] md:pl-[12vw] whitespace-nowrap">
                   From AI algorithms to crypto workflows,<br />
-                  I turn ambiguity into structured, usable products<br />
-                  that drive real business impact.
+                  I turn ambiguity into structured,<br />
+                  usable products that drive<br />
+                  real business impact.
                 </p>
 
                 {/* Education & Experience badges */}
