@@ -160,7 +160,7 @@ const Nurturly = () => {
 
       {/* Solution Section */}
       <section className="section-padding bg-foreground text-background">
-        <div className="container-wide">
+        <div className="container-narrow">
           <motion.div className="mb-16" {...fadeInUp}>
             <p className="text-xs font-semibold uppercase tracking-wider opacity-80 mb-4">SOLUTION</p>
             <h2 className="font-serif text-3xl md:text-4xl mb-6">
