@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Layout } from '@/components/Layout';
 import { SectionNav } from '@/components/SectionNav';
@@ -50,6 +51,9 @@ const sections = [
 ];
 
 const Nurturly = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <Layout>
       <SectionNav sections={sections} />
