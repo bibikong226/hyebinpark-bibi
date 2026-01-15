@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-import profilePhoto from "@/assets/profile-photo.jpg";
+import aboutProfile from "@/assets/about-profile.jpg";
 import expMichigan from "@/assets/exp-michigan.png";
 import expConcord from "@/assets/exp-concord.png";
 import expLine from "@/assets/exp-line.png";
@@ -117,7 +117,7 @@ const About = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <img 
-                src={profilePhoto} 
+                src={aboutProfile} 
                 alt="Hyebin Park" 
                 className="w-full max-w-md rounded-2xl shadow-xl"
               />
