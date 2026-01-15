@@ -325,7 +325,7 @@ const App = () => {
           <a href="#work" className="hover:opacity-60 transition-all">Work</a>
           <a href="#explore" className="hover:opacity-60 transition-all">Explore</a>
           <a href="#about" className="hover:opacity-60 transition-all">About</a>
-          <a href="#contact" className="px-5 py-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 transition-all normal-case text-sm tracking-normal font-medium">Contact</a>
+          <a href="https://www.linkedin.com/in/hyebinp/" target="_blank" rel="noopener noreferrer" className="px-5 py-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 transition-all normal-case text-sm tracking-normal font-medium">Contact</a>
         </div>
       </nav>
 
