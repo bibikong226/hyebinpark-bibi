@@ -28,16 +28,21 @@ export const Footer = () => {
             LinkedIn
           </a>
           <a
-            href="https://read.cv/"
+            href="https://drive.google.com/file/d/1l2V4pQCjAZhIhLyRmVh3m2QTw87yLI6P/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-primary transition-colors"
           >
             Read.cv
           </a>
-          <Link to="/contact" className="hover:text-primary transition-colors">
+          <a
+            href="https://www.linkedin.com/in/hyebinp/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-primary transition-colors"
+          >
             Email
-          </Link>
+          </a>
         </div>
       </div>
 
