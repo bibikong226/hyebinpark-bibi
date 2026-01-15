@@ -13,6 +13,7 @@ interface ProjectCardProps {
   logo: string;
   mockup: string;
   index: number;
+  externalUrl?: string;
 }
 
 export const ProjectCard = ({
@@ -26,7 +27,13 @@ export const ProjectCard = ({
   logo,
   mockup,
   index,
+  externalUrl,
 }: ProjectCardProps) => {
+  const CardWrapper = externalUrl ? 'a' : Link;
+  const linkProps = externalUrl 
+    ? { href: externalUrl, target: "_blank", rel: "noopener noreferrer" }
+    : { to: `/project/${id}` };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -34,8 +41,8 @@ export const ProjectCard = ({
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
-      <Link
-        to={`/project/${id}`}
+      <CardWrapper
+        {...linkProps as any}
         className="group block"
       >
         <article className="rounded-2xl overflow-hidden">
@@ -118,7 +125,7 @@ export const ProjectCard = ({
             </motion.div>
           </div>
         </article>
-      </Link>
+      </CardWrapper>
     </motion.div>
   );
 };
