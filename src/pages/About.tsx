@@ -7,6 +7,29 @@ import expConcord from "@/assets/exp-concord.png";
 import expLine from "@/assets/exp-line.png";
 import expTiktok from "@/assets/exp-tiktok.png";
 import expNaver from "@/assets/exp-naver.png";
+import hobbyTravel from "@/assets/hobby-travel.png";
+import hobbyPeople from "@/assets/hobby-people.png";
+import hobbyChallenges from "@/assets/hobby-challenges.png";
+import hobbyTheater from "@/assets/hobby-theater.jpg";
+
+const hobbies = [
+  {
+    image: hobbyTravel,
+    caption: "Loves to travel and experience new culture"
+  },
+  {
+    image: hobbyPeople,
+    caption: "Enjoys meeting different people and stories"
+  },
+  {
+    image: hobbyChallenges,
+    caption: "Eager to take on new challenges"
+  },
+  {
+    image: hobbyTheater,
+    caption: "Steps on stage and steals the spotlight"
+  }
+];
 
 const experiences = [
   {
@@ -197,6 +220,42 @@ const About = () => {
               >
                 <h3 className="text-2xl font-serif italic text-indigo-600 mb-4">{value.title}</h3>
                 <p className="text-zinc-600 leading-relaxed">{value.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Outside of Design Work Section */}
+      <section className="py-20 px-8 md:px-16 bg-zinc-50">
+        <div className="max-w-6xl mx-auto">
+          <motion.h2 
+            className="text-3xl md:text-4xl font-medium text-zinc-900 mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            Outside of Design Work
+          </motion.h2>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {hobbies.map((hobby, index) => (
+              <motion.div
+                key={hobby.caption}
+                className="space-y-4"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <div className="aspect-[3/4] rounded-2xl overflow-hidden">
+                  <img 
+                    src={hobby.image} 
+                    alt={hobby.caption} 
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <p className="text-zinc-600 text-sm leading-relaxed">{hobby.caption}</p>
               </motion.div>
             ))}
           </div>
