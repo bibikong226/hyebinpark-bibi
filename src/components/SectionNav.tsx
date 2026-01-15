@@ -41,15 +41,15 @@ export const SectionNav = ({ sections }: SectionNavProps) => {
   };
 
   return (
-    <nav className="fixed right-6 lg:right-10 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col gap-1 bg-background/95 backdrop-blur-md rounded-lg p-3 border border-border/50 shadow-lg">
+    <nav className="fixed right-4 lg:right-6 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col gap-0.5">
       {sections.map(({ id, label }) => (
         <button
           key={id}
           onClick={() => scrollToSection(id)}
-          className={`text-left text-xs px-3 py-1.5 rounded transition-all duration-200 ${
+          className={`text-right text-[11px] px-2 py-1 rounded-sm transition-all duration-300 ${
             activeSection === id
-              ? 'text-nurturly font-medium bg-nurturly/10'
-              : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+              ? 'text-nurturly font-medium'
+              : 'text-muted-foreground/60 hover:text-muted-foreground'
           }`}
         >
           {label}
