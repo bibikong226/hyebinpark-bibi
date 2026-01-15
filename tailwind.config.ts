@@ -57,6 +57,10 @@ export default {
           3: "hsl(var(--puzzle-piece-3))",
           4: "hsl(var(--puzzle-piece-4))",
         },
+        nurturly: {
+          DEFAULT: "hsl(var(--nurturly-pink))",
+          foreground: "hsl(var(--nurturly-pink-foreground))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
