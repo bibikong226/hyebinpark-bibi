@@ -112,7 +112,10 @@
     font-family: 'DM Sans', sans-serif;
   }
 
-  /* Headings inherit body font unless overridden with `font-serif` */
+  /* Headings with font-serif use Instrument Serif in regular (non-italic) style */
+  .font-serif {
+    font-style: normal;
+  }
 }
 
 @layer components {
