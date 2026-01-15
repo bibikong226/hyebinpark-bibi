@@ -176,24 +176,36 @@ const Index = () => {
       <section className="section-padding bg-primary text-primary-foreground">
         <div className="container-narrow text-center">
           <motion.div
-            className="space-y-6"
+            className="space-y-8"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="font-serif text-3xl md:text-4xl">
-              Let's create something great together
+            <h2 className="font-serif text-4xl md:text-5xl">
+              Let's Connect
             </h2>
-            <p className="text-primary-foreground/80 max-w-lg mx-auto">
-              I'm always interested in hearing about new projects and opportunities.
+            <p className="text-primary-foreground/80 max-w-2xl mx-auto text-lg leading-relaxed">
+              I'm always excited to connect with fellow designers, researchers, and innovators. Whether you have a project in mind or just want to talk about design and technology, I'd love to hear from you. Let's talk! 👩‍💻
             </p>
-            <a
-              href="/contact"
-              className="inline-flex items-center px-8 py-4 bg-background text-foreground rounded-lg font-medium hover:opacity-90 transition-opacity"
-            >
-              Start a conversation
-            </a>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-2">
+              <a
+                href="mailto:hyebinp@umich.edu"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-background text-foreground rounded-full font-medium hover:opacity-90 transition-opacity"
+              >
+                hyebinp@umich.edu
+                <span className="text-sm">↗</span>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/hyebinpark/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-primary-foreground/20 text-primary-foreground rounded-full font-medium hover:bg-primary-foreground/30 transition-colors border border-primary-foreground/30"
+              >
+                LinkedIn
+                <span className="text-sm">↗</span>
+              </a>
+            </div>
           </motion.div>
         </div>
       </section>
