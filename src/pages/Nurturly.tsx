@@ -32,10 +32,35 @@ import communityFeatureGif from '../assets/nurturly/community-feature.gif';
 import teamAwards from '../assets/nurturly/team-awards.png';
 
 const fadeInUp = {
-  initial: { opacity: 0, y: 20 },
+  initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.5 }
+  viewport: { once: true, margin: "-50px" },
+  transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as const }
+};
+
+// Special highlight box animation with glow effect
+const highlightBox = {
+  initial: { opacity: 0, y: 20, scale: 0.98, boxShadow: "0 0 0 0 rgba(236, 72, 153, 0)" },
+  whileInView: { 
+    opacity: 1, 
+    y: 0, 
+    scale: 1,
+    boxShadow: [
+      "0 0 0 0 rgba(236, 72, 153, 0)",
+      "0 0 30px 8px rgba(236, 72, 153, 0.35)",
+      "0 0 15px 3px rgba(236, 72, 153, 0.15)"
+    ]
+  },
+  viewport: { once: true, margin: "-30px" },
+  transition: { duration: 0.8, boxShadow: { duration: 1.2, times: [0, 0.5, 1] } }
+};
+
+// Image reveal animation
+const imageReveal = {
+  initial: { opacity: 0, y: 40, scale: 0.95 },
+  whileInView: { opacity: 1, y: 0, scale: 1 },
+  viewport: { once: true, margin: "-80px" },
+  transition: { duration: 0.7 }
 };
 
 const sections = [
@@ -147,7 +172,7 @@ const Nurturly = () => {
           <div className="space-y-4">
             <motion.div 
               className="bg-background p-6 rounded-xl border border-nurturly/20"
-              {...fadeInUp}
+              {...highlightBox}
             >
               <p className="text-foreground">
                 🌟 As the <strong>main UX designer</strong>, I drove the product from discovery to delivery, <strong>translating research into strategic design solutions.</strong> I focused on designing the <strong>AI-powered matching feature and contextual chatbot,</strong> grounded in insights from interviews, surveys, and competitive analysis.
@@ -155,7 +180,7 @@ const Nurturly = () => {
             </motion.div>
             <motion.div 
               className="bg-background p-6 rounded-xl border border-nurturly/20"
-              {...fadeInUp}
+              {...highlightBox}
             >
               <p className="text-foreground">
                 🚀 Our team won <strong>Runner-Up & People's Choice Awards</strong>, securing <strong>$5,000 in funding</strong> to advance Nurturly as a scalable postpartum support platform.
@@ -276,9 +301,9 @@ const Nurturly = () => {
           </motion.div>
 
           <div className="mt-12 space-y-8">
-            <motion.img src={surveyChartClean} alt="Survey results" className="w-full max-w-[800px] mx-auto" {...fadeInUp} />
-            <motion.img src={surveyStats} alt="Survey statistics" className="w-full max-w-[800px] mx-auto" {...fadeInUp} />
-            <motion.div className="bg-card p-6 rounded-xl border border-nurturly/20" {...fadeInUp}>
+            <motion.img src={surveyChartClean} alt="Survey results" className="w-full max-w-[800px] mx-auto" {...imageReveal} />
+            <motion.img src={surveyStats} alt="Survey statistics" className="w-full max-w-[800px] mx-auto" {...imageReveal} />
+            <motion.div className="bg-card p-6 rounded-xl border border-nurturly/20" {...highlightBox}>
               <p className="text-foreground">
                 💡 These findings helped me narrow the focus to <strong>mom-centered recovery support</strong> during pregnancy and postpartum, not just general parenting help.
               </p>
@@ -304,8 +329,8 @@ const Nurturly = () => {
           </motion.div>
 
           <div className="mt-12 space-y-8">
-            <motion.img src={emotionalSupportGapComplete} alt="Emotional Support Gap insights" className="w-full max-w-[800px] mx-auto" {...fadeInUp} />
-            <motion.img src={informationOverloadComplete} alt="Information Overload insights" className="w-full max-w-[800px] mx-auto" {...fadeInUp} />
+            <motion.img src={emotionalSupportGapComplete} alt="Emotional Support Gap insights" className="w-full max-w-[800px] mx-auto" {...imageReveal} />
+            <motion.img src={informationOverloadComplete} alt="Information Overload insights" className="w-full max-w-[800px] mx-auto" {...imageReveal} />
           </div>
         </div>
       </section>
@@ -458,7 +483,7 @@ const Nurturly = () => {
               </div>
             </div>
             
-            <motion.div className="bg-card p-6 rounded-xl border border-nurturly/20 mt-8" {...fadeInUp}>
+            <motion.div className="bg-card p-6 rounded-xl border border-nurturly/20 mt-8" {...highlightBox}>
               <p>⚡ By adding <span className="text-nurturly font-semibold">real-world example prompts</span> and adjusting <span className="text-nurturly font-semibold">visual hierarchy,</span> we helped users feel more confident starting the conversation.</p>
             </motion.div>
           </motion.div>
@@ -494,7 +519,7 @@ const Nurturly = () => {
               </div>
             </div>
             
-            <motion.div className="bg-card p-6 rounded-xl border border-nurturly/20 mt-8" {...fadeInUp}>
+            <motion.div className="bg-card p-6 rounded-xl border border-nurturly/20 mt-8" {...highlightBox}>
               <p>⚡ By <span className="text-nurturly font-semibold">decluttering the response</span> and surfacing a <span className="text-nurturly font-semibold">trusted source,</span> we helped moms feel more confident in the AI's answers.</p>
             </motion.div>
           </motion.div>
@@ -530,7 +555,7 @@ const Nurturly = () => {
               </div>
             </div>
             
-            <motion.div className="bg-card p-6 rounded-xl border border-nurturly/20 mt-8" {...fadeInUp}>
+            <motion.div className="bg-card p-6 rounded-xl border border-nurturly/20 mt-8" {...highlightBox}>
               <p>⚡ By <span className="text-nurturly font-semibold">surfacing shared traits</span> and <span className="text-nurturly font-semibold">grouping similar users,</span> we made connections feel easier, faster, and more genuine.</p>
             </motion.div>
           </motion.div>
