@@ -8,37 +8,36 @@
 
 @layer base {
   :root {
-    /* Warm cream/beige background palette */
-    --background: 40 33% 96%;
-    --foreground: 30 10% 15%;
+    /* Core palette: clean white + ink + indigo (matches homepage) */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 7%;
 
-    --card: 40 25% 94%;
-    --card-foreground: 30 10% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 7%;
 
-    --popover: 40 33% 96%;
-    --popover-foreground: 30 10% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 7%;
 
-    /* Warm terracotta/coral primary */
-    --primary: 15 65% 55%;
-    --primary-foreground: 40 33% 98%;
+    /* Indigo primary (used by Contact button) */
+    --primary: 243 75% 59%;
+    --primary-foreground: 0 0% 100%;
 
-    /* Soft sage secondary */
-    --secondary: 150 15% 88%;
-    --secondary-foreground: 30 10% 20%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 10%;
 
-    --muted: 40 20% 90%;
-    --muted-foreground: 30 8% 45%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
 
-    /* Blue/purple accent for Contact button */
-    --accent: 240 60% 55%;
+    /* Keep accent aligned with homepage indigo */
+    --accent: 243 75% 59%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 35 20% 85%;
-    --input: 35 20% 88%;
-    --ring: 15 65% 55%;
+    --border: 0 0% 90%;
+    --input: 0 0% 92%;
+    --ring: 243 75% 59%;
 
     --radius: 0.75rem;
 
@@ -47,56 +46,56 @@
     --puzzle-piece-2: 35 70% 60%;
     --puzzle-piece-3: 150 25% 65%;
     --puzzle-piece-4: 200 35% 55%;
-    
+
     /* Project-specific accent colors */
     --nurturly-pink: 340 75% 55%;
     --nurturly-pink-foreground: 0 0% 100%;
-    
-    --hero-gradient-start: 40 33% 96%;
-    --hero-gradient-end: 35 30% 92%;
-    
-    --shadow-warm: 30 30% 20%;
+
+    --hero-gradient-start: 0 0% 100%;
+    --hero-gradient-end: 0 0% 97%;
+
+    --shadow-warm: 0 0% 0%;
   }
 
   .dark {
-    --background: 30 15% 10%;
-    --foreground: 40 20% 92%;
+    --background: 0 0% 6%;
+    --foreground: 0 0% 95%;
 
-    --card: 30 12% 14%;
-    --card-foreground: 40 20% 92%;
+    --card: 0 0% 9%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 30 15% 10%;
-    --popover-foreground: 40 20% 92%;
+    --popover: 0 0% 6%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 15 60% 60%;
-    --primary-foreground: 30 15% 10%;
+    --primary: 243 75% 70%;
+    --primary-foreground: 0 0% 8%;
 
-    --secondary: 150 12% 20%;
-    --secondary-foreground: 40 20% 92%;
+    --secondary: 0 0% 14%;
+    --secondary-foreground: 0 0% 95%;
 
-    --muted: 30 10% 18%;
-    --muted-foreground: 40 15% 60%;
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 65%;
 
-    --accent: 240 55% 60%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 243 75% 70%;
+    --accent-foreground: 0 0% 8%;
 
     --destructive: 0 62% 40%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 30 10% 20%;
-    --input: 30 10% 22%;
-    --ring: 15 60% 60%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 243 75% 70%;
 
     --puzzle-piece-1: 15 55% 50%;
     --puzzle-piece-2: 35 60% 50%;
     --puzzle-piece-3: 150 20% 45%;
     --puzzle-piece-4: 200 30% 45%;
-    
-    --hero-gradient-start: 30 15% 10%;
-    --hero-gradient-end: 30 12% 14%;
-    
+
+    --hero-gradient-start: 0 0% 6%;
+    --hero-gradient-end: 0 0% 9%;
+
     --shadow-warm: 0 0% 0%;
-    
+
     /* Project-specific accent colors */
     --nurturly-pink: 340 70% 60%;
     --nurturly-pink-foreground: 0 0% 100%;

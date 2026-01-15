@@ -1,6 +1,4 @@
 import { motion } from 'framer-motion';
-import { ArrowLeft } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 import { Layout } from '@/components/Layout';
 import nurturlyLogo from '../assets/nurturly/nurturly-logo.png';
 import newMockupImage from '../assets/nurturly/new-mockup.png';
@@ -37,21 +35,8 @@ const fadeInUp = {
 };
 
 const Nurturly = () => {
-  const navigate = useNavigate();
-
   return (
     <Layout>
-      {/* Back Button */}
-      <motion.button
-        onClick={() => navigate('/')}
-        className="fixed top-24 left-6 z-50 flex items-center gap-2 bg-background/90 backdrop-blur-sm px-4 py-2 rounded-lg border border-border text-foreground text-sm font-medium hover:bg-card transition-colors"
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.3 }}
-      >
-        <ArrowLeft className="w-4 h-4" />
-        Back
-      </motion.button>
 
       {/* Hero Section */}
       <section className="section-padding">

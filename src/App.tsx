@@ -303,7 +303,7 @@ const App = () => {
   }];
   const nextTestimonial = () => setCurrentTestimonial(prev => (prev + 1) % testimonials.length);
   const prevTestimonial = () => setCurrentTestimonial(prev => (prev - 1 + testimonials.length) % testimonials.length);
-  return <div className="bg-[#ffffff] text-[#121212] selection:bg-indigo-100 overflow-x-hidden font-sans cursor-none">
+  return <div className="bg-background text-foreground selection:bg-primary/15 overflow-x-hidden font-sans cursor-none">
       
       {/* MAGNETIC VIEW CURSOR */}
       <motion.div style={{
