@@ -15,19 +15,19 @@ import hobbyTheater from "@/assets/hobby-theater.jpg";
 const hobbies = [
   {
     image: hobbyTravel,
-    caption: "Loves to travel and experience new culture"
+    caption: "✈️ Loves to travel and experience new culture"
   },
   {
     image: hobbyPeople,
-    caption: "Enjoys meeting different people and stories"
+    caption: "🤝 Enjoys meeting different people and stories"
   },
   {
     image: hobbyChallenges,
-    caption: "Eager to take on new challenges"
+    caption: "🤿 Eager to take on new challenges"
   },
   {
     image: hobbyTheater,
-    caption: "Steps on stage and steals the spotlight"
+    caption: "🎭 Steps on stage and steals the spotlight"
   }
 ];
 
@@ -67,14 +67,17 @@ const experiences = [
 const workValues = [
   {
     title: "Empathy",
+    emoji: "💛",
     description: "Understanding users deeply through research and genuine human connection to create meaningful solutions"
   },
   {
     title: "Strategy",
+    emoji: "🎯",
     description: "Bridging user needs with business goals through data-driven insights and strategic thinking"
   },
   {
     title: "Creativity",
+    emoji: "✨",
     description: "Exploring innovative approaches and emerging technologies to solve complex design challenges"
   }
 ];
@@ -218,7 +221,10 @@ const About = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
               >
-                <h3 className="text-2xl font-serif italic text-indigo-600 mb-4">{value.title}</h3>
+                <h3 className="text-2xl font-serif italic text-indigo-600 mb-4">
+                  <span className="mr-2">{value.emoji}</span>
+                  {value.title}
+                </h3>
                 <p className="text-zinc-600 leading-relaxed">{value.description}</p>
               </motion.div>
             ))}
