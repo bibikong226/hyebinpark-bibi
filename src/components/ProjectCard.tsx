@@ -124,6 +124,21 @@ export const ProjectCard = ({
           target="_blank"
           rel="noopener noreferrer"
           className="group block"
+          onClick={(e) => {
+            // In the Lovable preview (sandboxed iframe), opening a new tab can be blocked.
+            // Fallback: navigate the current frame so the link still works.
+            let isInIframe = false;
+            try {
+              isInIframe = window.self !== window.top;
+            } catch {
+              isInIframe = true;
+            }
+
+            if (isInIframe) {
+              e.preventDefault();
+              window.location.href = externalUrl;
+            }
+          }}
         >
           {cardContent}
         </a>
