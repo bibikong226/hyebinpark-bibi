@@ -25,6 +25,7 @@ import communityFinalDesign from '../assets/nurturly/community-final-design.png'
 import aiChatbotFeature from '../assets/nurturly/ai-chatbot-feature.png';
 import communityConnectionFeature from '../assets/nurturly/community-connection-feature.png';
 import trackingResourcesFeature from '../assets/nurturly/tracking-resources-feature.png';
+import localResourcesGif from '../assets/nurturly/local-resources.gif';
 import communityModerationFeature from '../assets/nurturly/community-moderation-feature.png';
 import communityFeatureGif from '../assets/nurturly/community-feature.gif';
 import teamAwards from '../assets/nurturly/team-awards.png';
@@ -237,7 +238,7 @@ const Nurturly = () => {
               </p>
             </div>
             <div className="flex-1 lg:flex-[0.8] flex justify-center">
-              <img src={trackingResourcesFeature} alt="Local Resources Map" className="max-w-[280px] rounded-[40px]" />
+              <img src={localResourcesGif} alt="Local Resources Map" className="max-w-[280px] rounded-[40px]" />
             </div>
           </motion.div>
 
