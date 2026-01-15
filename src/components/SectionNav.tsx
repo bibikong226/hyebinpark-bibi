@@ -42,7 +42,7 @@ export const SectionNav = ({ sections }: SectionNavProps) => {
 
   return (
     <motion.nav
-      className="fixed right-4 lg:right-8 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col gap-2"
+      className="fixed right-6 lg:right-10 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col gap-1 bg-background/80 backdrop-blur-sm rounded-lg p-3 border border-border/50 shadow-sm"
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5, delay: 0.5 }}
@@ -51,22 +51,13 @@ export const SectionNav = ({ sections }: SectionNavProps) => {
         <button
           key={id}
           onClick={() => scrollToSection(id)}
-          className="group flex items-center gap-3 justify-end"
+          className={`text-left text-xs px-3 py-1.5 rounded transition-all duration-200 ${
+            activeSection === id
+              ? 'text-nurturly font-medium bg-nurturly/10'
+              : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+          }`}
         >
-          <span
-            className={`text-xs font-medium transition-all duration-300 opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 ${
-              activeSection === id ? 'text-nurturly' : 'text-muted-foreground'
-            }`}
-          >
-            {label}
-          </span>
-          <span
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              activeSection === id
-                ? 'bg-nurturly scale-150'
-                : 'bg-muted-foreground/40 group-hover:bg-muted-foreground'
-            }`}
-          />
+          {label}
         </button>
       ))}
     </motion.nav>
