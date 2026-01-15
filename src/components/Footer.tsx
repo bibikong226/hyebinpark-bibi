@@ -1,48 +1,32 @@
-import { Link } from "react-router-dom";
+import { ArrowUpRight } from "lucide-react";
 
 export const Footer = () => {
-  const currentYear = new Date().getFullYear();
-
   return (
-    <footer className="px-8 md:px-16 py-20 md:py-24 border-t border-border bg-card">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
-        <div className="text-center md:text-left">
-          <div className="text-3xl font-black tracking-tighter uppercase mb-3">HYEBIN PARK</div>
-          <p className="text-[10px] text-muted-foreground tracking-[0.4em] uppercase font-medium">
-            Strategic Product Designer
-          </p>
-          <div className="mt-6">
-            <Link to="/contact" className="text-sm font-medium text-primary hover:opacity-70 transition-opacity">
-              Contact →
-            </Link>
-          </div>
-        </div>
-
-        <div className="flex gap-10 text-[10px] uppercase tracking-[0.4em] font-black text-muted-foreground">
+    <footer className="px-8 md:px-16 py-20 md:py-28 border-t border-border bg-card">
+      <div className="max-w-3xl mx-auto text-center">
+        <h2 className="font-serif text-4xl md:text-5xl mb-6">Let's Connect</h2>
+        <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-10">
+          I'm always excited to connect with fellow designers, researchers, and innovators. Whether you have a project in mind or just want to talk about design and technology, I'd love to hear from you. Let's talk! 👩‍💻
+        </p>
+        
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="mailto:hyebinp@umich.edu"
+            className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-background text-foreground rounded-full font-medium hover:opacity-90 transition-opacity"
+          >
+            hyebinp@umich.edu
+            <ArrowUpRight className="w-4 h-4" />
+          </a>
           <a
             href="https://www.linkedin.com/in/hyebinp/"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-primary transition-colors"
+            className="inline-flex items-center justify-center gap-2 px-8 py-3 border-2 border-muted-foreground/30 text-muted-foreground rounded-full font-medium hover:border-muted-foreground/50 transition-colors"
           >
             LinkedIn
+            <ArrowUpRight className="w-4 h-4" />
           </a>
-          <a
-            href="https://read.cv/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-primary transition-colors"
-          >
-            Read.cv
-          </a>
-          <Link to="/contact" className="hover:text-primary transition-colors">
-            Email
-          </Link>
         </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto mt-10 text-center text-xs text-muted-foreground">
-        © {currentYear} Hyebin Park. All rights reserved.
       </div>
     </footer>
   );
