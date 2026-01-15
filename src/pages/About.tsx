@@ -307,7 +307,7 @@ const About = () => {
 
       {/* Footer */}
       <footer className="py-8 px-8 md:px-16 bg-zinc-900 text-zinc-400 text-center text-sm">
-        <p>© 2024 Hyebin Park. All rights reserved.</p>
+        <p>Strategic AI Product Designer</p>
       </footer>
     </div>
   );
