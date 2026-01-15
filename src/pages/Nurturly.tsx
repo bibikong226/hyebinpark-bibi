@@ -38,21 +38,16 @@ const fadeInUp = {
   transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as const }
 };
 
-// Special highlight box animation with glow effect
+// Special highlight box animation with subtle left border accent
 const highlightBox = {
-  initial: { opacity: 0, y: 20, scale: 0.98, boxShadow: "0 0 0 0 rgba(236, 72, 153, 0)" },
+  initial: { opacity: 0, y: 20, scale: 0.98 },
   whileInView: { 
     opacity: 1, 
     y: 0, 
-    scale: 1,
-    boxShadow: [
-      "0 0 0 0 rgba(236, 72, 153, 0)",
-      "0 0 30px 8px rgba(236, 72, 153, 0.35)",
-      "0 0 15px 3px rgba(236, 72, 153, 0.15)"
-    ]
+    scale: 1
   },
   viewport: { once: true, margin: "-30px" },
-  transition: { duration: 0.8, boxShadow: { duration: 1.2, times: [0, 0.5, 1] } }
+  transition: { duration: 0.6 }
 };
 
 // Image reveal animation
@@ -83,6 +78,7 @@ const Nurturly = () => {
   }, []);
   return (
     <Layout>
+      <div className="origin-top scale-[0.9]">
       <SectionNav sections={sections} />
 
       {/* Hero Section */}
@@ -171,7 +167,7 @@ const Nurturly = () => {
 
           <div className="space-y-4">
             <motion.div 
-              className="bg-background p-6 rounded-xl border border-nurturly/20"
+              className="bg-background p-6 rounded-xl border-l-4 border-nurturly"
               {...highlightBox}
             >
               <p className="text-foreground">
@@ -179,7 +175,7 @@ const Nurturly = () => {
               </p>
             </motion.div>
             <motion.div 
-              className="bg-background p-6 rounded-xl border border-nurturly/20"
+              className="bg-background p-6 rounded-xl border-l-4 border-nurturly"
               {...highlightBox}
             >
               <p className="text-foreground">
@@ -303,7 +299,7 @@ const Nurturly = () => {
           <div className="mt-12 space-y-8">
             <motion.img src={surveyChartClean} alt="Survey results" className="w-full max-w-[800px] mx-auto" {...imageReveal} />
             <motion.img src={surveyStats} alt="Survey statistics" className="w-full max-w-[800px] mx-auto" {...imageReveal} />
-            <motion.div className="bg-card p-6 rounded-xl border border-nurturly/20" {...highlightBox}>
+            <motion.div className="bg-card p-6 rounded-xl border-l-4 border-nurturly" {...highlightBox}>
               <p className="text-foreground">
                 💡 These findings helped me narrow the focus to <strong>mom-centered recovery support</strong> during pregnancy and postpartum, not just general parenting help.
               </p>
@@ -483,7 +479,7 @@ const Nurturly = () => {
               </div>
             </div>
             
-            <motion.div className="bg-card p-6 rounded-xl border border-nurturly/20 mt-8" {...highlightBox}>
+            <motion.div className="bg-card p-6 rounded-xl border-l-4 border-nurturly mt-8" {...highlightBox}>
               <p>⚡ By adding <span className="text-nurturly font-semibold">real-world example prompts</span> and adjusting <span className="text-nurturly font-semibold">visual hierarchy,</span> we helped users feel more confident starting the conversation.</p>
             </motion.div>
           </motion.div>
@@ -519,7 +515,7 @@ const Nurturly = () => {
               </div>
             </div>
             
-            <motion.div className="bg-card p-6 rounded-xl border border-nurturly/20 mt-8" {...highlightBox}>
+            <motion.div className="bg-card p-6 rounded-xl border-l-4 border-nurturly mt-8" {...highlightBox}>
               <p>⚡ By <span className="text-nurturly font-semibold">decluttering the response</span> and surfacing a <span className="text-nurturly font-semibold">trusted source,</span> we helped moms feel more confident in the AI's answers.</p>
             </motion.div>
           </motion.div>
@@ -555,7 +551,7 @@ const Nurturly = () => {
               </div>
             </div>
             
-            <motion.div className="bg-card p-6 rounded-xl border border-nurturly/20 mt-8" {...highlightBox}>
+            <motion.div className="bg-card p-6 rounded-xl border-l-4 border-nurturly mt-8" {...highlightBox}>
               <p>⚡ By <span className="text-nurturly font-semibold">surfacing shared traits</span> and <span className="text-nurturly font-semibold">grouping similar users,</span> we made connections feel easier, faster, and more genuine.</p>
             </motion.div>
           </motion.div>
@@ -697,6 +693,7 @@ const Nurturly = () => {
           </motion.div>
         </div>
       </section>
+      </div>
     </Layout>
   );
 };
