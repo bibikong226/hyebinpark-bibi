@@ -29,9 +29,9 @@
     --muted: 40 20% 90%;
     --muted-foreground: 30 8% 45%;
 
-    /* Warm accent - golden/amber */
-    --accent: 35 70% 60%;
-    --accent-foreground: 30 10% 15%;
+    /* Blue/purple accent for Contact button */
+    --accent: 240 60% 55%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
@@ -77,8 +77,8 @@
     --muted: 30 10% 18%;
     --muted-foreground: 40 15% 60%;
 
-    --accent: 35 65% 55%;
-    --accent-foreground: 30 15% 10%;
+    --accent: 240 55% 60%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62% 40%;
     --destructive-foreground: 0 0% 100%;

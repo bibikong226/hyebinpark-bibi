@@ -4,9 +4,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { href: "/#work", label: "Work" },
-  { href: "/#explore", label: "Explore" },
-  { href: "/about", label: "About" },
+  { href: "/#work", label: "WORK" },
+  { href: "/#explore", label: "EXPLORE" },
+  { href: "/about", label: "ABOUT" },
+  { href: "/cv", label: "CV" },
 ];
 
 export const Navigation = () => {
@@ -43,8 +44,8 @@ export const Navigation = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
       <nav className="container-wide section-padding py-4 md:py-5 flex items-center justify-between">
-        <Link to="/" className="font-serif text-xl md:text-2xl font-medium hover:text-primary transition-colors">
-          Hyebin Park
+        <Link to="/" className="font-sans text-base md:text-lg font-bold tracking-wide hover:text-accent transition-colors">
+          HYEBIN PARK
         </Link>
 
         {/* Desktop Navigation */}
@@ -54,14 +55,14 @@ export const Navigation = () => {
               key={link.href}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className="relative text-sm tracking-wide transition-colors text-muted-foreground hover:text-foreground"
+              className="relative text-xs tracking-[0.15em] transition-colors text-muted-foreground hover:text-foreground"
             >
               {link.label}
             </a>
           ))}
           <Link
             to="/contact"
-            className="px-5 py-2 bg-primary text-primary-foreground text-sm font-medium rounded-full hover:bg-primary/90 transition-colors"
+            className="px-5 py-2 bg-accent text-accent-foreground text-sm font-medium rounded-full hover:bg-accent/90 transition-colors"
           >
             Contact
           </Link>
