@@ -1,52 +1,48 @@
 import { Link } from "react-router-dom";
 
-const socialLinks = [
-  { label: "LinkedIn", href: "https://linkedin.com" },
-  { label: "Read.cv", href: "https://read.cv" },
-  { label: "Instagram", href: "https://instagram.com" },
-];
-
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border bg-card/50">
-      <div className="container-wide section-padding py-12 md:py-16">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-          {/* Left side */}
-          <div className="space-y-4">
-            <h3 className="font-serif text-2xl">Let's connect</h3>
-            <p className="text-muted-foreground max-w-md">
-              Always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
-            </p>
-            <Link
-              to="/contact"
-              className="inline-block text-primary link-underline font-medium"
-            >
-              Get in touch →
+    <footer className="px-8 md:px-16 py-20 md:py-24 border-t border-border bg-card">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
+        <div className="text-center md:text-left">
+          <div className="text-3xl font-black tracking-tighter uppercase mb-3">HYEBIN PARK</div>
+          <p className="text-[10px] text-muted-foreground tracking-[0.4em] uppercase font-medium">
+            Strategic Product Designer
+          </p>
+          <div className="mt-6">
+            <Link to="/contact" className="text-sm font-medium text-primary hover:opacity-70 transition-opacity">
+              Contact →
             </Link>
           </div>
-
-          {/* Right side */}
-          <div className="flex flex-col items-start md:items-end gap-4">
-            <div className="flex gap-6">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground transition-colors link-underline"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-            <p className="text-sm text-muted-foreground">
-              © {currentYear} Hyebin Park. All rights reserved.
-            </p>
-          </div>
         </div>
+
+        <div className="flex gap-10 text-[10px] uppercase tracking-[0.4em] font-black text-muted-foreground">
+          <a
+            href="https://www.linkedin.com/in/hyebinp/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-primary transition-colors"
+          >
+            LinkedIn
+          </a>
+          <a
+            href="https://read.cv/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-primary transition-colors"
+          >
+            Read.cv
+          </a>
+          <Link to="/contact" className="hover:text-primary transition-colors">
+            Email
+          </Link>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto mt-10 text-center text-xs text-muted-foreground">
+        © {currentYear} Hyebin Park. All rights reserved.
       </div>
     </footer>
   );
