@@ -186,7 +186,7 @@ const Nurturly = () => {
                   Creates a safe space for moms to share and support each other, with AI-suggested connections based on shared stages, interests, and nearby location.
                 </p>
               </div>
-              <img src={communityFeature} alt="Community Feature" className="rounded-2xl shadow-lg" />
+              <img src={communityFeature} alt="Community Feature" className="rounded-2xl" />
             </div>
 
             <div className="grid md:grid-cols-2 gap-8 items-center">
@@ -225,8 +225,8 @@ const Nurturly = () => {
           </p>
           
           <div className="grid md:grid-cols-2 gap-8 mb-8">
-            <img src={surveyChart} alt="Survey Chart" className="rounded-xl shadow-md" />
-            <img src={surveyStats} alt="Survey Stats" className="rounded-xl shadow-md" />
+            <img src={surveyChart} alt="Survey Chart" className="rounded-xl" />
+            <img src={surveyStats} alt="Survey Stats" className="rounded-xl" />
           </div>
 
           <div className="bg-yellow-50 rounded-xl p-6">
@@ -252,8 +252,8 @@ const Nurturly = () => {
           </p>
           
           <div className="grid md:grid-cols-2 gap-8">
-            <img src={emotionalSupportGap} alt="Emotional Support Gap" className="rounded-xl shadow-md" />
-            <img src={informationOverload} alt="Information Overload" className="rounded-xl shadow-md" />
+            <img src={emotionalSupportGap} alt="Emotional Support Gap" className="rounded-xl" />
+            <img src={informationOverload} alt="Information Overload" className="rounded-xl" />
           </div>
         </div>
       </section>
@@ -273,8 +273,8 @@ const Nurturly = () => {
           </p>
           
           <div className="grid md:grid-cols-2 gap-8">
-            <img src={onlineCommunities1} alt="Why moms go to online communities" className="rounded-xl shadow-md" />
-            <img src={onlineCommunities2} alt="Online community challenges" className="rounded-xl shadow-md" />
+            <img src={onlineCommunities1} alt="Why moms go to online communities" className="rounded-xl" />
+            <img src={onlineCommunities2} alt="Online community challenges" className="rounded-xl" />
           </div>
         </div>
       </section>
@@ -293,7 +293,7 @@ const Nurturly = () => {
             This helped uncover key gaps in support, highlighting <strong>missed opportunities to create a more comprehensive and connected experience</strong> for moms.
           </p>
           
-          <img src={competitiveAnalysis} alt="Competitive Analysis" className="w-full rounded-xl shadow-md" />
+          <img src={competitiveAnalysis} alt="Competitive Analysis" className="w-full rounded-xl" />
         </div>
       </section>
 
@@ -367,7 +367,7 @@ const Nurturly = () => {
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium leading-relaxed mb-12">
             Through AI-powered features and empathy-driven design, Nurturly ensures moms feel supported, informed, and connected.
           </h2>
-          <img src={introducingNurturly} alt="Introducing Nurturly" className="w-full rounded-xl shadow-md" />
+          <img src={introducingNurturly} alt="Introducing Nurturly" className="w-full rounded-xl" />
         </div>
       </section>
 
@@ -378,13 +378,13 @@ const Nurturly = () => {
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium leading-relaxed mb-12">
             Visualized solutions through low-fidelity designs to explore effective layouts and gather feedback for improvement.
           </h2>
-          <img src={lowFiWireframes} alt="Low-fidelity wireframes" className="w-full rounded-xl shadow-md mb-16" />
+          <img src={lowFiWireframes} alt="Low-fidelity wireframes" className="w-full rounded-xl mb-16" />
 
           <p className="text-xs uppercase tracking-widest text-gray-400 mb-4">MID-FI WIREFRAME</p>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium leading-relaxed mb-12">
             Building on early concepts, I created mid-fidelity prototypes. This helped validate navigation logic, content prioritization, and the overall experience structure before moving into high-fidelity design.
           </h2>
-          <img src={highFiMockups} alt="High-fidelity mockups" className="w-full rounded-xl shadow-md" />
+          <img src={highFiMockups} alt="High-fidelity mockups" className="w-full rounded-xl" />
         </div>
       </section>
 
@@ -403,13 +403,13 @@ const Nurturly = () => {
             <div className="grid md:grid-cols-2 gap-8">
               <div>
                 <p className="text-red-500 font-medium mb-4">✗ First Design</p>
-                <img src={aiChatFirst} alt="AI Chat First Design" className="rounded-xl shadow-md mb-4" />
+                <img src={aiChatFirst} alt="AI Chat First Design" className="rounded-xl mb-4" />
                 <p className="text-zinc-600">😟 Users felt lost with no direction</p>
                 <p className="text-zinc-500 italic text-sm">"It looks empty... What should I ask?"</p>
               </div>
               <div>
                 <p className="text-green-500 font-medium mb-4">✓ Final Design</p>
-                <img src={aiChatFinal} alt="AI Chat Final Design" className="rounded-xl shadow-md mb-4" />
+                <img src={aiChatFinal} alt="AI Chat Final Design" className="rounded-xl mb-4" />
                 <p className="text-zinc-600">😊 Contextual prompts made asking easier</p>
                 <p className="text-zinc-500 italic text-sm">"Now I know how to start the conversation."</p>
               </div>
@@ -426,13 +426,13 @@ const Nurturly = () => {
             <div className="grid md:grid-cols-2 gap-8">
               <div>
                 <p className="text-red-500 font-medium mb-4">✗ First Design</p>
-                <img src={chatbotFirst} alt="Chatbot First Design" className="rounded-xl shadow-md mb-4" />
+                <img src={chatbotFirst} alt="Chatbot First Design" className="rounded-xl mb-4" />
                 <p className="text-zinc-600">😟 Too many links made responses feel cluttered and overwhelming</p>
                 <p className="text-zinc-500 italic text-sm">"Why are there so many links? It's kind of overwhelming."</p>
               </div>
               <div>
                 <p className="text-green-500 font-medium mb-4">✓ Final Design</p>
-                <img src={chatbotFinal} alt="Chatbot Final Design" className="rounded-xl shadow-md mb-4" />
+                <img src={chatbotFinal} alt="Chatbot Final Design" className="rounded-xl mb-4" />
                 <p className="text-zinc-600">😊 Simplified the response by removing extra links and clearly citing a trusted source</p>
                 <p className="text-zinc-500 italic text-sm">"This feels much more reliable now that I can clearly see where the info came from."</p>
               </div>
@@ -449,13 +449,13 @@ const Nurturly = () => {
             <div className="grid md:grid-cols-2 gap-8">
               <div>
                 <p className="text-red-500 font-medium mb-4">✗ First Design</p>
-                <img src={communityFirst} alt="Community First Design" className="rounded-xl shadow-md mb-4" />
+                <img src={communityFirst} alt="Community First Design" className="rounded-xl mb-4" />
                 <p className="text-zinc-600">😟 Suggested profiles appeared one at a time without context</p>
                 <p className="text-zinc-500 italic text-sm">"I don't love to swipe through too many people just to find someone I relate to."</p>
               </div>
               <div>
                 <p className="text-green-500 font-medium mb-4">✓ Final Design</p>
-                <img src={communityFinal} alt="Community Final Design" className="rounded-xl shadow-md mb-4" />
+                <img src={communityFinal} alt="Community Final Design" className="rounded-xl mb-4" />
                 <p className="text-zinc-600">😊 Grouped similar moms and highlighted shared traits</p>
                 <p className="text-zinc-500 italic text-sm">"It's easier to find someone I relate to when they're grouped."</p>
               </div>
@@ -475,19 +475,19 @@ const Nurturly = () => {
           <div className="space-y-16">
             <div>
               <h3 className="text-xl font-medium mb-6">AI chatbot that provides trustworthy resources</h3>
-              <img src={aiChatbotFeature} alt="AI Chatbot Feature" className="w-full rounded-xl shadow-md" />
+              <img src={aiChatbotFeature} alt="AI Chatbot Feature" className="w-full rounded-xl" />
             </div>
             <div>
               <h3 className="text-xl font-medium mb-6">Connecting Moms Through Shared Experiences</h3>
-              <img src={communityConnectionFeature} alt="Community Connection Feature" className="w-full rounded-xl shadow-md" />
+              <img src={communityConnectionFeature} alt="Community Connection Feature" className="w-full rounded-xl" />
             </div>
             <div>
               <h3 className="text-xl font-medium mb-6">Helping moms track recovery and find trusted local resources</h3>
-              <img src={trackingResourcesFeature} alt="Tracking Resources Feature" className="w-full rounded-xl shadow-md" />
+              <img src={trackingResourcesFeature} alt="Tracking Resources Feature" className="w-full rounded-xl" />
             </div>
             <div>
               <h3 className="text-xl font-medium mb-6">Moderated Community for Safe Support</h3>
-              <img src={communityModerationFeature} alt="Community Moderation Feature" className="w-full rounded-xl shadow-md" />
+              <img src={communityModerationFeature} alt="Community Moderation Feature" className="w-full rounded-xl" />
             </div>
           </div>
         </div>
@@ -509,7 +509,7 @@ const Nurturly = () => {
           <p className="text-lg text-zinc-600 leading-relaxed mb-12">
             This experience deepened my belief in empathy-driven UX and research-backed design, and we're now continuing to develop our MVP to launch a solution that truly supports moms.
           </p>
-          <img src={teamAwards} alt="Team Awards" className="w-full rounded-xl shadow-md" />
+          <img src={teamAwards} alt="Team Awards" className="w-full rounded-xl" />
         </div>
       </section>
 
