@@ -79,7 +79,6 @@ export const projects: Project[] = [
       "Secured $5,000 in funding",
       "Created personalized support system",
     ],
-    externalUrl: "https://hyebinparkbibi.com/nurturly",
   },
   {
     id: "gm",
