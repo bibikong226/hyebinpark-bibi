@@ -27,6 +27,7 @@ import communityConnectionFeature from '../assets/nurturly/community-connection-
 import trackingResourcesFeature from '../assets/nurturly/tracking-resources-feature.png';
 import localResourcesGif from '../assets/nurturly/local-resources.gif';
 import communityModerationFeature from '../assets/nurturly/community-moderation-feature.png';
+import feature04Gif from '../assets/nurturly/feature 04.gif';
 import communityFeatureGif from '../assets/nurturly/community-feature.gif';
 import teamAwards from '../assets/nurturly/team-awards.png';
 
@@ -252,7 +253,7 @@ const Nurturly = () => {
               </p>
             </div>
             <div className="flex-1 lg:flex-[0.8] flex justify-center">
-              <img src={communityModerationFeature} alt="Symptom Tracking" className="max-w-[280px] rounded-[40px]" />
+              <img src={feature04Gif} alt="Symptom Tracking" className="max-w-[280px] rounded-[40px]" />
             </div>
           </motion.div>
         </div>
