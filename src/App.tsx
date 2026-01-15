@@ -489,87 +489,131 @@ const App = () => {
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-40">
-          {projects.map((project, idx) => <motion.div key={project.id} initial={{
-          opacity: 0,
-          y: 50
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true
-        }} onMouseEnter={() => setCursorActive(true)} onMouseLeave={() => setCursorActive(false)} className="group relative cursor-none">
-              <div className="aspect-[16/11] mb-10 relative overflow-hidden transition-all duration-700 rounded-2xl border border-zinc-50 group-hover:shadow-2xl" style={{
-            backgroundColor: project.imageColor
-          }}>
-                {/* Logo at top-left corner */}
-                <div className="absolute left-5 md:left-8 top-5 md:top-6 z-10">
-                  <img
-                    src={project.logo}
-                    alt={`${project.title} logo`}
-                    loading="lazy"
-                    decoding="async"
-                    className={`w-auto object-contain ${
-                      project.id === 'gm' 
-                        ? 'h-20 md:h-28' 
-                        : project.id === 'nurturly' 
-                          ? 'h-8 md:h-10' 
-                          : 'h-10 md:h-14'
+          {projects.map((project, idx) => {
+            const cardInner = (
+              <>
+                <div
+                  className="aspect-[16/11] mb-10 relative overflow-hidden transition-all duration-700 rounded-2xl border border-zinc-50 group-hover:shadow-2xl"
+                  style={{ backgroundColor: project.imageColor }}
+                >
+                  {/* Logo at top-left corner */}
+                  <div className="absolute left-5 md:left-8 top-5 md:top-6 z-10">
+                    <img
+                      src={project.logo}
+                      alt={`${project.title} logo`}
+                      loading="lazy"
+                      decoding="async"
+                      className={`w-auto object-contain ${
+                        project.id === "gm"
+                          ? "h-20 md:h-28"
+                          : project.id === "nurturly"
+                            ? "h-8 md:h-10"
+                            : "h-10 md:h-14"
+                      }`}
+                    />
+                  </div>
+
+                  {/* Mockup - larger for concord/openoff, standard for others */}
+                  <div
+                    className={`absolute inset-0 flex items-center justify-center px-2 pb-2 ${
+                      project.id === "concord" || project.id === "openoff"
+                        ? "pt-6 md:pt-8"
+                        : "pt-14 md:pt-16"
                     }`}
-                  />
+                  >
+                    <img
+                      src={project.mockup}
+                      alt={`${project.title} mockup`}
+                      loading="lazy"
+                      decoding="async"
+                      className={`object-contain transition-transform duration-700 ${
+                        project.id === "concord" || project.id === "openoff"
+                          ? "max-h-[105%] max-w-[105%] scale-[1.05] group-hover:scale-[1.12]"
+                          : "max-h-full max-w-full group-hover:scale-105"
+                      }`}
+                    />
+                  </div>
                 </div>
 
-                {/* Mockup - larger for concord/openoff, standard for others */}
-                <div className={`absolute inset-0 flex items-center justify-center px-2 pb-2 ${
-                  project.id === 'concord' || project.id === 'openoff' 
-                    ? 'pt-6 md:pt-8' 
-                    : 'pt-14 md:pt-16'
-                }`}>
-                  <img
-                    src={project.mockup}
-                    alt={`${project.title} mockup`}
-                    loading="lazy"
-                    decoding="async"
-                    className={`object-contain transition-transform duration-700 ${
-                      project.id === 'concord' || project.id === 'openoff'
-                        ? 'max-h-[105%] max-w-[105%] scale-[1.05] group-hover:scale-[1.12]'
-                        : 'max-h-full max-w-full group-hover:scale-105'
-                    }`}
-                  />
-                </div>
-              </div>
-              <div className="space-y-4 px-2 relative z-10 transition-transform duration-500 group-hover:-translate-y-2">
-                <h3 className="text-3xl font-bold group-hover:text-zinc-900 leading-tight">{project.title}</h3>
-                <p className="text-base text-zinc-600 leading-relaxed">{project.description}</p>
-                
-                {/* Tags */}
-                <div className="flex flex-wrap gap-2 pt-2">
-                  {project.tags.map((tag, tagIdx) => (
-                    <span key={tagIdx} className="px-3 py-1 text-[10px] font-medium bg-zinc-100 text-zinc-600 rounded-full uppercase tracking-wider">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                
-                {/* Highlights with hover fill effect */}
-                <div className="space-y-2 pt-4">
-                  {project.highlights.map((highlight, hIdx) => (
-                    <div 
-                      key={hIdx} 
-                      className="relative inline-block overflow-hidden rounded-md px-4 py-2 mr-2"
-                    >
-                      <div className="absolute inset-0 bg-zinc-200" />
-                      <div 
-                        className="absolute inset-0 z-0 origin-left transition-transform duration-500 ease-out scale-x-0 group-hover:scale-x-100" 
-                        style={{ backgroundColor: project.accentColor }} 
-                      />
-                      <span className="relative z-10 text-sm text-zinc-700 group-hover:text-white transition-colors duration-300 font-medium">
-                        {highlight}
+                <div className="space-y-4 px-2 relative z-10 transition-transform duration-500 group-hover:-translate-y-2">
+                  <h3 className="text-3xl font-bold group-hover:text-zinc-900 leading-tight">{project.title}</h3>
+                  <p className="text-base text-zinc-600 leading-relaxed">{project.description}</p>
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-2 pt-2">
+                    {project.tags.map((tag, tagIdx) => (
+                      <span
+                        key={tagIdx}
+                        className="px-3 py-1 text-[10px] font-medium bg-zinc-100 text-zinc-600 rounded-full uppercase tracking-wider"
+                      >
+                        {tag}
                       </span>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+
+                  {/* Highlights with hover fill effect */}
+                  <div className="space-y-2 pt-4">
+                    {project.highlights.map((highlight, hIdx) => (
+                      <div
+                        key={hIdx}
+                        className="relative inline-block overflow-hidden rounded-md px-4 py-2 mr-2"
+                      >
+                        <div className="absolute inset-0 bg-zinc-200" />
+                        <div
+                          className="absolute inset-0 z-0 origin-left transition-transform duration-500 ease-out scale-x-0 group-hover:scale-x-100"
+                          style={{ backgroundColor: project.accentColor }}
+                        />
+                        <span className="relative z-10 text-sm text-zinc-700 group-hover:text-white transition-colors duration-300 font-medium">
+                          {highlight}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </motion.div>)}
+              </>
+            );
+
+            const commonMotionProps = {
+              key: project.id,
+              initial: { opacity: 0, y: 50 },
+              whileInView: { opacity: 1, y: 0 },
+              viewport: { once: true },
+              onMouseEnter: () => setCursorActive(true),
+              onMouseLeave: () => setCursorActive(false),
+              className: "group relative cursor-none",
+            } as const;
+
+            if (project.externalUrl) {
+              return (
+                <motion.a
+                  {...commonMotionProps}
+                  href={project.externalUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Open ${project.title} project`}
+                  onClick={(e) => {
+                    // In the Lovable preview (sandboxed iframe), opening a new tab can be blocked.
+                    // Fallback: navigate the current frame so the link still works.
+                    let isInIframe = false;
+                    try {
+                      isInIframe = window.self !== window.top;
+                    } catch {
+                      isInIframe = true;
+                    }
+
+                    if (isInIframe) {
+                      e.preventDefault();
+                      window.location.href = project.externalUrl!;
+                    }
+                  }}
+                >
+                  {cardInner}
+                </motion.a>
+              );
+            }
+
+            return <motion.div {...commonMotionProps}>{cardInner}</motion.div>;
+          })}
         </div>
       </section>
 
