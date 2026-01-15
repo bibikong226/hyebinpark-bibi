@@ -2,6 +2,8 @@ import React, { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Navigation } from "@/components/Navigation";
+import { Footer } from "@/components/Footer";
 import profilePhoto from "@/assets/profile-photo.jpg";
 import logoLine from "@/assets/logo-line.png";
 import logoTiktok from "@/assets/logo-tiktok.png";
@@ -320,16 +322,7 @@ const App = () => {
       </motion.div>
 
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 flex justify-between items-center px-8 md:px-16 py-10">
-        <div className="font-semibold tracking-tight text-xl uppercase text-zinc-900">Hyebin Park</div>
-        <div className="hidden md:flex items-center gap-8 text-[10px] uppercase tracking-[0.3em] font-medium text-zinc-900">
-          <a href="#work" className="hover:opacity-60 transition-all">Work</a>
-          <a href="#explore" className="hover:opacity-60 transition-all">Explore</a>
-          <a href="/about" className="hover:opacity-60 transition-all">About</a>
-          <a href="/cv" className="hover:opacity-60 transition-all">CV</a>
-          <a href="https://www.linkedin.com/in/hyebinp/" target="_blank" rel="noopener noreferrer" className="px-5 py-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 transition-all normal-case text-sm tracking-normal font-medium">Contact</a>
-        </div>
-      </nav>
+      <Navigation />
 
       {/* Hero Section */}
       <section className="relative h-screen">
@@ -692,17 +685,7 @@ const App = () => {
       </section>
 
       {/* Footer */}
-      <footer className="px-8 md:px-16 py-32 border-t border-zinc-100 flex flex-col md:flex-row justify-between items-center bg-[#fafafa]">
-        <div>
-          <div className="text-3xl font-black tracking-tighter uppercase mb-4">Hyebin Park</div>
-          <p className="text-[10px] text-zinc-400 tracking-[0.4em] uppercase font-medium">Strategic AI Product Designer</p>
-        </div>
-        <div className="flex gap-12 text-[10px] uppercase tracking-[0.4em] font-black text-zinc-400">
-          <a href="#" className="hover:text-indigo-600 transition-colors">LinkedIn</a>
-          <a href="#" className="hover:text-indigo-600 transition-colors">Read.cv</a>
-          <a href="#" className="hover:text-indigo-600 transition-colors">Email</a>
-        </div>
-      </footer>
+      <Footer />
     </div>;
 };
 export default App;
