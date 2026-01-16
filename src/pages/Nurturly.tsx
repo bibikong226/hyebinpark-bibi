@@ -371,30 +371,59 @@ const Nurturly = () => {
         </div>
       </section>
 
-      {/* Design Principles Section */}
+      {/* Design Strategy Section */}
       <section id="principles" className="section-padding">
         <div className="container-narrow">
           <motion.div {...fadeInUp}>
-            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">DESIGN PRINCIPLES</p>
-            <h2 className="font-serif text-3xl md:text-4xl mb-12">
-              Grounded in Research. <span className="text-nurturly">Designed with Empathy.</span>
+            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">DESIGN STRATEGY</p>
+            <h2 className="font-serif text-3xl md:text-4xl mb-6">
+              So How Can Our <span className="text-nurturly">Design</span> Truly <span className="text-nurturly">Support Moms?</span>
             </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed mb-4">
+              Based on what I heard and observed, I realized that moms weren't just asking for information. They were asking to be <strong className="text-foreground">seen, supported, and protected.</strong>
+            </p>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              I translated those pain points <strong className="text-foreground">into design goals</strong> that shaped the heart of Nurturly. The result: a solution grounded in <strong className="text-foreground">empathy, trust, and real human connection.</strong>
+            </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          {/* Pain Points */}
+          <div className="grid md:grid-cols-3 gap-8 mt-16 relative">
             {[
-              { emoji: '👀', title: 'See the Mom', desc: 'Support beyond the baby with validation and structured recovery tools.' },
-              { emoji: '🎯', title: 'Deliver Clarity', desc: 'Cut through information overload with personalized, reliable guidance.' },
-              { emoji: '🤝', title: 'Foster Safety', desc: 'Create a judgment-free space where moms feel heard and safe.' },
+              { emoji: '💔', label: 'PAIN POINT 1', title: 'Emotional Needs Unmet', desc: "Focus always on baby, not mom's recovery" },
+              { emoji: '⚠️', label: 'PAIN POINT 2', title: 'Information Overload', desc: 'Flooded with advice, lacking clarity' },
+              { emoji: '🌊', label: 'PAIN POINT 3', title: 'Missing Connection', desc: 'Need empathetic 1:1 support' },
+            ].map((point, index) => (
+              <motion.div 
+                key={index}
+                className="text-center relative"
+                {...fadeInUp}
+              >
+                <p className="text-xs font-semibold text-nurturly mb-2 uppercase tracking-wider">{point.label}</p>
+                <div className="text-4xl mb-3">{point.emoji}</div>
+                <h3 className="font-semibold text-lg mb-2">{point.title}</h3>
+                <p className="text-sm text-muted-foreground">{point.desc}</p>
+                {/* Vertical connector line */}
+                <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-full h-16 w-px bg-nurturly/30"></div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Design Principles */}
+          <div className="grid md:grid-cols-3 gap-6 mt-16">
+            {[
+              { emoji: '👀', label: 'DESIGN PRINCIPLE 1', title: 'See the Mom', desc: 'Support beyond the baby with validation and structured recovery tools.' },
+              { emoji: '🎯', label: 'DESIGN PRINCIPLE 2', title: 'Deliver Clarity', desc: 'Cut through information overload with personalized, reliable guidance.' },
+              { emoji: '🤝', label: 'DESIGN PRINCIPLE 3', title: 'Foster Safety', desc: 'Create a judgment-free space where moms feel heard and safe.' },
             ].map((principle, index) => (
               <motion.div 
                 key={index}
-                className="bg-nurturly text-nurturly-foreground p-8 rounded-xl text-center"
+                className="bg-nurturly text-white p-8 rounded-xl text-center"
                 {...fadeInUp}
               >
-                <p className="text-xs font-semibold opacity-80 mb-2 uppercase tracking-wider">DESIGN PRINCIPLE {index + 1}</p>
-                <div className="text-5xl mb-4">{principle.emoji}</div>
-                <h3 className="font-serif text-xl mb-3">{principle.title}</h3>
+                <p className="text-xs font-semibold opacity-80 mb-2 uppercase tracking-wider">{principle.label}</p>
+                <div className="text-4xl mb-3">{principle.emoji}</div>
+                <h3 className="font-semibold text-lg mb-2">{principle.title}</h3>
                 <p className="text-sm opacity-90">{principle.desc}</p>
               </motion.div>
             ))}
