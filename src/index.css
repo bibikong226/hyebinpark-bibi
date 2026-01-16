@@ -151,6 +151,14 @@
   .container-wide {
     @apply max-w-5xl mx-auto;
   }
+
+  /* Full-bleed section that breaks out of parent constraints */
+  .full-bleed-dark {
+    @apply bg-black text-white;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+  }
 }
 
 @layer utilities {
