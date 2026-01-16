@@ -41,7 +41,7 @@ export const SectionNav = ({ sections }: SectionNavProps) => {
   };
 
   return (
-    <nav className="fixed right-4 lg:right-6 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col gap-0.5">
+    <nav className="fixed right-4 lg:right-6 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col gap-0.5 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-sm rounded-lg px-2 py-2 shadow-lg">
       {sections.map(({ id, label }) => (
         <button
           key={id}
@@ -49,7 +49,7 @@ export const SectionNav = ({ sections }: SectionNavProps) => {
           className={`text-right text-[11px] px-2 py-1 rounded-sm transition-all duration-300 ${
             activeSection === id
               ? 'text-nurturly font-medium'
-              : 'text-muted-foreground/60 hover:text-muted-foreground'
+              : 'text-zinc-600 hover:text-zinc-900'
           }`}
         >
           {label}
