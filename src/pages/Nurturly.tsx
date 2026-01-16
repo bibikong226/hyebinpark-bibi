@@ -63,14 +63,14 @@ const sections = [
   { id: 'hero', label: 'Overview' },
   { id: 'summary', label: 'Summary' },
   { id: 'problem', label: 'Problem' },
-  { id: 'solution', label: 'Solution' },
+  { id: 'solution', label: 'Solution', isDark: true },
   { id: 'research', label: 'User Research' },
   { id: 'principles', label: 'Principles' },
   { id: 'ideation', label: 'Ideation' },
   { id: 'iterations', label: 'Iterations' },
   { id: 'highfi', label: 'High-Fi' },
   { id: 'result', label: 'Result' },
-  { id: 'reflection', label: 'Reflection' },
+  { id: 'reflection', label: 'Reflection', isDark: true },
 ];
 
 const Nurturly = () => {
@@ -80,7 +80,7 @@ const Nurturly = () => {
   return (
     <Layout>
       <SectionNav sections={sections} />
-      <div className="origin-top scale-[0.9]">
+      <div style={{ zoom: 0.9 }}>
 
       {/* Hero Section */}
       <section id="hero" className="section-padding">
@@ -202,8 +202,8 @@ const Nurturly = () => {
         </div>
       </section>
 
-      {/* Solution Section */}
-      <section id="solution" className="section-padding bg-foreground text-background">
+      {/* Solution Section - Full width black */}
+      <section id="solution" className="section-padding full-bleed-dark">
         <div className="container-narrow">
           <motion.div className="mb-16" {...fadeInUp}>
             <p className="text-xs font-semibold uppercase tracking-wider opacity-80 mb-4">SOLUTION</p>
@@ -610,8 +610,8 @@ const Nurturly = () => {
         </div>
       </section>
 
-      {/* Reflection Section */}
-      <section id="reflection" className="section-padding bg-foreground text-background">
+      {/* Reflection Section - Full width black */}
+      <section id="reflection" className="section-padding full-bleed-dark">
         <div className="container-narrow">
           <motion.p className="text-xs font-semibold uppercase tracking-wider opacity-80 mb-4" {...fadeInUp}>REFLECTION</motion.p>
 
