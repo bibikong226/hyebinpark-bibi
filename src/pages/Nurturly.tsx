@@ -658,14 +658,14 @@ const Nurturly = () => {
               ].map((item, index) => (
                 <motion.div 
                   key={index}
-                  className="bg-white text-black rounded-xl p-6"
+                  className="bg-gray-800 text-white rounded-xl p-6"
                   {...fadeInUp}
                 >
                   <div className="flex items-start gap-4">
                     <span className="text-2xl">{item.emoji}</span>
                     <div>
                       <h4 className="font-semibold text-lg mb-1">{item.title}</h4>
-                      <p className="text-gray-600">{item.desc}</p>
+                      <p className="text-gray-400">{item.desc}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -684,14 +684,14 @@ const Nurturly = () => {
               ].map((item, index) => (
                 <motion.div 
                   key={index}
-                  className="bg-nurturly text-white rounded-xl p-6"
+                  className="bg-gray-800 text-white rounded-xl p-6"
                   {...fadeInUp}
                 >
                   <div className="flex items-start gap-4">
                     <span className="text-2xl">{item.emoji}</span>
                     <div>
                       <h4 className="font-semibold text-lg mb-1">{item.title}</h4>
-                      <p className="text-white/90">{item.desc}</p>
+                      <p className="text-gray-400">{item.desc}</p>
                     </div>
                   </div>
                 </motion.div>
