@@ -79,8 +79,8 @@ const Nurturly = () => {
   }, []);
   return (
     <Layout>
-      <div className="origin-top scale-[0.9]">
       <SectionNav sections={sections} />
+      <div className="origin-top scale-[0.9]">
 
       {/* Hero Section */}
       <section id="hero" className="section-padding">
