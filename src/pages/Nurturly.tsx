@@ -671,29 +671,6 @@ const Nurturly = () => {
           </motion.div>
         </div>
       </section>
-
-      {/* CTA Section - Pink */}
-      <section className="section-padding full-bleed-pink">
-        <div className="container-narrow text-center" style={{ zoom: 0.9 }}>
-          <motion.div
-            className="space-y-6"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <h2 className="font-serif text-3xl md:text-4xl">
-              Let's Connect
-            </h2>
-            <a
-              href="/contact"
-              className="inline-flex items-center px-8 py-4 bg-background text-foreground rounded-lg font-medium hover:opacity-90 transition-opacity"
-            >
-              Start a conversation
-            </a>
-          </motion.div>
-        </div>
-      </section>
     </Layout>
   );
 };

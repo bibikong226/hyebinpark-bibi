@@ -5,7 +5,7 @@ export const Footer = () => {
   return (
     <>
       {/* Connect Section */}
-      <section className="py-20 px-8 md:px-16 bg-indigo-600 text-white">
+      <section className="py-20 px-8 md:px-16 bg-nurturly text-white">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -22,7 +22,7 @@ export const Footer = () => {
             <div className="flex flex-wrap justify-center gap-4 mt-8">
               <a 
                 href="mailto:hyebinp@umich.edu"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-white text-indigo-600 rounded-full hover:bg-zinc-100 transition-all font-medium"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-white text-nurturly rounded-full hover:bg-zinc-100 transition-all font-medium"
               >
                 hyebinp@umich.edu
                 <ArrowUpRight className="w-4 h-4" />
