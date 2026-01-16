@@ -623,20 +623,20 @@ const Nurturly = () => {
             <h3 className="font-serif text-2xl md:text-3xl mb-8">What I Could've Done Better</h3>
             <div className="space-y-4">
               {[
-                { emoji: '👩‍⚕️', title: 'Consult more health professionals', desc: 'To ensure solutions are balanced between clinical guidance and lived experiences.' },
-                { emoji: '👨‍👩‍👧', title: 'Include partners and families', desc: 'Broaden support by designing tools for the mom\'s ecosystem.' },
+                { emoji: '👩‍⚕️', title: 'Consult to more health professionals', desc: 'To ensure solutions are balanced between clinical guidance and lived experiences.' },
+                { emoji: '👨‍👩‍👧', title: 'Include partners and families', desc: 'Broaden support by designing tools for the mom\'s ecosystem' },
                 { emoji: '✅', title: 'Test more with moms during design iteration', desc: 'Ensure the experience feels truly supportive, not just usable.' },
               ].map((item, index) => (
                 <motion.div 
                   key={index}
-                  className="bg-background/5 border border-background/10 rounded-xl p-6"
+                  className="bg-white text-black rounded-xl p-6"
                   {...fadeInUp}
                 >
                   <div className="flex items-start gap-4">
-                    <span className="text-3xl">{item.emoji}</span>
+                    <span className="text-2xl">{item.emoji}</span>
                     <div>
-                      <h4 className="font-semibold text-lg mb-2">{item.title}</h4>
-                      <p className="opacity-80">{item.desc}</p>
+                      <h4 className="font-semibold text-lg mb-1">{item.title}</h4>
+                      <p className="text-gray-600">{item.desc}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -650,19 +650,19 @@ const Nurturly = () => {
             <div className="space-y-4">
               {[
                 { emoji: '💡', title: 'Empathy-led design starts with listening', desc: 'I listened deeply to users\' experiences to shape every design decision, ensuring the work was rooted in genuine needs, not assumptions.' },
-                { emoji: '🔄', title: 'Iteration is where design gets real', desc: 'Each round of feedback helped refine trust signals, entry points, and personalization, making the product feel truly supportive.' },
+                { emoji: '🔍', title: 'Translate complexity into clarity', desc: 'I broke down broad challenges into clear opportunities, connecting research findings to actionable design goals that addressed real user pain.' },
                 { emoji: '🤝', title: 'Cross-functional collaboration unlocks potential', desc: 'Working with product, business, and engineering helped me think beyond pixels, aligning design with sustainability and long-term impact.' },
               ].map((item, index) => (
                 <motion.div 
                   key={index}
-                  className="bg-background/5 border border-background/10 rounded-xl p-6"
+                  className="bg-nurturly text-white rounded-xl p-6"
                   {...fadeInUp}
                 >
                   <div className="flex items-start gap-4">
-                    <span className="text-3xl">{item.emoji}</span>
+                    <span className="text-2xl">{item.emoji}</span>
                     <div>
-                      <h4 className="font-semibold text-lg mb-2">{item.title}</h4>
-                      <p className="opacity-80">{item.desc}</p>
+                      <h4 className="font-semibold text-lg mb-1">{item.title}</h4>
+                      <p className="text-white/90">{item.desc}</p>
                     </div>
                   </div>
                 </motion.div>
