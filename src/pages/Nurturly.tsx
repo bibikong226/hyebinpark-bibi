@@ -203,8 +203,9 @@ const Nurturly = () => {
       </section>
 
       {/* Solution Section - Full width black */}
+      </div>
       <section id="solution" className="section-padding full-bleed-dark">
-        <div className="container-narrow">
+        <div className="container-narrow" style={{ zoom: 0.9 }}>
           <motion.div className="mb-16" {...fadeInUp}>
             <p className="text-xs font-semibold uppercase tracking-wider opacity-80 mb-4">SOLUTION</p>
             <h2 className="font-serif text-3xl md:text-4xl mb-6">
@@ -280,6 +281,7 @@ const Nurturly = () => {
           </motion.div>
         </div>
       </section>
+      <div style={{ zoom: 0.9 }}>
 
       {/* User Research Section */}
       <section id="research" className="section-padding">
@@ -611,8 +613,9 @@ const Nurturly = () => {
       </section>
 
       {/* Reflection Section - Full width black */}
+      </div>
       <section id="reflection" className="section-padding full-bleed-dark">
-        <div className="container-narrow">
+        <div className="container-narrow" style={{ zoom: 0.9 }}>
           <motion.p className="text-xs font-semibold uppercase tracking-wider opacity-80 mb-4" {...fadeInUp}>REFLECTION</motion.p>
 
           {/* What I Could've Done Better */}
@@ -669,9 +672,9 @@ const Nurturly = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="section-padding bg-nurturly text-nurturly-foreground">
-        <div className="container-narrow text-center">
+      {/* CTA Section - Pink */}
+      <section className="section-padding full-bleed-pink">
+        <div className="container-narrow text-center" style={{ zoom: 0.9 }}>
           <motion.div
             className="space-y-6"
             initial={{ opacity: 0, y: 20 }}
@@ -680,11 +683,8 @@ const Nurturly = () => {
             transition={{ duration: 0.5 }}
           >
             <h2 className="font-serif text-3xl md:text-4xl">
-              Let's create something great together
+              Let's Connect
             </h2>
-            <p className="opacity-90 max-w-lg mx-auto">
-              I'm always interested in hearing about new projects and opportunities.
-            </p>
             <a
               href="/contact"
               className="inline-flex items-center px-8 py-4 bg-background text-foreground rounded-lg font-medium hover:opacity-90 transition-opacity"
@@ -694,7 +694,6 @@ const Nurturly = () => {
           </motion.div>
         </div>
       </section>
-      </div>
     </Layout>
   );
 };
