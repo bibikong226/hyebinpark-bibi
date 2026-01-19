@@ -141,15 +141,15 @@
   }
 
   .section-padding {
-    @apply px-6 py-12 md:px-10 md:py-20 lg:px-20;
+    @apply px-4 py-8 sm:px-6 sm:py-12 md:px-10 md:py-20 lg:px-20;
   }
 
   .container-narrow {
-    @apply max-w-3xl mx-auto;
+    @apply max-w-3xl mx-auto px-4 sm:px-0;
   }
 
   .container-wide {
-    @apply max-w-5xl mx-auto;
+    @apply max-w-5xl mx-auto px-4 sm:px-0;
   }
 
   /* Full-bleed section that breaks out of parent constraints */

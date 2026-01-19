@@ -30,23 +30,23 @@ export const ProjectCard = ({
   externalUrl,
 }: ProjectCardProps) => {
   const cardContent = (
-    <article className="rounded-2xl overflow-hidden">
+    <article className="rounded-xl sm:rounded-2xl overflow-hidden">
           {/* Thumbnail Section - Logo left, Mockup right */}
           <div 
-            className="relative w-full aspect-[16/10] overflow-hidden"
+            className="relative w-full aspect-[16/10] sm:aspect-[16/10] overflow-hidden"
             style={{ backgroundColor: imageColor }}
           >
             {/* Logo positioned on left */}
-            <div className="absolute left-6 md:left-10 top-1/2 -translate-y-1/2 z-10 max-w-[35%]">
+            <div className="absolute left-4 sm:left-6 md:left-10 top-1/2 -translate-y-1/2 z-10 max-w-[30%] sm:max-w-[35%]">
               <img 
                 src={logo} 
                 alt={`${title} logo`} 
-                className="w-full h-auto max-h-24 md:max-h-32 object-contain object-left"
+                className="w-full h-auto max-h-16 sm:max-h-24 md:max-h-32 object-contain object-left"
               />
             </div>
             
             {/* Mockup positioned on right */}
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[55%] h-[90%] flex items-center justify-end">
+            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[55%] sm:w-[55%] h-[85%] sm:h-[90%] flex items-center justify-end">
               <img 
                 src={mockup} 
                 alt={`${title} mockup`} 
@@ -57,25 +57,25 @@ export const ProjectCard = ({
 
           {/* Content Section */}
           <div 
-            className="p-6 md:p-8 space-y-5"
+            className="p-4 sm:p-6 md:p-8 space-y-3 sm:space-y-5"
             style={{ backgroundColor: imageColor }}
           >
             {/* Project Title */}
-            <h3 className="font-serif text-2xl md:text-3xl text-foreground group-hover:text-primary transition-colors">
+            <h3 className="font-serif text-xl sm:text-2xl md:text-3xl text-foreground group-hover:text-primary transition-colors">
               {title}
             </h3>
 
             {/* Description */}
-            <p className="text-foreground/80 text-base md:text-lg leading-relaxed max-w-md">
+            <p className="text-foreground/80 text-sm sm:text-base md:text-lg leading-relaxed max-w-md">
               {description}
             </p>
 
             {/* Tags */}
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-1.5 sm:gap-2">
               {tags.map((tag, tagIndex) => (
                 <span
                   key={tagIndex}
-                  className="px-3 py-1 text-xs font-medium bg-foreground/10 text-foreground/90 rounded-full"
+                  className="px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-medium bg-foreground/10 text-foreground/90 rounded-full"
                 >
                   {tag}
                 </span>
@@ -83,11 +83,11 @@ export const ProjectCard = ({
             </div>
 
             {/* Highlights with hover fill effect */}
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-1.5 sm:gap-2">
               {highlights.map((highlight, highlightIndex) => (
                 <div
                   key={highlightIndex}
-                  className="relative overflow-hidden px-4 py-2 text-sm rounded-md font-medium"
+                  className="relative overflow-hidden px-2 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm rounded-md font-medium"
                 >
                   <div className="absolute inset-0 bg-zinc-200" />
                   <div 

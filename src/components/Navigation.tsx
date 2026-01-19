@@ -44,7 +44,7 @@ export const Navigation = () => {
 
   return (
     <header className="fixed top-0 w-full z-50 bg-background">
-      <nav className="flex justify-between items-center px-8 md:px-16 py-8">
+      <nav className="flex justify-between items-center px-4 sm:px-8 md:px-16 py-4 sm:py-6 md:py-8">
         <Link 
           to="/" 
           onClick={handleLogoClick}
