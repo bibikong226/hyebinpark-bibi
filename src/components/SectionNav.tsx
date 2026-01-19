@@ -44,12 +44,12 @@ export const SectionNav = ({ sections }: SectionNavProps) => {
   const isInDarkSection = sections.find(s => s.id === activeSection)?.isDark || false;
 
   return (
-    <nav className="fixed right-4 lg:right-6 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col gap-0.5">
+    <nav className="fixed right-2 sm:right-4 lg:right-6 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col gap-0.5">
       {sections.map(({ id, label }) => (
         <button
           key={id}
           onClick={() => scrollToSection(id)}
-          className={`text-right text-[11px] px-2 py-1 rounded-sm transition-all duration-300 ${
+          className={`text-right text-[10px] lg:text-[11px] px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-sm transition-all duration-300 ${
             activeSection === id
               ? 'text-nurturly font-medium'
               : isInDarkSection 

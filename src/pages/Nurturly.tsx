@@ -83,32 +83,32 @@ const Nurturly = () => {
       <div style={{ zoom: 0.9 }}>
 
       {/* Hero Section */}
-      <section id="hero" className="section-padding">
+      <section id="hero" className="section-padding pt-8 sm:pt-12">
         <div className="container-narrow text-center">
           <motion.img 
             src={nurturlyLogo} 
             alt="Nurturly Logo" 
-            className="max-w-[400px] mx-auto mb-6"
+            className="max-w-[250px] sm:max-w-[320px] md:max-w-[400px] mx-auto mb-4 sm:mb-6"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           />
           <motion.p
-            className="text-xl md:text-2xl text-nurturly font-semibold leading-relaxed"
+            className="text-base sm:text-lg md:text-xl lg:text-2xl text-nurturly font-semibold leading-relaxed"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Designing an AI-driven platform that connects new moms<br/>
+            Designing an AI-driven platform that connects new moms<br className="hidden sm:inline"/>
             to personalized resources and peer support
           </motion.p>
         </div>
       </section>
 
       {/* Hero Image */}
-      <section className="px-6 md:px-12 lg:px-24">
+      <section className="px-4 sm:px-6 md:px-12 lg:px-24">
         <motion.div 
-          className="bg-nurturly rounded-3xl p-8 md:p-12 max-w-6xl mx-auto"
+          className="bg-nurturly rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 lg:p-12 max-w-6xl mx-auto"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
@@ -125,7 +125,7 @@ const Nurturly = () => {
       <section className="section-padding">
         <div className="container-narrow">
           <motion.div 
-            className="grid grid-cols-2 md:grid-cols-4 gap-8"
+            className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
@@ -137,8 +137,8 @@ const Nurturly = () => {
               { title: 'TEAM', content: '2 UX designers\nproduct manager\nbusiness analyst' },
             ].map((item, index) => (
               <div key={index} className="text-left">
-                <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">{item.title}</h4>
-                <p className="text-foreground whitespace-pre-line">{item.content}</p>
+                <h4 className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2 sm:mb-3">{item.title}</h4>
+                <p className="text-xs sm:text-sm md:text-base text-foreground whitespace-pre-line leading-relaxed">{item.content}</p>
               </div>
             ))}
           </motion.div>
@@ -149,37 +149,37 @@ const Nurturly = () => {
       <section id="summary" className="section-padding bg-card/50">
         <div className="container-narrow">
           <motion.div {...fadeInUp}>
-            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">SUMMARY</p>
-            <h2 className="font-serif text-3xl md:text-4xl mb-6">
+            <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3 sm:mb-4">SUMMARY</p>
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl mb-4 sm:mb-6">
               Nurturly was created during the <span className="text-nurturly">Tech Innovation Jam</span>, a competitive 5-week <span className="text-nurturly">hackathon</span> at the University of Michigan.
             </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
               Designed to address the <span className="font-semibold text-foreground">emotional isolation</span> and <span className="font-semibold text-foreground">overwhelming information</span> moms face during <span className="font-semibold text-foreground">pregnancy and postpartum,</span> Nurturly connects them to a safe, supportive community and tailored resources through <span className="font-semibold text-foreground">AI-driven personalization.</span>
             </p>
           </motion.div>
 
           <motion.div 
-            className="flex gap-12 items-center justify-center my-12 flex-wrap"
+            className="flex gap-6 sm:gap-8 md:gap-12 items-center justify-center my-8 sm:my-10 md:my-12 flex-wrap"
             {...fadeInUp}
           >
-            <img src={umLogoImage} alt="University of Michigan Logo" className="max-h-[120px]" />
-            <img src={techJamLogoImage} alt="Tech Innovation Jam Logo" className="max-h-[120px]" />
+            <img src={umLogoImage} alt="University of Michigan Logo" className="max-h-[80px] sm:max-h-[100px] md:max-h-[120px]" />
+            <img src={techJamLogoImage} alt="Tech Innovation Jam Logo" className="max-h-[80px] sm:max-h-[100px] md:max-h-[120px]" />
           </motion.div>
 
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             <motion.div 
-              className="bg-background p-6 rounded-xl border border-nurturly/20"
+              className="bg-background p-4 sm:p-6 rounded-xl border border-nurturly/20"
               {...highlightBox}
             >
-              <p className="text-foreground">
+              <p className="text-sm sm:text-base text-foreground">
                 🌟 As the <strong>main UX designer</strong>, I drove the product from discovery to delivery, <strong>translating research into strategic design solutions.</strong> I focused on designing the <strong>AI-powered matching feature and contextual chatbot,</strong> grounded in insights from interviews, surveys, and competitive analysis.
               </p>
             </motion.div>
             <motion.div 
-              className="bg-background p-6 rounded-xl border border-nurturly/20"
+              className="bg-background p-4 sm:p-6 rounded-xl border border-nurturly/20"
               {...highlightBox}
             >
-              <p className="text-foreground">
+              <p className="text-sm sm:text-base text-foreground">
                 🚀 Our team won <strong>Runner-Up & People's Choice Awards</strong>, securing <strong>$5,000 in funding</strong> to advance Nurturly as a scalable postpartum support platform.
               </p>
             </motion.div>
@@ -191,11 +191,11 @@ const Nurturly = () => {
       <section id="problem" className="section-padding">
         <div className="container-narrow">
           <motion.div {...fadeInUp}>
-            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">PROBLEM</p>
-            <h2 className="font-serif text-3xl md:text-4xl mb-6">
+            <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3 sm:mb-4">PROBLEM</p>
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl mb-4 sm:mb-6">
               Pregnancy & Postpartum Support is <span className="text-nurturly">Scattered, Confusing,</span> and Leaves <span className="text-nurturly">Moms Feeling Alone.</span>
             </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
               From pregnancy to postpartum, moms experience profound changes, but <strong className="text-foreground">support remains fragmented and baby-focused.</strong> With <strong className="text-foreground">unreliable, conflicting resources</strong> and no clear guidance, moms are <strong className="text-foreground">left to figure it out alone.</strong>
             </p>
           </motion.div>
@@ -206,23 +206,23 @@ const Nurturly = () => {
       </div>
       <section id="solution" className="section-padding full-bleed-dark">
         <div className="container-narrow" style={{ zoom: 0.9 }}>
-          <motion.div className="mb-16" {...fadeInUp}>
-            <p className="text-xs font-semibold uppercase tracking-wider opacity-80 mb-4">SOLUTION</p>
-            <h2 className="font-serif text-3xl md:text-4xl mb-6">
-              <span className="text-nurturly">Reliable</span> answers. <span className="text-nurturly">Real connections.</span><br/>
+          <motion.div className="mb-10 sm:mb-12 md:mb-16" {...fadeInUp}>
+            <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider opacity-80 mb-3 sm:mb-4">SOLUTION</p>
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl mb-4 sm:mb-6">
+              <span className="text-nurturly">Reliable</span> answers. <span className="text-nurturly">Real connections.</span><br className="hidden sm:inline"/>
               A smarter way to navigate motherhood.
             </h2>
-            <p className="text-lg opacity-90 leading-relaxed max-w-3xl">
+            <p className="text-sm sm:text-base md:text-lg opacity-90 leading-relaxed max-w-3xl">
               Nurturly bridges the gap in postpartum care by combining AI-driven insights with human connection. Through personalized support and empathy-centered UX, it delivers a structured, reliable, and reassuring experience for every mom.
             </p>
           </motion.div>
 
           {/* Feature 1 */}
-          <motion.div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24 mb-24" {...fadeInUp}>
-            <div className="flex-1 lg:flex-[1.2]">
-              <span className="text-6xl font-semibold opacity-80">01</span>
-              <h3 className="font-serif text-2xl md:text-3xl my-4">AI-powered Chatbot & Contextual Recommendations</h3>
-              <p className="text-lg opacity-90">
+          <motion.div className="flex flex-col lg:flex-row items-center gap-6 sm:gap-8 lg:gap-24 mb-16 sm:mb-20 md:mb-24" {...fadeInUp}>
+            <div className="flex-1 lg:flex-[1.2] text-center lg:text-left">
+              <span className="text-4xl sm:text-5xl md:text-6xl font-semibold opacity-80">01</span>
+              <h3 className="font-serif text-xl sm:text-2xl md:text-3xl my-3 sm:my-4">AI-powered Chatbot & Contextual Recommendations</h3>
+              <p className="text-sm sm:text-base md:text-lg opacity-90">
                 Provides verified, <span className="text-nurturly">reliable answers,</span> while surfacing <span className="text-nurturly">related posts</span> and peer insights to foster meaningful connection through <span className="text-nurturly">shared concerns.</span>
               </p>
             </div>
@@ -233,50 +233,50 @@ const Nurturly = () => {
                 loop
                 muted
                 playsInline
-                className="max-w-[280px] rounded-[40px]"
+                className="max-w-[200px] sm:max-w-[240px] md:max-w-[280px] rounded-[28px] sm:rounded-[36px] md:rounded-[40px]"
               />
             </div>
           </motion.div>
 
           {/* Feature 2 */}
-          <motion.div className="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-24 mb-24" {...fadeInUp}>
-            <div className="flex-1 lg:flex-[1.2]">
-              <span className="text-6xl font-semibold opacity-80">02</span>
-              <h3 className="font-serif text-2xl md:text-3xl my-4">Moderated Community & Meaningful Connections</h3>
-              <p className="text-lg opacity-90">
+          <motion.div className="flex flex-col lg:flex-row-reverse items-center gap-6 sm:gap-8 lg:gap-24 mb-16 sm:mb-20 md:mb-24" {...fadeInUp}>
+            <div className="flex-1 lg:flex-[1.2] text-center lg:text-left">
+              <span className="text-4xl sm:text-5xl md:text-6xl font-semibold opacity-80">02</span>
+              <h3 className="font-serif text-xl sm:text-2xl md:text-3xl my-3 sm:my-4">Moderated Community & Meaningful Connections</h3>
+              <p className="text-sm sm:text-base md:text-lg opacity-90">
                 Creates a <span className="text-nurturly">safe space for moms to share</span> and support each other, with <span className="text-nurturly">AI-suggested connections</span> based on shared stages, interests, and nearby location.
               </p>
             </div>
             <div className="flex-1 lg:flex-[0.8] flex justify-center">
-              <img src={communityFeatureGif} alt="Community Feature" className="max-w-[280px] rounded-[40px]" />
+              <img src={communityFeatureGif} alt="Community Feature" className="max-w-[200px] sm:max-w-[240px] md:max-w-[280px] rounded-[28px] sm:rounded-[36px] md:rounded-[40px]" />
             </div>
           </motion.div>
 
           {/* Feature 3 */}
-          <motion.div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24 mb-24" {...fadeInUp}>
-            <div className="flex-1 lg:flex-[1.2]">
-              <span className="text-6xl font-semibold opacity-80">03</span>
-              <h3 className="font-serif text-2xl md:text-3xl my-4">Curated Local Resources & Support Map</h3>
-              <p className="text-lg opacity-90">
+          <motion.div className="flex flex-col lg:flex-row items-center gap-6 sm:gap-8 lg:gap-24 mb-16 sm:mb-20 md:mb-24" {...fadeInUp}>
+            <div className="flex-1 lg:flex-[1.2] text-center lg:text-left">
+              <span className="text-4xl sm:text-5xl md:text-6xl font-semibold opacity-80">03</span>
+              <h3 className="font-serif text-xl sm:text-2xl md:text-3xl my-3 sm:my-4">Curated Local Resources & Support Map</h3>
+              <p className="text-sm sm:text-base md:text-lg opacity-90">
                 Connects moms to nearby services, events, and care providers, offering <span className="text-nurturly">location-based resources tailored to their stage and needs.</span>
               </p>
             </div>
             <div className="flex-1 lg:flex-[0.8] flex justify-center">
-              <img src={localResourcesGif} alt="Local Resources Map" className="max-w-[280px] rounded-[40px]" />
+              <img src={localResourcesGif} alt="Local Resources Map" className="max-w-[200px] sm:max-w-[240px] md:max-w-[280px] rounded-[28px] sm:rounded-[36px] md:rounded-[40px]" />
             </div>
           </motion.div>
 
           {/* Feature 4 */}
-          <motion.div className="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-24" {...fadeInUp}>
-            <div className="flex-1 lg:flex-[1.2]">
-              <span className="text-6xl font-semibold opacity-80">04</span>
-              <h3 className="font-serif text-2xl md:text-3xl my-4">Personalized Symptom & Mood Tracking</h3>
-              <p className="text-lg opacity-90">
+          <motion.div className="flex flex-col lg:flex-row-reverse items-center gap-6 sm:gap-8 lg:gap-24" {...fadeInUp}>
+            <div className="flex-1 lg:flex-[1.2] text-center lg:text-left">
+              <span className="text-4xl sm:text-5xl md:text-6xl font-semibold opacity-80">04</span>
+              <h3 className="font-serif text-xl sm:text-2xl md:text-3xl my-3 sm:my-4">Personalized Symptom & Mood Tracking</h3>
+              <p className="text-sm sm:text-base md:text-lg opacity-90">
                 Helps moms track their <span className="text-nurturly">physical and emotional symptoms,</span> with <span className="text-nurturly">comparative data</span> from others at the same stage, offering <span className="text-nurturly">clarity and reassurance.</span>
               </p>
             </div>
             <div className="flex-1 lg:flex-[0.8] flex justify-center">
-              <img src={feature04Gif} alt="Symptom Tracking" className="max-w-[280px] rounded-[40px]" />
+              <img src={feature04Gif} alt="Symptom Tracking" className="max-w-[200px] sm:max-w-[240px] md:max-w-[280px] rounded-[28px] sm:rounded-[36px] md:rounded-[40px]" />
             </div>
           </motion.div>
         </div>
@@ -388,7 +388,7 @@ const Nurturly = () => {
           </motion.div>
 
           {/* Pain Points */}
-          <div className="grid md:grid-cols-3 gap-8 mt-16 relative">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 mt-10 sm:mt-12 md:mt-16 relative">
             {[
               { emoji: '💔', label: 'PAIN POINT 1', title: 'Emotional Needs Unmet', desc: "Focus always on baby, not mom's recovery" },
               { emoji: '⚠️', label: 'PAIN POINT 2', title: 'Information Overload', desc: 'Flooded with advice, lacking clarity' },
@@ -399,18 +399,18 @@ const Nurturly = () => {
                 className="text-center relative"
                 {...fadeInUp}
               >
-                <p className="text-xs font-semibold text-nurturly mb-2 uppercase tracking-wider">{point.label}</p>
-                <div className="text-4xl mb-3">{point.emoji}</div>
-                <h3 className="font-semibold text-lg mb-2">{point.title}</h3>
-                <p className="text-sm text-muted-foreground">{point.desc}</p>
+                <p className="text-[10px] sm:text-xs font-semibold text-nurturly mb-2 uppercase tracking-wider">{point.label}</p>
+                <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">{point.emoji}</div>
+                <h3 className="font-semibold text-base sm:text-lg mb-1 sm:mb-2">{point.title}</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground">{point.desc}</p>
                 {/* Vertical connector line */}
-                <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-full h-16 w-px bg-nurturly/30"></div>
+                <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-full h-12 sm:h-16 w-px bg-nurturly/30"></div>
               </motion.div>
             ))}
           </div>
 
           {/* Design Principles */}
-          <div className="grid md:grid-cols-3 gap-6 mt-16">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mt-10 sm:mt-12 md:mt-16">
             {[
               { emoji: '👀', label: 'DESIGN PRINCIPLE 1', title: 'See the Mom', desc: 'Support beyond the baby with validation and structured recovery tools.' },
               { emoji: '🎯', label: 'DESIGN PRINCIPLE 2', title: 'Deliver Clarity', desc: 'Cut through information overload with personalized, reliable guidance.' },
@@ -418,13 +418,13 @@ const Nurturly = () => {
             ].map((principle, index) => (
               <motion.div 
                 key={index}
-                className="bg-nurturly text-white p-8 rounded-xl text-center"
+                className="bg-nurturly text-white p-5 sm:p-6 md:p-8 rounded-xl text-center"
                 {...fadeInUp}
               >
-                <p className="text-xs font-semibold opacity-80 mb-2 uppercase tracking-wider">{principle.label}</p>
-                <div className="text-4xl mb-3">{principle.emoji}</div>
-                <h3 className="font-semibold text-lg mb-2">{principle.title}</h3>
-                <p className="text-sm opacity-90">{principle.desc}</p>
+                <p className="text-[10px] sm:text-xs font-semibold opacity-80 mb-2 uppercase tracking-wider">{principle.label}</p>
+                <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">{principle.emoji}</div>
+                <h3 className="font-semibold text-base sm:text-lg mb-1 sm:mb-2">{principle.title}</h3>
+                <p className="text-xs sm:text-sm opacity-90">{principle.desc}</p>
               </motion.div>
             ))}
           </div>
