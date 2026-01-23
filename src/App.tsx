@@ -89,6 +89,7 @@ const App = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [isTestimonialHovered, setIsTestimonialHovered] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
+  const [puzzleScale, setPuzzleScale] = useState(1);
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
   const cursorX = useSpring(mouseX, {
@@ -99,6 +100,26 @@ const App = () => {
     damping: 30,
     stiffness: 250
   });
+  
+  // Track window size for responsive puzzle scaling
+  useEffect(() => {
+    const updateScale = () => {
+      const width = window.innerWidth;
+      if (width < 640) {
+        setPuzzleScale(0.65); // mobile
+      } else if (width < 768) {
+        setPuzzleScale(0.8); // small tablet
+      } else if (width < 1024) {
+        setPuzzleScale(0.9); // tablet
+      } else {
+        setPuzzleScale(1); // desktop
+      }
+    };
+    updateScale();
+    window.addEventListener('resize', updateScale);
+    return () => window.removeEventListener('resize', updateScale);
+  }, []);
+  
   useEffect(() => {
     const moveMouse = e => {
       mouseX.set(e.clientX);
@@ -325,22 +346,22 @@ const App = () => {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative h-screen">
-        <div className="sticky top-0 h-screen w-full px-8 md:px-16 flex flex-col">
+      <section className="relative min-h-screen md:h-screen">
+        <div className="md:sticky md:top-0 min-h-screen md:h-screen w-full px-4 sm:px-8 md:px-16 flex flex-col">
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{
           backgroundImage: "linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)",
           backgroundSize: "100px 100px"
         }} />
 
           {/* Background Name (between header and hero content) */}
-          <div className="relative z-10 pt-28 md:pt-32 pb-8 md:pb-12 bg-white">
-            <h2 className="text-[18vw] md:text-[14vw] font-black uppercase tracking-tighter leading-none text-zinc-200 select-none text-center font-sans lg:text-9xl">
+          <div className="relative z-10 pt-20 sm:pt-24 md:pt-32 pb-4 sm:pb-6 md:pb-12 bg-white">
+            <h2 className="text-[12vw] sm:text-[14vw] md:text-[12vw] lg:text-9xl font-black uppercase tracking-tighter leading-none text-zinc-200 select-none text-center font-sans">
               HYEBIN PARK
             </h2>
           </div>
 
-          <div className="relative z-10 flex-1 w-full flex flex-col md:flex-row items-center">
-            <div className="w-full md:w-1/2">
+          <div className="relative z-10 flex-1 w-full flex flex-col lg:flex-row items-center gap-8 lg:gap-0">
+            <div className="w-full lg:w-1/2 order-2 lg:order-1">
               <motion.div initial={{
               opacity: 0,
               y: 20
@@ -351,71 +372,68 @@ const App = () => {
               duration: 1.0,
               ease: [0.16, 1, 0.3, 1]
             }}>
-                {/* Intro */}
-                
-
                 {/* Core statement */}
-                <h1 className="text-[3.5rem] sm:text-[5rem] md:text-[6rem] font-medium tracking-tight leading-[1.05] mb-10 select-none text-zinc-900 lg:text-8xl pl-[10vw] md:pl-[12vw]">
-                  <span className="block text-xl sm:text-2xl font-medium text-zinc-800 md:text-6xl">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium tracking-tight leading-[1.1] mb-6 sm:mb-8 md:mb-10 select-none text-zinc-900 pl-4 sm:pl-8 md:pl-[10vw] lg:pl-[12vw]">
+                  <span className="block text-base sm:text-lg md:text-xl lg:text-2xl font-medium text-zinc-800">
                     Turning
                   </span>
-                  <span className="block font-serif italic text-indigo-600 text-7xl">complexity</span>
+                  <span className="block font-serif italic text-indigo-600 text-4xl sm:text-5xl md:text-6xl lg:text-7xl">complexity</span>
                   <span className="block">
-                    <span className="text-xl sm:text-2xl font-medium md:text-6xl text-zinc-800">
+                    <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-medium text-zinc-800">
                       into{" "}
                     </span>
-                    <span className="font-serif italic text-indigo-600 text-7xl">clarity</span>
+                    <span className="font-serif italic text-indigo-600 text-4xl sm:text-5xl md:text-6xl lg:text-7xl">clarity</span>
                   </span>
                 </h1>
 
                 {/* Supporting explanation */}
-                <p className="text-lg md:text-xl leading-[1.6] text-zinc-600 pl-[10vw] md:pl-[12vw]">
-                  From AI algorithms to crypto workflows,<br />
-                  I turn ambiguity into structured,<br />
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-[1.6] text-zinc-600 pl-4 sm:pl-8 md:pl-[10vw] lg:pl-[12vw]">
+                  From AI algorithms to crypto workflows,<br className="hidden sm:block" />
+                  I turn ambiguity into structured,<br className="hidden sm:block" />
                   usable products that drive real business impact.
                 </p>
 
                 {/* Education & Experience badges */}
-                <div className="mt-14 pl-[10vw] md:pl-[12vw]">
+                <div className="mt-8 sm:mt-10 md:mt-14 pl-4 sm:pl-8 md:pl-[10vw] lg:pl-[12vw] pb-8 lg:pb-0">
                   {/* Divider line */}
-                  <div className="w-12 h-1 bg-indigo-600 mb-6"></div>
+                  <div className="w-10 sm:w-12 h-1 bg-indigo-600 mb-4 sm:mb-6"></div>
                   
                   {/* Education */}
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className="text-2xl">🎓</span>
-                    <span className="text-lg md:text-xl font-medium text-zinc-700">
+                  <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                    <span className="text-xl sm:text-2xl">🎓</span>
+                    <span className="text-sm sm:text-base md:text-lg lg:text-xl font-medium text-zinc-700">
                       MS-HCI @ University of Michigan
                     </span>
                   </div>
 
                   {/* Experience label */}
-                  <p className="text-xs tracking-widest text-zinc-500 uppercase mb-3">
+                  <p className="text-[10px] sm:text-xs tracking-widest text-zinc-500 uppercase mb-2 sm:mb-3">
                     Experience designing & researching for
                   </p>
 
                   {/* Company logos */}
-                  <div className="flex items-center gap-3">
-                    <img src={logoLine} alt="LINE" className="w-10 h-10 rounded-lg object-cover" />
-                    <img src={logoTiktok} alt="TikTok" className="w-10 h-10 rounded-lg object-cover" />
-                    <img src={logoGm} alt="GM" className="w-10 h-10 rounded-lg object-cover" />
-                    <img src={logoNaver} alt="NAVER" className="w-10 h-10 rounded-lg object-cover" />
-                    <img src={logoJstor} alt="JSTOR" className="w-10 h-10 rounded-lg object-cover" />
+                  <div className="flex items-center gap-2 sm:gap-3">
+                    <img src={logoLine} alt="LINE" className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg object-cover" />
+                    <img src={logoTiktok} alt="TikTok" className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg object-cover" />
+                    <img src={logoGm} alt="GM" className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg object-cover" />
+                    <img src={logoNaver} alt="NAVER" className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg object-cover" />
+                    <img src={logoJstor} alt="JSTOR" className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg object-cover" />
                   </div>
                 </div>
               </motion.div>
             </div>
 
             {/* RIGHT: INTERACTIVE JIGSAW -> ASSEMBLED -> FULL PROFILE REVEAL */}
-            <div className="w-full md:w-1/2 h-[60vh] md:h-full relative flex items-center justify-center md:ml-20">
-              <div className="relative w-[420px] h-[320px] md:w-[480px] md:h-[360px]" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
+            <div className="w-full lg:w-1/2 h-[280px] sm:h-[350px] md:h-[400px] lg:h-full relative flex items-center justify-center lg:ml-20 order-1 lg:order-2">
+              <div className="relative w-[280px] h-[220px] sm:w-[350px] sm:h-[280px] md:w-[420px] md:h-[320px] lg:w-[480px] lg:h-[360px]" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
                 {/* Puzzle pieces */}
                 <AnimatePresence>
                   {animationPhase !== "photo" && puzzlePieces.map((p, i) => (visiblePieces.includes(i) || animationPhase === "assembling" || animationPhase === "assembled") && <motion.div key={p.id} className="absolute" initial={{
                   opacity: 0,
                   scale: 0.6
                 }} animate={{
-                  x: animationPhase === "scattered" ? p.messy.x : p.final.x,
-                  y: animationPhase === "scattered" ? p.messy.y : p.final.y,
+                  x: (animationPhase === "scattered" ? p.messy.x : p.final.x) * puzzleScale,
+                  y: (animationPhase === "scattered" ? p.messy.y : p.final.y) * puzzleScale,
                   rotate: animationPhase === "scattered" ? p.messy.r : 0,
                   opacity: 1,
                   scale: 1
@@ -434,16 +452,16 @@ const App = () => {
                   willChange: "transform",
                   zIndex: Math.floor(i / 3) * 10 + i % 3
                 }}>
-                            <div className="w-[140px] h-[140px] relative" style={{
+                            <div className="w-[90px] h-[90px] sm:w-[110px] sm:h-[110px] md:w-[140px] md:h-[140px] relative" style={{
                     clipPath: `path(\"${JIGSAW_PATHS[p.variant]}\")`,
                     WebkitClipPath: `path(\"${JIGSAW_PATHS[p.variant]}\")`,
                     background: `linear-gradient(145deg, ${p.color}, ${p.color}dd)`
                   }}>
-                              <div className="absolute left-[15px] top-[15px] w-[90px] h-[90px] flex flex-col items-center justify-center">
-                                <span className="text-[12px] md:text-[14px] font-black tracking-wide text-white text-center leading-none select-none drop-shadow-sm">
+                              <div className="absolute left-[10px] top-[10px] sm:left-[12px] sm:top-[12px] md:left-[15px] md:top-[15px] w-[60px] h-[60px] sm:w-[75px] sm:h-[75px] md:w-[90px] md:h-[90px] flex flex-col items-center justify-center">
+                                <span className="text-[8px] sm:text-[10px] md:text-[14px] font-black tracking-wide text-white text-center leading-none select-none drop-shadow-sm">
                                   {p.label[0]}
                                 </span>
-                                <span className="text-[9px] md:text-[11px] font-bold tracking-wider text-white/90 text-center leading-none select-none mt-1.5 drop-shadow-sm">
+                                <span className="text-[6px] sm:text-[8px] md:text-[11px] font-bold tracking-wider text-white/90 text-center leading-none select-none mt-1 md:mt-1.5 drop-shadow-sm">
                                   {p.label[1]}
                                 </span>
                               </div>
@@ -465,7 +483,7 @@ const App = () => {
                 }} style={{
                   zIndex: 20
                 }}>
-                      <img src={profilePhoto} alt="Hyebin Park" className="w-[400px] h-[500px] md:w-[480px] md:h-[600px] object-cover object-top" />
+                      <img src={profilePhoto} alt="Hyebin Park" className="w-[250px] h-[320px] sm:w-[320px] sm:h-[400px] md:w-[400px] md:h-[500px] lg:w-[480px] lg:h-[600px] object-cover object-top" />
                     </motion.div>}
                 </AnimatePresence>
               </div>
