@@ -83,7 +83,7 @@ const Index = () => {
       </section>
 
       {/* Selected Work Section */}
-      <section id="work" className="section-padding bg-background pt-24 md:pt-32">
+      <section id="work" className="section-padding bg-background pt-32 md:pt-48 lg:pt-56">
         <div className="container-wide">
           <motion.div
             className="mb-12"
