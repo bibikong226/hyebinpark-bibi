@@ -346,8 +346,8 @@ const App = () => {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative min-h-screen md:h-screen">
-        <div className="md:sticky md:top-0 min-h-screen md:h-screen w-full px-4 sm:px-8 md:px-16 flex flex-col">
+      <section className="relative bg-white">
+        <div className="w-full px-4 sm:px-8 md:px-16 flex flex-col pb-16 md:pb-24 lg:pb-0 lg:min-h-screen">
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{
           backgroundImage: "linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)",
           backgroundSize: "100px 100px"
@@ -355,12 +355,13 @@ const App = () => {
 
           {/* Background Name (between header and hero content) */}
           <div className="relative z-10 pt-20 sm:pt-24 md:pt-32 pb-4 sm:pb-6 md:pb-12 bg-white">
-            <h2 className="text-[12vw] sm:text-[14vw] md:text-[12vw] lg:text-9xl font-black uppercase tracking-tighter leading-none text-zinc-200 select-none text-center font-sans">
+            <h2 className="text-[10vw] sm:text-[12vw] md:text-[10vw] lg:text-9xl font-black uppercase tracking-tighter leading-none text-zinc-200 select-none text-center font-sans">
               HYEBIN PARK
             </h2>
           </div>
 
           <div className="relative z-10 flex-1 w-full flex flex-col lg:flex-row items-center gap-8 lg:gap-0">
+            {/* LEFT: Text content */}
             <div className="w-full lg:w-1/2 order-2 lg:order-1">
               <motion.div initial={{
               opacity: 0,
@@ -373,59 +374,59 @@ const App = () => {
               ease: [0.16, 1, 0.3, 1]
             }}>
                 {/* Core statement */}
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium tracking-tight leading-[1.1] mb-6 sm:mb-8 md:mb-10 select-none text-zinc-900 pl-4 sm:pl-8 md:pl-[10vw] lg:pl-[12vw]">
-                  <span className="block text-base sm:text-lg md:text-xl lg:text-2xl font-medium text-zinc-800">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium tracking-tight leading-[1.1] mb-6 sm:mb-8 md:mb-10 select-none text-zinc-900 pl-4 sm:pl-8 md:pl-[10vw] lg:pl-[12vw]">
+                  <span className="block text-sm sm:text-base md:text-lg lg:text-xl font-medium text-zinc-800">
                     Turning
                   </span>
-                  <span className="block font-serif italic text-indigo-600 text-4xl sm:text-5xl md:text-6xl lg:text-7xl">complexity</span>
+                  <span className="block font-serif italic text-indigo-600 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">complexity</span>
                   <span className="block">
-                    <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-medium text-zinc-800">
+                    <span className="text-sm sm:text-base md:text-lg lg:text-xl font-medium text-zinc-800">
                       into{" "}
                     </span>
-                    <span className="font-serif italic text-indigo-600 text-4xl sm:text-5xl md:text-6xl lg:text-7xl">clarity</span>
+                    <span className="font-serif italic text-indigo-600 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">clarity</span>
                   </span>
                 </h1>
 
                 {/* Supporting explanation */}
-                <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-[1.6] text-zinc-600 pl-4 sm:pl-8 md:pl-[10vw] lg:pl-[12vw]">
+                <p className="text-xs sm:text-sm md:text-base lg:text-lg leading-[1.6] text-zinc-600 pl-4 sm:pl-8 md:pl-[10vw] lg:pl-[12vw] max-w-md lg:max-w-none">
                   From AI algorithms to crypto workflows,<br className="hidden sm:block" />
                   I turn ambiguity into structured,<br className="hidden sm:block" />
                   usable products that drive real business impact.
                 </p>
 
                 {/* Education & Experience badges */}
-                <div className="mt-8 sm:mt-10 md:mt-14 pl-4 sm:pl-8 md:pl-[10vw] lg:pl-[12vw] pb-8 lg:pb-0">
+                <div className="mt-6 sm:mt-8 md:mt-10 lg:mt-14 pl-4 sm:pl-8 md:pl-[10vw] lg:pl-[12vw]">
                   {/* Divider line */}
-                  <div className="w-10 sm:w-12 h-1 bg-indigo-600 mb-4 sm:mb-6"></div>
+                  <div className="w-8 sm:w-10 md:w-12 h-1 bg-indigo-600 mb-3 sm:mb-4 md:mb-6"></div>
                   
                   {/* Education */}
-                  <div className="flex items-center gap-2 mb-3 sm:mb-4">
-                    <span className="text-xl sm:text-2xl">🎓</span>
-                    <span className="text-sm sm:text-base md:text-lg lg:text-xl font-medium text-zinc-700">
+                  <div className="flex items-center gap-2 mb-2 sm:mb-3 md:mb-4">
+                    <span className="text-lg sm:text-xl md:text-2xl">🎓</span>
+                    <span className="text-xs sm:text-sm md:text-base lg:text-lg font-medium text-zinc-700">
                       MS-HCI @ University of Michigan
                     </span>
                   </div>
 
                   {/* Experience label */}
-                  <p className="text-[10px] sm:text-xs tracking-widest text-zinc-500 uppercase mb-2 sm:mb-3">
+                  <p className="text-[9px] sm:text-[10px] md:text-xs tracking-widest text-zinc-500 uppercase mb-2">
                     Experience designing & researching for
                   </p>
 
                   {/* Company logos */}
                   <div className="flex items-center gap-2 sm:gap-3">
-                    <img src={logoLine} alt="LINE" className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg object-cover" />
-                    <img src={logoTiktok} alt="TikTok" className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg object-cover" />
-                    <img src={logoGm} alt="GM" className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg object-cover" />
-                    <img src={logoNaver} alt="NAVER" className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg object-cover" />
-                    <img src={logoJstor} alt="JSTOR" className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg object-cover" />
+                    <img src={logoLine} alt="LINE" className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-lg object-cover" />
+                    <img src={logoTiktok} alt="TikTok" className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-lg object-cover" />
+                    <img src={logoGm} alt="GM" className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-lg object-cover" />
+                    <img src={logoNaver} alt="NAVER" className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-lg object-cover" />
+                    <img src={logoJstor} alt="JSTOR" className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-lg object-cover" />
                   </div>
                 </div>
               </motion.div>
             </div>
 
             {/* RIGHT: INTERACTIVE JIGSAW -> ASSEMBLED -> FULL PROFILE REVEAL */}
-            <div className="w-full lg:w-1/2 h-[280px] sm:h-[350px] md:h-[400px] lg:h-full relative flex items-center justify-center lg:ml-20 order-1 lg:order-2">
-              <div className="relative w-[280px] h-[220px] sm:w-[350px] sm:h-[280px] md:w-[420px] md:h-[320px] lg:w-[480px] lg:h-[360px]" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
+            <div className="w-full lg:w-1/2 h-[220px] sm:h-[280px] md:h-[350px] lg:h-[500px] relative flex items-center justify-center order-1 lg:order-2">
+              <div className="relative w-[220px] h-[180px] sm:w-[280px] sm:h-[220px] md:w-[350px] md:h-[280px] lg:w-[480px] lg:h-[360px]" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
                 {/* Puzzle pieces */}
                 <AnimatePresence>
                   {animationPhase !== "photo" && puzzlePieces.map((p, i) => (visiblePieces.includes(i) || animationPhase === "assembling" || animationPhase === "assembled") && <motion.div key={p.id} className="absolute" initial={{
@@ -452,16 +453,16 @@ const App = () => {
                   willChange: "transform",
                   zIndex: Math.floor(i / 3) * 10 + i % 3
                 }}>
-                            <div className="w-[90px] h-[90px] sm:w-[110px] sm:h-[110px] md:w-[140px] md:h-[140px] relative" style={{
+                            <div className="w-[70px] h-[70px] sm:w-[90px] sm:h-[90px] md:w-[110px] md:h-[110px] lg:w-[140px] lg:h-[140px] relative" style={{
                     clipPath: `path(\"${JIGSAW_PATHS[p.variant]}\")`,
                     WebkitClipPath: `path(\"${JIGSAW_PATHS[p.variant]}\")`,
                     background: `linear-gradient(145deg, ${p.color}, ${p.color}dd)`
                   }}>
-                              <div className="absolute left-[10px] top-[10px] sm:left-[12px] sm:top-[12px] md:left-[15px] md:top-[15px] w-[60px] h-[60px] sm:w-[75px] sm:h-[75px] md:w-[90px] md:h-[90px] flex flex-col items-center justify-center">
-                                <span className="text-[8px] sm:text-[10px] md:text-[14px] font-black tracking-wide text-white text-center leading-none select-none drop-shadow-sm">
+                              <div className="absolute left-[8px] top-[8px] sm:left-[10px] sm:top-[10px] md:left-[12px] md:top-[12px] lg:left-[15px] lg:top-[15px] w-[50px] h-[50px] sm:w-[65px] sm:h-[65px] md:w-[80px] md:h-[80px] lg:w-[90px] lg:h-[90px] flex flex-col items-center justify-center">
+                                <span className="text-[6px] sm:text-[8px] md:text-[10px] lg:text-[14px] font-black tracking-wide text-white text-center leading-none select-none drop-shadow-sm">
                                   {p.label[0]}
                                 </span>
-                                <span className="text-[6px] sm:text-[8px] md:text-[11px] font-bold tracking-wider text-white/90 text-center leading-none select-none mt-1 md:mt-1.5 drop-shadow-sm">
+                                <span className="text-[5px] sm:text-[6px] md:text-[8px] lg:text-[11px] font-bold tracking-wider text-white/90 text-center leading-none select-none mt-0.5 sm:mt-1 lg:mt-1.5 drop-shadow-sm">
                                   {p.label[1]}
                                 </span>
                               </div>
@@ -483,7 +484,7 @@ const App = () => {
                 }} style={{
                   zIndex: 20
                 }}>
-                      <img src={profilePhoto} alt="Hyebin Park" className="w-[250px] h-[320px] sm:w-[320px] sm:h-[400px] md:w-[400px] md:h-[500px] lg:w-[480px] lg:h-[600px] object-cover object-top" />
+                      <img src={profilePhoto} alt="Hyebin Park" className="w-[180px] h-[230px] sm:w-[240px] sm:h-[300px] md:w-[320px] md:h-[400px] lg:w-[400px] lg:h-[500px] object-cover object-top" />
                     </motion.div>}
                 </AnimatePresence>
               </div>
@@ -493,11 +494,11 @@ const App = () => {
       </section>
 
       {/* WORK GRID */}
-      <section id="work" className="px-8 md:px-16 py-48 border-t border-zinc-100 bg-white">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-40 gap-10">
+      <section id="work" className="px-4 sm:px-8 md:px-16 py-16 sm:py-24 md:py-32 lg:py-48 border-t border-zinc-100 bg-white relative z-10">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 sm:mb-20 md:mb-32 lg:mb-40 gap-6 md:gap-10">
           <div className="max-w-2xl">
-            <h2 className="text-[10px] uppercase tracking-[0.6em] text-zinc-400 mb-8 font-black">Selected Work</h2>
-            <p className="text-5xl md:text-8xl font-bold tracking-tighter leading-none">Strategic <span className="italic font-serif font-light text-zinc-300">Outputs.</span></p>
+            <h2 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.6em] text-zinc-400 mb-4 sm:mb-6 md:mb-8 font-black">Selected Work</h2>
+            <p className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-bold tracking-tighter leading-none">Strategic <span className="italic font-serif font-light text-zinc-300">Outputs.</span></p>
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-40">
