@@ -494,15 +494,30 @@ const App = () => {
       </section>
 
       {/* WORK GRID */}
-      <section id="work" className="px-4 sm:px-8 md:px-16 py-16 sm:py-24 md:py-32 lg:py-48 border-t border-zinc-100 bg-white relative z-10">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 sm:mb-20 md:mb-32 lg:mb-40 gap-6 md:gap-10">
-          <div className="max-w-2xl">
-            <h2 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.6em] text-zinc-400 mb-4 sm:mb-6 md:mb-8 font-black">Selected Work</h2>
-            <p className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-bold tracking-tighter leading-none">Strategic <span className="italic font-serif font-light text-zinc-300">Outputs.</span></p>
+      <section
+        id="work"
+        className="px-4 sm:px-8 md:px-16 py-16 sm:py-24 md:py-32 lg:py-48 border-t border-zinc-100 bg-white relative z-10"
+      >
+        {/* Subtle grid overlay (kept above the white background, below content) */}
+        <div
+          className="absolute inset-0 opacity-[0.12] pointer-events-none"
+          aria-hidden="true"
+          style={{
+            backgroundImage:
+              "linear-gradient(hsl(var(--foreground) / 0.35) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground) / 0.35) 1px, transparent 1px)",
+            backgroundSize: "100px 100px",
+          }}
+        />
+
+        <div className="relative z-10">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 sm:mb-20 md:mb-32 lg:mb-40 gap-6 md:gap-10">
+            <div className="max-w-2xl">
+              <h2 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.6em] text-zinc-400 mb-4 sm:mb-6 md:mb-8 font-black">Selected Work</h2>
+              <p className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-bold tracking-tighter leading-none">Strategic <span className="italic font-serif font-light text-zinc-300">Outputs.</span></p>
+            </div>
           </div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-40">
-          {projects.map((project, idx) => {
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-40">
+            {projects.map((project, idx) => {
             const cardInner = (
               <>
                 <div
@@ -633,7 +648,8 @@ const App = () => {
                 </Link>
               </motion.div>
             );
-          })}
+            })}
+          </div>
         </div>
       </section>
 
