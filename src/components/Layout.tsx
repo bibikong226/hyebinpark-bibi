@@ -11,7 +11,7 @@ export const Layout = ({ children }: LayoutProps) => {
     <div className="relative min-h-screen flex flex-col bg-background text-foreground overflow-x-hidden">
       {/* Subtle grid background on white sections */}
       <div
-        className="pointer-events-none fixed inset-0 opacity-[0.15] z-0"
+        className="pointer-events-none fixed inset-0 opacity-[0.08] z-0"
         aria-hidden="true"
         style={{
           backgroundImage:
