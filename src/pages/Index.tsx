@@ -173,7 +173,7 @@ const Index = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-primary text-primary-foreground">
+      <section className="section-padding bg-violet-600 text-white">
         <div className="container-narrow text-center">
           <motion.div
             className="space-y-8"
@@ -185,7 +185,7 @@ const Index = () => {
             <h2 className="font-serif text-4xl md:text-5xl">
               Let's Connect
             </h2>
-            <p className="text-primary-foreground/80 max-w-2xl mx-auto text-lg leading-relaxed">
+            <p className="text-white/80 max-w-2xl mx-auto text-lg leading-relaxed">
               I'm always excited to connect with fellow designers, researchers, and innovators. Whether you have a project in mind or just want to talk about design and technology, I'd love to hear from you. Let's talk! 👩‍💻
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-2">
@@ -200,7 +200,7 @@ const Index = () => {
                 href="https://www.linkedin.com/in/hyebinpark/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-primary-foreground/20 text-primary-foreground rounded-full font-medium hover:bg-primary-foreground/30 transition-colors border border-primary-foreground/30"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white/20 text-white rounded-full font-medium hover:bg-white/30 transition-colors border border-white/30"
               >
                 LinkedIn
                 <span className="text-sm">↗</span>
