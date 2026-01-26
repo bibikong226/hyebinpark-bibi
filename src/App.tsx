@@ -500,7 +500,7 @@ const App = () => {
       >
         {/* Subtle grid overlay (kept above the white background, below content) */}
         <div
-          className="absolute inset-0 opacity-[0.12] pointer-events-none"
+          className="absolute inset-0 opacity-[0.06] pointer-events-none"
           aria-hidden="true"
           style={{
             backgroundImage:
