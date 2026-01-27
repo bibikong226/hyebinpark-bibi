@@ -4,9 +4,10 @@ import { Footer } from "./Footer";
 
 interface LayoutProps {
   children: ReactNode;
+  footerVariant?: "purple" | "pink";
 }
 
-export const Layout = ({ children }: LayoutProps) => {
+export const Layout = ({ children, footerVariant = "purple" }: LayoutProps) => {
   return (
     <div className="relative min-h-screen flex flex-col bg-background text-foreground overflow-x-hidden">
       {/* Subtle grid background on white sections */}
@@ -22,7 +23,7 @@ export const Layout = ({ children }: LayoutProps) => {
 
       <Navigation />
       <main className="relative flex-1 pt-16 md:pt-20">{children}</main>
-      <Footer />
+      <Footer variant={footerVariant} />
     </div>
   );
 };

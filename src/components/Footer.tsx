@@ -1,11 +1,20 @@
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 
-export const Footer = () => {
+interface FooterProps {
+  variant?: "purple" | "pink";
+}
+
+export const Footer = ({ variant = "purple" }: FooterProps) => {
+  const bgClass = variant === "pink" ? "bg-nurturly" : "bg-violet-600";
+  const emailButtonClass = variant === "pink" 
+    ? "bg-white text-nurturly hover:bg-zinc-100" 
+    : "bg-white text-violet-600 hover:bg-zinc-100";
+
   return (
     <>
       {/* Connect Section */}
-      <section className="py-20 px-8 md:px-16 bg-nurturly text-white">
+      <section className={`py-20 px-8 md:px-16 ${bgClass} text-white`}>
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -22,7 +31,7 @@ export const Footer = () => {
             <div className="flex flex-wrap justify-center gap-4 mt-8">
               <a 
                 href="mailto:hyebinp@umich.edu"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-white text-nurturly rounded-full hover:bg-zinc-100 transition-all font-medium"
+                className={`inline-flex items-center gap-2 px-6 py-3 ${emailButtonClass} rounded-full transition-all font-medium`}
               >
                 hyebinp@umich.edu
                 <ArrowUpRight className="w-4 h-4" />

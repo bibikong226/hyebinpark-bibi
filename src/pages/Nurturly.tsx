@@ -78,7 +78,7 @@ const Nurturly = () => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <Layout>
+    <Layout footerVariant="pink">
       <SectionNav sections={sections} />
       <div style={{ zoom: 0.9 }}>
 
