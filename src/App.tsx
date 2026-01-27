@@ -397,7 +397,7 @@ const App = () => {
                 {/* Education & Experience badges */}
                 <div className="mt-6 sm:mt-8 md:mt-10 lg:mt-14 pl-4 sm:pl-8 md:pl-[10vw] lg:pl-[12vw]">
                   {/* Divider line */}
-                  <div className="w-8 sm:w-10 md:w-12 h-1 bg-indigo-600 mb-3 sm:mb-4 md:mb-6"></div>
+                  <div className="w-8 sm:w-10 md:w-12 h-1 bg-gradient-to-r from-indigo-600 to-transparent rounded-full mb-3 sm:mb-4 md:mb-6"></div>
                   
                   {/* Education */}
                   <div className="flex items-center gap-2 mb-2 sm:mb-3 md:mb-4">
