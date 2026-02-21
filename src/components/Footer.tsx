@@ -6,10 +6,10 @@ interface FooterProps {
 }
 
 export const Footer = ({ variant = "purple" }: FooterProps) => {
-  const bgClass = variant === "pink" ? "bg-nurturly" : "bg-indigo-600";
+  const bgClass = variant === "pink" ? "bg-nurturly" : "bg-primary";
   const emailButtonClass = variant === "pink" 
     ? "bg-white text-nurturly hover:bg-zinc-100" 
-    : "bg-white text-indigo-600 hover:bg-zinc-100";
+    : "bg-white text-primary hover:bg-zinc-100";
 
   return (
     <>
