@@ -83,6 +83,7 @@ const App = () => {
       setPuzzleStatus('assembling');
       const t1 = setTimeout(() => { setAnimationPhase('assembled'); setPuzzleStatus('assembled'); }, 800);
       const t2 = setTimeout(() => setAnimationPhase('photo'), 2000);
+
       return () => { clearTimeout(t1); clearTimeout(t2); };
     } else {
       setAnimationPhase('scattered');
@@ -100,13 +101,13 @@ const App = () => {
       setPuzzleStatus('assembling');
       for (let i = 0; i < puzzlePieces.length; i++) {
         if (cancelled) return;
-        await new Promise(r => setTimeout(r, 350));
+        await new Promise(r => setTimeout(r, 550));
         setVisiblePieces(prev => [...prev, i]);
       }
-      await new Promise(r => setTimeout(r, 2500));
+      await new Promise(r => setTimeout(r, 3000));
       if (cancelled) return;
       setAnimationPhase('assembling');
-      await new Promise(r => setTimeout(r, 1000));
+      await new Promise(r => setTimeout(r, 1400));
       if (cancelled) return;
       setAnimationPhase('assembled');
       setPuzzleStatus('assembled');
@@ -162,10 +163,10 @@ const App = () => {
 
         {/* Desktop Surface */}
         <div className="relative flex-1 overflow-hidden px-4 pb-24 pt-6 sm:px-6 md:px-8 lg:px-10 lg:pb-28 lg:pt-8">
-          <div className="absolute inset-x-0 top-2 z-[1] flex items-center justify-center overflow-hidden pointer-events-none lg:top-4" aria-hidden="true">
+          <div className="absolute inset-x-0 top-3 z-[1] flex items-center justify-center overflow-hidden pointer-events-none lg:top-5" aria-hidden="true">
             <span
-              className="font-sans font-bold text-[clamp(72px,12vw,190px)] tracking-[0.14em] uppercase leading-none whitespace-nowrap"
-              style={{ color: "hsl(var(--primary) / 0.12)" }}
+              className="font-sans font-black text-[clamp(72px,12vw,190px)] tracking-[0.14em] uppercase leading-none whitespace-nowrap select-none"
+              style={{ color: "hsl(var(--primary) / 0.18)" }}
             >
               HYEBIN PARK
             </span>
@@ -303,9 +304,9 @@ const App = () => {
                             }}
                             exit={{ opacity: 0, scale: 1.02, transition: { duration: 0.4, delay: i * 0.02 } }}
                             transition={{
-                              duration: animationPhase === "scattered" ? 0.6 : 0.8,
+                              duration: animationPhase === "scattered" ? 0.8 : 1.2,
                               ease: [0.25, 0.46, 0.45, 0.94],
-                              delay: animationPhase === "scattered" ? 0 : i * 0.18,
+                              delay: animationPhase === "scattered" ? 0 : i * 0.25,
                             }}
                             style={{ willChange: "transform", zIndex: animationPhase === "scattered" ? 6 - i : i + 1 }}
                           >
@@ -325,7 +326,7 @@ const App = () => {
                           transition={{ duration: 0.5 }}
                           style={{ zIndex: 20 }}
                         >
-                          <img src={profilePhoto} alt="Hyebin Park" className="h-[240px] w-[328px] max-w-full rounded-xl object-cover object-top lg:h-[258px] lg:w-[348px]" />
+                          <img src={profilePhoto} alt="Hyebin Park" className="w-full h-full rounded-xl object-cover object-[center_20%]" />
                         </motion.div>
                       )}
                     </AnimatePresence>
@@ -385,14 +386,13 @@ const App = () => {
       </section>
 
       {/* ═══ SELECTED WORK — macOS window cards with ACTUAL images ═══ */}
-      <section id="work" className="py-24 px-4 sm:px-8 md:px-10 border-t border-border bg-secondary/50">
-        <div className="max-w-[1140px] mx-auto">
-          <p className="text-[11px] font-medium tracking-[0.12em] uppercase text-primary mb-2.5">Selected Work</p>
-          <h2 className="font-serif text-[clamp(26px,3.2vw,38px)] font-normal leading-[1.15] mb-11">
-            A collection of projects where I've led<br className="hidden md:inline" /> design efforts to create impactful solutions.
-          </h2>
+      <section id="work" className="py-28 sm:py-32 px-4 sm:px-8 md:px-10 border-t border-border bg-secondary/50">
+        <div className="max-w-[1060px] mx-auto">
+          <p className="text-[11px] font-medium tracking-[0.3em] uppercase text-muted-foreground mb-4">Selected Work</p>
+          <h2 className="text-[clamp(42px,6vw,80px)] font-black leading-[1.05] tracking-tight mb-1">Strategic</h2>
+          <h2 className="font-serif text-[clamp(42px,6vw,80px)] italic font-normal leading-[1.05] tracking-tight text-muted-foreground/30 mb-16">Outputs.</h2>
 
-          <div className="grid md:grid-cols-2 gap-10">
+          <div className="grid md:grid-cols-2 gap-x-8 gap-y-14">
             {projects.map((project, idx) => {
               const dark = isDarkBg(project.id);
 
@@ -417,7 +417,7 @@ const App = () => {
                   </div>
 
                   {/* Thumbnail */}
-                  <div className="w-full aspect-[16/11] relative overflow-hidden" style={{ background: project.imageColor }}>
+                  <div className="w-full aspect-[16/10] relative overflow-hidden" style={{ background: project.imageColor }}>
                     <div className="absolute left-5 md:left-7 top-4 md:top-5 z-10">
                       <img
                         src={project.logo}
@@ -500,33 +500,45 @@ const App = () => {
         </div>
       </section>
 
-      {/* ═══ TESTIMONIALS — 2×2 grid ═══ */}
-      <section id="collab" className="py-20 px-4 sm:px-8 md:px-10 border-t border-border">
-        <div className="max-w-[1100px] mx-auto">
-          <p className="text-[11px] font-medium tracking-[0.12em] uppercase text-primary mb-2.5">Collaboration</p>
-          <h2 className="font-serif text-[clamp(26px,3.2vw,38px)] font-normal leading-[1.15] mb-11">
-            Words from people<br />I've worked alongside.
+      {/* ═══ TESTIMONIALS — macOS window cards ═══ */}
+      <section id="collab" className="py-28 sm:py-32 px-4 sm:px-8 md:px-10 border-t border-border">
+        <div className="max-w-[1060px] mx-auto">
+          <p className="text-[11px] font-medium tracking-[0.3em] uppercase text-muted-foreground mb-4">Collaboration</p>
+          <h2 className="text-[clamp(32px,4.5vw,56px)] font-black leading-[1.1] tracking-tight mb-14">
+            Words from people<br className="hidden sm:block" />I've worked alongside.
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-5">
+          <div className="grid md:grid-cols-2 gap-6">
             {testimonials.map((t, i) => (
               <motion.div
                 key={t.id}
-                className="bg-secondary rounded-xl p-7 border border-border flex flex-col justify-between gap-5 hover:shadow-lg transition-shadow"
+                className="rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                style={{
+                  background: "hsl(var(--background) / 0.97)",
+                  backdropFilter: "blur(20px)",
+                  border: "1px solid hsl(var(--foreground) / 0.08)",
+                  boxShadow: "0 8px 32px rgba(0,0,0,.08), 0 2px 8px rgba(0,0,0,.04)",
+                }}
                 initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
               >
-                <div>
-                  <div className="text-4xl font-serif text-primary/35 leading-none mb-1.5">"</div>
-                  <p className="font-serif text-[15px] italic leading-[1.75] text-foreground">{t.text}</p>
-                  <p className="font-serif text-sm italic leading-[1.65] text-muted-foreground mt-2">{t.subtext}"</p>
+                <div className="h-9 flex items-center px-3.5 gap-3 border-b"
+                  style={{ background: "hsl(var(--secondary) / 0.86)", borderColor: "hsl(var(--foreground) / 0.06)" }}>
+                  <TitleBarDots />
+                  <span className="flex-1 text-center text-[10.5px] font-medium text-muted-foreground">
+                    {t.company} — {t.role}
+                  </span>
                 </div>
-                <div className="border-t border-border pt-4">
-                  <div className="text-sm font-semibold mb-0.5">{t.author}</div>
-                  <div className="text-xs text-muted-foreground">{t.role}</div>
-                  <div className="text-xs text-primary mt-[1px]">{t.company}</div>
+                <div className="p-6 flex flex-col gap-4">
+                  <div className="text-3xl font-serif text-primary/30 leading-none">"</div>
+                  <p className="font-serif text-[15px] italic leading-[1.8] text-foreground -mt-3">{t.text}</p>
+                  <p className="font-serif text-[13.5px] italic leading-[1.7] text-muted-foreground">{t.subtext}"</p>
+                  <div className="border-t border-border pt-3 mt-1">
+                    <div className="text-sm font-semibold">{t.author}</div>
+                    <div className="text-xs text-muted-foreground">{t.role}, <span className="text-primary">{t.company}</span></div>
+                  </div>
                 </div>
               </motion.div>
             ))}
