@@ -548,7 +548,7 @@ const App = () => {
                     </div>
 
                     {/* Arrow */}
-                    <div className="flex">
+                    <div className="flex mt-auto pt-2">
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm transition-all duration-300 group-hover:rotate-45 ${dark ? "bg-white/15 text-white/70 group-hover:bg-white/90 group-hover:text-black" : "bg-white/70 text-black/60 group-hover:bg-black/[0.82] group-hover:text-white"}`}>
                         ↗
                       </div>
