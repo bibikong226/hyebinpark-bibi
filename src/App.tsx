@@ -30,18 +30,6 @@ const TitleBarDots = () => (
   </div>
 );
 
-/* ── Menu Bar Clock ── */
-const MenuBarClock = () => {
-  const [now, setNow] = useState(new Date());
-  useEffect(() => {
-    const t = setInterval(() => setNow(new Date()), 10000);
-    return () => clearInterval(t);
-  }, []);
-  const date = now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
-  const time = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
-  return <>{date} {time}</>;
-};
-
 const PuzzleTile = ({
   color,
   label,
