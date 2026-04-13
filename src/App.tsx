@@ -247,7 +247,7 @@ const App = () => {
           </div>
 
           <div className="relative z-10 mx-auto flex h-full w-full max-w-[1500px] items-start justify-center">
-            <div className="grid w-full items-start gap-5 pt-36 md:grid-cols-[minmax(0,1.12fr)_minmax(320px,0.88fr)] md:pt-32 lg:grid-cols-[minmax(0,1.14fr)_minmax(380px,0.9fr)] lg:gap-0 lg:pt-32 xl:grid-cols-[minmax(0,1.12fr)_minmax(430px,0.88fr)]">
+            <div className="grid w-full items-start gap-6 pt-44 md:grid-cols-[minmax(0,1.12fr)_minmax(320px,0.88fr)] md:pt-40 lg:grid-cols-[minmax(0,1.14fr)_minmax(380px,0.9fr)] lg:gap-0 lg:pt-44 xl:grid-cols-[minmax(0,1.12fr)_minmax(430px,0.88fr)]">
               <motion.div
                 className="relative z-20 overflow-hidden rounded-[28px]"
                 style={{
@@ -416,21 +416,25 @@ const App = () => {
 
         </div>
 
-        {/* Dock — matches header style */}
-        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-6 px-6 py-2 rounded-full z-30"
+        {/* Dock — icon style matching header */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1 px-3 py-2 rounded-2xl z-30"
           style={{
-            background: "rgba(236,236,242,.82)",
+            background: "rgba(236,236,242,.72)",
             backdropFilter: "blur(24px) saturate(1.6)",
-            border: "1px solid rgba(0,0,0,.08)",
+            border: "1px solid rgba(0,0,0,.06)",
+            boxShadow: "0 8px 32px rgba(0,0,0,.08)",
           }}>
           {[
-            { label: "WORK", action: () => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" }) },
-            { label: "EXPLORE", action: () => document.getElementById("explore")?.scrollIntoView({ behavior: "smooth" }) },
-            { label: "COLLAB", action: () => document.getElementById("collab")?.scrollIntoView({ behavior: "smooth" }) },
+            { label: "Work", icon: "💼", action: () => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" }) },
+            { label: "Explore", icon: "🔍", action: () => document.getElementById("explore")?.scrollIntoView({ behavior: "smooth" }) },
+            { label: "About", icon: "👤", action: () => window.location.href = "/about" },
+            { label: "CV", icon: "📄", action: () => window.open("https://drive.google.com/file/d/1l2V4pQCjAZhIhLyRmVh3m2QTw87yLI6P/view?usp=sharing", "_blank") },
+            { label: "Contact", icon: "✉️", action: () => window.location.href = "mailto:hyebinp@umich.edu" },
           ].map((item) => (
             <button key={item.label} onClick={item.action}
-              className="text-[11px] font-medium tracking-[0.18em] uppercase text-foreground/75 hover:text-foreground transition-colors">
-              {item.label}
+              className="flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl hover:bg-white/50 transition-colors group">
+              <span className="text-xl group-hover:scale-110 transition-transform">{item.icon}</span>
+              <span className="text-[9px] font-medium text-foreground/60">{item.label}</span>
             </button>
           ))}
         </div>
