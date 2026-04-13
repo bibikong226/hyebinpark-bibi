@@ -42,6 +42,37 @@ const MenuBarClock = () => {
   return <>{date} {time}</>;
 };
 
+const PuzzleTile = ({
+  color,
+  label,
+  variant,
+}: {
+  color: string;
+  label: string[];
+  variant: keyof typeof JIGSAW_PATHS;
+}) => (
+  <div className="relative w-[110px] h-[110px] lg:w-[118px] lg:h-[118px]">
+    <svg
+      viewBox="0 0 140 140"
+      className="absolute inset-0 w-full h-full"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d={JIGSAW_PATHS[variant]} fill={color} />
+    </svg>
+    <div className="absolute inset-0 flex items-center justify-center px-4">
+      <span
+        className="text-center text-[10px] lg:text-[11px] font-bold tracking-[0.04em] uppercase text-primary-foreground leading-[1.15] select-none"
+        style={{ textShadow: "0 1px 3px hsl(var(--foreground) / 0.25)" }}
+      >
+        {label[0]}
+        <br />
+        {label[1]}
+      </span>
+    </div>
+  </div>
+);
+
 const App = () => {
   const [animationPhase, setAnimationPhase] = useState<'scattered' | 'assembling' | 'assembled' | 'photo'>('scattered');
   const [isHovering, setIsHovering] = useState(false);
@@ -49,12 +80,12 @@ const App = () => {
   const [puzzleStatus, setPuzzleStatus] = useState<'assembling' | 'assembled'>('assembling');
 
   const puzzlePieces = [
-    { id: 1, label: ["USER", "NEEDS"], variant: "P1", color: "#D4826A", messy: { x: 5, y: 40, r: -25 }, final: { x: 20, y: 25, r: 0 } },
-    { id: 2, label: ["DATA", "COMPLEXITY"], variant: "P2", color: "#5B8FD4", messy: { x: 90, y: -10, r: 20 }, final: { x: 110, y: 25, r: 0 } },
-    { id: 3, label: ["BUSINESS", "GOALS"], variant: "P3", color: "#5BAF6A", messy: { x: 200, y: 15, r: -30 }, final: { x: 200, y: 25, r: 0 } },
-    { id: 4, label: ["TECH", "CONSTRAINTS"], variant: "P4", color: "#D4956A", messy: { x: 10, y: 160, r: 30 }, final: { x: 20, y: 115, r: 0 } },
-    { id: 5, label: ["EDGE", "CASES"], variant: "P5", color: "#8B6FD4", messy: { x: 120, y: 175, r: -18 }, final: { x: 110, y: 115, r: 0 } },
-    { id: 6, label: ["EMERGING", "TECH"], variant: "P6", color: "#D46FAA", messy: { x: 210, y: 150, r: 22 }, final: { x: 200, y: 115, r: 0 } },
+    { id: 1, label: ["USER", "NEEDS"], variant: "P1", color: "hsl(15 56% 63%)", messy: { x: 18, y: 34, r: -12 }, final: { x: 12, y: 10, r: 0 } },
+    { id: 2, label: ["DATA", "COMPLEXITY"], variant: "P2", color: "hsl(214 52% 59%)", messy: { x: 122, y: 0, r: 16 }, final: { x: 122, y: 10, r: 0 } },
+    { id: 3, label: ["BUSINESS", "GOALS"], variant: "P3", color: "hsl(126 33% 53%)", messy: { x: 236, y: 18, r: -24 }, final: { x: 232, y: 10, r: 0 } },
+    { id: 4, label: ["TECH", "CONSTRAINTS"], variant: "P4", color: "hsl(27 56% 61%)", messy: { x: 12, y: 138, r: 28 }, final: { x: 12, y: 120, r: 0 } },
+    { id: 5, label: ["EDGE", "CASES"], variant: "P5", color: "hsl(258 50% 62%)", messy: { x: 132, y: 156, r: -14 }, final: { x: 122, y: 120, r: 0 } },
+    { id: 6, label: ["EMERGING", "TECH"], variant: "P6", color: "hsl(318 48% 59%)", messy: { x: 238, y: 136, r: 18 }, final: { x: 232, y: 120, r: 0 } },
   ];
 
   // Animation cycle
@@ -127,7 +158,7 @@ const App = () => {
       {/* ═══════════════════════════════════════
            macOS DESKTOP HERO
       ═══════════════════════════════════════ */}
-      <section className="w-full h-screen min-h-[760px] relative overflow-hidden flex flex-col"
+      <section className="relative flex min-h-[900px] w-full flex-col overflow-hidden lg:min-h-screen"
         style={{
           background: `
             radial-gradient(ellipse 65% 55% at 15% 35%, rgba(165,180,252,.42) 0%, transparent 60%),
@@ -159,180 +190,188 @@ const App = () => {
         </div>
 
         {/* Desktop Surface */}
-        <div className="flex-1 relative overflow-hidden">
-          {/* Big name background — MORE VISIBLE */}
-          <div className="absolute top-4 left-0 right-0 flex items-center justify-center pointer-events-none overflow-hidden z-[1]" aria-hidden="true">
-            <span className="font-sans font-bold text-[clamp(64px,11vw,160px)] tracking-[0.15em] uppercase leading-none whitespace-nowrap"
-              style={{ color: "rgba(79,70,229,.12)" }}>
+        <div className="relative flex-1 overflow-hidden px-4 pb-24 pt-8 sm:px-6 md:px-8 lg:px-10 lg:pb-28 lg:pt-10">
+          <div className="absolute inset-x-0 top-4 z-[1] flex items-center justify-center overflow-hidden pointer-events-none md:top-0 lg:top-2" aria-hidden="true">
+            <span
+              className="font-sans font-bold text-[clamp(72px,12vw,190px)] tracking-[0.14em] uppercase leading-none whitespace-nowrap"
+              style={{ color: "hsl(var(--primary) / 0.12)" }}
+            >
               HYEBIN PARK
             </span>
           </div>
 
-          {/* ── Bio Window — BIGGER ── */}
-          <motion.div
-            className="absolute z-20 rounded-xl overflow-hidden"
-            style={{
-              left: "4%", top: "50%", width: "clamp(320px, 42%, 480px)",
-              background: "rgba(252,252,255,.97)",
-              backdropFilter: "blur(40px)",
-              border: "1px solid rgba(0,0,0,.08)",
-              boxShadow: "0 24px 70px rgba(0,0,0,.16), 0 6px 18px rgba(0,0,0,.09)",
-              transform: "translateY(-45%)",
-            }}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {/* Title bar */}
-            <div className="h-10 flex items-center px-3.5 gap-3 flex-shrink-0 border-b"
-              style={{ background: "rgba(245,244,250,.93)", borderColor: "rgba(0,0,0,.06)" }}>
-              <TitleBarDots />
-              <span className="flex-1 text-center text-xs font-medium text-muted-foreground">hyebin-park.portfolio</span>
-            </div>
-
-            {/* Bio body */}
-            <div className="p-7 pb-6 flex flex-col gap-4">
-              <p className="text-[11px] font-medium tracking-[0.12em] uppercase text-muted-foreground">Hi, I am Hyebin Park.</p>
-              
-              {/* Headline */}
-              <div>
-                <div className="flex items-baseline gap-2 flex-wrap">
-                  <span className="text-[clamp(15px,1.6vw,18px)] text-muted-foreground">Turning</span>
-                  <span className="font-serif text-[clamp(30px,4vw,46px)] italic text-primary">complexity</span>
+          <div className="relative z-10 mx-auto flex h-full w-full max-w-[1500px] items-center justify-center">
+            <div className="grid w-full items-center gap-5 pt-24 md:grid-cols-[minmax(0,1.12fr)_minmax(320px,0.88fr)] md:pt-20 lg:grid-cols-[minmax(0,1.14fr)_minmax(380px,0.9fr)] lg:gap-0 lg:pt-16 xl:grid-cols-[minmax(0,1.12fr)_minmax(430px,0.88fr)]">
+              <motion.div
+                className="relative z-20 overflow-hidden rounded-[28px]"
+                style={{
+                  background: "hsl(var(--background) / 0.96)",
+                  backdropFilter: "blur(40px)",
+                  border: "1px solid hsl(var(--foreground) / 0.08)",
+                  boxShadow: "0 24px 70px rgba(0,0,0,.16), 0 6px 18px rgba(0,0,0,.09)",
+                }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <div
+                  className="flex h-11 items-center gap-3 border-b px-3.5"
+                  style={{ background: "hsl(var(--secondary) / 0.86)", borderColor: "hsl(var(--foreground) / 0.06)" }}
+                >
+                  <TitleBarDots />
+                  <span className="flex-1 text-center text-xs font-medium text-muted-foreground">hyebin-park.portfolio</span>
                 </div>
-                <div className="flex items-baseline gap-2 flex-wrap mt-[3px]">
-                  <span className="text-[clamp(15px,1.6vw,18px)] text-foreground/25">into</span>
-                  <span className="font-serif text-[clamp(30px,4vw,46px)] italic text-foreground">clarity.</span>
+
+                <div className="flex flex-col gap-5 p-7 pb-7 sm:p-8 lg:min-h-[520px] lg:justify-center lg:p-10 xl:min-h-[560px] xl:p-12">
+                  <p className="text-[11px] font-medium tracking-[0.12em] uppercase text-muted-foreground">Hi, I am Hyebin Park.</p>
+
+                  <div className="space-y-1">
+                    <div className="flex flex-wrap items-baseline gap-2 md:gap-3">
+                      <span className="text-[clamp(20px,2vw,28px)] text-muted-foreground">Turning</span>
+                      <span className="font-serif text-[clamp(42px,5.3vw,76px)] italic text-primary leading-none">complexity</span>
+                    </div>
+                    <div className="flex flex-wrap items-baseline gap-2 md:gap-3">
+                      <span className="text-[clamp(20px,2vw,28px)] text-foreground/25">into</span>
+                      <span className="font-serif text-[clamp(42px,5.3vw,76px)] italic text-foreground leading-none">clarity.</span>
+                    </div>
+                  </div>
+
+                  <p className="max-w-[44rem] text-base leading-[1.75] text-muted-foreground md:text-[1.1rem]">
+                    From AI algorithms to crypto workflows,<br className="hidden sm:block" />
+                    I turn ambiguity into structured, usable products<br className="hidden sm:block" />
+                    that drive real business impact.
+                  </p>
+
+                  <div className="flex items-center gap-2 border-t border-border pt-4 text-base font-medium text-foreground md:text-[1.05rem]">
+                    🎓 MS-HCI @ University of Michigan
+                  </div>
+
+                  <div>
+                    <p className="mb-3 text-[11px] tracking-[0.12em] uppercase text-muted-foreground">Experience designing & researching for</p>
+                    <div className="flex flex-wrap items-center gap-3">
+                      <img src={logoLine} alt="LINE" className="w-10 h-10 rounded-xl object-cover shadow-md" />
+                      <img src={logoTiktok} alt="TikTok" className="w-10 h-10 rounded-xl object-cover shadow-md" />
+                      <img src={logoGm} alt="GM" className="w-10 h-10 rounded-xl object-cover shadow-md" />
+                      <img src={logoNaver} alt="NAVER" className="w-10 h-10 rounded-xl object-cover shadow-md" />
+                      <img src={logoJstor} alt="JSTOR" className="w-10 h-10 rounded-xl object-cover shadow-md" />
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap gap-3 pt-1">
+                    <a href="mailto:hyebinp@umich.edu" className="inline-flex items-center gap-[5px] rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-all hover:-translate-y-px hover:opacity-90">
+                      hyebinp@umich.edu ↗
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/in/hyebinpark/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-[5px] rounded-full border-[1.5px] border-foreground/15 px-5 py-3 text-sm font-medium transition-all hover:-translate-y-px hover:border-primary hover:text-primary"
+                    >
+                      LinkedIn ↗
+                    </a>
+                  </div>
                 </div>
-              </div>
+              </motion.div>
 
-              <p className="text-sm text-muted-foreground leading-[1.65]">
-                From AI algorithms to crypto workflows,<br />
-                I turn ambiguity into structured, usable products<br />
-                that drive real business impact.
-              </p>
-
-              {/* School */}
-              <div className="flex items-center gap-2 text-sm font-medium text-foreground pt-1 border-t border-border">
-                🎓 MS-HCI @ University of Michigan
-              </div>
-
-              {/* Experience logos */}
-              <div>
-                <p className="text-[10px] tracking-[0.1em] uppercase text-muted-foreground mb-2">Experience designing & researching for</p>
-                <div className="flex gap-2 items-center flex-wrap">
-                  <img src={logoLine} alt="LINE" className="w-8 h-8 rounded-lg object-cover shadow-md" />
-                  <img src={logoTiktok} alt="TikTok" className="w-8 h-8 rounded-lg object-cover shadow-md" />
-                  <img src={logoGm} alt="GM" className="w-8 h-8 rounded-lg object-cover shadow-md" />
-                  <img src={logoNaver} alt="NAVER" className="w-8 h-8 rounded-lg object-cover shadow-md" />
-                  <img src={logoJstor} alt="JSTOR" className="w-8 h-8 rounded-lg object-cover shadow-md" />
+              <motion.div
+                className="relative z-[22] overflow-hidden rounded-[28px] md:-ml-8 md:mt-10 lg:-ml-12 lg:mt-8 xl:-ml-16"
+                style={{
+                  background: "hsl(var(--background) / 0.96)",
+                  backdropFilter: "blur(40px)",
+                  border: "1px solid hsl(var(--foreground) / 0.08)",
+                  boxShadow: "0 24px 70px rgba(0,0,0,.16), 0 6px 18px rgba(0,0,0,.09)",
+                }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <div
+                  className="flex h-11 items-center gap-3 border-b px-3.5"
+                  style={{ background: "hsl(var(--secondary) / 0.86)", borderColor: "hsl(var(--foreground) / 0.06)" }}
+                >
+                  <TitleBarDots />
+                  <span className="flex-1 text-center text-xs font-medium text-muted-foreground">
+                    puzzle.complexity — {puzzleStatus === 'assembled' ? 'assembled ✓' : 'assembling'}
+                  </span>
                 </div>
-              </div>
 
-              {/* CTAs */}
-              <div className="flex gap-[9px] flex-wrap">
-                <a href="mailto:hyebinp@umich.edu" className="inline-flex items-center gap-[5px] px-[18px] py-[9px] bg-primary text-primary-foreground rounded-full text-xs font-medium hover:opacity-90 transition-all hover:-translate-y-px">
-                  hyebinp@umich.edu ↗
-                </a>
-                <a href="https://www.linkedin.com/in/hyebinpark/" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-[5px] px-[18px] py-[9px] border-[1.5px] border-foreground/15 rounded-full text-xs font-medium hover:border-primary hover:text-primary transition-all hover:-translate-y-px">
-                  LinkedIn ↗
-                </a>
-              </div>
-            </div>
-          </motion.div>
+                <div
+                  className="flex h-[38px] items-center gap-2 border-b px-3"
+                  style={{ background: "hsl(var(--secondary) / 0.78)", borderColor: "hsl(var(--foreground) / 0.05)" }}
+                >
+                  <button
+                    onClick={handleScatter}
+                    className="rounded-[8px] border bg-background px-3 py-1 text-[11px] font-medium text-foreground transition-colors hover:bg-secondary"
+                    style={{ borderColor: "hsl(var(--foreground) / 0.14)" }}
+                  >
+                    ↺ Scatter
+                  </button>
+                  <span className="ml-auto text-[11px] text-muted-foreground">
+                    {puzzleStatus === 'assembled' ? 'solved ✓' : 'watch it assemble →'}
+                  </span>
+                </div>
 
-          {/* ── Puzzle Window — BIGGER ── */}
-          <motion.div
-            className="absolute z-[22] rounded-xl overflow-hidden hidden sm:block"
-            style={{
-              right: "3%", top: "50%", width: "clamp(340px, 38%, 420px)",
-              background: "rgba(252,252,255,.97)",
-              backdropFilter: "blur(40px)",
-              border: "1px solid rgba(0,0,0,.08)",
-              boxShadow: "0 24px 70px rgba(0,0,0,.16), 0 6px 18px rgba(0,0,0,.09)",
-              transform: "translateY(-48%)",
-            }}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {/* Title bar */}
-            <div className="h-10 flex items-center px-3.5 gap-3 flex-shrink-0 border-b"
-              style={{ background: "rgba(245,244,250,.93)", borderColor: "rgba(0,0,0,.06)" }}>
-              <TitleBarDots />
-              <span className="flex-1 text-center text-xs font-medium text-muted-foreground">
-                puzzle.complexity — {puzzleStatus === 'assembled' ? 'assembled ✓' : 'assembling'}
-              </span>
-            </div>
+                <div
+                  className="relative flex flex-col items-center bg-[#16161E] px-4 pb-4 pt-5 sm:px-5"
+                  onMouseEnter={() => setIsHovering(true)}
+                  onMouseLeave={() => setIsHovering(false)}
+                >
+                  <div className="relative h-[258px] w-[352px] max-w-full lg:h-[276px] lg:w-[372px]">
+                    <AnimatePresence>
+                      {animationPhase !== "photo" && puzzlePieces.map((p, i) =>
+                        (visiblePieces.includes(i) || animationPhase === "assembling" || animationPhase === "assembled") && (
+                          <motion.div
+                            key={p.id}
+                            className="absolute"
+                            initial={{ opacity: 0, scale: 0.6 }}
+                            animate={{
+                              x: animationPhase === "scattered" ? p.messy.x : p.final.x,
+                              y: animationPhase === "scattered" ? p.messy.y : p.final.y,
+                              rotate: animationPhase === "scattered" ? p.messy.r : 0,
+                              opacity: 1,
+                              scale: animationPhase === "scattered" ? 0.97 : 1,
+                            }}
+                            exit={{ opacity: 0, scale: 1.02, transition: { duration: 0.4, delay: i * 0.02 } }}
+                            transition={{
+                              duration: animationPhase === "scattered" ? 0.6 : 0.8,
+                              ease: [0.25, 0.46, 0.45, 0.94],
+                              delay: animationPhase === "scattered" ? 0 : i * 0.18,
+                            }}
+                            style={{ willChange: "transform", zIndex: animationPhase === "scattered" ? 6 - i : i + 1 }}
+                          >
+                            <PuzzleTile color={p.color} label={p.label} variant={p.variant as keyof typeof JIGSAW_PATHS} />
+                          </motion.div>
+                        )
+                      )}
+                    </AnimatePresence>
 
-            {/* Scatter bar */}
-            <div className="h-[34px] flex items-center px-3 gap-2 border-b"
-              style={{ background: "rgba(243,242,248,.88)", borderColor: "rgba(0,0,0,.05)" }}>
-              <button onClick={handleScatter}
-                className="px-2.5 py-[3px] rounded-[5px] border bg-white text-[11px] font-medium text-foreground hover:bg-secondary transition-colors"
-                style={{ borderColor: "rgba(0,0,0,.14)" }}>
-                ↺ Scatter
-              </button>
-              <span className="ml-auto text-[11px] text-muted-foreground">
-                {puzzleStatus === 'assembled' ? 'solved ✓' : 'watch it assemble →'}
-              </span>
-            </div>
+                    <AnimatePresence>
+                      {animationPhase === "photo" && (
+                        <motion.div
+                          className="absolute inset-0 flex items-center justify-center"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.5 }}
+                          style={{ zIndex: 20 }}
+                        >
+                          <img
+                            src={profilePhoto}
+                            alt="Hyebin Park"
+                            className="h-[240px] w-[328px] max-w-full rounded-xl object-cover object-top lg:h-[258px] lg:w-[348px]"
+                          />
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
 
-            {/* Puzzle container — BIGGER */}
-            <div className="bg-[#16161E] px-[18px] pt-5 pb-3.5 relative flex flex-col items-center"
-              onMouseEnter={() => setIsHovering(true)}
-              onMouseLeave={() => setIsHovering(false)}>
-              <div className="relative w-[300px] h-[220px]">
-                <AnimatePresence>
-                  {animationPhase !== "photo" && puzzlePieces.map((p, i) =>
-                    (visiblePieces.includes(i) || animationPhase === "assembling" || animationPhase === "assembled") && (
-                      <motion.div key={p.id} className="absolute"
-                        initial={{ opacity: 0, scale: 0.6 }}
-                        animate={{
-                          x: animationPhase === "scattered" ? p.messy.x : p.final.x,
-                          y: animationPhase === "scattered" ? p.messy.y : p.final.y,
-                          rotate: animationPhase === "scattered" ? p.messy.r : 0,
-                          opacity: 1, scale: animationPhase === "scattered" ? 0.95 : 1
-                        }}
-                        exit={{ opacity: 0, scale: 1.02, transition: { duration: 0.4, delay: i * 0.02 } }}
-                        transition={{
-                          duration: animationPhase === "scattered" ? 0.6 : 0.8,
-                          ease: [0.25, 0.46, 0.45, 0.94],
-                          delay: animationPhase === "scattered" ? 0 : i * 0.18
-                        }}
-                        style={{ willChange: "transform", zIndex: animationPhase === "scattered" ? 6 - i : i + 1 }}>
-                        <div className="w-[90px] h-[90px] relative"
-                          style={{
-                            clipPath: `path("${JIGSAW_PATHS[p.variant as keyof typeof JIGSAW_PATHS]}")`,
-                            background: p.color,
-                          }}>
-                          <div className="absolute inset-0 flex flex-col items-center justify-center p-2">
-                            <span className="text-[9.5px] font-bold tracking-[0.04em] uppercase text-white text-center leading-[1.25] select-none"
-                              style={{ textShadow: "0 1px 3px rgba(0,0,0,.25)" }}>
-                              {p.label[0]}<br />{p.label[1]}
-                            </span>
-                          </div>
-                        </div>
-                      </motion.div>
-                    )
-                  )}
-                </AnimatePresence>
-                <AnimatePresence>
-                  {animationPhase === "photo" && (
-                    <motion.div className="absolute inset-0 flex items-center justify-center"
-                      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                      transition={{ duration: 0.5 }} style={{ zIndex: 20 }}>
-                      <img src={profilePhoto} alt="Hyebin Park" className="w-[280px] h-[210px] object-cover object-top rounded-md" />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-              <p className="text-center pt-2 pb-1 text-[10px] text-white/[0.28] tracking-[0.06em]">
-                {puzzleStatus === 'assembled' ? '← scatter to replay' : 'pieces assembling…'}
-              </p>
+                  <p className="pb-1 pt-3 text-center text-[10px] tracking-[0.06em] text-white/30">
+                    {puzzleStatus === 'assembled' ? '← scatter to replay' : 'pieces assembling…'}
+                  </p>
+                </div>
+              </motion.div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Scroll cue */}
           <div className="absolute bottom-[72px] left-1/2 -translate-x-1/2 flex flex-col items-center gap-[5px] pointer-events-none z-10"
