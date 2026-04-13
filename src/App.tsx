@@ -49,12 +49,12 @@ const App = () => {
   const [puzzleStatus, setPuzzleStatus] = useState<'assembling' | 'assembled'>('assembling');
 
   const puzzlePieces = [
-    { id: 1, label: ["USER", "NEEDS"], variant: "P1", color: "#D4826A", messy: { x: -15, y: 50, r: -32 }, final: { x: 20, y: 25, r: 0 } },
-    { id: 2, label: ["DATA", "COMPLEXITY"], variant: "P2", color: "#5B8FD4", messy: { x: 60, y: -18, r: 28 }, final: { x: 110, y: 25, r: 0 } },
-    { id: 3, label: ["BUSINESS", "GOALS"], variant: "P3", color: "#5BAF6A", messy: { x: 280, y: 5, r: -38 }, final: { x: 200, y: 25, r: 0 } },
-    { id: 4, label: ["TECH", "CONSTRAINTS"], variant: "P4", color: "#D4956A", messy: { x: -5, y: 190, r: 38 }, final: { x: 20, y: 115, r: 0 } },
-    { id: 5, label: ["EDGE", "CASES"], variant: "P5", color: "#8B6FD4", messy: { x: 145, y: 215, r: -22 }, final: { x: 110, y: 115, r: 0 } },
-    { id: 6, label: ["EMERGING", "TECH"], variant: "P6", color: "#D46FAA", messy: { x: 295, y: 185, r: 25 }, final: { x: 200, y: 115, r: 0 } },
+    { id: 1, label: ["USER", "NEEDS"], variant: "P1", color: "#D4826A", messy: { x: 5, y: 40, r: -25 }, final: { x: 20, y: 25, r: 0 } },
+    { id: 2, label: ["DATA", "COMPLEXITY"], variant: "P2", color: "#5B8FD4", messy: { x: 90, y: -10, r: 20 }, final: { x: 110, y: 25, r: 0 } },
+    { id: 3, label: ["BUSINESS", "GOALS"], variant: "P3", color: "#5BAF6A", messy: { x: 200, y: 15, r: -30 }, final: { x: 200, y: 25, r: 0 } },
+    { id: 4, label: ["TECH", "CONSTRAINTS"], variant: "P4", color: "#D4956A", messy: { x: 10, y: 160, r: 30 }, final: { x: 20, y: 115, r: 0 } },
+    { id: 5, label: ["EDGE", "CASES"], variant: "P5", color: "#8B6FD4", messy: { x: 120, y: 175, r: -18 }, final: { x: 110, y: 115, r: 0 } },
+    { id: 6, label: ["EMERGING", "TECH"], variant: "P6", color: "#D46FAA", messy: { x: 210, y: 150, r: 22 }, final: { x: 200, y: 115, r: 0 } },
   ];
 
   // Animation cycle
