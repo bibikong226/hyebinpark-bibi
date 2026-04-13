@@ -500,7 +500,7 @@ const App = () => {
         </div>
       </section>
 
-      {/* ═══ TESTIMONIALS — macOS window cards ═══ */}
+      {/* ═══ TESTIMONIALS — Featured quote carousel ═══ */}
       <section id="collab" className="py-28 sm:py-32 px-4 sm:px-8 md:px-10 border-t border-border">
         <div className="max-w-[1060px] mx-auto">
           <p className="text-[11px] font-medium tracking-[0.3em] uppercase text-muted-foreground mb-4">Collaboration</p>
@@ -508,41 +508,7 @@ const App = () => {
             Words from people<br className="hidden sm:block" />I've worked alongside.
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            {testimonials.map((t, i) => (
-              <motion.div
-                key={t.id}
-                className="rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-                style={{
-                  background: "hsl(var(--background) / 0.97)",
-                  backdropFilter: "blur(20px)",
-                  border: "1px solid hsl(var(--foreground) / 0.08)",
-                  boxShadow: "0 8px 32px rgba(0,0,0,.08), 0 2px 8px rgba(0,0,0,.04)",
-                }}
-                initial={{ opacity: 0, y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-              >
-                <div className="h-9 flex items-center px-3.5 gap-3 border-b"
-                  style={{ background: "hsl(var(--secondary) / 0.86)", borderColor: "hsl(var(--foreground) / 0.06)" }}>
-                  <TitleBarDots />
-                  <span className="flex-1 text-center text-[10.5px] font-medium text-muted-foreground">
-                    {t.company} — {t.role}
-                  </span>
-                </div>
-                <div className="p-6 flex flex-col gap-4">
-                  <div className="text-3xl font-serif text-primary/30 leading-none">"</div>
-                  <p className="font-serif text-[15px] italic leading-[1.8] text-foreground -mt-3">{t.text}</p>
-                  <p className="font-serif text-[13.5px] italic leading-[1.7] text-muted-foreground">{t.subtext}"</p>
-                  <div className="border-t border-border pt-3 mt-1">
-                    <div className="text-sm font-semibold">{t.author}</div>
-                    <div className="text-xs text-muted-foreground">{t.role}, <span className="text-primary">{t.company}</span></div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <TestimonialCarousel testimonials={testimonials} />
         </div>
       </section>
 
