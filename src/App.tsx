@@ -30,18 +30,6 @@ const TitleBarDots = () => (
   </div>
 );
 
-/* ── Menu Bar Clock ── */
-const MenuBarClock = () => {
-  const [now, setNow] = useState(new Date());
-  useEffect(() => {
-    const t = setInterval(() => setNow(new Date()), 10000);
-    return () => clearInterval(t);
-  }, []);
-  const date = now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
-  const time = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
-  return <>{date} {time}</>;
-};
-
 const PuzzleTile = ({
   color,
   label,
@@ -169,29 +157,12 @@ const App = () => {
           `
         }}>
 
-        {/* Menu Bar */}
-        <div className="relative z-[60] h-7 flex-shrink-0 flex items-center justify-between px-3.5 select-none border-b"
-          style={{ background: "rgba(236,236,242,.85)", backdropFilter: "blur(24px)", borderColor: "rgba(0,0,0,.07)" }}>
-          <div className="flex items-center">
-            <span className="text-[13px] mr-1.5 opacity-75">⌘</span>
-            <span className="text-xs font-semibold text-foreground/80 px-2 h-7 flex items-center">Finder</span>
-            <span className="text-xs font-medium text-foreground/80 px-2 h-7 flex items-center">File</span>
-            <span className="text-xs font-medium text-foreground/80 px-2 h-7 flex items-center">Edit</span>
-            <span className="text-xs font-medium text-foreground/80 px-2 h-7 flex items-center hidden sm:flex">View</span>
-            <span className="text-xs font-medium text-foreground/80 px-2 h-7 flex items-center hidden sm:flex">Go</span>
-            <span className="text-xs font-medium text-foreground/80 px-2 h-7 flex items-center hidden md:flex">Window</span>
-            <span className="text-xs font-medium text-foreground/80 px-2 h-7 flex items-center hidden md:flex">Help</span>
-          </div>
-          <div className="flex items-center gap-2.5 text-xs text-foreground/75">
-            <span className="hidden sm:inline"><MenuBarClock /></span>
-            <span>🔋</span>
-            <span>◉</span>
-          </div>
-        </div>
+        {/* Navigation header at top of hero */}
+        <Navigation />
 
         {/* Desktop Surface */}
-        <div className="relative flex-1 overflow-hidden px-4 pb-24 pt-8 sm:px-6 md:px-8 lg:px-10 lg:pb-28 lg:pt-10">
-          <div className="absolute inset-x-0 top-4 z-[1] flex items-center justify-center overflow-hidden pointer-events-none md:top-0 lg:top-2" aria-hidden="true">
+        <div className="relative flex-1 overflow-hidden px-4 pb-24 pt-1 sm:px-6 md:px-8 lg:px-10 lg:pb-28 lg:pt-2">
+          <div className="absolute inset-x-0 -top-3 z-[1] flex items-center justify-center overflow-hidden pointer-events-none" aria-hidden="true">
             <span
               className="font-sans font-bold text-[clamp(72px,12vw,190px)] tracking-[0.14em] uppercase leading-none whitespace-nowrap"
               style={{ color: "hsl(var(--primary) / 0.12)" }}
@@ -200,8 +171,8 @@ const App = () => {
             </span>
           </div>
 
-          <div className="relative z-10 mx-auto flex h-full w-full max-w-[1500px] items-center justify-center">
-            <div className="grid w-full items-center gap-5 pt-24 md:grid-cols-[minmax(0,1.12fr)_minmax(320px,0.88fr)] md:pt-20 lg:grid-cols-[minmax(0,1.14fr)_minmax(380px,0.9fr)] lg:gap-0 lg:pt-16 xl:grid-cols-[minmax(0,1.12fr)_minmax(430px,0.88fr)]">
+          <div className="relative z-10 mx-auto flex h-full w-full max-w-[1500px] items-start justify-center">
+            <div className="grid w-full items-start gap-5 pt-10 md:grid-cols-[minmax(0,1.12fr)_minmax(320px,0.88fr)] md:pt-8 lg:grid-cols-[minmax(0,1.14fr)_minmax(380px,0.9fr)] lg:gap-0 lg:pt-6 xl:grid-cols-[minmax(0,1.12fr)_minmax(430px,0.88fr)]">
               <motion.div
                 className="relative z-20 overflow-hidden rounded-[28px]"
                 style={{
@@ -425,9 +396,6 @@ const App = () => {
           </button>
         </div>
       </section>
-
-      {/* ═══ NAVIGATION (sticky, below hero) ═══ */}
-      <Navigation />
 
       {/* ═══ SELECTED WORK — macOS window cards with ACTUAL images ═══ */}
       <section id="work" className="py-20 px-4 sm:px-8 md:px-10 border-t border-border bg-secondary/50">

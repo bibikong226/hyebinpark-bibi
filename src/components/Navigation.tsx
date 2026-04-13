@@ -43,13 +43,19 @@ export const Navigation = () => {
   };
 
   return (
-    <header className="sticky top-0 w-full z-50 bg-background border-b border-border">
-      <nav className="flex justify-between items-center px-4 sm:px-8 md:px-10 h-16">
+    <header className="sticky top-0 w-full z-50 border-b"
+      style={{
+        background: "rgba(236,236,242,.82)",
+        backdropFilter: "blur(24px) saturate(1.6)",
+        borderColor: "rgba(0,0,0,.08)",
+      }}>
+      <nav className="flex justify-between items-center px-4 sm:px-8 md:px-10 h-10">
         <Link 
           to="/" 
           onClick={handleLogoClick}
-          className="font-bold tracking-[0.08em] text-base uppercase text-foreground"
+          className="font-bold tracking-[0.08em] text-[13px] uppercase text-foreground/85"
         >
+          <span className="mr-1.5 opacity-60">⌘</span>
           Hyebin Park
         </Link>
 
@@ -62,14 +68,14 @@ export const Navigation = () => {
               onClick={(e) => !link.external && handleNavClick(e, link.href)}
               target={link.external ? "_blank" : undefined}
               rel={link.external ? "noopener noreferrer" : undefined}
-              className="text-[10px] font-medium tracking-[0.3em] uppercase text-foreground hover:opacity-55 transition-opacity"
+              className="text-[11px] font-medium tracking-[0.18em] uppercase text-foreground/75 hover:text-foreground transition-colors"
             >
               {link.label}
             </a>
           ))}
           <a
             href="mailto:hyebinp@umich.edu"
-            className="px-5 py-2 bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-opacity text-[13px] font-medium"
+            className="px-4 py-1.5 bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-opacity text-[11px] font-medium"
           >
             Contact
           </a>
