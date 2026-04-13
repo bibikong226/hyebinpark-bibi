@@ -288,7 +288,7 @@ const App = () => {
 
   // Testimonial Auto-scroll
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: ReturnType<typeof setInterval>;
     if (!isTestimonialHovered) {
       interval = setInterval(() => {
         setCurrentTestimonial(prev => (prev + 1) % testimonials.length);
