@@ -193,33 +193,31 @@ const App = () => {
                   <span className="flex-1 text-center text-xs font-medium text-muted-foreground">hyebin-park.portfolio</span>
                 </div>
 
-                <div className="flex flex-col gap-5 p-7 pb-7 sm:p-8 lg:min-h-[520px] lg:justify-center lg:p-10 xl:min-h-[560px] xl:p-12">
-                  <p className="text-[11px] font-medium tracking-[0.12em] uppercase text-muted-foreground">Hi, I am Hyebin Park.</p>
-
-                  <div className="space-y-1">
+                <div className="flex flex-col gap-6 p-8 pb-8 sm:p-9 lg:min-h-[520px] lg:justify-center lg:p-11 xl:min-h-[560px] xl:p-14">
+                  <div className="space-y-2">
                     <div className="flex flex-wrap items-baseline gap-2 md:gap-3">
-                      <span className="text-[clamp(20px,2vw,28px)] text-muted-foreground">Turning</span>
-                      <span className="font-serif text-[clamp(42px,5.3vw,76px)] italic text-primary leading-none">complexity</span>
+                      <span className="text-[clamp(22px,2.2vw,30px)] text-muted-foreground">Turning</span>
+                      <span className="font-serif text-[clamp(48px,5.8vw,82px)] italic text-primary leading-none">complexity</span>
                     </div>
                     <div className="flex flex-wrap items-baseline gap-2 md:gap-3">
-                      <span className="text-[clamp(20px,2vw,28px)] text-foreground/25">into</span>
-                      <span className="font-serif text-[clamp(42px,5.3vw,76px)] italic text-foreground leading-none">clarity.</span>
+                      <span className="text-[clamp(22px,2.2vw,30px)] text-muted-foreground">into</span>
+                      <span className="font-serif text-[clamp(48px,5.8vw,82px)] italic text-primary leading-none">clarity.</span>
                     </div>
                   </div>
 
-                  <p className="max-w-[44rem] text-base leading-[1.75] text-muted-foreground md:text-[1.1rem]">
+                  <p className="max-w-[44rem] text-[15px] leading-[1.8] text-muted-foreground md:text-[1.05rem]">
                     From AI algorithms to crypto workflows,<br className="hidden sm:block" />
                     I turn ambiguity into structured, usable products<br className="hidden sm:block" />
                     that drive real business impact.
                   </p>
 
-                  <div className="flex items-center gap-2 border-t border-border pt-4 text-base font-medium text-foreground md:text-[1.05rem]">
+                  <div className="flex items-center gap-2 border-t border-border pt-5 text-base font-medium text-foreground md:text-[1.05rem]">
                     🎓 MS-HCI @ University of Michigan
                   </div>
 
                   <div>
-                    <p className="mb-3 text-[11px] tracking-[0.12em] uppercase text-muted-foreground">Experience designing & researching for</p>
-                    <div className="flex flex-wrap items-center gap-3">
+                    <p className="mb-3.5 text-[11px] tracking-[0.12em] uppercase text-muted-foreground">Experience designing & researching for</p>
+                    <div className="flex flex-wrap items-center gap-3.5">
                       <img src={logoLine} alt="LINE" className="w-10 h-10 rounded-xl object-cover shadow-md" />
                       <img src={logoTiktok} alt="TikTok" className="w-10 h-10 rounded-xl object-cover shadow-md" />
                       <img src={logoGm} alt="GM" className="w-10 h-10 rounded-xl object-cover shadow-md" />
@@ -228,7 +226,7 @@ const App = () => {
                     </div>
                   </div>
 
-                  <div className="flex flex-wrap gap-3 pt-1">
+                  <div className="flex flex-wrap gap-3 pt-2">
                     <a href="mailto:hyebinp@umich.edu" className="inline-flex items-center gap-[5px] rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-all hover:-translate-y-px hover:opacity-90">
                       hyebinp@umich.edu ↗
                     </a>
@@ -283,7 +281,8 @@ const App = () => {
                 </div>
 
                 <div
-                  className="relative flex flex-col items-center bg-[#16161E] px-4 pb-4 pt-5 sm:px-5"
+                  className="relative flex flex-col items-center px-4 pb-4 pt-5 sm:px-5"
+                  style={{ background: "hsl(var(--secondary) / 0.5)" }}
                   onMouseEnter={() => setIsHovering(true)}
                   onMouseLeave={() => setIsHovering(false)}
                 >
@@ -326,17 +325,13 @@ const App = () => {
                           transition={{ duration: 0.5 }}
                           style={{ zIndex: 20 }}
                         >
-                          <img
-                            src={profilePhoto}
-                            alt="Hyebin Park"
-                            className="h-[240px] w-[328px] max-w-full rounded-xl object-cover object-top lg:h-[258px] lg:w-[348px]"
-                          />
+                          <img src={profilePhoto} alt="Hyebin Park" className="h-[240px] w-[328px] max-w-full rounded-xl object-cover object-top lg:h-[258px] lg:w-[348px]" />
                         </motion.div>
                       )}
                     </AnimatePresence>
                   </div>
 
-                  <p className="pb-1 pt-3 text-center text-[10px] tracking-[0.06em] text-white/30">
+                  <p className="pb-1 pt-3 text-center text-[10px] tracking-[0.06em] text-muted-foreground/40">
                     {puzzleStatus === 'assembled' ? '← scatter to replay' : 'pieces assembling…'}
                   </p>
                 </div>
@@ -344,14 +339,6 @@ const App = () => {
             </div>
           </div>
 
-          {/* Scroll cue */}
-          <div className="absolute bottom-[72px] left-1/2 -translate-x-1/2 flex flex-col items-center gap-[5px] pointer-events-none z-10"
-            style={{ animation: "bob 2s ease-in-out infinite" }}>
-            <span className="text-[9px] tracking-[0.12em] uppercase" style={{ color: "rgba(79,70,229,.38)" }}>scroll</span>
-            <svg width="14" height="18" viewBox="0 0 14 18" fill="none">
-              <path d="M7 2v12M2 10l5 5 5-5" stroke="hsl(243,75%,59%)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
         </div>
 
         {/* Dock */}
@@ -398,14 +385,14 @@ const App = () => {
       </section>
 
       {/* ═══ SELECTED WORK — macOS window cards with ACTUAL images ═══ */}
-      <section id="work" className="py-20 px-4 sm:px-8 md:px-10 border-t border-border bg-secondary/50">
-        <div className="max-w-[1100px] mx-auto">
+      <section id="work" className="py-24 px-4 sm:px-8 md:px-10 border-t border-border bg-secondary/50">
+        <div className="max-w-[1140px] mx-auto">
           <p className="text-[11px] font-medium tracking-[0.12em] uppercase text-primary mb-2.5">Selected Work</p>
           <h2 className="font-serif text-[clamp(26px,3.2vw,38px)] font-normal leading-[1.15] mb-11">
             A collection of projects where I've led<br className="hidden md:inline" /> design efforts to create impactful solutions.
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-7">
+          <div className="grid md:grid-cols-2 gap-10">
             {projects.map((project, idx) => {
               const dark = isDarkBg(project.id);
 
@@ -429,17 +416,16 @@ const App = () => {
                     </span>
                   </div>
 
-                  {/* Thumbnail with ACTUAL logo + mockup images */}
-                  <div className="w-full aspect-[16/10] relative overflow-hidden" style={{ background: project.imageColor }}>
-                    {/* Logo at top-left */}
-                    <div className="absolute left-5 md:left-7 top-5 md:top-6 z-10">
+                  {/* Thumbnail */}
+                  <div className="w-full aspect-[16/11] relative overflow-hidden" style={{ background: project.imageColor }}>
+                    <div className="absolute left-5 md:left-7 top-4 md:top-5 z-10">
                       <img
                         src={project.logo}
                         alt={`${project.title} logo`}
                         loading="lazy"
                         className={`w-auto object-contain ${
                           project.id === "gm"
-                            ? "h-16 md:h-24"
+                            ? "h-10 md:h-14"
                             : project.id === "nurturly"
                               ? "h-7 md:h-9"
                               : "h-8 md:h-12"
@@ -447,21 +433,12 @@ const App = () => {
                       />
                     </div>
 
-                    {/* Mockup image */}
-                    <div className={`absolute inset-0 flex items-center justify-center px-2 pb-2 ${
-                      project.id === "concord" || project.id === "openoff"
-                        ? "pt-6 md:pt-8"
-                        : "pt-12 md:pt-14"
-                    }`}>
+                    <div className="absolute inset-0 flex items-center justify-center px-2 pb-0 pt-8 md:pt-10">
                       <img
                         src={project.mockup}
                         alt={`${project.title} mockup`}
                         loading="lazy"
-                        className={`object-contain transition-transform duration-700 ${
-                          project.id === "concord" || project.id === "openoff"
-                            ? "max-h-[105%] max-w-[105%] scale-[1.05] group-hover:scale-[1.12]"
-                            : "max-h-full max-w-full group-hover:scale-105"
-                        }`}
+                        className="object-contain max-h-full max-w-full transition-transform duration-700 group-hover:scale-105"
                       />
                     </div>
                   </div>
