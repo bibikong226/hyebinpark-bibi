@@ -392,13 +392,13 @@ const App = () => {
           <h2 className="text-[clamp(42px,6vw,80px)] font-black leading-[1.05] tracking-tight mb-1">Strategic</h2>
           <h2 className="font-serif text-[clamp(42px,6vw,80px)] italic font-normal leading-[1.05] tracking-tight text-muted-foreground/30 mb-16">Outputs.</h2>
 
-          <div className="grid md:grid-cols-2 gap-x-8 gap-y-14">
+          <div className="grid md:grid-cols-2 gap-x-8 gap-y-14" style={{ gridAutoRows: "1fr" }}>
             {projects.map((project, idx) => {
               const dark = isDarkBg(project.id);
 
               const card = (
                 <motion.div
-                  className="rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-[7px] group"
+                  className="rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-[7px] group flex flex-col h-full"
                   style={{ boxShadow: "0 16px 50px rgba(0,0,0,.12), 0 4px 14px rgba(0,0,0,.07)" }}
                   initial={{ opacity: 0, y: 18 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -444,7 +444,7 @@ const App = () => {
                   </div>
 
                   {/* Content */}
-                  <div className="p-[20px_24px_22px]" style={{ background: project.imageColor }}>
+                  <div className="p-[20px_24px_22px] flex-1 flex flex-col" style={{ background: project.imageColor }}>
                     <div className="flex flex-wrap gap-[5px] mb-3">
                       {project.tags.map((tag, ti) => (
                         <span key={ti} className={`inline-block px-2.5 py-[3px] rounded-full text-[10.5px] font-medium border ${dark ? "bg-white/10 text-white/75 border-white/[0.08]" : "bg-black/[0.09] text-black/[0.72] border-black/[0.07]"}`}>
