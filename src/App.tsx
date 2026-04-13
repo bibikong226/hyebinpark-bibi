@@ -61,6 +61,80 @@ const PuzzleTile = ({
   </div>
 );
 
+/* ── Testimonial Carousel ── */
+const TestimonialCarousel = ({ testimonials }: { testimonials: { id: string; author: string; role: string; company: string; text: string; subtext: string }[] }) => {
+  const [active, setActive] = useState(0);
+  const total = testimonials.length;
+
+  useEffect(() => {
+    const timer = setInterval(() => setActive(prev => (prev + 1) % total), 6000);
+    return () => clearInterval(timer);
+  }, [total]);
+
+  const t = testimonials[active];
+
+  return (
+    <div className="relative">
+      {/* Main featured quote — macOS window */}
+      <motion.div
+        className="rounded-xl overflow-hidden"
+        style={{
+          background: "hsl(var(--background) / 0.97)",
+          backdropFilter: "blur(20px)",
+          border: "1px solid hsl(var(--foreground) / 0.08)",
+          boxShadow: "0 16px 50px rgba(0,0,0,.1), 0 4px 14px rgba(0,0,0,.05)",
+        }}
+      >
+        <div className="h-9 flex items-center px-3.5 gap-3 border-b"
+          style={{ background: "hsl(var(--secondary) / 0.86)", borderColor: "hsl(var(--foreground) / 0.06)" }}>
+          <TitleBarDots />
+          <span className="flex-1 text-center text-[10.5px] font-medium text-muted-foreground">
+            testimonials.txt — {active + 1}/{total}
+          </span>
+        </div>
+
+        <div className="p-8 md:p-12 lg:p-16 min-h-[280px] flex flex-col justify-center">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={t.id}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.4 }}
+              className="space-y-6"
+            >
+              <p className="font-serif text-[clamp(18px,2.2vw,28px)] italic leading-[1.6] text-foreground/90">
+                "{t.text}"
+              </p>
+              <p className="text-sm md:text-base leading-[1.7] text-muted-foreground max-w-2xl">
+                {t.subtext}
+              </p>
+              <div className="pt-2">
+                <div className="text-sm font-semibold">{t.author}</div>
+                <div className="text-xs text-muted-foreground">{t.role}, <span className="text-primary">{t.company}</span></div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </motion.div>
+
+      {/* Navigation dots + names */}
+      <div className="flex items-center justify-center gap-4 mt-8">
+        {testimonials.map((item, i) => (
+          <button
+            key={item.id}
+            onClick={() => setActive(i)}
+            className={`flex flex-col items-center gap-2 transition-all duration-300 group ${i === active ? "opacity-100" : "opacity-40 hover:opacity-70"}`}
+          >
+            <div className={`h-1 rounded-full transition-all duration-500 ${i === active ? "w-8 bg-primary" : "w-4 bg-muted-foreground"}`} />
+            <span className="text-[11px] font-medium text-muted-foreground hidden sm:block">{item.author.split(" ")[0]}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const App = () => {
   const [animationPhase, setAnimationPhase] = useState<'scattered' | 'assembling' | 'assembled' | 'photo'>('scattered');
   const [isHovering, setIsHovering] = useState(false);
@@ -162,18 +236,18 @@ const App = () => {
         <Navigation />
 
         {/* Desktop Surface */}
-        <div className="relative flex-1 overflow-hidden px-4 pb-24 pt-6 sm:px-6 md:px-8 lg:px-10 lg:pb-28 lg:pt-8">
-          <div className="absolute inset-x-0 top-3 z-[1] flex items-center justify-center overflow-hidden pointer-events-none lg:top-5" aria-hidden="true">
+        <div className="relative flex-1 overflow-hidden px-4 pb-24 pt-10 sm:px-6 md:px-8 lg:px-10 lg:pb-28 lg:pt-14">
+          <div className="absolute inset-x-0 top-8 z-[1] flex items-center justify-center overflow-hidden pointer-events-none lg:top-12" aria-hidden="true">
             <span
               className="font-sans font-black text-[clamp(72px,12vw,190px)] tracking-[0.14em] uppercase leading-none whitespace-nowrap select-none"
-              style={{ color: "hsl(var(--primary) / 0.18)" }}
+              style={{ color: "hsl(var(--foreground) / 0.08)" }}
             >
               HYEBIN PARK
             </span>
           </div>
 
           <div className="relative z-10 mx-auto flex h-full w-full max-w-[1500px] items-start justify-center">
-            <div className="grid w-full items-start gap-5 pt-20 md:grid-cols-[minmax(0,1.12fr)_minmax(320px,0.88fr)] md:pt-18 lg:grid-cols-[minmax(0,1.14fr)_minmax(380px,0.9fr)] lg:gap-0 lg:pt-16 xl:grid-cols-[minmax(0,1.12fr)_minmax(430px,0.88fr)]">
+            <div className="grid w-full items-start gap-5 pt-28 md:grid-cols-[minmax(0,1.12fr)_minmax(320px,0.88fr)] md:pt-24 lg:grid-cols-[minmax(0,1.14fr)_minmax(380px,0.9fr)] lg:gap-0 lg:pt-24 xl:grid-cols-[minmax(0,1.12fr)_minmax(430px,0.88fr)]">
               <motion.div
                 className="relative z-20 overflow-hidden rounded-[28px]"
                 style={{
@@ -392,13 +466,13 @@ const App = () => {
           <h2 className="text-[clamp(42px,6vw,80px)] font-black leading-[1.05] tracking-tight mb-1">Strategic</h2>
           <h2 className="font-serif text-[clamp(42px,6vw,80px)] italic font-normal leading-[1.05] tracking-tight text-muted-foreground/30 mb-16">Outputs.</h2>
 
-          <div className="grid md:grid-cols-2 gap-x-8 gap-y-14">
+          <div className="grid md:grid-cols-2 gap-x-8 gap-y-14" style={{ gridAutoRows: "1fr" }}>
             {projects.map((project, idx) => {
               const dark = isDarkBg(project.id);
 
               const card = (
                 <motion.div
-                  className="rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-[7px] group"
+                  className="rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-[7px] group flex flex-col h-full"
                   style={{ boxShadow: "0 16px 50px rgba(0,0,0,.12), 0 4px 14px rgba(0,0,0,.07)" }}
                   initial={{ opacity: 0, y: 18 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -444,7 +518,7 @@ const App = () => {
                   </div>
 
                   {/* Content */}
-                  <div className="p-[20px_24px_22px]" style={{ background: project.imageColor }}>
+                  <div className="p-[20px_24px_22px] flex-1 flex flex-col" style={{ background: project.imageColor }}>
                     <div className="flex flex-wrap gap-[5px] mb-3">
                       {project.tags.map((tag, ti) => (
                         <span key={ti} className={`inline-block px-2.5 py-[3px] rounded-full text-[10.5px] font-medium border ${dark ? "bg-white/10 text-white/75 border-white/[0.08]" : "bg-black/[0.09] text-black/[0.72] border-black/[0.07]"}`}>
@@ -474,7 +548,7 @@ const App = () => {
                     </div>
 
                     {/* Arrow */}
-                    <div className="flex">
+                    <div className="flex mt-auto pt-2">
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm transition-all duration-300 group-hover:rotate-45 ${dark ? "bg-white/15 text-white/70 group-hover:bg-white/90 group-hover:text-black" : "bg-white/70 text-black/60 group-hover:bg-black/[0.82] group-hover:text-white"}`}>
                         ↗
                       </div>
@@ -500,7 +574,7 @@ const App = () => {
         </div>
       </section>
 
-      {/* ═══ TESTIMONIALS — macOS window cards ═══ */}
+      {/* ═══ TESTIMONIALS — Featured quote carousel ═══ */}
       <section id="collab" className="py-28 sm:py-32 px-4 sm:px-8 md:px-10 border-t border-border">
         <div className="max-w-[1060px] mx-auto">
           <p className="text-[11px] font-medium tracking-[0.3em] uppercase text-muted-foreground mb-4">Collaboration</p>
@@ -508,41 +582,7 @@ const App = () => {
             Words from people<br className="hidden sm:block" />I've worked alongside.
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            {testimonials.map((t, i) => (
-              <motion.div
-                key={t.id}
-                className="rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-                style={{
-                  background: "hsl(var(--background) / 0.97)",
-                  backdropFilter: "blur(20px)",
-                  border: "1px solid hsl(var(--foreground) / 0.08)",
-                  boxShadow: "0 8px 32px rgba(0,0,0,.08), 0 2px 8px rgba(0,0,0,.04)",
-                }}
-                initial={{ opacity: 0, y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-              >
-                <div className="h-9 flex items-center px-3.5 gap-3 border-b"
-                  style={{ background: "hsl(var(--secondary) / 0.86)", borderColor: "hsl(var(--foreground) / 0.06)" }}>
-                  <TitleBarDots />
-                  <span className="flex-1 text-center text-[10.5px] font-medium text-muted-foreground">
-                    {t.company} — {t.role}
-                  </span>
-                </div>
-                <div className="p-6 flex flex-col gap-4">
-                  <div className="text-3xl font-serif text-primary/30 leading-none">"</div>
-                  <p className="font-serif text-[15px] italic leading-[1.8] text-foreground -mt-3">{t.text}</p>
-                  <p className="font-serif text-[13.5px] italic leading-[1.7] text-muted-foreground">{t.subtext}"</p>
-                  <div className="border-t border-border pt-3 mt-1">
-                    <div className="text-sm font-semibold">{t.author}</div>
-                    <div className="text-xs text-muted-foreground">{t.role}, <span className="text-primary">{t.company}</span></div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <TestimonialCarousel testimonials={testimonials} />
         </div>
       </section>
 
