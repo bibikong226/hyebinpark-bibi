@@ -83,7 +83,8 @@ const App = () => {
       setPuzzleStatus('assembling');
       const t1 = setTimeout(() => { setAnimationPhase('assembled'); setPuzzleStatus('assembled'); }, 800);
       const t2 = setTimeout(() => setAnimationPhase('photo'), 2000);
-      return () => { clearTimeout(t1); clearTimeout(t2); };
+
+      return () => { clearTimeout(t1); clearTimeout(t2);};
     } else {
       setAnimationPhase('scattered');
       setPuzzleStatus('assembling');
