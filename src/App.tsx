@@ -161,8 +161,8 @@ const App = () => {
         <Navigation />
 
         {/* Desktop Surface */}
-        <div className="relative flex-1 overflow-hidden px-4 pb-24 pt-1 sm:px-6 md:px-8 lg:px-10 lg:pb-28 lg:pt-2">
-          <div className="absolute inset-x-0 -top-3 z-[1] flex items-center justify-center overflow-hidden pointer-events-none" aria-hidden="true">
+        <div className="relative flex-1 overflow-hidden px-4 pb-24 pt-6 sm:px-6 md:px-8 lg:px-10 lg:pb-28 lg:pt-8">
+          <div className="absolute inset-x-0 top-2 z-[1] flex items-center justify-center overflow-hidden pointer-events-none lg:top-4" aria-hidden="true">
             <span
               className="font-sans font-bold text-[clamp(72px,12vw,190px)] tracking-[0.14em] uppercase leading-none whitespace-nowrap"
               style={{ color: "hsl(var(--primary) / 0.12)" }}
@@ -172,7 +172,7 @@ const App = () => {
           </div>
 
           <div className="relative z-10 mx-auto flex h-full w-full max-w-[1500px] items-start justify-center">
-            <div className="grid w-full items-start gap-5 pt-10 md:grid-cols-[minmax(0,1.12fr)_minmax(320px,0.88fr)] md:pt-8 lg:grid-cols-[minmax(0,1.14fr)_minmax(380px,0.9fr)] lg:gap-0 lg:pt-6 xl:grid-cols-[minmax(0,1.12fr)_minmax(430px,0.88fr)]">
+            <div className="grid w-full items-start gap-5 pt-20 md:grid-cols-[minmax(0,1.12fr)_minmax(320px,0.88fr)] md:pt-18 lg:grid-cols-[minmax(0,1.14fr)_minmax(380px,0.9fr)] lg:gap-0 lg:pt-16 xl:grid-cols-[minmax(0,1.12fr)_minmax(430px,0.88fr)]">
               <motion.div
                 className="relative z-20 overflow-hidden rounded-[28px]"
                 style={{
