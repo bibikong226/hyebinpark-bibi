@@ -236,18 +236,18 @@ const App = () => {
         <Navigation />
 
         {/* Desktop Surface */}
-        <div className="relative flex-1 overflow-hidden px-4 pb-24 pt-14 sm:px-6 md:px-8 lg:px-10 lg:pb-28 lg:pt-20">
-          <div className="absolute inset-x-0 top-10 z-[1] flex items-center justify-center overflow-hidden pointer-events-none lg:top-16" aria-hidden="true">
+        <div className="relative flex-1 overflow-hidden px-4 pb-28 pt-20 sm:px-6 md:px-8 lg:px-10 lg:pb-32 lg:pt-28">
+          <div className="absolute inset-x-0 top-6 z-[1] flex items-center justify-center overflow-hidden pointer-events-none lg:top-10" aria-hidden="true">
             <span
               className="font-sans font-black text-[clamp(72px,12vw,190px)] tracking-[0.14em] uppercase leading-none whitespace-nowrap select-none"
-              style={{ color: "hsl(0 0% 72% / 0.45)" }}
+              style={{ color: "hsl(0 0% 78% / 0.5)" }}
             >
               HYEBIN PARK
             </span>
           </div>
 
           <div className="relative z-10 mx-auto flex h-full w-full max-w-[1500px] items-start justify-center">
-            <div className="grid w-full items-start gap-5 pt-36 md:grid-cols-[minmax(0,1.12fr)_minmax(320px,0.88fr)] md:pt-32 lg:grid-cols-[minmax(0,1.14fr)_minmax(380px,0.9fr)] lg:gap-0 lg:pt-32 xl:grid-cols-[minmax(0,1.12fr)_minmax(430px,0.88fr)]">
+            <div className="grid w-full items-start gap-6 pt-44 md:grid-cols-[minmax(0,1.12fr)_minmax(320px,0.88fr)] md:pt-40 lg:grid-cols-[minmax(0,1.14fr)_minmax(380px,0.9fr)] lg:gap-0 lg:pt-44 xl:grid-cols-[minmax(0,1.12fr)_minmax(430px,0.88fr)]">
               <motion.div
                 className="relative z-20 overflow-hidden rounded-[28px]"
                 style={{
@@ -416,119 +416,120 @@ const App = () => {
 
         </div>
 
-        {/* Dock — matches header style */}
-        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-6 px-6 py-2 rounded-full z-30"
+        {/* Dock — icon style matching header */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1 px-3 py-2 rounded-2xl z-30"
           style={{
-            background: "rgba(236,236,242,.82)",
+            background: "rgba(236,236,242,.72)",
             backdropFilter: "blur(24px) saturate(1.6)",
-            border: "1px solid rgba(0,0,0,.08)",
+            border: "1px solid rgba(0,0,0,.06)",
+            boxShadow: "0 8px 32px rgba(0,0,0,.08)",
           }}>
           {[
-            { label: "WORK", action: () => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" }) },
-            { label: "EXPLORE", action: () => document.getElementById("explore")?.scrollIntoView({ behavior: "smooth" }) },
-            { label: "COLLAB", action: () => document.getElementById("collab")?.scrollIntoView({ behavior: "smooth" }) },
+            { label: "Work", icon: "💼", action: () => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" }) },
+            { label: "Explore", icon: "🔍", action: () => document.getElementById("explore")?.scrollIntoView({ behavior: "smooth" }) },
+            { label: "About", icon: "👤", action: () => window.location.href = "/about" },
+            { label: "CV", icon: "📄", action: () => window.open("https://drive.google.com/file/d/1l2V4pQCjAZhIhLyRmVh3m2QTw87yLI6P/view?usp=sharing", "_blank") },
+            { label: "Contact", icon: "✉️", action: () => window.location.href = "mailto:hyebinp@umich.edu" },
           ].map((item) => (
             <button key={item.label} onClick={item.action}
-              className="text-[11px] font-medium tracking-[0.18em] uppercase text-foreground/75 hover:text-foreground transition-colors">
-              {item.label}
+              className="flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl hover:bg-white/50 transition-colors group">
+              <span className="text-xl group-hover:scale-110 transition-transform">{item.icon}</span>
+              <span className="text-[9px] font-medium text-foreground/60">{item.label}</span>
             </button>
           ))}
         </div>
       </section>
 
-      {/* ═══ SELECTED WORK — macOS window cards with ACTUAL images ═══ */}
-      <section id="work" className="py-28 sm:py-32 px-4 sm:px-8 md:px-10 border-t border-border bg-secondary/50">
-        <div className="max-w-[1060px] mx-auto">
+      {/* ═══ SELECTED WORK — reference-style cards with macOS title bar ═══ */}
+      <section id="work" className="py-28 sm:py-36 px-4 sm:px-8 md:px-10 border-t border-border bg-secondary/50">
+        <div className="max-w-[1200px] mx-auto">
           <p className="text-[11px] font-medium tracking-[0.3em] uppercase text-muted-foreground mb-4">Selected Work</p>
           <h2 className="text-[clamp(42px,6vw,80px)] font-black leading-[1.05] tracking-tight mb-1">Strategic</h2>
-          <h2 className="font-serif text-[clamp(42px,6vw,80px)] italic font-normal leading-[1.05] tracking-tight text-muted-foreground/30 mb-16">Outputs.</h2>
+          <h2 className="font-serif text-[clamp(42px,6vw,80px)] italic font-normal leading-[1.05] tracking-tight text-muted-foreground/30 mb-20">Outputs.</h2>
 
-          <div className="grid md:grid-cols-2 gap-x-8 gap-y-14" style={{ gridAutoRows: "1fr" }}>
+          <div className="grid md:grid-cols-2 gap-x-10 gap-y-16">
             {projects.map((project, idx) => {
               const dark = isDarkBg(project.id);
 
               const card = (
                 <motion.div
-                  className="rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-[7px] group flex flex-col h-full"
-                  style={{ boxShadow: "0 16px 50px rgba(0,0,0,.12), 0 4px 14px rgba(0,0,0,.07)" }}
+                  className="rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-[6px] group flex flex-col"
+                  style={{ boxShadow: "0 12px 40px rgba(0,0,0,.1), 0 4px 12px rgba(0,0,0,.06)" }}
                   initial={{ opacity: 0, y: 18 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.08 }}
-                  whileHover={{ boxShadow: "0 28px 75px rgba(0,0,0,.15), 0 8px 22px rgba(0,0,0,.08)" }}
+                  whileHover={{ boxShadow: "0 24px 60px rgba(0,0,0,.14), 0 8px 20px rgba(0,0,0,.08)" }}
                   key={project.id}
                 >
-                  {/* Title bar */}
-                  <div className="h-[38px] flex items-center px-3.5 gap-3 border-b"
-                    style={{ background: "rgba(240,239,245,.97)", borderColor: "rgba(0,0,0,.07)" }}>
-                    <TitleBarDots />
-                    <span className="flex-1 text-center text-[11.5px] font-medium text-muted-foreground">
-                      {project.id}.portfolio — {project.role}
-                    </span>
-                  </div>
-
-                  {/* Thumbnail */}
-                  <div className="w-full aspect-[16/10] relative overflow-hidden" style={{ background: project.imageColor }}>
-                    <div className="absolute left-5 md:left-7 top-4 md:top-5 z-10">
+                  {/* Thumbnail — large, full width */}
+                  <div className="w-full aspect-[16/9] relative overflow-hidden" style={{ background: project.imageColor }}>
+                    {/* Logo pill top-left */}
+                    <div className="absolute left-4 md:left-6 top-4 md:top-5 z-10">
                       <img
                         src={project.logo}
                         alt={`${project.title} logo`}
                         loading="lazy"
                         className={`w-auto object-contain ${
                           project.id === "gm"
-                            ? "h-10 md:h-14"
+                            ? "h-8 md:h-10"
                             : project.id === "nurturly"
-                              ? "h-7 md:h-9"
-                              : "h-8 md:h-12"
+                              ? "h-5 md:h-6"
+                              : "h-6 md:h-9"
                         }`}
                       />
                     </div>
 
-                    <div className="absolute inset-0 flex items-center justify-center px-2 pb-0 pt-8 md:pt-10">
+                    {/* Mockup centered */}
+                    <div className="absolute inset-0 flex items-end justify-center px-4 pt-10 md:pt-12">
                       <img
                         src={project.mockup}
                         alt={`${project.title} mockup`}
                         loading="lazy"
-                        className="object-contain max-h-full max-w-full transition-transform duration-700 group-hover:scale-105"
+                        className={`object-contain max-w-full transition-transform duration-700 group-hover:scale-[1.03] ${
+                          project.id === "concord" ? "max-h-[95%]" : "max-h-[88%]"
+                        }`}
                       />
+                    </div>
+
+                    {/* VIEW pill */}
+                    <div className="absolute bottom-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="px-4 py-1.5 rounded-full bg-white/90 text-[11px] font-semibold tracking-wider uppercase text-foreground/80 shadow-md">
+                        VIEW
+                      </div>
                     </div>
                   </div>
 
-                  {/* Content */}
-                  <div className="p-[20px_24px_22px] flex-1 flex flex-col" style={{ background: project.imageColor }}>
-                    <div className="flex flex-wrap gap-[5px] mb-3">
+                  {/* Content below image — white/light bg */}
+                  <div className="p-6 md:p-7 flex-1 flex flex-col bg-background">
+                    <h3 className="font-serif text-[22px] md:text-[26px] font-semibold leading-[1.2] mb-2 text-foreground">
+                      {project.title}
+                    </h3>
+                    <p className="text-[13.5px] md:text-[14.5px] leading-[1.65] text-muted-foreground mb-4 max-w-[440px]">
+                      {project.description}
+                    </p>
+
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-[5px] mb-4">
                       {project.tags.map((tag, ti) => (
-                        <span key={ti} className={`inline-block px-2.5 py-[3px] rounded-full text-[10.5px] font-medium border ${dark ? "bg-white/10 text-white/75 border-white/[0.08]" : "bg-black/[0.09] text-black/[0.72] border-black/[0.07]"}`}>
+                        <span key={ti} className="inline-block px-2.5 py-[3px] rounded-full text-[10.5px] font-medium border bg-secondary text-muted-foreground border-border">
                           {tag}
                         </span>
                       ))}
                     </div>
-                    <div className={`font-serif text-[22px] font-normal leading-[1.2] mb-[7px] ${dark ? "text-white/90" : "text-black/85"}`}>
-                      {project.title}
-                    </div>
-                    <p className={`text-[13.5px] leading-[1.65] mb-[13px] max-w-[400px] ${dark ? "text-white/[0.58]" : "text-black/[0.68]"}`}>
-                      {project.description}
-                    </p>
 
-                    {/* Highlights with hover fill */}
-                    <div className="flex flex-wrap gap-[6px] mb-[15px]">
+                    {/* Highlights */}
+                    <div className="flex flex-wrap gap-[6px] mt-auto">
                       {project.highlights.map((hl, hi) => (
                         <div key={hi} className="relative overflow-hidden rounded-[7px] px-3 py-[6px] cursor-default">
-                          <div className={`absolute inset-0 ${dark ? "bg-white/12" : "bg-white/45"}`} />
+                          <div className="absolute inset-0 bg-secondary" />
                           <div className="absolute inset-0 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-[450ms] ease-out z-0"
                             style={{ background: project.accentColor }} />
-                          <span className={`relative z-10 text-xs font-medium transition-colors duration-[350ms] group-hover:text-white ${dark ? "text-white/80" : "text-black/75"}`}>
+                          <span className="relative z-10 text-xs font-medium transition-colors duration-[350ms] group-hover:text-white text-foreground/75">
                             {hl}
                           </span>
                         </div>
                       ))}
-                    </div>
-
-                    {/* Arrow */}
-                    <div className="flex mt-auto pt-2">
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm transition-all duration-300 group-hover:rotate-45 ${dark ? "bg-white/15 text-white/70 group-hover:bg-white/90 group-hover:text-black" : "bg-white/70 text-black/60 group-hover:bg-black/[0.82] group-hover:text-white"}`}>
-                        ↗
-                      </div>
                     </div>
                   </div>
                 </motion.div>
