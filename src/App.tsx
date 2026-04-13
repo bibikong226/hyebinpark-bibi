@@ -61,6 +61,80 @@ const PuzzleTile = ({
   </div>
 );
 
+/* ── Testimonial Carousel ── */
+const TestimonialCarousel = ({ testimonials }: { testimonials: { id: string; author: string; role: string; company: string; text: string; subtext: string }[] }) => {
+  const [active, setActive] = useState(0);
+  const total = testimonials.length;
+
+  useEffect(() => {
+    const timer = setInterval(() => setActive(prev => (prev + 1) % total), 6000);
+    return () => clearInterval(timer);
+  }, [total]);
+
+  const t = testimonials[active];
+
+  return (
+    <div className="relative">
+      {/* Main featured quote — macOS window */}
+      <motion.div
+        className="rounded-xl overflow-hidden"
+        style={{
+          background: "hsl(var(--background) / 0.97)",
+          backdropFilter: "blur(20px)",
+          border: "1px solid hsl(var(--foreground) / 0.08)",
+          boxShadow: "0 16px 50px rgba(0,0,0,.1), 0 4px 14px rgba(0,0,0,.05)",
+        }}
+      >
+        <div className="h-9 flex items-center px-3.5 gap-3 border-b"
+          style={{ background: "hsl(var(--secondary) / 0.86)", borderColor: "hsl(var(--foreground) / 0.06)" }}>
+          <TitleBarDots />
+          <span className="flex-1 text-center text-[10.5px] font-medium text-muted-foreground">
+            testimonials.txt — {active + 1}/{total}
+          </span>
+        </div>
+
+        <div className="p-8 md:p-12 lg:p-16 min-h-[280px] flex flex-col justify-center">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={t.id}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.4 }}
+              className="space-y-6"
+            >
+              <p className="font-serif text-[clamp(18px,2.2vw,28px)] italic leading-[1.6] text-foreground/90">
+                "{t.text}"
+              </p>
+              <p className="text-sm md:text-base leading-[1.7] text-muted-foreground max-w-2xl">
+                {t.subtext}
+              </p>
+              <div className="pt-2">
+                <div className="text-sm font-semibold">{t.author}</div>
+                <div className="text-xs text-muted-foreground">{t.role}, <span className="text-primary">{t.company}</span></div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </motion.div>
+
+      {/* Navigation dots + names */}
+      <div className="flex items-center justify-center gap-4 mt-8">
+        {testimonials.map((item, i) => (
+          <button
+            key={item.id}
+            onClick={() => setActive(i)}
+            className={`flex flex-col items-center gap-2 transition-all duration-300 group ${i === active ? "opacity-100" : "opacity-40 hover:opacity-70"}`}
+          >
+            <div className={`h-1 rounded-full transition-all duration-500 ${i === active ? "w-8 bg-primary" : "w-4 bg-muted-foreground"}`} />
+            <span className="text-[11px] font-medium text-muted-foreground hidden sm:block">{item.author.split(" ")[0]}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const App = () => {
   const [animationPhase, setAnimationPhase] = useState<'scattered' | 'assembling' | 'assembled' | 'photo'>('scattered');
   const [isHovering, setIsHovering] = useState(false);
