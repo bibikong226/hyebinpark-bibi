@@ -175,13 +175,13 @@ const App = () => {
       setPuzzleStatus('assembling');
       for (let i = 0; i < puzzlePieces.length; i++) {
         if (cancelled) return;
-        await new Promise(r => setTimeout(r, 550));
+        await new Promise(r => setTimeout(r, 800));
         setVisiblePieces(prev => [...prev, i]);
       }
-      await new Promise(r => setTimeout(r, 3000));
+      await new Promise(r => setTimeout(r, 3500));
       if (cancelled) return;
       setAnimationPhase('assembling');
-      await new Promise(r => setTimeout(r, 1400));
+      await new Promise(r => setTimeout(r, 2000));
       if (cancelled) return;
       setAnimationPhase('assembled');
       setPuzzleStatus('assembled');
@@ -236,18 +236,18 @@ const App = () => {
         <Navigation />
 
         {/* Desktop Surface */}
-        <div className="relative flex-1 overflow-hidden px-4 pb-24 pt-10 sm:px-6 md:px-8 lg:px-10 lg:pb-28 lg:pt-14">
-          <div className="absolute inset-x-0 top-8 z-[1] flex items-center justify-center overflow-hidden pointer-events-none lg:top-12" aria-hidden="true">
+        <div className="relative flex-1 overflow-hidden px-4 pb-24 pt-14 sm:px-6 md:px-8 lg:px-10 lg:pb-28 lg:pt-20">
+          <div className="absolute inset-x-0 top-10 z-[1] flex items-center justify-center overflow-hidden pointer-events-none lg:top-16" aria-hidden="true">
             <span
               className="font-sans font-black text-[clamp(72px,12vw,190px)] tracking-[0.14em] uppercase leading-none whitespace-nowrap select-none"
-              style={{ color: "hsl(var(--foreground) / 0.08)" }}
+              style={{ color: "hsl(0 0% 72% / 0.45)" }}
             >
               HYEBIN PARK
             </span>
           </div>
 
           <div className="relative z-10 mx-auto flex h-full w-full max-w-[1500px] items-start justify-center">
-            <div className="grid w-full items-start gap-5 pt-28 md:grid-cols-[minmax(0,1.12fr)_minmax(320px,0.88fr)] md:pt-24 lg:grid-cols-[minmax(0,1.14fr)_minmax(380px,0.9fr)] lg:gap-0 lg:pt-24 xl:grid-cols-[minmax(0,1.12fr)_minmax(430px,0.88fr)]">
+            <div className="grid w-full items-start gap-5 pt-36 md:grid-cols-[minmax(0,1.12fr)_minmax(320px,0.88fr)] md:pt-32 lg:grid-cols-[minmax(0,1.14fr)_minmax(380px,0.9fr)] lg:gap-0 lg:pt-32 xl:grid-cols-[minmax(0,1.12fr)_minmax(430px,0.88fr)]">
               <motion.div
                 className="relative z-20 overflow-hidden rounded-[28px]"
                 style={{
@@ -378,9 +378,9 @@ const App = () => {
                             }}
                             exit={{ opacity: 0, scale: 1.02, transition: { duration: 0.4, delay: i * 0.02 } }}
                             transition={{
-                              duration: animationPhase === "scattered" ? 0.8 : 1.2,
+                              duration: animationPhase === "scattered" ? 1.0 : 1.6,
                               ease: [0.25, 0.46, 0.45, 0.94],
-                              delay: animationPhase === "scattered" ? 0 : i * 0.25,
+                              delay: animationPhase === "scattered" ? 0 : i * 0.35,
                             }}
                             style={{ willChange: "transform", zIndex: animationPhase === "scattered" ? 6 - i : i + 1 }}
                           >
@@ -416,46 +416,23 @@ const App = () => {
 
         </div>
 
-        {/* Dock */}
-        <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex items-end gap-2 px-4 py-2 rounded-[18px] z-30"
+        {/* Dock — matches header style */}
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-6 px-6 py-2 rounded-full z-30"
           style={{
-            background: "rgba(215,212,228,.55)",
-            backdropFilter: "blur(20px)",
-            border: "1px solid rgba(255,255,255,.65)",
-            boxShadow: "0 4px 20px rgba(0,0,0,.10), inset 0 1px 0 rgba(255,255,255,.55)",
+            background: "rgba(236,236,242,.82)",
+            backdropFilter: "blur(24px) saturate(1.6)",
+            border: "1px solid rgba(0,0,0,.08)",
           }}>
           {[
-            { emoji: "🗂️", gradient: "linear-gradient(145deg,#818CF8,#4F46E5)", label: "Finder", action: () => window.scrollTo({ top: 0, behavior: "smooth" }) },
-            { emoji: "💼", gradient: "linear-gradient(145deg,#F9A8D4,#EC4899)", label: "Work", action: () => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" }) },
-            { emoji: "💬", gradient: "linear-gradient(145deg,#FDE68A,#F59E0B)", label: "Collaboration", action: () => document.getElementById("collab")?.scrollIntoView({ behavior: "smooth" }) },
+            { label: "WORK", action: () => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" }) },
+            { label: "EXPLORE", action: () => document.getElementById("explore")?.scrollIntoView({ behavior: "smooth" }) },
+            { label: "COLLAB", action: () => document.getElementById("collab")?.scrollIntoView({ behavior: "smooth" }) },
           ].map((item) => (
             <button key={item.label} onClick={item.action}
-              className="flex flex-col items-center gap-[3px] relative group transition-transform duration-200 hover:-translate-y-2.5 hover:scale-[1.22]">
-              <div className="w-11 h-11 rounded-[11px] flex items-center justify-center text-[22px]"
-                style={{ background: item.gradient, boxShadow: "0 2px 8px rgba(0,0,0,.18)" }}>
-                {item.emoji}
-              </div>
-              <div className="w-1 h-1 rounded-full bg-black/[0.38]" />
-              <span className="absolute bottom-[calc(100%+10px)] left-1/2 -translate-x-1/2 translate-y-1 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-150 pointer-events-none px-2 py-[3px] rounded-[5px] text-[10px] text-white whitespace-nowrap"
-                style={{ background: "rgba(28,26,38,.82)" }}>
-                {item.label}
-              </span>
+              className="text-[11px] font-medium tracking-[0.18em] uppercase text-foreground/75 hover:text-foreground transition-colors">
+              {item.label}
             </button>
           ))}
-
-          <div className="w-px h-11 mx-0.5" style={{ background: "rgba(0,0,0,.11)" }} />
-
-          <button onClick={() => document.getElementById("cta-section")?.scrollIntoView({ behavior: "smooth" })}
-            className="flex flex-col items-center gap-[3px] relative group transition-transform duration-200 hover:-translate-y-2.5 hover:scale-[1.22]">
-            <div className="w-11 h-11 rounded-[11px] flex items-center justify-center text-[22px]"
-              style={{ background: "linear-gradient(145deg,#FCA5A5,#DC2626)", boxShadow: "0 2px 8px rgba(0,0,0,.18)" }}>
-              ✉️
-            </div>
-            <span className="absolute bottom-[calc(100%+10px)] left-1/2 -translate-x-1/2 translate-y-1 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-150 pointer-events-none px-2 py-[3px] rounded-[5px] text-[10px] text-white whitespace-nowrap"
-              style={{ background: "rgba(28,26,38,.82)" }}>
-              Contact
-            </span>
-          </button>
         </div>
       </section>
 
