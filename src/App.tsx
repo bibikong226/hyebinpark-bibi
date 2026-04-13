@@ -236,11 +236,11 @@ const App = () => {
         <Navigation />
 
         {/* Desktop Surface */}
-        <div className="relative flex-1 overflow-hidden px-4 pb-24 pt-14 sm:px-6 md:px-8 lg:px-10 lg:pb-28 lg:pt-20">
-          <div className="absolute inset-x-0 top-10 z-[1] flex items-center justify-center overflow-hidden pointer-events-none lg:top-16" aria-hidden="true">
+        <div className="relative flex-1 overflow-hidden px-4 pb-28 pt-20 sm:px-6 md:px-8 lg:px-10 lg:pb-32 lg:pt-28">
+          <div className="absolute inset-x-0 top-6 z-[1] flex items-center justify-center overflow-hidden pointer-events-none lg:top-10" aria-hidden="true">
             <span
               className="font-sans font-black text-[clamp(72px,12vw,190px)] tracking-[0.14em] uppercase leading-none whitespace-nowrap select-none"
-              style={{ color: "hsl(0 0% 72% / 0.45)" }}
+              style={{ color: "hsl(0 0% 78% / 0.5)" }}
             >
               HYEBIN PARK
             </span>
