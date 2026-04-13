@@ -43,18 +43,18 @@ export const Navigation = () => {
   };
 
   return (
-    <header className="fixed top-0 w-full z-50 bg-background">
-      <nav className="flex justify-between items-center px-4 sm:px-8 md:px-16 py-4 sm:py-6 md:py-8">
+    <header className="sticky top-0 w-full z-50 bg-background border-b border-border">
+      <nav className="flex justify-between items-center px-4 sm:px-8 md:px-10 h-16">
         <Link 
           to="/" 
           onClick={handleLogoClick}
-          className="font-semibold tracking-tight text-xl uppercase text-foreground"
+          className="font-bold tracking-[0.08em] text-base uppercase text-foreground"
         >
-          HYEBIN PARK
+          Hyebin Park
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8 text-[10px] uppercase tracking-[0.3em] font-medium text-foreground">
+        <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -62,17 +62,17 @@ export const Navigation = () => {
               onClick={(e) => !link.external && handleNavClick(e, link.href)}
               target={link.external ? "_blank" : undefined}
               rel={link.external ? "noopener noreferrer" : undefined}
-              className="hover:opacity-60 transition-all"
+              className="text-[10px] font-medium tracking-[0.3em] uppercase text-foreground hover:opacity-55 transition-opacity"
             >
               {link.label}
             </a>
           ))}
-          <Link
-            to="/contact"
-            className="px-5 py-2 bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-opacity normal-case text-sm tracking-normal font-medium"
+          <a
+            href="mailto:hyebinp@umich.edu"
+            className="px-5 py-2 bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-opacity text-[13px] font-medium"
           >
             Contact
-          </Link>
+          </a>
         </div>
 
         {/* Mobile Menu Button */}
@@ -111,13 +111,13 @@ export const Navigation = () => {
                     {link.label}
                   </a>
                 ))}
-                <Link
-                  to="/contact"
+                <a
+                  href="mailto:hyebinp@umich.edu"
                   onClick={() => setIsMenuOpen(false)}
                   className="text-2xl text-primary font-medium"
                 >
                   Contact
-                </Link>
+                </a>
               </div>
             </motion.div>
           )}
