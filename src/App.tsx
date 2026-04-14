@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import profilePhoto from "@/assets/profile-photo.jpg";
-import macosWallpaper from "@/assets/macos-wallpaper.jpg";
 import logoLine from "@/assets/logo-line.png";
 import logoTiktok from "@/assets/logo-tiktok.png";
 import logoGm from "@/assets/logo-gm.png";
@@ -202,17 +201,16 @@ const App = () => {
       {/* ═══════════════════════════════════════
            macOS DESKTOP HERO
       ═══════════════════════════════════════ */}
-      <section className="relative flex min-h-[860px] w-full flex-col overflow-hidden lg:min-h-[calc(100vh-40px)]">
-        {/* macOS Wallpaper Background */}
-        <img 
-          src={macosWallpaper} 
-          alt="" 
-          className="absolute inset-0 w-full h-full object-cover" 
-          width={1920} 
-          height={1080}
-          aria-hidden="true"
-        />
-        <div className="absolute inset-0 bg-black/10" />
+      <section className="relative flex min-h-[860px] w-full flex-col overflow-hidden lg:min-h-[calc(100vh-40px)]"
+        style={{
+          background: `
+            radial-gradient(ellipse 80% 50% at 20% 80%, rgba(59,130,246,.25) 0%, transparent 50%),
+            radial-gradient(ellipse 60% 60% at 80% 20%, rgba(139,92,246,.2) 0%, transparent 50%),
+            radial-gradient(ellipse 50% 40% at 50% 60%, rgba(6,182,212,.12) 0%, transparent 45%),
+            radial-gradient(ellipse 40% 30% at 90% 90%, rgba(236,72,153,.1) 0%, transparent 40%),
+            linear-gradient(160deg, #0c1222 0%, #111830 30%, #1a1040 55%, #0d1a2f 80%, #080e1a 100%)
+          `
+        }}>
 
         {/* Desktop Surface */}
         <div className="relative flex-1 overflow-hidden px-4 pb-28 pt-8 sm:px-6 md:px-8 lg:px-10 lg:pb-32 lg:pt-12">
