@@ -704,7 +704,13 @@ const App = () => {
                         />
                       </div>
                       <div className="absolute bottom-4 right-4 z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                        <div className="rounded-full bg-white/95 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-slate-800 shadow-md">
+                        <div
+                          className="rounded-full px-4 py-1.5 text-[11px] font-semibold uppercase tracking-wider shadow-md"
+                          style={{
+                            background: "hsl(var(--work-surface-1) / 0.96)",
+                            color: "hsl(var(--work-foreground))",
+                          }}
+                        >
                           View
                         </div>
                       </div>
