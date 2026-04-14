@@ -235,11 +235,11 @@ const App = () => {
   ];
 
   const folders = [
-    { icon: folderAi, label: "AI Products" },
-    { icon: folderEnterprise, label: "B2B Enterprise" },
-    { icon: folderFintech, label: "Fintech" },
-    { icon: folderCrypto, label: "Crypto / Web3" },
-    { icon: folderResearch, label: "User Research" },
+    { icon: folderAiMl, label: "AI / ML" },
+    { icon: folderProduct, label: "Product Design" },
+    { icon: folderDevtools, label: "Data & Dev Tools" },
+    { icon: folderFintechWeb3, label: "Fintech & Web3" },
+    { icon: folderUxr, label: "UX Research" },
   ];
 
   return (
