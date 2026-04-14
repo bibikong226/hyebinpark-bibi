@@ -61,76 +61,54 @@ const PuzzleTile = ({
   </div>
 );
 
-/* ── Testimonial Carousel ── */
-const TestimonialCarousel = ({ testimonials }: { testimonials: { id: string; author: string; role: string; company: string; text: string; subtext: string }[] }) => {
-  const [active, setActive] = useState(0);
-  const total = testimonials.length;
-
-  useEffect(() => {
-    const timer = setInterval(() => setActive(prev => (prev + 1) % total), 6000);
-    return () => clearInterval(timer);
-  }, [total]);
-
-  const t = testimonials[active];
-
+/* ── Testimonial Grid (Frosted Glass) ── */
+const TestimonialGrid = ({ testimonials }: { testimonials: { id: string; author: string; role: string; company: string; text: string; subtext: string }[] }) => {
   return (
-    <div className="relative">
-      {/* Main featured quote — macOS window */}
-      <motion.div
-        className="rounded-xl overflow-hidden"
-        style={{
-          background: "hsl(var(--background) / 0.97)",
-          backdropFilter: "blur(20px)",
-          border: "1px solid hsl(var(--foreground) / 0.08)",
-          boxShadow: "0 16px 50px rgba(0,0,0,.1), 0 4px 14px rgba(0,0,0,.05)",
-        }}
-      >
-        <div className="h-9 flex items-center px-3.5 gap-3 border-b"
-          style={{ background: "hsl(var(--secondary) / 0.86)", borderColor: "hsl(var(--foreground) / 0.06)" }}>
-          <TitleBarDots />
-          <span className="flex-1 text-center text-[10.5px] font-medium text-muted-foreground">
-            testimonials.txt — {active + 1}/{total}
-          </span>
-        </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-start">
+      {testimonials.map((t, i) => (
+        <motion.div
+          key={t.id}
+          className={`group relative flex flex-col gap-6 rounded-[24px] p-8 md:p-10 transition-transform duration-500 ease-out hover:-translate-y-1.5 ${i % 2 === 1 ? "md:mt-14" : ""}`}
+          style={{
+            background: "hsl(var(--foreground) / 0.03)",
+            backdropFilter: "blur(24px) saturate(1.4)",
+            border: "1px solid hsl(var(--foreground) / 0.08)",
+            boxShadow: "0 20px 48px -12px rgba(0,0,0,.08), inset 0 1px 0 hsl(var(--background) / 0.5)",
+          }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: i * 0.1, duration: 0.5 }}
+          whileHover={{
+            borderColor: "hsl(var(--foreground) / 0.14)",
+            boxShadow: "0 28px 60px -12px rgba(0,0,0,.12), inset 0 1px 0 hsl(var(--background) / 0.5)",
+          }}
+        >
+          {/* Subtle mac dots accent */}
+          <div className="flex gap-1.5 opacity-30 group-hover:opacity-50 transition-opacity">
+            <div className="w-2 h-2 rounded-full bg-muted-foreground" />
+            <div className="w-2 h-2 rounded-full bg-muted-foreground" />
+            <div className="w-2 h-2 rounded-full bg-muted-foreground" />
+          </div>
 
-        <div className="p-8 md:p-12 lg:p-16 min-h-[280px] flex flex-col justify-center">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={t.id}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.4 }}
-              className="space-y-6"
-            >
-              <p className="font-serif text-[clamp(18px,2.2vw,28px)] italic leading-[1.6] text-foreground/90">
-                "{t.text}"
-              </p>
-              <p className="text-sm md:text-base leading-[1.7] text-muted-foreground max-w-2xl">
-                {t.subtext}
-              </p>
-              <div className="pt-2">
-                <div className="text-sm font-semibold">{t.author}</div>
-                <div className="text-xs text-muted-foreground">{t.role}, <span className="text-primary">{t.company}</span></div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </motion.div>
+          <p className="font-serif text-lg md:text-xl italic leading-relaxed text-foreground/85">
+            "{t.text}"
+          </p>
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            {t.subtext}
+          </p>
 
-      {/* Navigation dots + names */}
-      <div className="flex items-center justify-center gap-4 mt-8">
-        {testimonials.map((item, i) => (
-          <button
-            key={item.id}
-            onClick={() => setActive(i)}
-            className={`flex flex-col items-center gap-2 transition-all duration-300 group ${i === active ? "opacity-100" : "opacity-40 hover:opacity-70"}`}
-          >
-            <div className={`h-1 rounded-full transition-all duration-500 ${i === active ? "w-8 bg-primary" : "w-4 bg-muted-foreground"}`} />
-            <span className="text-[11px] font-medium text-muted-foreground hidden sm:block">{item.author.split(" ")[0]}</span>
-          </button>
-        ))}
-      </div>
+          <div className="mt-auto flex items-center gap-3 pt-2">
+            <div className="w-10 h-10 rounded-full bg-secondary border border-border flex items-center justify-center text-sm font-semibold text-muted-foreground">
+              {t.author.split(" ").map(n => n[0]).join("")}
+            </div>
+            <div>
+              <span className="text-sm font-semibold text-foreground block">{t.author}</span>
+              <span className="text-xs text-muted-foreground">{t.role} · <span className="text-primary">{t.company}</span></span>
+            </div>
+          </div>
+        </motion.div>
+      ))}
     </div>
   );
 };
