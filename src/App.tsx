@@ -140,7 +140,7 @@ const App = () => {
   ];
 
   return (
-    <div className="bg-background text-foreground overflow-x-hidden font-sans">
+    <div className="overflow-x-hidden font-sans" style={{ background: "#0c0e1a", color: "rgba(255,255,255,0.9)" }}>
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:rounded-md focus:text-sm focus:font-medium"
