@@ -50,9 +50,9 @@ const PuzzlePieceSVG = ({ piece, index }: { piece: PuzzlePiece; index: number })
             {hasBlankTop ? <circle cx={PIECE_W / 2} cy={0} r={TAB_R} fill="black" /> : null}
           </mask>
           <linearGradient id={glossId} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="rgba(255,255,255,0.22)" />
-            <stop offset="42%" stopColor="rgba(255,255,255,0.06)" />
-            <stop offset="100%" stopColor="rgba(0,0,0,0.12)" />
+            <stop offset="0%" stopColor="hsl(var(--desktop-foreground) / 0.22)" />
+            <stop offset="42%" stopColor="hsl(var(--desktop-foreground) / 0.06)" />
+            <stop offset="100%" stopColor="hsl(var(--desktop-shadow) / 0.12)" />
           </linearGradient>
           <filter id={shadowId} x="-20%" y="-20%" width="150%" height="150%">
             <feDropShadow dx="0" dy="7" stdDeviation="8" floodOpacity="0.24" />
