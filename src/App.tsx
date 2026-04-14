@@ -195,11 +195,13 @@ const App = () => {
 
   return (
     <div className="bg-background text-foreground overflow-x-hidden font-sans">
+      {/* Sticky Navigation — consistent across scroll */}
+      <Navigation />
 
       {/* ═══════════════════════════════════════
            macOS DESKTOP HERO
       ═══════════════════════════════════════ */}
-      <section className="relative flex min-h-[900px] w-full flex-col overflow-hidden lg:min-h-screen"
+      <section className="relative flex min-h-[860px] w-full flex-col overflow-hidden lg:min-h-[calc(100vh-40px)]"
         style={{
           background: `
             radial-gradient(ellipse 65% 55% at 15% 35%, rgba(165,180,252,.42) 0%, transparent 60%),
@@ -209,9 +211,6 @@ const App = () => {
             linear-gradient(156deg, #EEF2FF 0%, #F3F4FF 34%, #F5F0FF 64%, #FFF7ED 100%)
           `
         }}>
-
-        {/* Navigation header at top of hero */}
-        <Navigation />
 
         {/* Desktop Surface */}
         <div className="relative flex-1 overflow-hidden px-4 pb-28 pt-20 sm:px-6 md:px-8 lg:px-10 lg:pb-32 lg:pt-28">
