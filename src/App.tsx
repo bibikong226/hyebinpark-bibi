@@ -204,11 +204,11 @@ const App = () => {
       <section className="relative flex min-h-[860px] w-full flex-col overflow-hidden lg:min-h-[calc(100vh-40px)]"
         style={{
           background: `
-            radial-gradient(ellipse 65% 55% at 15% 35%, rgba(165,180,252,.42) 0%, transparent 60%),
-            radial-gradient(ellipse 55% 65% at 84% 68%, rgba(196,181,253,.36) 0%, transparent 55%),
-            radial-gradient(ellipse 45% 38% at 54% 4%, rgba(254,215,170,.28) 0%, transparent 50%),
-            radial-gradient(ellipse 48% 44% at 8% 92%, rgba(167,243,208,.16) 0%, transparent 45%),
-            linear-gradient(156deg, #EEF2FF 0%, #F3F4FF 34%, #F5F0FF 64%, #FFF7ED 100%)
+            radial-gradient(ellipse 80% 60% at 20% 80%, rgba(59,130,246,.35) 0%, transparent 55%),
+            radial-gradient(ellipse 70% 50% at 80% 20%, rgba(139,92,246,.3) 0%, transparent 50%),
+            radial-gradient(ellipse 50% 40% at 50% 50%, rgba(6,182,212,.15) 0%, transparent 45%),
+            radial-gradient(ellipse 60% 50% at 10% 20%, rgba(16,185,129,.12) 0%, transparent 40%),
+            linear-gradient(145deg, #0c1220 0%, #111827 25%, #1e1b4b 50%, #0f172a 75%, #0c1220 100%)
           `
         }}>
 
@@ -217,7 +217,7 @@ const App = () => {
           <div className="absolute inset-x-0 top-6 z-[1] flex items-center justify-center overflow-hidden pointer-events-none lg:top-10" aria-hidden="true">
             <span
               className="font-sans font-black text-[clamp(72px,12vw,190px)] tracking-[0.14em] uppercase leading-none whitespace-nowrap select-none"
-              style={{ color: "hsl(0 0% 78% / 0.5)" }}
+              style={{ color: "rgba(255,255,255,0.06)" }}
             >
               HYEBIN PARK
             </span>
@@ -228,10 +228,10 @@ const App = () => {
               <motion.div
                 className="relative z-20 overflow-hidden rounded-[28px]"
                 style={{
-                  background: "hsl(var(--background) / 0.96)",
+                  background: "rgba(255,255,255,0.92)",
                   backdropFilter: "blur(40px)",
-                  border: "1px solid hsl(var(--foreground) / 0.08)",
-                  boxShadow: "0 24px 70px rgba(0,0,0,.16), 0 6px 18px rgba(0,0,0,.09)",
+                  border: "1px solid rgba(255,255,255,0.3)",
+                  boxShadow: "0 24px 70px rgba(0,0,0,.35), 0 6px 18px rgba(0,0,0,.2)",
                 }}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -239,7 +239,7 @@ const App = () => {
               >
                 <div
                   className="flex h-11 items-center gap-3 border-b px-3.5"
-                  style={{ background: "hsl(var(--secondary) / 0.86)", borderColor: "hsl(var(--foreground) / 0.06)" }}
+                  style={{ background: "rgba(245,245,248,0.9)", borderColor: "rgba(0,0,0,0.06)" }}
                 >
                   <TitleBarDots />
                   <span className="flex-1 text-center text-xs font-medium text-muted-foreground">hyebin-park.portfolio</span>
@@ -297,10 +297,10 @@ const App = () => {
               <motion.div
                 className="relative z-[22] overflow-hidden rounded-[28px] md:-ml-8 md:mt-10 lg:-ml-12 lg:mt-8 xl:-ml-16"
                 style={{
-                  background: "hsl(var(--background) / 0.96)",
+                  background: "rgba(255,255,255,0.92)",
                   backdropFilter: "blur(40px)",
-                  border: "1px solid hsl(var(--foreground) / 0.08)",
-                  boxShadow: "0 24px 70px rgba(0,0,0,.16), 0 6px 18px rgba(0,0,0,.09)",
+                  border: "1px solid rgba(255,255,255,0.3)",
+                  boxShadow: "0 24px 70px rgba(0,0,0,.35), 0 6px 18px rgba(0,0,0,.2)",
                 }}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -308,7 +308,7 @@ const App = () => {
               >
                 <div
                   className="flex h-11 items-center gap-3 border-b px-3.5"
-                  style={{ background: "hsl(var(--secondary) / 0.86)", borderColor: "hsl(var(--foreground) / 0.06)" }}
+                  style={{ background: "rgba(245,245,248,0.9)", borderColor: "rgba(0,0,0,0.06)" }}
                 >
                   <TitleBarDots />
                   <span className="flex-1 text-center text-xs font-medium text-muted-foreground">
@@ -396,10 +396,10 @@ const App = () => {
         {/* Dock — macOS style with colored icon tiles */}
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-0 px-3 py-2.5 rounded-[22px] z-30"
           style={{
-            background: "rgba(240,240,245,.75)",
+            background: "rgba(30,30,40,.65)",
             backdropFilter: "blur(28px) saturate(1.8)",
-            border: "1px solid rgba(255,255,255,.5)",
-            boxShadow: "0 8px 40px rgba(0,0,0,.1), 0 2px 8px rgba(0,0,0,.06), inset 0 1px 0 rgba(255,255,255,.6)",
+            border: "1px solid rgba(255,255,255,.15)",
+            boxShadow: "0 8px 40px rgba(0,0,0,.3), 0 2px 8px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.08)",
           }}>
           {(() => {
             const mainItems = [
@@ -419,12 +419,12 @@ const App = () => {
                         style={{ background: item.bg }}>
                         {item.icon}
                       </div>
-                      <span className="text-[9px] font-medium tracking-wide text-foreground/50">{item.label}</span>
+                      <span className="text-[9px] font-medium tracking-wide text-white/50">{item.label}</span>
                     </button>
                   ))}
                 </div>
                 {/* Divider */}
-                <div className="w-px h-10 bg-foreground/10 mx-2.5" />
+                <div className="w-px h-10 bg-white/15 mx-2.5" />
                 <div className="px-1.5">
                   <button onClick={contactItem.action}
                     className="flex flex-col items-center gap-1 group">
@@ -432,7 +432,7 @@ const App = () => {
                       style={{ background: contactItem.bg }}>
                       {contactItem.icon}
                     </div>
-                    <span className="text-[9px] font-medium tracking-wide text-foreground/50">{contactItem.label}</span>
+                    <span className="text-[9px] font-medium tracking-wide text-white/50">{contactItem.label}</span>
                   </button>
                 </div>
               </>
