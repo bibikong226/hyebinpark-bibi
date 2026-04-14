@@ -68,24 +68,20 @@ const MacWin = ({
 );
 
 const DesktopFolderIcon = () => (
-  <div className="relative h-[58px] w-[76px]" aria-hidden="true">
+  <div className="relative h-[60px] w-[78px]" aria-hidden="true">
     <div
-      className="absolute left-3 top-0 h-4 w-8 rounded-t-[10px]"
+      className="absolute left-3 top-[2px] h-[13px] w-[30px] rounded-t-[9px]"
       style={{
-        background: "linear-gradient(180deg, hsl(var(--puzzle-piece-5)) 0%, hsl(var(--puzzle-piece-3)) 100%)",
+        background: "linear-gradient(180deg, hsl(var(--folder-top)) 0%, hsl(var(--folder-body)) 100%)",
       }}
     />
     <div
-      className="absolute inset-x-0 bottom-0 top-3 rounded-[14px]"
+      className="absolute inset-x-0 bottom-0 top-3 rounded-[13px]"
       style={{
-        background: "linear-gradient(180deg, hsl(var(--puzzle-piece-2)) 0%, hsl(var(--puzzle-piece-1)) 100%)",
+        background: "linear-gradient(180deg, hsl(var(--folder-body)) 0%, hsl(var(--folder-body-strong)) 100%)",
         boxShadow:
-          "inset 0 1px 0 hsl(var(--desktop-foreground) / 0.18), 0 12px 26px hsl(var(--desktop-shadow) / 0.26)",
+          "inset 0 1px 0 hsl(var(--desktop-foreground) / 0.28), 0 10px 18px hsl(var(--desktop-shadow) / 0.22)",
       }}
-    />
-    <div
-      className="absolute inset-x-3 top-5 h-[2px] rounded-full"
-      style={{ background: "hsl(var(--desktop-foreground) / 0.12)" }}
     />
   </div>
 );
@@ -358,15 +354,14 @@ const App = () => {
       <SpotlightSearch isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
       <FinderWindow isOpen={!!finderCategory} onClose={() => setFinderCategory(null)} category={finderCategory || ""} />
 
-      <main id="main-content" role="main" className="pt-10">
+      <main id="main-content" role="main">
         <section
           className="relative flex min-h-[920px] w-full flex-col overflow-hidden lg:min-h-screen"
           style={{
             background: `
-              radial-gradient(ellipse 72% 42% at 50% 0%, hsl(var(--desktop-foreground) / 0.09) 0%, transparent 66%),
-              radial-gradient(ellipse 66% 56% at 18% 86%, hsl(var(--puzzle-piece-1) / 0.28) 0%, transparent 54%),
-              radial-gradient(ellipse 48% 40% at 84% 18%, hsl(var(--puzzle-piece-3) / 0.24) 0%, transparent 48%),
-              linear-gradient(160deg, hsl(var(--desktop-wallpaper-start)) 0%, hsl(var(--desktop-wallpaper-mid)) 52%, hsl(var(--desktop-wallpaper-end)) 100%)
+              radial-gradient(ellipse 72% 42% at 50% 0%, hsl(var(--desktop-foreground) / 0.05) 0%, transparent 68%),
+              radial-gradient(ellipse 52% 44% at 16% 84%, hsl(var(--desktop-accent) / 0.12) 0%, transparent 56%),
+              linear-gradient(180deg, hsl(var(--desktop-wallpaper-start)) 0%, hsl(var(--desktop-wallpaper-mid)) 48%, hsl(var(--desktop-wallpaper-end)) 100%)
             `,
           }}
           aria-label="Desktop hero"
@@ -379,8 +374,8 @@ const App = () => {
                   <h1
                     className="text-[clamp(4.4rem,15vw,11rem)] font-black leading-[0.84] tracking-[-0.06em] uppercase"
                     style={{
-                      color: "hsl(var(--desktop-foreground) / 0.18)",
-                      textShadow: "0 0 36px hsl(var(--desktop-foreground) / 0.04)",
+                      color: "hsl(var(--desktop-foreground) / 0.12)",
+                      textShadow: "0 0 30px hsl(var(--desktop-foreground) / 0.03)",
                     }}
                   >
                     HYEBIN PARK
@@ -388,11 +383,11 @@ const App = () => {
                 </div>
 
                 <motion.p
-                  className="mt-2 mb-4 rounded-full px-5 py-2 text-[12px] font-bold tracking-[0.24em] uppercase"
+                  className="mb-4 mt-2 rounded-full px-5 py-2 text-[12px] font-bold tracking-[0.24em] uppercase"
                   style={{
                     color: "hsl(var(--desktop-foreground))",
-                    background: "hsl(var(--desktop-accent) / 0.22)",
-                    border: "1px solid hsl(var(--desktop-border) / 0.14)",
+                    background: "hsl(var(--desktop-accent) / 0.18)",
+                    border: "1px solid hsl(var(--desktop-border) / 0.12)",
                   }}
                   initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -409,10 +404,10 @@ const App = () => {
                   transition={{ delay: 0.1 }}
                 >
                   <span className="font-medium">Turning</span>{" "}
-                  <span className="font-serif italic" style={{ color: "hsl(var(--puzzle-piece-2))" }}>complexity</span>
+                  <span className="font-serif italic" style={{ color: "hsl(var(--desktop-accent))" }}>complexity</span>
                   <br />
                   <span className="font-medium">into</span>{" "}
-                  <span className="font-serif italic" style={{ color: "hsl(var(--puzzle-piece-3))" }}>clarity</span>
+                  <span className="font-serif italic" style={{ color: "hsl(var(--desktop-accent))" }}>clarity</span>
                 </motion.h2>
 
                 <motion.button
@@ -479,7 +474,7 @@ const App = () => {
                   </MacWin>
 
                   <MacWin title="Experience" delay={0.22} className="mt-6">
-                    <div className="grid grid-cols-2 gap-3 p-5 sm:grid-cols-5">
+                    <div className="flex flex-wrap items-center gap-x-6 gap-y-4 p-5 sm:justify-between">
                       {[
                         { src: logoLine, alt: "LINE" },
                         { src: logoTiktok, alt: "TikTok" },
@@ -487,15 +482,8 @@ const App = () => {
                         { src: logoNaver, alt: "NAVER" },
                         { src: logoJstor, alt: "JSTOR" },
                       ].map((logo) => (
-                        <div
-                          key={logo.alt}
-                          className="flex h-16 items-center justify-center rounded-[18px] p-4"
-                          style={{
-                            background: "linear-gradient(180deg, hsl(var(--desktop-foreground) / 0.12), hsl(var(--desktop-foreground) / 0.06))",
-                            border: "1px solid hsl(var(--desktop-border) / 0.12)",
-                          }}
-                        >
-                          <img src={logo.src} alt={logo.alt} className="max-h-7 w-auto object-contain" />
+                        <div key={logo.alt} className="flex h-8 items-center justify-center">
+                          <img src={logo.src} alt={logo.alt} className="max-h-8 w-auto object-contain" />
                         </div>
                       ))}
                     </div>
@@ -513,13 +501,13 @@ const App = () => {
                     <p id="folders-heading" className="mb-4 px-1 text-[10px] font-semibold tracking-[0.22em] uppercase" style={{ color: "hsl(var(--desktop-muted))" }}>
                       Project Folders
                     </p>
-                    <div className="flex flex-wrap items-start justify-center gap-x-6 gap-y-5 lg:justify-start">
+                    <div className="flex flex-wrap items-start justify-center gap-x-7 gap-y-6 lg:justify-start">
                       {folders.map((folder, index) => (
                         <motion.button
                           key={folder.label}
                           type="button"
                           onClick={() => setFinderCategory(folder.label)}
-                          className="group flex w-[96px] flex-col items-center gap-2 text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))] rounded-xl"
+                          className="group flex w-[102px] flex-col items-center gap-2 text-center rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))]"
                           initial={{ opacity: 0, y: 14 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.22 + index * 0.07 }}
@@ -529,10 +517,7 @@ const App = () => {
                           <div className="transition-transform duration-200 group-hover:-translate-y-1 group-focus-visible:-translate-y-1">
                             <DesktopFolderIcon />
                           </div>
-                          <span
-                            className="text-[11px] font-semibold leading-tight"
-                            style={{ color: "hsl(var(--desktop-foreground) / 0.9)" }}
-                          >
+                          <span className="text-[11px] font-medium leading-tight" style={{ color: "hsl(var(--desktop-foreground) / 0.88)" }}>
                             {folder.label}
                           </span>
                         </motion.button>
