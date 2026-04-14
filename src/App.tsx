@@ -239,7 +239,7 @@ const App = () => {
               >
                 <div
                   className="flex h-11 items-center gap-3 border-b px-3.5"
-                  style={{ background: "hsl(var(--secondary) / 0.86)", borderColor: "hsl(var(--foreground) / 0.06)" }}
+                  style={{ background: "rgba(245,245,248,0.9)", borderColor: "rgba(0,0,0,0.06)" }}
                 >
                   <TitleBarDots />
                   <span className="flex-1 text-center text-xs font-medium text-muted-foreground">hyebin-park.portfolio</span>
@@ -308,7 +308,7 @@ const App = () => {
               >
                 <div
                   className="flex h-11 items-center gap-3 border-b px-3.5"
-                  style={{ background: "hsl(var(--secondary) / 0.86)", borderColor: "hsl(var(--foreground) / 0.06)" }}
+                  style={{ background: "rgba(245,245,248,0.9)", borderColor: "rgba(0,0,0,0.06)" }}
                 >
                   <TitleBarDots />
                   <span className="flex-1 text-center text-xs font-medium text-muted-foreground">
