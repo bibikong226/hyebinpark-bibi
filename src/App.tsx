@@ -70,41 +70,41 @@ const TestimonialGrid = ({ testimonials }: { testimonials: { id: string; author:
           key={t.id}
           className={`group relative flex flex-col gap-6 rounded-[24px] p-8 md:p-10 transition-transform duration-500 ease-out hover:-translate-y-1.5 ${i % 2 === 1 ? "md:mt-14" : ""}`}
           style={{
-            background: "hsl(var(--foreground) / 0.03)",
+            background: "rgba(255,255,255,0.05)",
             backdropFilter: "blur(24px) saturate(1.4)",
-            border: "1px solid hsl(var(--foreground) / 0.08)",
-            boxShadow: "0 20px 48px -12px rgba(0,0,0,.08), inset 0 1px 0 hsl(var(--background) / 0.5)",
+            border: "1px solid rgba(255,255,255,0.1)",
+            boxShadow: "0 20px 48px -12px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,0.08)",
           }}
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: i * 0.1, duration: 0.5 }}
           whileHover={{
-            borderColor: "hsl(var(--foreground) / 0.14)",
-            boxShadow: "0 28px 60px -12px rgba(0,0,0,.12), inset 0 1px 0 hsl(var(--background) / 0.5)",
+            borderColor: "rgba(255,255,255,0.18)",
+            boxShadow: "0 28px 60px -12px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,0.1)",
           }}
         >
           {/* Subtle mac dots accent */}
           <div className="flex gap-1.5 opacity-30 group-hover:opacity-50 transition-opacity">
-            <div className="w-2 h-2 rounded-full bg-muted-foreground" />
-            <div className="w-2 h-2 rounded-full bg-muted-foreground" />
-            <div className="w-2 h-2 rounded-full bg-muted-foreground" />
+            <div className="w-2 h-2 rounded-full bg-white/40" />
+            <div className="w-2 h-2 rounded-full bg-white/40" />
+            <div className="w-2 h-2 rounded-full bg-white/40" />
           </div>
 
-          <p className="font-serif text-lg md:text-xl italic leading-relaxed text-foreground/85">
+          <p className="font-serif text-lg md:text-xl italic leading-relaxed text-white/85">
             "{t.text}"
           </p>
-          <p className="text-sm leading-relaxed text-muted-foreground">
+          <p className="text-sm leading-relaxed text-white/50">
             {t.subtext}
           </p>
 
           <div className="mt-auto flex items-center gap-3 pt-2">
-            <div className="w-10 h-10 rounded-full bg-secondary border border-border flex items-center justify-center text-sm font-semibold text-muted-foreground">
+            <div className="w-10 h-10 rounded-full bg-white/10 border border-white/15 flex items-center justify-center text-sm font-semibold text-white/60">
               {t.author.split(" ").map(n => n[0]).join("")}
             </div>
             <div>
-              <span className="text-sm font-semibold text-foreground block">{t.author}</span>
-              <span className="text-xs text-muted-foreground">{t.role} · <span className="text-primary">{t.company}</span></span>
+              <span className="text-sm font-semibold text-white block">{t.author}</span>
+              <span className="text-xs text-white/50">{t.role} · <span className="text-indigo-400">{t.company}</span></span>
             </div>
           </div>
         </motion.div>
@@ -195,11 +195,13 @@ const App = () => {
 
   return (
     <div className="bg-background text-foreground overflow-x-hidden font-sans">
+      {/* Sticky Navigation — consistent across scroll */}
+      <Navigation />
 
       {/* ═══════════════════════════════════════
            macOS DESKTOP HERO
       ═══════════════════════════════════════ */}
-      <section className="relative flex min-h-[900px] w-full flex-col overflow-hidden lg:min-h-screen"
+      <section className="relative flex min-h-[860px] w-full flex-col overflow-hidden lg:min-h-[calc(100vh-40px)]"
         style={{
           background: `
             radial-gradient(ellipse 65% 55% at 15% 35%, rgba(165,180,252,.42) 0%, transparent 60%),
@@ -209,9 +211,6 @@ const App = () => {
             linear-gradient(156deg, #EEF2FF 0%, #F3F4FF 34%, #F5F0FF 64%, #FFF7ED 100%)
           `
         }}>
-
-        {/* Navigation header at top of hero */}
-        <Navigation />
 
         {/* Desktop Surface */}
         <div className="relative flex-1 overflow-hidden px-4 pb-28 pt-20 sm:px-6 md:px-8 lg:px-10 lg:pb-32 lg:pt-28">
@@ -404,36 +403,37 @@ const App = () => {
           }}>
           {(() => {
             const mainItems = [
-              { icon: "📂", bg: "linear-gradient(135deg, #7B6EF6, #5B4CD8)", action: () => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" }), active: true },
-              { icon: "💼", bg: "linear-gradient(135deg, #F472B6, #DB2777)", action: () => document.getElementById("explore")?.scrollIntoView({ behavior: "smooth" }), active: false },
-              { icon: "📋", bg: "linear-gradient(135deg, #6EE7B7, #10B981)", action: () => window.location.href = "/about", active: false },
-              { icon: "💬", bg: "linear-gradient(135deg, #FBBF24, #F59E0B)", action: () => window.open("https://drive.google.com/file/d/1l2V4pQCjAZhIhLyRmVh3m2QTw87yLI6P/view?usp=sharing", "_blank"), active: false },
+              { icon: "📂", label: "Work", bg: "linear-gradient(135deg, #7B6EF6, #5B4CD8)", action: () => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" }), active: true },
+              { icon: "💼", label: "Explore", bg: "linear-gradient(135deg, #F472B6, #DB2777)", action: () => document.getElementById("explore")?.scrollIntoView({ behavior: "smooth" }), active: false },
+              { icon: "📋", label: "About", bg: "linear-gradient(135deg, #6EE7B7, #10B981)", action: () => window.location.href = "/about", active: false },
+              { icon: "💬", label: "CV", bg: "linear-gradient(135deg, #FBBF24, #F59E0B)", action: () => window.open("https://drive.google.com/file/d/1l2V4pQCjAZhIhLyRmVh3m2QTw87yLI6P/view?usp=sharing", "_blank"), active: false },
             ];
-            const contactItem = { icon: "✉️", bg: "linear-gradient(135deg, #F87171, #DC2626)", action: () => window.location.href = "mailto:hyebinp@umich.edu", active: false };
+            const contactItem = { icon: "✉️", label: "Contact", bg: "linear-gradient(135deg, #F87171, #DC2626)", action: () => window.location.href = "mailto:hyebinp@umich.edu", active: false };
 
             return (
               <>
                 <div className="flex items-center gap-2.5 px-1.5">
                   {mainItems.map((item, i) => (
-                    <button key={i} onClick={item.action} className="flex flex-col items-center gap-1.5 group">
+                    <button key={i} onClick={item.action} className="flex flex-col items-center gap-1 group">
                       <div className="w-12 h-12 md:w-14 md:h-14 rounded-[14px] flex items-center justify-center text-2xl shadow-md group-hover:scale-110 group-hover:shadow-lg transition-all duration-200"
                         style={{ background: item.bg }}>
                         {item.icon}
                       </div>
-                      {item.active && <div className="w-1 h-1 rounded-full bg-foreground/40" />}
-                      {!item.active && <div className="w-1 h-1 rounded-full bg-foreground/20" />}
+                      <span className="text-[9px] font-medium tracking-wide text-foreground/50">{item.label}</span>
                     </button>
                   ))}
                 </div>
                 {/* Divider */}
                 <div className="w-px h-10 bg-foreground/10 mx-2.5" />
-                <div className="flex flex-col items-center gap-1.5 group px-1.5">
+                <div className="px-1.5">
                   <button onClick={contactItem.action}
-                    className="w-12 h-12 md:w-14 md:h-14 rounded-[14px] flex items-center justify-center text-2xl shadow-md group-hover:scale-110 group-hover:shadow-lg transition-all duration-200"
-                    style={{ background: contactItem.bg }}>
-                    {contactItem.icon}
+                    className="flex flex-col items-center gap-1 group">
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-[14px] flex items-center justify-center text-2xl shadow-md group-hover:scale-110 group-hover:shadow-lg transition-all duration-200"
+                      style={{ background: contactItem.bg }}>
+                      {contactItem.icon}
+                    </div>
+                    <span className="text-[9px] font-medium tracking-wide text-foreground/50">{contactItem.label}</span>
                   </button>
-                  <div className="w-1 h-1 rounded-full bg-foreground/20" />
                 </div>
               </>
             );
@@ -553,11 +553,18 @@ const App = () => {
         </div>
       </section>
 
-      {/* ═══ TESTIMONIALS — Featured quote carousel ═══ */}
-      <section id="collab" className="py-28 sm:py-32 px-4 sm:px-8 md:px-10 border-t border-border">
-        <div className="max-w-[1060px] mx-auto">
-          <p className="text-[11px] font-medium tracking-[0.3em] uppercase text-muted-foreground mb-4">Collaboration</p>
-          <h2 className="text-[clamp(32px,4.5vw,56px)] font-black leading-[1.1] tracking-tight mb-14">
+      {/* ═══ TESTIMONIALS — Dark backdrop for frosted glass ═══ */}
+      <section id="collab" className="relative py-28 sm:py-32 px-4 sm:px-8 md:px-10 overflow-hidden"
+        style={{
+          background: "linear-gradient(165deg, #0F0F1A 0%, #1A1A2E 40%, #16213E 70%, #0F0F1A 100%)",
+        }}>
+        {/* Ambient glow blobs */}
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full opacity-20 blur-[120px] pointer-events-none" style={{ background: "radial-gradient(circle, rgba(99,102,241,.6), transparent 70%)" }} />
+        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full opacity-15 blur-[100px] pointer-events-none" style={{ background: "radial-gradient(circle, rgba(168,85,247,.5), transparent 70%)" }} />
+
+        <div className="relative max-w-[1060px] mx-auto">
+          <p className="text-[11px] font-medium tracking-[0.3em] uppercase text-white/40 mb-4">Collaboration</p>
+          <h2 className="text-[clamp(32px,4.5vw,56px)] font-black leading-[1.1] tracking-tight mb-14 text-white">
             Words from people<br className="hidden sm:block" />I've worked alongside.
           </h2>
 
