@@ -478,7 +478,7 @@ const App = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="p-6 md:p-7 flex-1 flex flex-col bg-background">
+                  <div className="p-6 md:p-7 flex-1 flex flex-col" style={{ background: "rgba(30,30,40,0.8)" }}>
                     <h3 className="font-serif text-[22px] md:text-[26px] font-semibold leading-[1.2] mb-2 text-foreground">
                       {project.title}
                     </h3>
