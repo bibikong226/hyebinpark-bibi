@@ -8,6 +8,7 @@ const pieces = [
     startX: -110,
     startY: -54,
     final: { left: "18px", top: "18px" },
+    edges: { right: "tab", bottom: "tab", left: "flat", top: "flat" },
   },
   {
     label: "Systems",
@@ -15,6 +16,7 @@ const pieces = [
     startX: 118,
     startY: -46,
     final: { right: "18px", top: "18px" },
+    edges: { right: "flat", bottom: "tab", left: "blank", top: "flat" },
   },
   {
     label: "AI",
@@ -22,6 +24,7 @@ const pieces = [
     startX: -92,
     startY: 84,
     final: { left: "18px", bottom: "18px" },
+    edges: { right: "tab", bottom: "flat", left: "flat", top: "blank" },
   },
   {
     label: "Impact",
@@ -29,8 +32,73 @@ const pieces = [
     startX: 126,
     startY: 92,
     final: { right: "18px", bottom: "18px" },
+    edges: { right: "flat", bottom: "flat", left: "blank", top: "blank" },
   },
 ];
+
+const PuzzlePieceShape = ({
+  label,
+  color,
+  edges,
+}: {
+  label: string;
+  color: string;
+  edges: { right: string; bottom: string; left: string; top: string };
+}) => {
+  const cutoutStyle = {
+    background: "hsl(var(--desktop-panel-strong))",
+    boxShadow: "inset 0 1px 0 hsl(var(--desktop-border) / 0.08)",
+  };
+
+  const tabStyle = {
+    background: color,
+    boxShadow: "0 12px 20px hsl(var(--desktop-shadow) / 0.14), inset 0 1px 0 hsl(var(--desktop-border) / 0.16)",
+  };
+
+  return (
+    <div className="relative h-[108px] w-[108px]">
+      <div
+        className="absolute inset-[10px] rounded-[26px]"
+        style={{
+          background: color,
+          boxShadow:
+            "0 16px 28px hsl(var(--desktop-shadow) / 0.22), inset 0 1px 0 hsl(var(--desktop-border) / 0.18)",
+        }}
+      />
+
+      {edges.top === "tab" && (
+        <span className="absolute left-1/2 top-[2px] h-7 w-7 -translate-x-1/2 rounded-full" style={tabStyle} aria-hidden="true" />
+      )}
+      {edges.right === "tab" && (
+        <span className="absolute right-[2px] top-1/2 h-7 w-7 -translate-y-1/2 rounded-full" style={tabStyle} aria-hidden="true" />
+      )}
+      {edges.bottom === "tab" && (
+        <span className="absolute bottom-[2px] left-1/2 h-7 w-7 -translate-x-1/2 rounded-full" style={tabStyle} aria-hidden="true" />
+      )}
+      {edges.left === "tab" && (
+        <span className="absolute left-[2px] top-1/2 h-7 w-7 -translate-y-1/2 rounded-full" style={tabStyle} aria-hidden="true" />
+      )}
+
+      {edges.top === "blank" && (
+        <span className="absolute left-1/2 top-[6px] h-8 w-8 -translate-x-1/2 rounded-full" style={cutoutStyle} aria-hidden="true" />
+      )}
+      {edges.right === "blank" && (
+        <span className="absolute right-[6px] top-1/2 h-8 w-8 -translate-y-1/2 rounded-full" style={cutoutStyle} aria-hidden="true" />
+      )}
+      {edges.bottom === "blank" && (
+        <span className="absolute bottom-[6px] left-1/2 h-8 w-8 -translate-x-1/2 rounded-full" style={cutoutStyle} aria-hidden="true" />
+      )}
+      {edges.left === "blank" && (
+        <span className="absolute left-[6px] top-1/2 h-8 w-8 -translate-y-1/2 rounded-full" style={cutoutStyle} aria-hidden="true" />
+      )}
+
+      <div className="absolute inset-[22px] flex items-center justify-center px-2 text-center text-[11px] font-semibold uppercase tracking-[0.09em] md:text-[12px]"
+        style={{ color: "hsl(var(--desktop-foreground))" }}>
+        {label}
+      </div>
+    </div>
+  );
+};
 
 export const PuzzleAnimation = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -53,7 +121,7 @@ export const PuzzleAnimation = () => {
   return (
     <div
       ref={containerRef}
-      className="relative h-[220px] w-[260px] md:h-[240px] md:w-[280px]"
+      className="relative h-[236px] w-[260px] md:h-[248px] md:w-[280px]"
       role="img"
       aria-label="Animated four-part framework connecting Research, Systems, AI, and Impact."
     >
@@ -81,14 +149,8 @@ export const PuzzleAnimation = () => {
       {pieces.map((piece, index) => (
         <motion.div
           key={piece.label}
-          className="absolute flex items-center justify-center rounded-[18px] px-3 text-center text-[12px] font-semibold tracking-[0.08em] uppercase md:text-[13px]"
+          className="absolute"
           style={{
-            width: "calc(50% - 24px)",
-            height: "calc(50% - 24px)",
-            color: "hsl(var(--desktop-foreground))",
-            background: piece.color,
-            boxShadow:
-              "0 16px 28px hsl(var(--desktop-shadow) / 0.22), inset 0 1px 0 hsl(var(--desktop-border) / 0.18)",
             ...piece.final,
           }}
           initial={
@@ -110,12 +172,13 @@ export const PuzzleAnimation = () => {
             rotate: 0,
           }}
           transition={{
-            duration: prefersReducedMotion ? 0 : 0.7,
+            type: "spring",
+            stiffness: 180,
+            damping: 18,
             delay: prefersReducedMotion ? 0 : index * 0.08,
-            ease: [0.22, 1, 0.36, 1],
           }}
         >
-          {piece.label}
+          <PuzzlePieceShape label={piece.label} color={piece.color} edges={piece.edges} />
         </motion.div>
       ))}
 
