@@ -345,52 +345,65 @@ const App = () => {
           className="relative flex min-h-[920px] w-full flex-col overflow-hidden lg:min-h-screen"
           style={{
             background: `
-              radial-gradient(ellipse 72% 58% at 15% 84%, hsl(var(--desktop-accent) / 0.22) 0%, transparent 52%),
-              radial-gradient(ellipse 56% 42% at 82% 16%, hsl(var(--puzzle-piece-2) / 0.14) 0%, transparent 48%),
-              radial-gradient(ellipse 40% 30% at 48% 58%, hsl(var(--desktop-border) / 0.08) 0%, transparent 55%),
+              radial-gradient(ellipse 72% 58% at 15% 84%, hsl(var(--desktop-accent) / 0.28) 0%, transparent 52%),
+              radial-gradient(ellipse 56% 42% at 82% 16%, hsl(280 60% 50% / 0.18) 0%, transparent 48%),
+              radial-gradient(ellipse 40% 30% at 48% 58%, hsl(270 40% 60% / 0.1) 0%, transparent 55%),
               linear-gradient(155deg, hsl(var(--desktop-wallpaper-start)) 0%, hsl(var(--desktop-wallpaper-mid)) 48%, hsl(var(--desktop-wallpaper-end)) 100%)
             `,
           }}
           aria-label="Desktop hero"
         >
-          <div className="relative z-10 flex-1 px-4 pb-10 pt-6 sm:px-6 md:px-8 lg:px-12 lg:pb-28">
+          <div className="relative z-10 flex-1 px-4 pb-10 pt-6 sm:px-6 md:px-8 lg:px-12 lg:pb-32">
             <div className="mx-auto max-w-[1280px]">
-              <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-                <div className="space-y-1">
-                  <p className="text-[11px] font-semibold tracking-[0.22em] uppercase" style={{ color: "hsl(var(--desktop-muted))" }}>
-                    Strategic AI Product Designer
-                  </p>
-                  <p className="max-w-[560px] text-[14px] leading-6" style={{ color: "hsl(var(--desktop-subtle))" }}>
-                    Human-centered systems, AI products, research, and technically complex platforms.
-                  </p>
-                </div>
+
+              {/* Centered hero header */}
+              <div className="mb-10 flex flex-col items-center text-center lg:mb-14">
+                <motion.p
+                  className="mb-3 rounded-full px-4 py-1.5 text-[11px] font-bold tracking-[0.28em] uppercase"
+                  style={{
+                    color: "hsl(var(--desktop-accent))",
+                    background: "hsl(var(--desktop-accent) / 0.14)",
+                    border: "1px solid hsl(var(--desktop-accent) / 0.22)",
+                  }}
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.06 }}
+                >
+                  Strategic AI Product Designer
+                </motion.p>
+
+                <h1
+                  className="text-[clamp(3.2rem,12vw,8.5rem)] font-black leading-[0.9] tracking-[-0.06em]"
+                  style={{ color: "hsl(var(--desktop-foreground))" }}
+                >
+                  HYEBIN PARK
+                </h1>
 
                 <motion.button
                   type="button"
                   onClick={() => setSearchOpen(true)}
-                  className="flex w-full items-center gap-3 rounded-full px-4 py-3 text-left lg:max-w-[360px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))]"
+                  className="mt-5 flex items-center gap-3 rounded-full px-5 py-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))]"
                   style={{
                     color: "hsl(var(--desktop-foreground))",
                     background: "hsl(var(--desktop-search) / 0.86)",
                     border: "1px solid hsl(var(--desktop-border) / 0.08)",
                     boxShadow: "0 14px 36px hsl(var(--desktop-shadow) / 0.24)",
                   }}
-                  initial={{ opacity: 0, y: -10 }}
+                  initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.08 }}
+                  transition={{ delay: 0.12 }}
                   aria-label="Open project search"
                   aria-haspopup="dialog"
                 >
-                  <Search size={16} aria-hidden="true" />
-                  <span className="flex-1 text-[14px] font-medium" style={{ color: "hsl(var(--desktop-muted))" }}>
-                    Search projects, domains, and skills
+                  <Search size={15} aria-hidden="true" />
+                  <span className="text-[13px] font-medium" style={{ color: "hsl(var(--desktop-muted))" }}>
+                    Search projects
                   </span>
                   <span
-                    className="rounded-full px-2.5 py-1 text-[11px] font-semibold"
+                    className="ml-2 rounded-full px-2 py-0.5 text-[10px] font-semibold"
                     style={{
                       color: "hsl(var(--desktop-foreground))",
                       background: "hsl(var(--desktop-border) / 0.08)",
-                      border: "1px solid hsl(var(--desktop-border) / 0.08)",
                     }}
                     aria-hidden="true"
                   >
@@ -399,95 +412,105 @@ const App = () => {
                 </motion.button>
               </div>
 
-              <h1
-                className="mb-8 text-[clamp(3.9rem,15vw,10rem)] font-black leading-[0.88] tracking-[-0.08em]"
-                style={{ color: "hsl(var(--desktop-foreground) / 0.12)" }}
-              >
-                HYEBIN PARK
-              </h1>
-
               <div className="grid gap-6 lg:grid-cols-12 lg:items-start">
-                <div className="lg:col-span-7">
-                  <MacWin title="Intro" delay={0.12} className="h-full min-h-[340px]">
-                      <div className="grid gap-6 p-6 md:grid-cols-[104px,minmax(0,1fr)] md:p-7">
+                <div className="lg:col-span-5">
+                  <MacWin title="About" delay={0.12}>
+                      <div className="flex gap-5 p-5 md:p-6">
                         <img
                           src={profilePhoto}
                           alt="Hyebin Park"
-                          className="h-24 w-24 rounded-[28px] object-cover object-[center_20%]"
+                          className="h-16 w-16 flex-shrink-0 rounded-[20px] object-cover object-[center_20%]"
                           style={{
                             border: "1px solid hsl(var(--desktop-border) / 0.12)",
-                            boxShadow: "0 16px 34px hsl(var(--desktop-shadow) / 0.25)",
                           }}
                         />
 
-                        <div>
-                          <p className="text-[12px] font-semibold tracking-[0.18em] uppercase" style={{ color: "hsl(var(--desktop-muted))" }}>
-                            Currently focused on AI, data, and systems-heavy product work
+                        <div className="min-w-0">
+                          <p className="text-[15px] font-semibold leading-6" style={{ color: "hsl(var(--desktop-foreground))" }}>
+                            I turn complex AI & data products into clear, trustworthy experiences.
                           </p>
-                          <p className="mt-3 max-w-[18ch] text-[clamp(1.65rem,3vw,2.5rem)] font-black leading-[1.02] tracking-[-0.04em]" style={{ color: "hsl(var(--desktop-foreground))" }}>
-                            I design complex products that feel clear, calm, and easy to trust.
-                          </p>
-                          <p className="mt-4 max-w-[34ch] text-[15px] leading-7" style={{ color: "hsl(var(--desktop-muted))" }}>
-                            I design technically complex products that feel structured, human, and easy to trust — from AI systems to research-heavy workflows and fintech platforms.
-                          </p>
-                          <div className="mt-5 inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[12px] font-semibold"
+                          <div className="mt-3 inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-semibold"
                             style={{
                               color: "hsl(var(--desktop-foreground))",
                               background: "hsl(var(--desktop-border) / 0.08)",
-                              border: "1px solid hsl(var(--desktop-border) / 0.08)",
                             }}>
                             <span className="h-2 w-2 rounded-full" style={{ background: "hsl(var(--desktop-success))" }} aria-hidden="true" />
-                            Available for product design, UX research, and AI product work
+                            Open to work
                           </div>
                         </div>
                       </div>
 
                       <div
-                        className="grid gap-3 border-t p-6 pt-5 sm:grid-cols-3 md:px-7"
+                        className="grid grid-cols-3 gap-2 border-t p-4"
                         style={{ borderColor: "hsl(var(--desktop-border) / 0.08)" }}
                       >
                         {[
-                          { label: "Projects", value: "5+" },
-                          { label: "Industries", value: "AI · Fintech · Research" },
-                          { label: "Impact", value: "$3.5M startup growth" },
+                          { label: "Focus", value: "AI · Data" },
+                          { label: "Education", value: "MS-HCI" },
+                          { label: "Impact", value: "$3.5M" },
                         ].map((item) => (
                           <div
                             key={item.label}
-                            className="rounded-2xl px-4 py-3"
+                            className="rounded-xl px-3 py-2"
                             style={{
                               background: "hsl(var(--desktop-search) / 0.52)",
-                              border: "1px solid hsl(var(--desktop-border) / 0.06)",
                             }}
                           >
-                            <p className="text-[10px] font-semibold tracking-[0.16em] uppercase" style={{ color: "hsl(var(--desktop-subtle))" }}>
+                            <p className="text-[9px] font-semibold tracking-[0.16em] uppercase" style={{ color: "hsl(var(--desktop-subtle))" }}>
                               {item.label}
                             </p>
-                            <p className="mt-2 text-sm font-semibold leading-6" style={{ color: "hsl(var(--desktop-foreground))" }}>
+                            <p className="mt-1 text-[13px] font-semibold" style={{ color: "hsl(var(--desktop-foreground))" }}>
                               {item.value}
                             </p>
                           </div>
                         ))}
                       </div>
                   </MacWin>
+
+                  <div className="mt-6">
+                    <MacWin title="Experience" delay={0.22}>
+                      <div className="flex flex-wrap items-center gap-3 p-5">
+                        {[
+                          { src: logoLine, alt: "LINE" },
+                          { src: logoTiktok, alt: "TikTok" },
+                          { src: logoGm, alt: "GM" },
+                          { src: logoNaver, alt: "NAVER" },
+                          { src: logoJstor, alt: "JSTOR" },
+                        ].map((logo) => (
+                          <div
+                            key={logo.alt}
+                            className="flex h-11 w-11 items-center justify-center rounded-xl p-2"
+                            style={{
+                              background: "hsl(var(--desktop-search) / 0.62)",
+                              border: "1px solid hsl(var(--desktop-border) / 0.08)",
+                            }}
+                          >
+                            <img src={logo.src} alt={logo.alt} className="max-h-full max-w-full object-contain opacity-90" />
+                          </div>
+                        ))}
+                      </div>
+                    </MacWin>
+                  </div>
                 </div>
 
-                <aside className="lg:col-span-5 lg:pl-4" aria-labelledby="folders-heading">
-                  <div className="px-1 pt-2 lg:pt-4">
-                    <div className="mb-6">
-                      <p id="folders-heading" className="text-[11px] font-semibold tracking-[0.22em] uppercase" style={{ color: "hsl(var(--desktop-muted))" }}>
-                        Project folders
-                      </p>
-                      <p className="mt-1 text-[13px] leading-6" style={{ color: "hsl(var(--desktop-subtle))" }}>
-                        Open a folder to browse related case studies.
-                      </p>
+                <div className="lg:col-span-7">
+                  <MacWin title="How I Work" delay={0.18}>
+                    <div className="flex items-center justify-center overflow-hidden p-6 md:p-8">
+                      <PuzzleAnimation />
                     </div>
-                    <div className="grid grid-cols-2 justify-items-start gap-x-6 gap-y-8 sm:grid-cols-3 sm:gap-x-8 sm:gap-y-10">
+                  </MacWin>
+
+                  <aside className="mt-6" aria-labelledby="folders-heading">
+                    <p id="folders-heading" className="mb-3 px-1 text-[10px] font-semibold tracking-[0.22em] uppercase" style={{ color: "hsl(var(--desktop-muted))" }}>
+                      Project Folders
+                    </p>
+                    <div className="grid grid-cols-5 gap-2 sm:gap-4">
                       {folders.map((folder, index) => (
                         <motion.button
                           key={folder.label}
                           type="button"
                           onClick={() => setFinderCategory(folder.label)}
-                          className="group flex w-[92px] flex-col items-center gap-2 text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))] rounded-xl"
+                          className="group flex flex-col items-center gap-1.5 text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))] rounded-xl p-2"
                           initial={{ opacity: 0, y: 14 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.22 + index * 0.07 }}
@@ -497,10 +520,10 @@ const App = () => {
                           <img
                             src={folder.icon}
                             alt=""
-                            className="h-[72px] w-[72px] object-contain transition-transform duration-200 group-hover:-translate-y-1"
+                            className="h-14 w-14 object-contain transition-transform duration-200 group-hover:-translate-y-1"
                           />
                           <span
-                            className="max-w-[92px] text-[11px] font-medium leading-tight"
+                            className="text-[10px] font-medium leading-tight"
                             style={{ color: "hsl(var(--desktop-foreground) / 0.85)" }}
                           >
                             {folder.label}
@@ -508,69 +531,7 @@ const App = () => {
                         </motion.button>
                       ))}
                     </div>
-                  </div>
-                </aside>
-
-                <div className="lg:col-span-7">
-                  <MacWin title="How I Work" delay={0.2} className="h-full min-h-[320px]">
-                    <div className="grid items-center gap-6 p-5 md:grid-cols-[minmax(0,1fr)_280px] md:p-6">
-                      <div>
-                        <p className="text-[11px] font-semibold tracking-[0.18em] uppercase" style={{ color: "hsl(var(--desktop-subtle))" }}>
-                          Research → Structure → Outcome
-                        </p>
-                        <h2 className="mt-3 text-[clamp(1.6rem,3vw,2.25rem)] font-black leading-[1.02] tracking-[-0.03em]" style={{ color: "hsl(var(--desktop-foreground))" }}>
-                          I turn ambiguity into clear product decisions.
-                        </h2>
-                        <p className="mt-4 text-[14px] leading-7" style={{ color: "hsl(var(--desktop-muted))" }}>
-                          My process blends UX research, systems thinking, and AI product strategy so the final experience feels intuitive, not overwhelming.
-                        </p>
-                      </div>
-                      <div className="flex justify-center lg:justify-end">
-                        <PuzzleAnimation />
-                      </div>
-                    </div>
-                  </MacWin>
-                </div>
-
-                <div className="lg:col-span-5 lg:pl-4">
-                  <MacWin title="Background" delay={0.28} className="h-full min-h-[320px]">
-                      <div className="space-y-5 p-6">
-                        <div>
-                          <p className="text-[11px] font-semibold tracking-[0.18em] uppercase" style={{ color: "hsl(var(--desktop-subtle))" }}>
-                            Education
-                          </p>
-                          <p className="mt-2 text-lg font-semibold leading-7" style={{ color: "hsl(var(--desktop-foreground))" }}>
-                            MS-HCI @ University of Michigan
-                          </p>
-                        </div>
-
-                        <div>
-                          <p className="text-[11px] font-semibold tracking-[0.18em] uppercase" style={{ color: "hsl(var(--desktop-subtle))" }}>
-                            Experience
-                          </p>
-                          <div className="mt-3 flex flex-wrap items-center gap-3">
-                            {[
-                              { src: logoLine, alt: "LINE" },
-                              { src: logoTiktok, alt: "TikTok" },
-                              { src: logoGm, alt: "GM" },
-                              { src: logoNaver, alt: "NAVER" },
-                              { src: logoJstor, alt: "JSTOR" },
-                            ].map((logo) => (
-                              <div
-                                key={logo.alt}
-                                className="flex h-12 w-12 items-center justify-center rounded-2xl p-2"
-                                style={{
-                                  background: "hsl(var(--desktop-search) / 0.62)",
-                                  border: "1px solid hsl(var(--desktop-border) / 0.08)",
-                                }}
-                              >
-                                <img src={logo.src} alt={logo.alt} className="max-h-full max-w-full object-contain opacity-90" />
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                  </MacWin>
+                  </aside>
                 </div>
               </div>
             </div>
