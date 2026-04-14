@@ -13,19 +13,19 @@ interface PuzzlePiece {
 }
 
 const pieces: PuzzlePiece[] = [
-  { label: "User", sublabel: "Needs", color: "hsl(var(--puzzle-piece-1))", row: 0, col: 0, startX: -110, startY: -70, startRotate: -10 },
-  { label: "Data", sublabel: "Complexity", color: "hsl(var(--puzzle-piece-2))", row: 0, col: 1, startX: 26, startY: -90, startRotate: 7 },
-  { label: "Business", sublabel: "Goals", color: "hsl(var(--puzzle-piece-3))", row: 0, col: 2, startX: 120, startY: -58, startRotate: -6 },
-  { label: "Tech", sublabel: "Constraints", color: "hsl(var(--puzzle-piece-4))", row: 1, col: 0, startX: -90, startY: 80, startRotate: 8 },
-  { label: "Edge", sublabel: "Cases", color: "hsl(var(--puzzle-piece-5))", row: 1, col: 1, startX: 16, startY: 96, startRotate: -7 },
-  { label: "Emerging", sublabel: "Tech", color: "hsl(var(--puzzle-piece-6))", row: 1, col: 2, startX: 130, startY: 72, startRotate: 10 },
+  { label: "User", sublabel: "Needs", color: "#7C5CFC", row: 0, col: 0, startX: -140, startY: -100, startRotate: -15 },
+  { label: "Data", sublabel: "Complexity", color: "#9B7DFF", row: 0, col: 1, startX: 30, startY: -120, startRotate: 12 },
+  { label: "Business", sublabel: "Goals", color: "#6C4DE6", row: 0, col: 2, startX: 160, startY: -80, startRotate: -8 },
+  { label: "Tech", sublabel: "Constraints", color: "#8B6CF7", row: 1, col: 0, startX: -120, startY: 110, startRotate: 10 },
+  { label: "Edge", sublabel: "Cases", color: "#A78BFA", row: 1, col: 1, startX: 20, startY: 130, startRotate: -12 },
+  { label: "Emerging", sublabel: "Tech", color: "#7048E8", row: 1, col: 2, startX: 170, startY: 95, startRotate: 14 },
 ];
 
-const PIECE_W = 112;
-const PIECE_H = 98;
+const PIECE_W = 100;
+const PIECE_H = 72;
 const GAP = 0;
-const TAB_R = 16;
-const CORNER_R = 18;
+const TAB_R = 13;
+const CORNER_R = 14;
 
 const PuzzlePieceSVG = ({ piece, index }: { piece: PuzzlePiece; index: number }) => {
   const hasTabRight = piece.col < 2;
@@ -50,12 +50,12 @@ const PuzzlePieceSVG = ({ piece, index }: { piece: PuzzlePiece; index: number })
             {hasBlankTop ? <circle cx={PIECE_W / 2} cy={0} r={TAB_R} fill="black" /> : null}
           </mask>
           <linearGradient id={glossId} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="hsl(var(--desktop-foreground) / 0.22)" />
-            <stop offset="42%" stopColor="hsl(var(--desktop-foreground) / 0.06)" />
-            <stop offset="100%" stopColor="hsl(var(--desktop-shadow) / 0.12)" />
+            <stop offset="0%" stopColor="rgba(255,255,255,0.28)" />
+            <stop offset="50%" stopColor="rgba(255,255,255,0.06)" />
+            <stop offset="100%" stopColor="rgba(0,0,0,0.1)" />
           </linearGradient>
           <filter id={shadowId} x="-20%" y="-20%" width="150%" height="150%">
-            <feDropShadow dx="0" dy="7" stdDeviation="8" floodOpacity="0.24" />
+            <feDropShadow dx="0" dy="4" stdDeviation="6" floodOpacity="0.2" />
           </filter>
         </defs>
 
@@ -66,13 +66,13 @@ const PuzzlePieceSVG = ({ piece, index }: { piece: PuzzlePiece; index: number })
       </svg>
 
       <div
-        className="absolute left-0 top-0 flex flex-col items-center justify-center px-2 text-center"
+        className="absolute left-0 top-0 flex flex-col items-center justify-center px-1 text-center"
         style={{ width: PIECE_W, height: PIECE_H }}
       >
-        <span className="text-[13px] font-black uppercase leading-tight tracking-[0.08em]" style={{ color: "hsl(var(--desktop-foreground))" }}>
+        <span className="text-[11px] font-black uppercase leading-tight tracking-[0.06em]" style={{ color: "rgba(255,255,255,0.95)" }}>
           {piece.label}
         </span>
-        <span className="text-[10px] font-semibold uppercase tracking-[0.14em]" style={{ color: "hsl(var(--desktop-foreground) / 0.82)" }}>
+        <span className="text-[8px] font-semibold uppercase tracking-[0.12em]" style={{ color: "rgba(255,255,255,0.7)" }}>
           {piece.sublabel}
         </span>
       </div>
@@ -92,7 +92,7 @@ export const PuzzleAnimation = () => {
       return;
     }
     if (isInView) {
-      const timer = window.setTimeout(() => setIsAssembled(true), 160);
+      const timer = window.setTimeout(() => setIsAssembled(true), 300);
       return () => window.clearTimeout(timer);
     }
   }, [isInView, prefersReducedMotion]);
@@ -120,20 +120,20 @@ export const PuzzleAnimation = () => {
             initial={
               prefersReducedMotion
                 ? false
-                : { x: piece.startX, y: piece.startY, opacity: 0, scale: 0.88, rotate: piece.startRotate }
+                : { x: piece.startX, y: piece.startY, opacity: 0, scale: 0.85, rotate: piece.startRotate }
             }
             animate={{
               x: isAssembled ? 0 : piece.startX,
               y: isAssembled ? 0 : piece.startY,
-              opacity: 1,
-              scale: 1,
-              rotate: 0,
+              opacity: isAssembled ? 1 : 0,
+              scale: isAssembled ? 1 : 0.85,
+              rotate: isAssembled ? 0 : piece.startRotate,
             }}
             transition={{
               type: "spring",
-              stiffness: 150,
-              damping: 18,
-              delay: prefersReducedMotion ? 0 : index * 0.08,
+              stiffness: 120,
+              damping: 14,
+              delay: prefersReducedMotion ? 0 : index * 0.1,
             }}
           >
             <PuzzlePieceSVG piece={piece} index={index} />

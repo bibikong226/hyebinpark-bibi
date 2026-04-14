@@ -1,54 +1,71 @@
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 
-interface FooterProps {
-  variant?: "purple" | "pink";
-}
-
 const CV_LINK = "https://drive.google.com/file/d/1l2V4pQCjAZhIhLyRmVh3m2QTw87yLI6P/view?usp=sharing";
 
-export const Footer = ({ variant = "purple" }: FooterProps) => {
+export const Footer = () => {
   return (
     <>
-      {/* Connect Section */}
+      {/* Let's Connect - Mac window style */}
       <section
-        className="py-20 px-8 md:px-16"
+        className="px-4 py-24 sm:px-8 sm:py-32 md:px-10"
         style={{
-          background: "linear-gradient(165deg, rgba(99,102,241,.15) 0%, rgba(30,30,60,.6) 50%, rgba(12,14,26,.9) 100%)",
-          borderTop: "1px solid rgba(255,255,255,.06)",
+          background: "linear-gradient(180deg, #1a1428 0%, #14101e 50%, #0e0b16 100%)",
         }}
         aria-labelledby="connect-heading"
       >
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="mx-auto max-w-[700px]">
           <motion.div
+            className="overflow-hidden rounded-[16px]"
+            style={{
+              background: "linear-gradient(180deg, rgba(38,32,58,0.95), rgba(24,20,42,0.92))",
+              border: "1px solid rgba(255,255,255,0.08)",
+              boxShadow: "0 24px 64px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06)",
+            }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="space-y-6"
           >
-            <h2 id="connect-heading" className="font-serif text-3xl md:text-4xl font-normal italic text-white">
-              Let's Connect
-            </h2>
-            <p className="text-[15.5px] text-white/60 max-w-[540px] mx-auto leading-[1.7]">
-              I'm always excited to connect with fellow designers, researchers, and innovators. Whether you have a project in mind or just want to talk about design and technology, I'd love to hear from you. Let's talk! 👩‍💻
-            </p>
-            <div className="flex flex-wrap justify-center gap-3 mt-8">
-              <a
-                href="mailto:hyebinp@umich.edu"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-white text-[#0c0e1a] rounded-full hover:bg-white/90 transition-all font-medium text-[13.5px] focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
-              >
-                hyebinp@umich.edu
-                <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/hyebinp/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 text-white border border-white/20 rounded-full hover:bg-white/20 transition-all font-medium text-[13.5px] focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
-              >
-                LinkedIn
-                <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
-              </a>
+            {/* Title bar */}
+            <div className="flex items-center gap-2 border-b px-4 py-2.5" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+              <div className="flex items-center gap-[7px]">
+                <span className="h-3 w-3 rounded-full" style={{ background: "#FF5F57" }} />
+                <span className="h-3 w-3 rounded-full" style={{ background: "#FFBD2E" }} />
+                <span className="h-3 w-3 rounded-full" style={{ background: "#28C840" }} />
+              </div>
+              <span className="flex-1 text-center text-[11px] font-semibold tracking-[0.16em] uppercase" style={{ color: "rgba(255,255,255,0.4)" }}>
+                Let's Connect
+              </span>
+              <div className="w-[52px]" />
+            </div>
+
+            {/* Content */}
+            <div className="px-8 py-10 text-center md:px-12 md:py-14">
+              <h2 id="connect-heading" className="font-serif text-3xl italic md:text-4xl" style={{ color: "rgba(255,255,255,0.92)" }}>
+                Let's Connect
+              </h2>
+              <p className="mx-auto mt-4 max-w-[440px] text-[15px] leading-[1.7]" style={{ color: "rgba(255,255,255,0.5)" }}>
+                I'm always excited to connect with fellow designers, researchers, and innovators. Let's talk! 👩‍💻
+              </p>
+              <div className="mt-8 flex flex-wrap justify-center gap-3">
+                <a
+                  href="mailto:hyebinp@umich.edu"
+                  className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-[13.5px] font-medium text-[#0e0b16] transition-all hover:bg-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
+                >
+                  hyebinp@umich.edu
+                  <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/hyebinp/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border px-6 py-3 text-[13.5px] font-medium transition-all hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
+                  style={{ color: "rgba(255,255,255,0.8)", borderColor: "rgba(255,255,255,0.15)" }}
+                >
+                  LinkedIn
+                  <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                </a>
+              </div>
             </div>
           </motion.div>
         </div>
@@ -56,19 +73,19 @@ export const Footer = ({ variant = "purple" }: FooterProps) => {
 
       {/* Footer */}
       <footer
-        className="py-7 px-8 md:px-10 flex flex-col sm:flex-row items-center justify-between gap-4"
+        className="flex flex-col items-center justify-between gap-4 px-8 py-7 sm:flex-row md:px-10"
         role="contentinfo"
         style={{
-          background: "rgba(12,14,26,0.9)",
-          borderTop: "1px solid rgba(255,255,255,.06)",
+          background: "#0e0b16",
+          borderTop: "1px solid rgba(255,255,255,0.06)",
         }}
       >
-        <span className="font-serif text-[17px] italic text-white/40">Hyebin Park</span>
+        <span className="font-serif text-[17px] italic" style={{ color: "rgba(255,255,255,0.3)" }}>Hyebin Park</span>
         <div className="flex gap-5">
-          <a href="mailto:hyebinp@umich.edu" className="text-xs text-white/40 hover:text-white transition-colors tracking-wide focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 rounded-sm">Email</a>
-          <a href="https://www.linkedin.com/in/hyebinp/" target="_blank" rel="noopener noreferrer" className="text-xs text-white/40 hover:text-white transition-colors tracking-wide focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 rounded-sm">LinkedIn</a>
-          <a href={CV_LINK} target="_blank" rel="noopener noreferrer" className="text-xs text-white/40 hover:text-white transition-colors tracking-wide focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 rounded-sm">Resume</a>
-          <a href="https://hyebinparkbibi.com" className="text-xs text-white/40 hover:text-white transition-colors tracking-wide focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 rounded-sm">hyebinparkbibi.com</a>
+          <a href="mailto:hyebinp@umich.edu" className="rounded-sm text-xs tracking-wide transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400" style={{ color: "rgba(255,255,255,0.3)" }}>Email</a>
+          <a href="https://www.linkedin.com/in/hyebinp/" target="_blank" rel="noopener noreferrer" className="rounded-sm text-xs tracking-wide transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400" style={{ color: "rgba(255,255,255,0.3)" }}>LinkedIn</a>
+          <a href={CV_LINK} target="_blank" rel="noopener noreferrer" className="rounded-sm text-xs tracking-wide transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400" style={{ color: "rgba(255,255,255,0.3)" }}>Resume</a>
+          <a href="https://hyebinparkbibi.com" className="rounded-sm text-xs tracking-wide transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400" style={{ color: "rgba(255,255,255,0.3)" }}>hyebinparkbibi.com</a>
         </div>
       </footer>
     </>
