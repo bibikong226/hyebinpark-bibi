@@ -84,7 +84,7 @@ export const Navigation = () => {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden p-2 hover:bg-muted rounded-lg transition-colors"
+          className="md:hidden p-2 hover:bg-white/10 rounded-lg transition-colors text-white/80"
           aria-label="Toggle menu"
         >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
