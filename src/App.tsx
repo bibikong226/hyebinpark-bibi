@@ -12,11 +12,6 @@ import logoTiktok from "@/assets/logo-tiktok.png";
 import logoGm from "@/assets/logo-gm.png";
 import logoNaver from "@/assets/logo-naver.png";
 import logoJstor from "@/assets/logo-jstor.png";
-import folderAiMl from "@/assets/folder-ai-ml.png";
-import folderProduct from "@/assets/folder-product.png";
-import folderDevtools from "@/assets/folder-devtools.png";
-import folderUxr from "@/assets/folder-uxr.png";
-import folderFintechWeb3 from "@/assets/folder-fintech-web3.png";
 import { projects } from "@/data/projects";
 
 const MacWin = ({
@@ -70,6 +65,29 @@ const MacWin = ({
     </div>
     <div>{children}</div>
   </motion.section>
+);
+
+const DesktopFolderIcon = () => (
+  <div className="relative h-[58px] w-[76px]" aria-hidden="true">
+    <div
+      className="absolute left-3 top-0 h-4 w-8 rounded-t-[10px]"
+      style={{
+        background: "linear-gradient(180deg, hsl(var(--puzzle-piece-5)) 0%, hsl(var(--puzzle-piece-3)) 100%)",
+      }}
+    />
+    <div
+      className="absolute inset-x-0 bottom-0 top-3 rounded-[14px]"
+      style={{
+        background: "linear-gradient(180deg, hsl(var(--puzzle-piece-2)) 0%, hsl(var(--puzzle-piece-1)) 100%)",
+        boxShadow:
+          "inset 0 1px 0 hsl(var(--desktop-foreground) / 0.18), 0 12px 26px hsl(var(--desktop-shadow) / 0.26)",
+      }}
+    />
+    <div
+      className="absolute inset-x-3 top-5 h-[2px] rounded-full"
+      style={{ background: "hsl(var(--desktop-foreground) / 0.12)" }}
+    />
+  </div>
 );
 
 const SpotlightSearch = ({
@@ -319,11 +337,11 @@ const App = () => {
   ];
 
   const folders = [
-    { icon: folderAiMl, label: "AI / ML" },
-    { icon: folderProduct, label: "Product Design" },
-    { icon: folderDevtools, label: "Data & Dev Tools" },
-    { icon: folderFintechWeb3, label: "Fintech & Web3" },
-    { icon: folderUxr, label: "UX Research" },
+    { label: "AI / ML" },
+    { label: "Product Design" },
+    { label: "Data & Dev Tools" },
+    { label: "Fintech & Web3" },
+    { label: "UX Research" },
   ];
 
   return (
@@ -340,15 +358,15 @@ const App = () => {
       <SpotlightSearch isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
       <FinderWindow isOpen={!!finderCategory} onClose={() => setFinderCategory(null)} category={finderCategory || ""} />
 
-      <main id="main-content" role="main">
+      <main id="main-content" role="main" className="pt-10">
         <section
           className="relative flex min-h-[920px] w-full flex-col overflow-hidden lg:min-h-screen"
           style={{
             background: `
-              radial-gradient(ellipse 80% 60% at 20% 80%, hsl(270 65% 40% / 0.45) 0%, transparent 50%),
-              radial-gradient(ellipse 60% 50% at 80% 20%, hsl(255 70% 50% / 0.35) 0%, transparent 45%),
-              radial-gradient(ellipse 50% 40% at 50% 50%, hsl(260 55% 45% / 0.2) 0%, transparent 50%),
-              linear-gradient(155deg, hsl(265 50% 16%) 0%, hsl(260 45% 12%) 40%, hsl(255 55% 8%) 100%)
+              radial-gradient(ellipse 72% 42% at 50% 0%, hsl(var(--desktop-foreground) / 0.09) 0%, transparent 66%),
+              radial-gradient(ellipse 66% 56% at 18% 86%, hsl(var(--puzzle-piece-1) / 0.28) 0%, transparent 54%),
+              radial-gradient(ellipse 48% 40% at 84% 18%, hsl(var(--puzzle-piece-3) / 0.24) 0%, transparent 48%),
+              linear-gradient(160deg, hsl(var(--desktop-wallpaper-start)) 0%, hsl(var(--desktop-wallpaper-mid)) 52%, hsl(var(--desktop-wallpaper-end)) 100%)
             `,
           }}
           aria-label="Desktop hero"
@@ -356,24 +374,25 @@ const App = () => {
           <div className="relative z-10 flex-1 px-4 pb-10 pt-6 sm:px-6 md:px-8 lg:px-12 lg:pb-32">
             <div className="mx-auto max-w-[1280px]">
 
-              {/* Large faded name as watermark */}
-              <div className="pointer-events-none select-none text-center mb-6 lg:mb-8">
-                <h1
-                  className="text-[clamp(4rem,15vw,11rem)] font-black leading-[0.85] tracking-[-0.04em] uppercase"
-                  style={{ color: "hsl(260 40% 60% / 0.12)" }}
-                >
-                  HYEBIN PARK
-                </h1>
-              </div>
-
-              {/* Headline + subtitle */}
               <div className="mb-8 flex flex-col items-center text-center lg:mb-12">
+                <div className="pointer-events-none select-none text-center">
+                  <h1
+                    className="text-[clamp(4.4rem,15vw,11rem)] font-black leading-[0.84] tracking-[-0.06em] uppercase"
+                    style={{
+                      color: "hsl(var(--desktop-foreground) / 0.18)",
+                      textShadow: "0 0 36px hsl(var(--desktop-foreground) / 0.04)",
+                    }}
+                  >
+                    HYEBIN PARK
+                  </h1>
+                </div>
+
                 <motion.p
-                  className="mb-4 rounded-full px-5 py-2 text-[12px] font-bold tracking-[0.24em] uppercase"
+                  className="mt-2 mb-4 rounded-full px-5 py-2 text-[12px] font-bold tracking-[0.24em] uppercase"
                   style={{
-                    color: "hsl(var(--desktop-accent))",
-                    background: "hsl(var(--desktop-accent) / 0.14)",
-                    border: "1px solid hsl(var(--desktop-accent) / 0.22)",
+                    color: "hsl(var(--desktop-foreground))",
+                    background: "hsl(var(--desktop-accent) / 0.22)",
+                    border: "1px solid hsl(var(--desktop-border) / 0.14)",
                   }}
                   initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -383,17 +402,17 @@ const App = () => {
                 </motion.p>
 
                 <motion.h2
-                  className="text-[clamp(2rem,5.5vw,4.5rem)] leading-[1.08] tracking-tight"
+                  className="text-[clamp(2.2rem,5.7vw,4.8rem)] leading-[1.02] tracking-tight"
                   style={{ color: "hsl(var(--desktop-foreground))" }}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 }}
                 >
-                  <span className="font-light">Turning</span>{" "}
-                  <span className="font-serif italic" style={{ color: "hsl(var(--desktop-accent))" }}>complexity</span>
+                  <span className="font-medium">Turning</span>{" "}
+                  <span className="font-serif italic" style={{ color: "hsl(var(--puzzle-piece-2))" }}>complexity</span>
                   <br />
-                  <span className="font-light">into</span>{" "}
-                  <span className="font-serif italic" style={{ color: "hsl(var(--desktop-accent))" }}>clarity</span>
+                  <span className="font-medium">into</span>{" "}
+                  <span className="font-serif italic" style={{ color: "hsl(var(--puzzle-piece-3))" }}>clarity</span>
                 </motion.h2>
 
                 <motion.button
@@ -402,8 +421,8 @@ const App = () => {
                   className="mt-6 flex items-center gap-3 rounded-full px-5 py-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))]"
                   style={{
                     color: "hsl(var(--desktop-foreground))",
-                    background: "hsl(var(--desktop-search) / 0.86)",
-                    border: "1px solid hsl(var(--desktop-border) / 0.08)",
+                    background: "hsl(var(--desktop-search) / 0.88)",
+                    border: "1px solid hsl(var(--desktop-border) / 0.1)",
                     boxShadow: "0 14px 36px hsl(var(--desktop-shadow) / 0.24)",
                   }}
                   initial={{ opacity: 0, y: 8 }}
@@ -460,7 +479,7 @@ const App = () => {
                   </MacWin>
 
                   <MacWin title="Experience" delay={0.22} className="mt-6">
-                    <div className="flex items-center justify-between gap-4 p-5">
+                    <div className="grid grid-cols-2 gap-3 p-5 sm:grid-cols-5">
                       {[
                         { src: logoLine, alt: "LINE" },
                         { src: logoTiktok, alt: "TikTok" },
@@ -470,9 +489,13 @@ const App = () => {
                       ].map((logo) => (
                         <div
                           key={logo.alt}
-                          className="flex h-10 w-10 items-center justify-center rounded-xl"
+                          className="flex h-16 items-center justify-center rounded-[18px] p-4"
+                          style={{
+                            background: "linear-gradient(180deg, hsl(var(--desktop-foreground) / 0.12), hsl(var(--desktop-foreground) / 0.06))",
+                            border: "1px solid hsl(var(--desktop-border) / 0.12)",
+                          }}
                         >
-                          <img src={logo.src} alt={logo.alt} className="max-h-full max-w-full object-contain opacity-80 brightness-[2] grayscale" />
+                          <img src={logo.src} alt={logo.alt} className="max-h-7 w-auto object-contain" />
                         </div>
                       ))}
                     </div>
@@ -486,31 +509,29 @@ const App = () => {
                     </div>
                   </MacWin>
 
-                  <aside className="mt-6" aria-labelledby="folders-heading">
-                    <p id="folders-heading" className="mb-3 px-1 text-[10px] font-semibold tracking-[0.22em] uppercase" style={{ color: "hsl(var(--desktop-muted))" }}>
+                  <aside className="mt-8" aria-labelledby="folders-heading">
+                    <p id="folders-heading" className="mb-4 px-1 text-[10px] font-semibold tracking-[0.22em] uppercase" style={{ color: "hsl(var(--desktop-muted))" }}>
                       Project Folders
                     </p>
-                    <div className="grid grid-cols-5 gap-2 sm:gap-4">
+                    <div className="flex flex-wrap items-start justify-center gap-x-6 gap-y-5 lg:justify-start">
                       {folders.map((folder, index) => (
                         <motion.button
                           key={folder.label}
                           type="button"
                           onClick={() => setFinderCategory(folder.label)}
-                          className="group flex flex-col items-center gap-1.5 text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))] rounded-xl p-2"
+                          className="group flex w-[96px] flex-col items-center gap-2 text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))] rounded-xl"
                           initial={{ opacity: 0, y: 14 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.22 + index * 0.07 }}
                           aria-label={`Open ${folder.label} folder`}
                           aria-haspopup="dialog"
                         >
-                          <img
-                            src={folder.icon}
-                            alt=""
-                            className="h-14 w-14 object-contain transition-transform duration-200 group-hover:-translate-y-1"
-                          />
+                          <div className="transition-transform duration-200 group-hover:-translate-y-1 group-focus-visible:-translate-y-1">
+                            <DesktopFolderIcon />
+                          </div>
                           <span
-                            className="text-[10px] font-medium leading-tight"
-                            style={{ color: "hsl(var(--desktop-foreground) / 0.85)" }}
+                            className="text-[11px] font-semibold leading-tight"
+                            style={{ color: "hsl(var(--desktop-foreground) / 0.9)" }}
                           >
                             {folder.label}
                           </span>
@@ -683,7 +704,13 @@ const App = () => {
                         />
                       </div>
                       <div className="absolute bottom-4 right-4 z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                        <div className="rounded-full bg-white/95 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-slate-800 shadow-md">
+                        <div
+                          className="rounded-full px-4 py-1.5 text-[11px] font-semibold uppercase tracking-wider shadow-md"
+                          style={{
+                            background: "hsl(var(--work-surface-1) / 0.96)",
+                            color: "hsl(var(--work-foreground))",
+                          }}
+                        >
                           View
                         </div>
                       </div>

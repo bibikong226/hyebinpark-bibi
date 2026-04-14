@@ -21,9 +21,9 @@ const pieces: PuzzlePiece[] = [
   { label: "Emerging", sublabel: "Tech", color: "hsl(var(--puzzle-piece-6))", row: 1, col: 2, startX: 160, startY: 80, startRotate: 14 },
 ];
 
-const PIECE_W = 100;
-const PIECE_H = 90;
-const GAP = 6;
+const PIECE_W = 108;
+const PIECE_H = 96;
+const GAP = 4;
 const TAB_R = 12;
 
 const PuzzlePieceSVG = ({ piece, index }: { piece: PuzzlePiece; index: number }) => {
