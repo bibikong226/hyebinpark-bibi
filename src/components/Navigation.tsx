@@ -85,6 +85,9 @@ export const Navigation = () => {
           >
             Contact
           </a>
+          <span className="text-[11px] text-white/40 font-medium tracking-wide hidden lg:block">
+            {currentTime.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })} {currentTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}
+          </span>
         </div>
 
         {/* Mobile Menu Button */}
