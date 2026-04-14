@@ -1,100 +1,117 @@
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
-const pieces = [
-  {
-    label: "Research",
-    color: "hsl(var(--puzzle-piece-1))",
-    startX: -110,
-    startY: -54,
-    final: { left: "18px", top: "18px" },
-    edges: { right: "tab", bottom: "tab", left: "flat", top: "flat" },
-  },
-  {
-    label: "Systems",
-    color: "hsl(var(--puzzle-piece-2))",
-    startX: 118,
-    startY: -46,
-    final: { right: "18px", top: "18px" },
-    edges: { right: "flat", bottom: "tab", left: "blank", top: "flat" },
-  },
-  {
-    label: "AI",
-    color: "hsl(var(--puzzle-piece-3))",
-    startX: -92,
-    startY: 84,
-    final: { left: "18px", bottom: "18px" },
-    edges: { right: "tab", bottom: "flat", left: "flat", top: "blank" },
-  },
-  {
-    label: "Impact",
-    color: "hsl(var(--puzzle-piece-4))",
-    startX: 126,
-    startY: 92,
-    final: { right: "18px", bottom: "18px" },
-    edges: { right: "flat", bottom: "flat", left: "blank", top: "blank" },
-  },
+interface PuzzlePiece {
+  label: string;
+  sublabel: string;
+  color: string;
+  row: number;
+  col: number;
+  startX: number;
+  startY: number;
+  startRotate: number;
+}
+
+const pieces: PuzzlePiece[] = [
+  { label: "User", sublabel: "Needs", color: "hsl(var(--puzzle-piece-1))", row: 0, col: 0, startX: -120, startY: -80, startRotate: -12 },
+  { label: "Data", sublabel: "Complexity", color: "hsl(var(--puzzle-piece-2))", row: 0, col: 1, startX: 40, startY: -100, startRotate: 8 },
+  { label: "Business", sublabel: "Goals", color: "hsl(var(--puzzle-piece-3))", row: 0, col: 2, startX: 140, startY: -60, startRotate: -6 },
+  { label: "Tech", sublabel: "Constraints", color: "hsl(var(--puzzle-piece-4))", row: 1, col: 0, startX: -100, startY: 90, startRotate: 10 },
+  { label: "Edge", sublabel: "Cases", color: "hsl(var(--puzzle-piece-5))", row: 1, col: 1, startX: 20, startY: 110, startRotate: -8 },
+  { label: "Emerging", sublabel: "Tech", color: "hsl(var(--puzzle-piece-6))", row: 1, col: 2, startX: 160, startY: 80, startRotate: 14 },
 ];
 
-const PuzzlePieceShape = ({
-  label,
-  color,
-  edges,
-}: {
-  label: string;
-  color: string;
-  edges: { right: string; bottom: string; left: string; top: string };
-}) => {
-  const cutoutStyle = {
-    background: "hsl(var(--desktop-panel-strong))",
-    boxShadow: "inset 0 1px 0 hsl(var(--desktop-border) / 0.08)",
+const PIECE_W = 100;
+const PIECE_H = 90;
+const GAP = 6;
+const TAB_R = 12;
+
+const PuzzlePieceSVG = ({ piece, index }: { piece: PuzzlePiece; index: number }) => {
+  const w = PIECE_W;
+  const h = PIECE_H;
+  const tr = TAB_R;
+
+  const hasTabRight = piece.col < 2;
+  const hasTabBottom = piece.row < 1;
+  const hasBlankLeft = piece.col > 0;
+  const hasBlankTop = piece.row > 0;
+
+  const buildPath = () => {
+    let d = `M 0 0`;
+
+    // Top edge
+    if (hasBlankTop) {
+      d += ` L ${w / 2 - tr} 0`;
+      d += ` A ${tr} ${tr} 0 1 1 ${w / 2 + tr} 0`;
+      d += ` L ${w} 0`;
+    } else {
+      d += ` L ${w} 0`;
+    }
+
+    // Right edge
+    if (hasTabRight) {
+      d += ` L ${w} ${h / 2 - tr}`;
+      d += ` A ${tr} ${tr} 0 1 0 ${w} ${h / 2 + tr}`;
+      d += ` L ${w} ${h}`;
+    } else {
+      d += ` L ${w} ${h}`;
+    }
+
+    // Bottom edge
+    if (hasTabBottom) {
+      d += ` L ${w / 2 + tr} ${h}`;
+      d += ` A ${tr} ${tr} 0 1 0 ${w / 2 - tr} ${h}`;
+      d += ` L 0 ${h}`;
+    } else {
+      d += ` L 0 ${h}`;
+    }
+
+    // Left edge
+    if (hasBlankLeft) {
+      d += ` L 0 ${h / 2 + tr}`;
+      d += ` A ${tr} ${tr} 0 1 1 0 ${h / 2 - tr}`;
+      d += ` L 0 0`;
+    } else {
+      d += ` L 0 0`;
+    }
+
+    d += " Z";
+    return d;
   };
 
-  const tabStyle = {
-    background: color,
-    boxShadow: "0 12px 20px hsl(var(--desktop-shadow) / 0.14), inset 0 1px 0 hsl(var(--desktop-border) / 0.16)",
-  };
+  const svgW = w + (hasTabRight ? tr + 2 : 0);
+  const svgH = h + (hasTabBottom ? tr + 2 : 0);
 
   return (
-    <div className="relative h-[108px] w-[108px]">
+    <div className="relative" style={{ width: svgW, height: svgH }}>
+      <svg
+        width={svgW}
+        height={svgH}
+        viewBox={`${hasBlankLeft ? 0 : 0} ${hasBlankTop ? 0 : 0} ${svgW} ${svgH}`}
+        fill="none"
+        aria-hidden="true"
+      >
+        <defs>
+          <filter id={`shadow-${index}`}>
+            <feDropShadow dx="0" dy="4" stdDeviation="6" floodOpacity="0.25" />
+          </filter>
+        </defs>
+        <path
+          d={buildPath()}
+          fill={piece.color}
+          filter={`url(#shadow-${index})`}
+        />
+      </svg>
       <div
-        className="absolute inset-[10px] rounded-[26px]"
-        style={{
-          background: color,
-          boxShadow:
-            "0 16px 28px hsl(var(--desktop-shadow) / 0.22), inset 0 1px 0 hsl(var(--desktop-border) / 0.18)",
-        }}
-      />
-
-      {edges.top === "tab" && (
-        <span className="absolute left-1/2 top-[2px] h-7 w-7 -translate-x-1/2 rounded-full" style={tabStyle} aria-hidden="true" />
-      )}
-      {edges.right === "tab" && (
-        <span className="absolute right-[2px] top-1/2 h-7 w-7 -translate-y-1/2 rounded-full" style={tabStyle} aria-hidden="true" />
-      )}
-      {edges.bottom === "tab" && (
-        <span className="absolute bottom-[2px] left-1/2 h-7 w-7 -translate-x-1/2 rounded-full" style={tabStyle} aria-hidden="true" />
-      )}
-      {edges.left === "tab" && (
-        <span className="absolute left-[2px] top-1/2 h-7 w-7 -translate-y-1/2 rounded-full" style={tabStyle} aria-hidden="true" />
-      )}
-
-      {edges.top === "blank" && (
-        <span className="absolute left-1/2 top-[6px] h-8 w-8 -translate-x-1/2 rounded-full" style={cutoutStyle} aria-hidden="true" />
-      )}
-      {edges.right === "blank" && (
-        <span className="absolute right-[6px] top-1/2 h-8 w-8 -translate-y-1/2 rounded-full" style={cutoutStyle} aria-hidden="true" />
-      )}
-      {edges.bottom === "blank" && (
-        <span className="absolute bottom-[6px] left-1/2 h-8 w-8 -translate-x-1/2 rounded-full" style={cutoutStyle} aria-hidden="true" />
-      )}
-      {edges.left === "blank" && (
-        <span className="absolute left-[6px] top-1/2 h-8 w-8 -translate-y-1/2 rounded-full" style={cutoutStyle} aria-hidden="true" />
-      )}
-
-      <div className="absolute inset-[22px] flex items-center justify-center px-2 text-center text-[11px] font-semibold uppercase tracking-[0.09em] md:text-[12px]"
-        style={{ color: "hsl(var(--desktop-foreground))" }}>
-        {label}
+        className="absolute inset-0 flex flex-col items-center justify-center"
+        style={{ width: w, height: h }}
+      >
+        <span className="text-[13px] font-black uppercase leading-tight tracking-wide" style={{ color: "white" }}>
+          {piece.label}
+        </span>
+        <span className="text-[10px] font-semibold uppercase tracking-[0.14em]" style={{ color: "rgba(255,255,255,0.82)" }}>
+          {piece.sublabel}
+        </span>
       </div>
     </div>
   );
@@ -102,99 +119,64 @@ const PuzzlePieceShape = ({
 
 export const PuzzleAnimation = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { once: true, margin: "-80px" });
+  const isInView = useInView(containerRef, { once: true, margin: "-60px" });
   const prefersReducedMotion = useReducedMotion();
-  const [isAssembled, setIsAssembled] = useState(prefersReducedMotion);
+  const [isAssembled, setIsAssembled] = useState(!!prefersReducedMotion);
 
   useEffect(() => {
     if (prefersReducedMotion) {
       setIsAssembled(true);
       return;
     }
-
     if (isInView) {
-      const timer = window.setTimeout(() => setIsAssembled(true), 160);
+      const timer = window.setTimeout(() => setIsAssembled(true), 200);
       return () => window.clearTimeout(timer);
     }
   }, [isInView, prefersReducedMotion]);
 
+  const totalW = 3 * PIECE_W + 2 * GAP + TAB_R + 2;
+  const totalH = 2 * PIECE_H + GAP + TAB_R + 2;
+
   return (
     <div
       ref={containerRef}
-      className="relative h-[236px] w-[260px] md:h-[248px] md:w-[280px]"
+      className="relative"
+      style={{ width: totalW, height: totalH }}
       role="img"
-      aria-label="Animated four-part framework connecting Research, Systems, AI, and Impact."
+      aria-label="Six-piece puzzle framework: User Needs, Data Complexity, Business Goals, Tech Constraints, Edge Cases, Emerging Tech"
     >
-      <div
-        className="absolute inset-0 rounded-[28px]"
-        style={{
-          background:
-            "linear-gradient(180deg, hsl(var(--desktop-search) / 0.84), hsl(var(--desktop-panel-strong) / 0.92))",
-          border: "1px solid hsl(var(--desktop-border) / 0.12)",
-          boxShadow:
-            "inset 0 1px 0 hsl(var(--desktop-border) / 0.08), 0 20px 42px hsl(var(--desktop-shadow) / 0.24)",
-        }}
-        aria-hidden="true"
-      />
+      {pieces.map((piece, index) => {
+        const x = piece.col * (PIECE_W + GAP);
+        const y = piece.row * (PIECE_H + GAP);
 
-      <div
-        className="absolute inset-[18px] rounded-[22px]"
-        style={{
-          border: "1px dashed hsl(var(--desktop-border) / 0.12)",
-          background: "hsl(var(--desktop-shadow) / 0.08)",
-        }}
-        aria-hidden="true"
-      />
-
-      {pieces.map((piece, index) => (
-        <motion.div
-          key={piece.label}
-          className="absolute"
-          style={{
-            ...piece.final,
-          }}
-          initial={
-            prefersReducedMotion
-              ? false
-              : {
-                  x: piece.startX,
-                  y: piece.startY,
-                  opacity: 0,
-                  scale: 0.92,
-                  rotate: index % 2 === 0 ? -8 : 8,
-                }
-          }
-          animate={{
-            x: isAssembled ? 0 : piece.startX,
-            y: isAssembled ? 0 : piece.startY,
-            opacity: 1,
-            scale: 1,
-            rotate: 0,
-          }}
-          transition={{
-            type: "spring",
-            stiffness: 180,
-            damping: 18,
-            delay: prefersReducedMotion ? 0 : index * 0.08,
-          }}
-        >
-          <PuzzlePieceShape label={piece.label} color={piece.color} edges={piece.edges} />
-        </motion.div>
-      ))}
-
-      <motion.div
-        className="absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full px-3 py-1 text-[10px] font-medium tracking-[0.18em] uppercase"
-        style={{
-          color: "hsl(var(--desktop-muted))",
-          background: "hsl(var(--desktop-panel) / 0.78)",
-          border: "1px solid hsl(var(--desktop-border) / 0.08)",
-        }}
-        initial={prefersReducedMotion ? false : { opacity: 0 }}
-        animate={{ opacity: isAssembled ? 1 : 0.45 }}
-        transition={{ duration: prefersReducedMotion ? 0 : 0.4, delay: prefersReducedMotion ? 0 : 0.35 }}
-      >
-        Design Framework
-      </motion.div>
+        return (
+          <motion.div
+            key={piece.label + piece.sublabel}
+            className="absolute"
+            style={{ left: x, top: y }}
+            initial={
+              prefersReducedMotion
+                ? false
+                : { x: piece.startX, y: piece.startY, opacity: 0, scale: 0.85, rotate: piece.startRotate }
+            }
+            animate={{
+              x: isAssembled ? 0 : piece.startX,
+              y: isAssembled ? 0 : piece.startY,
+              opacity: 1,
+              scale: 1,
+              rotate: 0,
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 140,
+              damping: 16,
+              delay: prefersReducedMotion ? 0 : index * 0.09,
+            }}
+          >
+            <PuzzlePieceSVG piece={piece} index={index} />
+          </motion.div>
+        );
+      })}
     </div>
   );
 };
