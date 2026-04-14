@@ -269,7 +269,7 @@ const App = () => {
           </div>
 
           <div className="relative z-10 mx-auto flex h-full w-full max-w-[1500px] items-start justify-center">
-            <div className="grid w-full items-start gap-6 pt-44 md:grid-cols-[minmax(0,1.12fr)_minmax(320px,0.88fr)] md:pt-40 lg:grid-cols-[minmax(0,1.14fr)_minmax(380px,0.9fr)] lg:gap-0 lg:pt-44 xl:grid-cols-[minmax(0,1.12fr)_minmax(430px,0.88fr)]">
+            <div className="grid w-full items-start gap-6 pt-24 md:grid-cols-[minmax(0,1.12fr)_minmax(320px,0.88fr)] md:pt-20 lg:grid-cols-[minmax(0,1.14fr)_minmax(380px,0.9fr)] lg:gap-0 lg:pt-28 xl:grid-cols-[minmax(0,1.12fr)_minmax(430px,0.88fr)]">
               <motion.div
                 className="relative z-20 overflow-hidden rounded-[28px]"
                 style={{
