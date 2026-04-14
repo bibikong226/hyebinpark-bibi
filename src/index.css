@@ -42,24 +42,26 @@
     --radius: 0.75rem;
 
     /* Portfolio specific tokens */
-    --puzzle-piece-1: 243 60% 65%;
-    --puzzle-piece-2: 260 50% 72%;
-    --puzzle-piece-3: 220 45% 78%;
-    --puzzle-piece-4: 235 55% 58%;
+    --puzzle-piece-1: 0 72% 68%;
+    --puzzle-piece-2: 220 68% 70%;
+    --puzzle-piece-3: 145 58% 62%;
+    --puzzle-piece-4: 35 82% 62%;
+    --puzzle-piece-5: 270 52% 68%;
+    --puzzle-piece-6: 340 62% 68%;
 
     /* Desktop theme tokens */
-    --desktop-wallpaper-start: 230 45% 10%;
-    --desktop-wallpaper-mid: 228 34% 14%;
-    --desktop-wallpaper-end: 225 40% 7%;
-    --desktop-panel: 228 23% 15%;
-    --desktop-panel-strong: 228 21% 12%;
-    --desktop-search: 226 17% 18%;
+    --desktop-wallpaper-start: 260 52% 12%;
+    --desktop-wallpaper-mid: 255 42% 16%;
+    --desktop-wallpaper-end: 248 48% 8%;
+    --desktop-panel: 256 28% 16%;
+    --desktop-panel-strong: 254 26% 12%;
+    --desktop-search: 252 22% 20%;
     --desktop-foreground: 0 0% 98%;
     --desktop-muted: 222 18% 84%;
     --desktop-subtle: 222 11% 66%;
     --desktop-border: 0 0% 100%;
     --desktop-shadow: 229 45% 2%;
-    --desktop-accent: 243 75% 68%;
+    --desktop-accent: 260 75% 68%;
     --desktop-success: 142 69% 45%;
 
     /* Light work section tokens */
@@ -110,23 +112,25 @@
     --input: 0 0% 18%;
     --ring: 243 75% 70%;
 
-    --puzzle-piece-1: 243 50% 55%;
-    --puzzle-piece-2: 260 40% 60%;
-    --puzzle-piece-3: 220 35% 65%;
-    --puzzle-piece-4: 235 45% 50%;
+    --puzzle-piece-1: 0 65% 60%;
+    --puzzle-piece-2: 220 58% 62%;
+    --puzzle-piece-3: 145 50% 55%;
+    --puzzle-piece-4: 35 75% 55%;
+    --puzzle-piece-5: 270 45% 60%;
+    --puzzle-piece-6: 340 55% 60%;
 
-    --desktop-wallpaper-start: 230 45% 10%;
-    --desktop-wallpaper-mid: 228 34% 14%;
-    --desktop-wallpaper-end: 225 40% 7%;
-    --desktop-panel: 228 23% 15%;
-    --desktop-panel-strong: 228 21% 12%;
-    --desktop-search: 226 17% 18%;
+    --desktop-wallpaper-start: 260 52% 12%;
+    --desktop-wallpaper-mid: 255 42% 16%;
+    --desktop-wallpaper-end: 248 48% 8%;
+    --desktop-panel: 256 28% 16%;
+    --desktop-panel-strong: 254 26% 12%;
+    --desktop-search: 252 22% 20%;
     --desktop-foreground: 0 0% 98%;
     --desktop-muted: 222 18% 84%;
     --desktop-subtle: 222 11% 66%;
     --desktop-border: 0 0% 100%;
     --desktop-shadow: 229 45% 2%;
-    --desktop-accent: 243 75% 68%;
+    --desktop-accent: 260 75% 68%;
     --desktop-success: 142 69% 45%;
 
     --work-surface-1: 220 33% 98%;
