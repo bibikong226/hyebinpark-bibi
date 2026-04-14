@@ -42,10 +42,10 @@
     --radius: 0.75rem;
 
     /* Portfolio specific tokens */
-    --puzzle-piece-1: 15 65% 55%;
-    --puzzle-piece-2: 35 70% 60%;
-    --puzzle-piece-3: 150 25% 65%;
-    --puzzle-piece-4: 200 35% 55%;
+    --puzzle-piece-1: 243 60% 65%;
+    --puzzle-piece-2: 260 50% 72%;
+    --puzzle-piece-3: 220 45% 78%;
+    --puzzle-piece-4: 235 55% 58%;
 
     /* Project-specific accent colors */
     --nurturly-pink: 340 75% 55%;
