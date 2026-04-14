@@ -45,15 +45,15 @@ export const Navigation = () => {
   return (
     <header className="sticky top-0 w-full z-50 border-b"
       style={{
-        background: "rgba(236,236,242,.82)",
+        background: "rgba(12,18,32,.72)",
         backdropFilter: "blur(24px) saturate(1.6)",
-        borderColor: "rgba(0,0,0,.08)",
+        borderColor: "rgba(255,255,255,.08)",
       }}>
       <nav className="flex justify-between items-center px-4 sm:px-8 md:px-10 h-10">
         <Link 
           to="/" 
           onClick={handleLogoClick}
-          className="font-bold tracking-[0.08em] text-[13px] uppercase text-foreground/85"
+          className="font-bold tracking-[0.08em] text-[13px] uppercase text-white/85"
         >
           <span className="mr-1.5 opacity-60">⌘</span>
           Hyebin Park
@@ -68,7 +68,7 @@ export const Navigation = () => {
               onClick={(e) => !link.external && handleNavClick(e, link.href)}
               target={link.external ? "_blank" : undefined}
               rel={link.external ? "noopener noreferrer" : undefined}
-              className="text-[11px] font-medium tracking-[0.18em] uppercase text-foreground/75 hover:text-foreground transition-colors"
+              className="text-[11px] font-medium tracking-[0.18em] uppercase text-white/60 hover:text-white transition-colors"
             >
               {link.label}
             </a>
