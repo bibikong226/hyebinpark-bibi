@@ -141,8 +141,15 @@ const App = () => {
 
   return (
     <div className="bg-background text-foreground overflow-x-hidden font-sans">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:rounded-md focus:text-sm focus:font-medium"
+      >
+        Skip to main content
+      </a>
       <Navigation />
 
+      <main id="main-content" role="main">
       {/* ═══ macOS DESKTOP HERO ═══ */}
       <section
         className="relative flex min-h-[900px] w-full flex-col overflow-hidden lg:min-h-screen"
