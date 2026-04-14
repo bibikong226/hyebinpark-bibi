@@ -201,41 +201,90 @@ const App = () => {
       {/* ═══════════════════════════════════════
            macOS DESKTOP HERO
       ═══════════════════════════════════════ */}
-      <section className="relative flex min-h-[860px] w-full flex-col overflow-hidden lg:min-h-[calc(100vh-40px)]"
+      <section className="relative flex min-h-[900px] w-full flex-col overflow-hidden lg:min-h-screen"
         style={{
           background: `
-            radial-gradient(ellipse 80% 50% at 20% 80%, rgba(59,130,246,.25) 0%, transparent 50%),
-            radial-gradient(ellipse 60% 60% at 80% 20%, rgba(139,92,246,.2) 0%, transparent 50%),
-            radial-gradient(ellipse 50% 40% at 50% 60%, rgba(6,182,212,.12) 0%, transparent 45%),
-            radial-gradient(ellipse 40% 30% at 90% 90%, rgba(236,72,153,.1) 0%, transparent 40%),
-            linear-gradient(160deg, #0c1222 0%, #111830 30%, #1a1040 55%, #0d1a2f 80%, #080e1a 100%)
+            radial-gradient(ellipse 120% 80% at 30% 100%, rgba(56,189,248,.45) 0%, transparent 50%),
+            radial-gradient(ellipse 100% 70% at 70% 0%, rgba(99,102,241,.35) 0%, transparent 50%),
+            radial-gradient(ellipse 80% 60% at 50% 50%, rgba(14,165,233,.2) 0%, transparent 50%),
+            radial-gradient(ellipse 60% 40% at 90% 80%, rgba(168,85,247,.15) 0%, transparent 40%),
+            linear-gradient(180deg, #1e40af 0%, #2563eb 20%, #3b82f6 40%, #38bdf8 70%, #7dd3fc 100%)
           `
         }}>
 
-        {/* Desktop Surface */}
-        <div className="relative flex-1 overflow-hidden px-4 pb-28 pt-8 sm:px-6 md:px-8 lg:px-10 lg:pb-32 lg:pt-12">
+        {/* Big background name */}
+        <div className="absolute inset-x-0 top-[15%] z-[1] flex items-center justify-center overflow-hidden pointer-events-none" aria-hidden="true">
+          <span
+            className="font-sans font-black text-[clamp(80px,14vw,220px)] tracking-[0.12em] uppercase leading-none whitespace-nowrap select-none"
+            style={{ color: "rgba(255,255,255,0.08)" }}
+          >
+            HYEBIN PARK
+          </span>
+        </div>
 
-          {/* macOS Control Center Widget — top right */}
+        {/* Desktop Surface */}
+        <div className="relative flex-1 px-5 pb-24 pt-6 sm:px-8 md:px-10 lg:px-12 lg:pb-28">
+
+          {/* Bio Widget — top left, small frosted card */}
           <motion.div
-            className="absolute top-4 right-4 z-20 hidden xl:block"
+            className="relative z-20 w-[280px] sm:w-[300px] rounded-2xl overflow-hidden"
+            style={{
+              background: "rgba(255,255,255,0.15)",
+              backdropFilter: "blur(30px) saturate(1.5)",
+              border: "1px solid rgba(255,255,255,0.25)",
+              boxShadow: "0 16px 50px rgba(0,0,0,.15)",
+            }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="p-5">
+              <div className="flex items-center gap-3 mb-3">
+                <img src={profilePhoto} alt="Hyebin Park" className="w-12 h-12 rounded-full object-cover object-[center_20%] border-2 border-white/30" />
+                <div>
+                  <h2 className="text-[15px] font-bold text-white leading-tight">Hyebin Park</h2>
+                  <p className="text-[11px] text-white/60">Strategic AI Product Designer</p>
+                </div>
+              </div>
+              <p className="text-[12px] leading-[1.6] text-white/70 mb-3">
+                Turning complexity into clarity.<br/>
+                MS-HCI @ University of Michigan
+              </p>
+              <div className="flex items-center gap-1.5 mb-3">
+                <span className="w-2 h-2 rounded-full bg-green-400" />
+                <span className="text-[11px] text-green-300 font-medium">Available for work</span>
+              </div>
+              <div className="flex flex-wrap items-center gap-2">
+                <img src={logoLine} alt="LINE" className="w-7 h-7 rounded-lg object-cover" />
+                <img src={logoTiktok} alt="TikTok" className="w-7 h-7 rounded-lg object-cover" />
+                <img src={logoGm} alt="GM" className="w-7 h-7 rounded-lg object-cover" />
+                <img src={logoNaver} alt="NAVER" className="w-7 h-7 rounded-lg object-cover" />
+                <img src={logoJstor} alt="JSTOR" className="w-7 h-7 rounded-lg object-cover" />
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Control Center — top right */}
+          <motion.div
+            className="absolute top-6 right-5 z-20 hidden lg:block sm:right-8 md:right-10 lg:right-12"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.5 }}
+            transition={{ delay: 0.7, duration: 0.5 }}
           >
-            <div className="rounded-2xl p-3.5 w-[180px]" style={{
-              background: "rgba(30,30,40,.7)",
+            <div className="rounded-2xl p-3.5 w-[170px]" style={{
+              background: "rgba(255,255,255,0.12)",
               backdropFilter: "blur(30px) saturate(1.5)",
-              border: "1px solid rgba(255,255,255,.1)",
-              boxShadow: "0 12px 40px rgba(0,0,0,.4)",
+              border: "1px solid rgba(255,255,255,0.2)",
+              boxShadow: "0 10px 30px rgba(0,0,0,.12)",
             }}>
-              <div className="grid grid-cols-2 gap-1.5 mb-2.5">
+              <div className="grid grid-cols-2 gap-1.5 mb-2">
                 {[
                   { icon: "📶", label: "Wi-Fi", active: true },
                   { icon: "🔵", label: "Bluetooth", active: true },
                   { icon: "🌙", label: "Focus", active: false },
                   { icon: "✈️", label: "AirDrop", active: false },
                 ].map((item, i) => (
-                  <div key={i} className={`flex items-center gap-1 rounded-lg px-2 py-1.5 text-[9px] font-medium ${item.active ? 'bg-blue-500/80 text-white' : 'bg-white/8 text-white/50'}`}>
+                  <div key={i} className={`flex items-center gap-1 rounded-lg px-2 py-1.5 text-[9px] font-medium ${item.active ? 'bg-blue-500/70 text-white' : 'bg-white/10 text-white/50'}`}>
                     <span className="text-[10px]">{item.icon}</span>
                     <span className="truncate">{item.label}</span>
                   </div>
@@ -243,224 +292,100 @@ const App = () => {
               </div>
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-[9px] text-white/50">
-                  <span>Display</span>
-                  <span className="text-white/70">73%</span>
+                  <span>Display</span><span className="text-white/70">73%</span>
                 </div>
-                <div className="h-[3px] rounded-full bg-white/10 overflow-hidden">
-                  <div className="h-full w-[73%] rounded-full bg-white/60" />
+                <div className="h-[3px] rounded-full bg-white/15 overflow-hidden">
+                  <div className="h-full w-[73%] rounded-full bg-white/70" />
                 </div>
                 <div className="flex items-center justify-between text-[9px] text-white/50">
-                  <span>🔊 Volume</span>
-                  <span className="text-white/70">75%</span>
+                  <span>🔊 Volume</span><span className="text-white/70">75%</span>
                 </div>
-                <div className="h-[3px] rounded-full bg-white/10 overflow-hidden">
-                  <div className="h-full w-[75%] rounded-full bg-white/60" />
+                <div className="h-[3px] rounded-full bg-white/15 overflow-hidden">
+                  <div className="h-full w-[75%] rounded-full bg-white/70" />
                 </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Main content area — centered bio window + floating puzzle */}
-          <div className="relative z-10 mx-auto flex h-full w-full max-w-[1100px] items-start justify-center pt-10 md:pt-14 lg:pt-16">
-            
-            {/* Bio Window — main focus */}
-            <motion.div
-              className="relative z-20 w-full max-w-[620px] overflow-hidden rounded-2xl"
-              style={{
-                background: "rgba(255,255,255,0.92)",
-                backdropFilter: "blur(40px)",
-                border: "1px solid rgba(255,255,255,0.35)",
-                boxShadow: "0 30px 80px rgba(0,0,0,.4), 0 8px 20px rgba(0,0,0,.25)",
-              }}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <div
-                className="flex h-10 items-center gap-3 border-b px-3.5"
-                style={{ background: "rgba(245,245,248,0.95)", borderColor: "rgba(0,0,0,0.06)" }}
-              >
-                <TitleBarDots />
-                <span className="flex-1 text-center text-[11px] font-medium text-muted-foreground">hyebin-park.portfolio</span>
-              </div>
+          {/* Desktop Icons — project mockups scattered like macOS desktop files */}
+          <div className="relative z-10 mt-10 mx-auto max-w-[900px] lg:mt-14">
+            <div className="flex flex-wrap justify-center gap-x-10 gap-y-6 sm:gap-x-14 md:gap-x-16 lg:gap-x-20 lg:gap-y-8">
+              {projects.map((project, idx) => {
+                const link = project.externalUrl || `/${project.id}`;
+                const isExternal = !!project.externalUrl;
+                const El = isExternal ? 'a' : Link;
+                const elProps: any = isExternal
+                  ? { href: link, target: "_blank", rel: "noopener noreferrer" }
+                  : { to: link };
 
-              <div className="flex flex-col gap-5 p-7 sm:p-8 lg:p-10">
-                <div className="space-y-1.5">
-                  <div className="flex flex-wrap items-baseline gap-2 md:gap-2.5">
-                    <span className="text-[clamp(18px,2vw,24px)] text-muted-foreground">Turning</span>
-                    <span className="font-serif text-[clamp(40px,5vw,68px)] italic text-primary leading-none">complexity</span>
-                  </div>
-                  <div className="flex flex-wrap items-baseline gap-2 md:gap-2.5">
-                    <span className="text-[clamp(18px,2vw,24px)] text-muted-foreground">into</span>
-                    <span className="font-serif text-[clamp(40px,5vw,68px)] italic text-primary leading-none">clarity.</span>
-                  </div>
-                </div>
-
-                <p className="max-w-[40rem] text-[14px] leading-[1.75] text-muted-foreground md:text-[15px]">
-                  From AI algorithms to crypto workflows,<br className="hidden sm:block" />
-                  I turn ambiguity into structured, usable products<br className="hidden sm:block" />
-                  that drive real business impact.
-                </p>
-
-                <div className="flex items-center gap-2 border-t border-border pt-4 text-sm font-medium text-foreground md:text-[15px]">
-                  🎓 MS-HCI @ University of Michigan
-                </div>
-
-                <div>
-                  <p className="mb-3 text-[10px] tracking-[0.12em] uppercase text-muted-foreground">Experience designing & researching for</p>
-                  <div className="flex flex-wrap items-center gap-3">
-                    <img src={logoLine} alt="LINE" className="w-9 h-9 rounded-xl object-cover shadow-md" />
-                    <img src={logoTiktok} alt="TikTok" className="w-9 h-9 rounded-xl object-cover shadow-md" />
-                    <img src={logoGm} alt="GM" className="w-9 h-9 rounded-xl object-cover shadow-md" />
-                    <img src={logoNaver} alt="NAVER" className="w-9 h-9 rounded-xl object-cover shadow-md" />
-                    <img src={logoJstor} alt="JSTOR" className="w-9 h-9 rounded-xl object-cover shadow-md" />
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap gap-2.5 pt-1">
-                  <a href="mailto:hyebinp@umich.edu" className="inline-flex items-center gap-[5px] rounded-full bg-primary px-4 py-2.5 text-[13px] font-medium text-primary-foreground transition-all hover:-translate-y-px hover:opacity-90">
-                    hyebinp@umich.edu ↗
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/in/hyebinpark/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-[5px] rounded-full border-[1.5px] border-foreground/15 px-4 py-2.5 text-[13px] font-medium transition-all hover:-translate-y-px hover:border-primary hover:text-primary"
+                return (
+                  <motion.div
+                    key={project.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 + idx * 0.1, duration: 0.5 }}
                   >
-                    LinkedIn ↗
-                  </a>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Puzzle — small floating preview window */}
-            <motion.div
-              className="absolute right-0 top-16 z-[22] hidden md:block w-[280px] lg:w-[320px] xl:right-[-40px] overflow-hidden rounded-2xl"
-              style={{
-                background: "rgba(255,255,255,0.92)",
-                backdropFilter: "blur(40px)",
-                border: "1px solid rgba(255,255,255,0.35)",
-                boxShadow: "0 24px 60px rgba(0,0,0,.35), 0 6px 16px rgba(0,0,0,.2)",
-              }}
-              initial={{ opacity: 0, y: 20, rotate: 2 }}
-              animate={{ opacity: 1, y: 0, rotate: 2 }}
-              transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <div
-                className="flex h-8 items-center gap-2 border-b px-3"
-                style={{ background: "rgba(245,245,248,0.95)", borderColor: "rgba(0,0,0,0.06)" }}
-              >
-                <div className="flex gap-[5px]">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
-                </div>
-                <span className="flex-1 text-center text-[10px] font-medium text-muted-foreground">
-                  {puzzleStatus === 'assembled' ? 'assembled ✓' : 'assembling…'}
-                </span>
-              </div>
-
-              <div
-                className="relative flex flex-col items-center px-3 pb-3 pt-3"
-                style={{ background: "hsl(var(--secondary) / 0.5)" }}
-                onMouseEnter={() => setIsHovering(true)}
-                onMouseLeave={() => setIsHovering(false)}
-              >
-                <div className="relative h-[180px] w-[260px] max-w-full scale-[0.75] origin-center">
-                  <AnimatePresence>
-                    {animationPhase !== "photo" && puzzlePieces.map((p, i) =>
-                      (visiblePieces.includes(i) || animationPhase === "assembling" || animationPhase === "assembled") && (
-                        <motion.div
-                          key={p.id}
-                          className="absolute"
-                          initial={{ opacity: 0, scale: 0.6 }}
-                          animate={{
-                            x: animationPhase === "scattered" ? p.messy.x : p.final.x,
-                            y: animationPhase === "scattered" ? p.messy.y : p.final.y,
-                            rotate: animationPhase === "scattered" ? p.messy.r : 0,
-                            opacity: 1,
-                            scale: animationPhase === "scattered" ? 0.97 : 1,
-                          }}
-                          exit={{ opacity: 0, scale: 1.02, transition: { duration: 0.4, delay: i * 0.02 } }}
-                          transition={{
-                            duration: animationPhase === "scattered" ? 1.0 : 1.6,
-                            ease: [0.25, 0.46, 0.45, 0.94],
-                            delay: animationPhase === "scattered" ? 0 : i * 0.35,
-                          }}
-                          style={{ willChange: "transform", zIndex: animationPhase === "scattered" ? 6 - i : i + 1 }}
-                        >
-                          <PuzzleTile color={p.color} label={p.label} variant={p.variant as keyof typeof JIGSAW_PATHS} />
-                        </motion.div>
-                      )
-                    )}
-                  </AnimatePresence>
-
-                  <AnimatePresence>
-                    {animationPhase === "photo" && (
-                      <motion.div
-                        className="absolute inset-0 flex items-center justify-center"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.5 }}
-                        style={{ zIndex: 20 }}
+                    <El {...elProps} className="flex flex-col items-center gap-2 group cursor-pointer">
+                      <div
+                        className="w-[80px] h-[80px] sm:w-[90px] sm:h-[90px] md:w-[100px] md:h-[100px] rounded-[18px] overflow-hidden shadow-lg group-hover:scale-110 group-hover:shadow-xl transition-all duration-300 flex items-center justify-center"
+                        style={{ background: project.imageColor }}
                       >
-                        <img src={profilePhoto} alt="Hyebin Park" className="w-full h-full rounded-lg object-cover object-[center_20%]" />
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-                <button
-                  onClick={handleScatter}
-                  className="text-[9px] font-medium text-muted-foreground/50 hover:text-muted-foreground transition-colors"
-                >
-                  {puzzleStatus === 'assembled' ? '↺ scatter' : '▶ assembling…'}
-                </button>
-              </div>
-            </motion.div>
+                        <img
+                          src={project.mockup}
+                          alt={project.title}
+                          loading="lazy"
+                          className="w-[80%] h-[80%] object-contain"
+                        />
+                      </div>
+                      <span className="text-[11px] font-medium text-white/80 text-center leading-tight group-hover:text-white transition-colors max-w-[100px] drop-shadow-sm">
+                        {project.title}
+                      </span>
+                    </El>
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
-
         </div>
 
-        {/* Dock — macOS style with colored icon tiles */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-0 px-3 py-2.5 rounded-[22px] z-30"
+        {/* Dock */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-0 px-3 py-2 rounded-[20px] z-30"
           style={{
-            background: "rgba(30,30,40,.55)",
+            background: "rgba(255,255,255,0.18)",
             backdropFilter: "blur(28px) saturate(1.8)",
-            border: "1px solid rgba(255,255,255,.12)",
-            boxShadow: "0 8px 40px rgba(0,0,0,.3), 0 2px 8px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.06)",
+            border: "1px solid rgba(255,255,255,.3)",
+            boxShadow: "0 8px 40px rgba(0,0,0,.12), inset 0 1px 0 rgba(255,255,255,.2)",
           }}>
           {(() => {
             const mainItems = [
-              { icon: "📂", label: "Work", bg: "linear-gradient(135deg, #7B6EF6, #5B4CD8)", action: () => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" }), active: true },
-              { icon: "💼", label: "Explore", bg: "linear-gradient(135deg, #F472B6, #DB2777)", action: () => document.getElementById("explore")?.scrollIntoView({ behavior: "smooth" }), active: false },
-              { icon: "📋", label: "About", bg: "linear-gradient(135deg, #6EE7B7, #10B981)", action: () => window.location.href = "/about", active: false },
-              { icon: "💬", label: "CV", bg: "linear-gradient(135deg, #FBBF24, #F59E0B)", action: () => window.open("https://drive.google.com/file/d/1l2V4pQCjAZhIhLyRmVh3m2QTw87yLI6P/view?usp=sharing", "_blank"), active: false },
+              { icon: "📂", label: "Work", bg: "linear-gradient(135deg, #7B6EF6, #5B4CD8)", action: () => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" }) },
+              { icon: "💼", label: "Explore", bg: "linear-gradient(135deg, #F472B6, #DB2777)", action: () => document.getElementById("explore")?.scrollIntoView({ behavior: "smooth" }) },
+              { icon: "📋", label: "About", bg: "linear-gradient(135deg, #6EE7B7, #10B981)", action: () => window.location.href = "/about" },
+              { icon: "💬", label: "CV", bg: "linear-gradient(135deg, #FBBF24, #F59E0B)", action: () => window.open("https://drive.google.com/file/d/1l2V4pQCjAZhIhLyRmVh3m2QTw87yLI6P/view?usp=sharing", "_blank") },
             ];
-            const contactItem = { icon: "✉️", label: "Contact", bg: "linear-gradient(135deg, #F87171, #DC2626)", action: () => window.location.href = "mailto:hyebinp@umich.edu", active: false };
+            const contactItem = { icon: "✉️", label: "Contact", bg: "linear-gradient(135deg, #F87171, #DC2626)", action: () => window.location.href = "mailto:hyebinp@umich.edu" };
 
             return (
               <>
-                <div className="flex items-center gap-2.5 px-1.5">
+                <div className="flex items-center gap-2 px-1">
                   {mainItems.map((item, i) => (
-                    <button key={i} onClick={item.action} className="flex flex-col items-center gap-1 group">
-                      <div className="w-11 h-11 md:w-12 md:h-12 rounded-[12px] flex items-center justify-center text-xl shadow-md group-hover:scale-110 group-hover:shadow-lg transition-all duration-200"
+                    <button key={i} onClick={item.action} className="flex flex-col items-center gap-0.5 group">
+                      <div className="w-10 h-10 md:w-11 md:h-11 rounded-[11px] flex items-center justify-center text-lg shadow-md group-hover:scale-110 group-hover:-translate-y-1 group-hover:shadow-lg transition-all duration-200"
                         style={{ background: item.bg }}>
                         {item.icon}
                       </div>
-                      <span className="text-[8px] font-medium tracking-wide text-white/50">{item.label}</span>
+                      <span className="text-[8px] font-medium text-white/60">{item.label}</span>
                     </button>
                   ))}
                 </div>
-                <div className="w-px h-8 bg-white/15 mx-2" />
-                <div className="px-1.5">
-                  <button onClick={contactItem.action}
-                    className="flex flex-col items-center gap-1 group">
-                    <div className="w-11 h-11 md:w-12 md:h-12 rounded-[12px] flex items-center justify-center text-xl shadow-md group-hover:scale-110 group-hover:shadow-lg transition-all duration-200"
+                <div className="w-px h-8 bg-white/20 mx-1.5" />
+                <div className="px-1">
+                  <button onClick={contactItem.action} className="flex flex-col items-center gap-0.5 group">
+                    <div className="w-10 h-10 md:w-11 md:h-11 rounded-[11px] flex items-center justify-center text-lg shadow-md group-hover:scale-110 group-hover:-translate-y-1 group-hover:shadow-lg transition-all duration-200"
                       style={{ background: contactItem.bg }}>
                       {contactItem.icon}
                     </div>
-                    <span className="text-[8px] font-medium tracking-wide text-white/50">{contactItem.label}</span>
+                    <span className="text-[8px] font-medium text-white/60">{contactItem.label}</span>
                   </button>
                 </div>
               </>
