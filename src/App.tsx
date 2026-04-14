@@ -494,19 +494,19 @@ const App = () => {
         id="work"
         className="py-28 sm:py-36 px-4 sm:px-8 md:px-10"
         style={{
-          background: "linear-gradient(180deg, #0c0e1a 0%, #111827 50%, #0f1420 100%)",
-          borderTop: "1px solid rgba(255,255,255,.06)",
+          background: "linear-gradient(180deg, #f8f9fc 0%, #f1f3f8 50%, #eef0f5 100%)",
+          borderTop: "1px solid rgba(0,0,0,.06)",
         }}
         aria-labelledby="work-heading"
       >
         <div className="max-w-[1200px] mx-auto">
-          <p className="text-[11px] font-medium tracking-[0.3em] uppercase text-white/30 mb-4">
+          <p className="text-[11px] font-medium tracking-[0.3em] uppercase text-gray-400 mb-4">
             Selected Work
           </p>
-          <h2 id="work-heading" className="text-[clamp(42px,6vw,80px)] font-black leading-[1.05] tracking-tight mb-1 text-white">
+          <h2 id="work-heading" className="text-[clamp(42px,6vw,80px)] font-black leading-[1.05] tracking-tight mb-1 text-gray-900">
             Strategic
           </h2>
-          <h2 className="font-serif text-[clamp(42px,6vw,80px)] italic font-normal leading-[1.05] tracking-tight text-white/20 mb-20">
+          <h2 className="font-serif text-[clamp(42px,6vw,80px)] italic font-normal leading-[1.05] tracking-tight text-gray-300 mb-20">
             Outputs.
           </h2>
 
@@ -551,18 +551,18 @@ const App = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="p-6 md:p-7 flex-1 flex flex-col" style={{ background: "rgba(30,30,40,0.8)" }}>
-                    <h3 className="font-serif text-[22px] md:text-[26px] font-semibold leading-[1.2] mb-2 text-white">
+                  <div className="p-6 md:p-7 flex-1 flex flex-col bg-white">
+                    <h3 className="font-serif text-[22px] md:text-[26px] font-semibold leading-[1.2] mb-2 text-gray-900">
                       {project.title}
                     </h3>
-                    <p className="text-[13.5px] md:text-[14.5px] leading-[1.65] text-white/50 mb-4 max-w-[440px]">
+                    <p className="text-[13.5px] md:text-[14.5px] leading-[1.65] text-gray-500 mb-4 max-w-[440px]">
                       {project.description}
                     </p>
                     <div className="flex flex-wrap gap-[5px] mb-4">
                       {project.tags.map((tag, ti) => (
                         <span
                           key={ti}
-                          className="inline-block px-2.5 py-[3px] rounded-full text-[10.5px] font-medium border border-white/10 bg-white/5 text-white/60"
+                          className="inline-block px-2.5 py-[3px] rounded-full text-[10.5px] font-medium border border-gray-200 bg-gray-50 text-gray-500"
                         >
                           {tag}
                         </span>
@@ -571,12 +571,12 @@ const App = () => {
                     <div className="flex flex-wrap gap-[6px] mt-auto">
                       {project.highlights.map((hl, hi) => (
                         <div key={hi} className="relative overflow-hidden rounded-[7px] px-3 py-[6px] cursor-default">
-                          <div className="absolute inset-0 bg-white/5" />
+                          <div className="absolute inset-0 bg-gray-100" />
                           <div
                             className="absolute inset-0 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-[450ms] ease-out z-0"
                             style={{ background: project.accentColor }}
                           />
-                          <span className="relative z-10 text-xs font-medium transition-colors duration-[350ms] group-hover:text-white text-white/60">
+                          <span className="relative z-10 text-xs font-medium transition-colors duration-[350ms] group-hover:text-white text-gray-600">
                             {hl}
                           </span>
                         </div>
