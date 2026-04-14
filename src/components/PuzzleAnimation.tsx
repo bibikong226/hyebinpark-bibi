@@ -28,17 +28,20 @@ const PuzzlePiece = ({
 }: PuzzlePieceProps) => {
   return (
     <motion.div
-      className="absolute w-24 h-24 md:w-32 md:h-32"
+      className="absolute"
       style={{
+        width: "52%",
+        height: "52%",
         backgroundColor: color,
         clipPath: clipPath,
+        borderRadius: "6px",
       }}
       initial={{
         x: initialX,
         y: initialY,
         rotate: rotation,
         opacity: 0,
-        scale: 0.8,
+        scale: 0.6,
       }}
       animate={{
         x: isCompleted ? finalX : initialX,
@@ -49,10 +52,10 @@ const PuzzlePiece = ({
       }}
       transition={{
         delay: delay,
-        duration: 1.5,
+        duration: 2,
         type: "spring",
-        stiffness: 50,
-        damping: 20,
+        stiffness: 35,
+        damping: 18,
       }}
       onAnimationComplete={onComplete}
     />
@@ -68,12 +71,11 @@ export const PuzzleAnimation = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
-  // Trigger animation on hover or scroll into view
   useEffect(() => {
     if (isHovered || isInView) {
       const timer = setTimeout(() => {
         setIsCompleted(true);
-      }, 200);
+      }, 300);
       return () => clearTimeout(timer);
     }
   }, [isHovered, isInView]);
@@ -88,47 +90,51 @@ export const PuzzleAnimation = () => {
     setCompletedPieces((prev) => prev + 1);
   };
 
-  // Puzzle piece clip paths that create interlocking shapes
+  // Clean 2x2 grid puzzle with tab/blank connectors
   const pieces = [
     {
+      // Top-left: tab on right, tab on bottom
       color: "hsl(var(--puzzle-piece-1))",
-      clipPath: "polygon(0% 0%, 100% 0%, 100% 45%, 75% 45%, 75% 55%, 100% 55%, 100% 100%, 0% 100%, 0% 55%, 25% 55%, 25% 45%, 0% 45%)",
-      initialX: -150,
-      initialY: -100,
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 40%, 85% 40%, 85% 60%, 100% 60%, 100% 100%, 60% 100%, 60% 85%, 40% 85%, 40% 100%, 0% 100%)",
+      initialX: -120,
+      initialY: -80,
       finalX: 0,
       finalY: 0,
-      rotation: -25,
-      delay: 0.1,
-    },
-    {
-      color: "hsl(var(--puzzle-piece-2))",
-      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 55% 100%, 55% 75%, 45% 75%, 45% 100%, 0% 100%, 0% 55%, 25% 55%, 25% 45%, 0% 45%)",
-      initialX: 150,
-      initialY: -120,
-      finalX: 80,
-      finalY: 0,
-      rotation: 30,
+      rotation: -20,
       delay: 0.2,
     },
     {
-      color: "hsl(var(--puzzle-piece-3))",
-      clipPath: "polygon(25% 0%, 25% 25%, 0% 25%, 0% 100%, 100% 100%, 100% 0%, 55% 0%, 55% 25%, 45% 25%, 45% 0%)",
-      initialX: -120,
-      initialY: 150,
-      finalX: 0,
-      finalY: 80,
-      rotation: -35,
-      delay: 0.3,
+      // Top-right: blank on left, tab on bottom
+      color: "hsl(var(--puzzle-piece-2))",
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 60% 100%, 60% 85%, 40% 85%, 40% 100%, 0% 100%, 0% 60%, 15% 60%, 15% 40%, 0% 40%)",
+      initialX: 140,
+      initialY: -100,
+      finalX: 78,
+      finalY: 0,
+      rotation: 25,
+      delay: 0.5,
     },
     {
-      color: "hsl(var(--puzzle-piece-4))",
-      clipPath: "polygon(0% 0%, 45% 0%, 45% 25%, 55% 25%, 55% 0%, 100% 0%, 100% 100%, 0% 100%)",
-      initialX: 180,
+      // Bottom-left: blank on top, tab on right
+      color: "hsl(var(--puzzle-piece-3))",
+      clipPath: "polygon(40% 0%, 40% 15%, 60% 15%, 60% 0%, 100% 0%, 100% 40%, 85% 40%, 85% 60%, 100% 60%, 100% 100%, 0% 100%, 0% 0%)",
+      initialX: -100,
       initialY: 130,
-      finalX: 80,
-      finalY: 80,
-      rotation: 40,
-      delay: 0.4,
+      finalX: 0,
+      finalY: 78,
+      rotation: -30,
+      delay: 0.8,
+    },
+    {
+      // Bottom-right: blank on left, blank on top
+      color: "hsl(var(--puzzle-piece-4))",
+      clipPath: "polygon(0% 0%, 0% 15%, 15% 15%, 15% 0%, 40% 0%, 40% 15%, 60% 15%, 60% 0%, 100% 0%, 100% 100%, 0% 100%)",
+      initialX: 160,
+      initialY: 120,
+      finalX: 78,
+      finalY: 78,
+      rotation: 35,
+      delay: 1.1,
     },
   ];
 
@@ -138,15 +144,15 @@ export const PuzzleAnimation = () => {
       className="relative w-48 h-48 md:w-64 md:h-64 cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
     >
-      {/* Glow effect when completed */}
+      {/* Subtle glow when completed */}
       <motion.div
         className="absolute inset-0 rounded-2xl"
         initial={{ opacity: 0 }}
         animate={{
           opacity: showGlow ? 1 : 0,
-          boxShadow: showGlow ? "0 0 60px hsl(var(--primary) / 0.4)" : "none",
+          boxShadow: showGlow ? "0 0 40px hsl(var(--primary) / 0.25)" : "none",
         }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.8 }}
       />
 
       {/* Puzzle pieces */}
@@ -159,19 +165,19 @@ export const PuzzleAnimation = () => {
         />
       ))}
 
-      {/* Completion sparkle effect - no loop */}
+      {/* Completion sparkle */}
       {showGlow && (
         <motion.div
           className="absolute inset-0 flex items-center justify-center"
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.4 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
         >
           <motion.div
-            className="w-4 h-4 rounded-full bg-accent"
-            initial={{ scale: 1, opacity: 1 }}
-            animate={{ scale: 1.5, opacity: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="w-3 h-3 rounded-full bg-accent"
+            initial={{ scale: 1, opacity: 0.8 }}
+            animate={{ scale: 2, opacity: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
           />
         </motion.div>
       )}
