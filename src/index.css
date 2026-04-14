@@ -42,27 +42,31 @@
     --radius: 0.75rem;
 
     /* Portfolio specific tokens */
-    --puzzle-piece-1: 260 65% 58%;
-    --puzzle-piece-2: 230 60% 56%;
-    --puzzle-piece-3: 280 55% 62%;
-    --puzzle-piece-4: 245 70% 52%;
-    --puzzle-piece-5: 300 50% 58%;
-    --puzzle-piece-6: 220 65% 60%;
+    --puzzle-piece-1: 210 72% 62%;
+    --puzzle-piece-2: 194 60% 60%;
+    --puzzle-piece-3: 165 24% 62%;
+    --puzzle-piece-4: 42 76% 68%;
+    --puzzle-piece-5: 24 68% 66%;
+    --puzzle-piece-6: 214 14% 66%;
+
+    --folder-top: 210 100% 74%;
+    --folder-body: 210 96% 63%;
+    --folder-body-strong: 214 90% 55%;
 
     /* Desktop theme tokens */
-    --desktop-wallpaper-start: 260 52% 12%;
-    --desktop-wallpaper-mid: 255 42% 16%;
-    --desktop-wallpaper-end: 248 48% 8%;
-    --desktop-panel: 256 28% 16%;
-    --desktop-panel-strong: 254 26% 12%;
-    --desktop-search: 252 22% 20%;
-    --desktop-foreground: 0 0% 98%;
-    --desktop-muted: 222 18% 84%;
-    --desktop-subtle: 222 11% 66%;
+    --desktop-wallpaper-start: 220 16% 18%;
+    --desktop-wallpaper-mid: 223 16% 12%;
+    --desktop-wallpaper-end: 225 20% 8%;
+    --desktop-panel: 220 16% 17%;
+    --desktop-panel-strong: 224 18% 13%;
+    --desktop-search: 220 15% 21%;
+    --desktop-foreground: 0 0% 97%;
+    --desktop-muted: 220 10% 78%;
+    --desktop-subtle: 220 8% 61%;
     --desktop-border: 0 0% 100%;
-    --desktop-shadow: 229 45% 2%;
-    --desktop-accent: 260 75% 68%;
-    --desktop-success: 142 69% 45%;
+    --desktop-shadow: 224 30% 5%;
+    --desktop-accent: 211 92% 62%;
+    --desktop-success: 142 52% 45%;
 
     /* Light work section tokens */
     --work-surface-1: 220 33% 98%;
@@ -112,26 +116,30 @@
     --input: 0 0% 18%;
     --ring: 243 75% 70%;
 
-    --puzzle-piece-1: 260 58% 52%;
-    --puzzle-piece-2: 230 52% 50%;
-    --puzzle-piece-3: 280 48% 55%;
-    --puzzle-piece-4: 245 62% 48%;
-    --puzzle-piece-5: 300 44% 52%;
-    --puzzle-piece-6: 220 58% 54%;
+    --puzzle-piece-1: 210 64% 56%;
+    --puzzle-piece-2: 194 54% 55%;
+    --puzzle-piece-3: 165 18% 56%;
+    --puzzle-piece-4: 42 68% 62%;
+    --puzzle-piece-5: 24 62% 60%;
+    --puzzle-piece-6: 214 12% 60%;
 
-    --desktop-wallpaper-start: 260 52% 12%;
-    --desktop-wallpaper-mid: 255 42% 16%;
-    --desktop-wallpaper-end: 248 48% 8%;
-    --desktop-panel: 256 28% 16%;
-    --desktop-panel-strong: 254 26% 12%;
-    --desktop-search: 252 22% 20%;
-    --desktop-foreground: 0 0% 98%;
-    --desktop-muted: 222 18% 84%;
-    --desktop-subtle: 222 11% 66%;
+    --folder-top: 210 96% 70%;
+    --folder-body: 211 88% 58%;
+    --folder-body-strong: 214 82% 50%;
+
+    --desktop-wallpaper-start: 220 16% 18%;
+    --desktop-wallpaper-mid: 223 16% 12%;
+    --desktop-wallpaper-end: 225 20% 8%;
+    --desktop-panel: 220 16% 17%;
+    --desktop-panel-strong: 224 18% 13%;
+    --desktop-search: 220 15% 21%;
+    --desktop-foreground: 0 0% 97%;
+    --desktop-muted: 220 10% 78%;
+    --desktop-subtle: 220 8% 61%;
     --desktop-border: 0 0% 100%;
-    --desktop-shadow: 229 45% 2%;
-    --desktop-accent: 260 75% 68%;
-    --desktop-success: 142 69% 45%;
+    --desktop-shadow: 224 30% 5%;
+    --desktop-accent: 211 92% 62%;
+    --desktop-success: 142 52% 45%;
 
     --work-surface-1: 220 33% 98%;
     --work-surface-2: 220 28% 96%;

@@ -13,103 +13,66 @@ interface PuzzlePiece {
 }
 
 const pieces: PuzzlePiece[] = [
-  { label: "User", sublabel: "Needs", color: "hsl(var(--puzzle-piece-1))", row: 0, col: 0, startX: -120, startY: -80, startRotate: -12 },
-  { label: "Data", sublabel: "Complexity", color: "hsl(var(--puzzle-piece-2))", row: 0, col: 1, startX: 40, startY: -100, startRotate: 8 },
-  { label: "Business", sublabel: "Goals", color: "hsl(var(--puzzle-piece-3))", row: 0, col: 2, startX: 140, startY: -60, startRotate: -6 },
-  { label: "Tech", sublabel: "Constraints", color: "hsl(var(--puzzle-piece-4))", row: 1, col: 0, startX: -100, startY: 90, startRotate: 10 },
-  { label: "Edge", sublabel: "Cases", color: "hsl(var(--puzzle-piece-5))", row: 1, col: 1, startX: 20, startY: 110, startRotate: -8 },
-  { label: "Emerging", sublabel: "Tech", color: "hsl(var(--puzzle-piece-6))", row: 1, col: 2, startX: 160, startY: 80, startRotate: 14 },
+  { label: "User", sublabel: "Needs", color: "hsl(var(--puzzle-piece-1))", row: 0, col: 0, startX: -110, startY: -70, startRotate: -10 },
+  { label: "Data", sublabel: "Complexity", color: "hsl(var(--puzzle-piece-2))", row: 0, col: 1, startX: 26, startY: -90, startRotate: 7 },
+  { label: "Business", sublabel: "Goals", color: "hsl(var(--puzzle-piece-3))", row: 0, col: 2, startX: 120, startY: -58, startRotate: -6 },
+  { label: "Tech", sublabel: "Constraints", color: "hsl(var(--puzzle-piece-4))", row: 1, col: 0, startX: -90, startY: 80, startRotate: 8 },
+  { label: "Edge", sublabel: "Cases", color: "hsl(var(--puzzle-piece-5))", row: 1, col: 1, startX: 16, startY: 96, startRotate: -7 },
+  { label: "Emerging", sublabel: "Tech", color: "hsl(var(--puzzle-piece-6))", row: 1, col: 2, startX: 130, startY: 72, startRotate: 10 },
 ];
 
-const PIECE_W = 108;
-const PIECE_H = 96;
-const GAP = 4;
-const TAB_R = 12;
+const PIECE_W = 112;
+const PIECE_H = 98;
+const GAP = 0;
+const TAB_R = 16;
+const CORNER_R = 18;
 
 const PuzzlePieceSVG = ({ piece, index }: { piece: PuzzlePiece; index: number }) => {
-  const w = PIECE_W;
-  const h = PIECE_H;
-  const tr = TAB_R;
-
   const hasTabRight = piece.col < 2;
   const hasTabBottom = piece.row < 1;
   const hasBlankLeft = piece.col > 0;
   const hasBlankTop = piece.row > 0;
-
-  const buildPath = () => {
-    let d = `M 0 0`;
-
-    // Top edge
-    if (hasBlankTop) {
-      d += ` L ${w / 2 - tr} 0`;
-      d += ` A ${tr} ${tr} 0 1 1 ${w / 2 + tr} 0`;
-      d += ` L ${w} 0`;
-    } else {
-      d += ` L ${w} 0`;
-    }
-
-    // Right edge
-    if (hasTabRight) {
-      d += ` L ${w} ${h / 2 - tr}`;
-      d += ` A ${tr} ${tr} 0 1 0 ${w} ${h / 2 + tr}`;
-      d += ` L ${w} ${h}`;
-    } else {
-      d += ` L ${w} ${h}`;
-    }
-
-    // Bottom edge
-    if (hasTabBottom) {
-      d += ` L ${w / 2 + tr} ${h}`;
-      d += ` A ${tr} ${tr} 0 1 0 ${w / 2 - tr} ${h}`;
-      d += ` L 0 ${h}`;
-    } else {
-      d += ` L 0 ${h}`;
-    }
-
-    // Left edge
-    if (hasBlankLeft) {
-      d += ` L 0 ${h / 2 + tr}`;
-      d += ` A ${tr} ${tr} 0 1 1 0 ${h / 2 - tr}`;
-      d += ` L 0 0`;
-    } else {
-      d += ` L 0 0`;
-    }
-
-    d += " Z";
-    return d;
-  };
-
-  const svgW = w + (hasTabRight ? tr + 2 : 0);
-  const svgH = h + (hasTabBottom ? tr + 2 : 0);
+  const svgW = PIECE_W + (hasTabRight ? TAB_R : 0);
+  const svgH = PIECE_H + (hasTabBottom ? TAB_R : 0);
+  const maskId = `puzzle-mask-${index}`;
+  const glossId = `puzzle-gloss-${index}`;
+  const shadowId = `puzzle-shadow-${index}`;
 
   return (
     <div className="relative" style={{ width: svgW, height: svgH }}>
-      <svg
-        width={svgW}
-        height={svgH}
-        viewBox={`${hasBlankLeft ? 0 : 0} ${hasBlankTop ? 0 : 0} ${svgW} ${svgH}`}
-        fill="none"
-        aria-hidden="true"
-      >
+      <svg width={svgW} height={svgH} viewBox={`0 0 ${svgW} ${svgH}`} fill="none" aria-hidden="true">
         <defs>
-          <filter id={`shadow-${index}`}>
-            <feDropShadow dx="0" dy="4" stdDeviation="6" floodOpacity="0.25" />
+          <mask id={maskId}>
+            <rect width={PIECE_W} height={PIECE_H} rx={CORNER_R} fill="white" />
+            {hasTabRight ? <circle cx={PIECE_W} cy={PIECE_H / 2} r={TAB_R} fill="white" /> : null}
+            {hasTabBottom ? <circle cx={PIECE_W / 2} cy={PIECE_H} r={TAB_R} fill="white" /> : null}
+            {hasBlankLeft ? <circle cx={0} cy={PIECE_H / 2} r={TAB_R} fill="black" /> : null}
+            {hasBlankTop ? <circle cx={PIECE_W / 2} cy={0} r={TAB_R} fill="black" /> : null}
+          </mask>
+          <linearGradient id={glossId} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="rgba(255,255,255,0.22)" />
+            <stop offset="42%" stopColor="rgba(255,255,255,0.06)" />
+            <stop offset="100%" stopColor="rgba(0,0,0,0.12)" />
+          </linearGradient>
+          <filter id={shadowId} x="-20%" y="-20%" width="150%" height="150%">
+            <feDropShadow dx="0" dy="7" stdDeviation="8" floodOpacity="0.24" />
           </filter>
         </defs>
-        <path
-          d={buildPath()}
-          fill={piece.color}
-          filter={`url(#shadow-${index})`}
-        />
+
+        <g mask={`url(#${maskId})`} filter={`url(#${shadowId})`}>
+          <rect width={svgW} height={svgH} fill={piece.color} />
+          <rect width={svgW} height={svgH} fill={`url(#${glossId})`} />
+        </g>
       </svg>
+
       <div
-        className="absolute inset-0 flex flex-col items-center justify-center"
-        style={{ width: w, height: h }}
+        className="absolute left-0 top-0 flex flex-col items-center justify-center px-2 text-center"
+        style={{ width: PIECE_W, height: PIECE_H }}
       >
-        <span className="text-[13px] font-black uppercase leading-tight tracking-wide" style={{ color: "white" }}>
+        <span className="text-[13px] font-black uppercase leading-tight tracking-[0.08em]" style={{ color: "hsl(var(--desktop-foreground))" }}>
           {piece.label}
         </span>
-        <span className="text-[10px] font-semibold uppercase tracking-[0.14em]" style={{ color: "rgba(255,255,255,0.82)" }}>
+        <span className="text-[10px] font-semibold uppercase tracking-[0.14em]" style={{ color: "hsl(var(--desktop-foreground) / 0.82)" }}>
           {piece.sublabel}
         </span>
       </div>
@@ -129,18 +92,18 @@ export const PuzzleAnimation = () => {
       return;
     }
     if (isInView) {
-      const timer = window.setTimeout(() => setIsAssembled(true), 200);
+      const timer = window.setTimeout(() => setIsAssembled(true), 160);
       return () => window.clearTimeout(timer);
     }
   }, [isInView, prefersReducedMotion]);
 
-  const totalW = 3 * PIECE_W + 2 * GAP + TAB_R + 2;
-  const totalH = 2 * PIECE_H + GAP + TAB_R + 2;
+  const totalW = 3 * PIECE_W + TAB_R;
+  const totalH = 2 * PIECE_H + TAB_R;
 
   return (
     <div
       ref={containerRef}
-      className="relative"
+      className="relative max-w-full"
       style={{ width: totalW, height: totalH }}
       role="img"
       aria-label="Six-piece puzzle framework: User Needs, Data Complexity, Business Goals, Tech Constraints, Edge Cases, Emerging Tech"
@@ -157,7 +120,7 @@ export const PuzzleAnimation = () => {
             initial={
               prefersReducedMotion
                 ? false
-                : { x: piece.startX, y: piece.startY, opacity: 0, scale: 0.85, rotate: piece.startRotate }
+                : { x: piece.startX, y: piece.startY, opacity: 0, scale: 0.88, rotate: piece.startRotate }
             }
             animate={{
               x: isAssembled ? 0 : piece.startX,
@@ -168,9 +131,9 @@ export const PuzzleAnimation = () => {
             }}
             transition={{
               type: "spring",
-              stiffness: 140,
-              damping: 16,
-              delay: prefersReducedMotion ? 0 : index * 0.09,
+              stiffness: 150,
+              damping: 18,
+              delay: prefersReducedMotion ? 0 : index * 0.08,
             }}
           >
             <PuzzlePieceSVG piece={piece} index={index} />
