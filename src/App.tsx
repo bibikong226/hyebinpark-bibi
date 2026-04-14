@@ -1,9 +1,11 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
+import { Search, X } from "lucide-react";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { PuzzleAnimation } from "@/components/PuzzleAnimation";
+import { FinderWindow } from "@/components/FinderWindow";
 import profilePhoto from "@/assets/profile-photo.jpg";
 import logoLine from "@/assets/logo-line.png";
 import logoTiktok from "@/assets/logo-tiktok.png";
@@ -31,6 +33,8 @@ const MacWin = ({
 }) => (
   <motion.div
     className={`rounded-xl overflow-hidden ${className}`}
+    role="region"
+    aria-label={title || "Window"}
     style={{
       background: "rgba(30,30,40,0.75)",
       backdropFilter: "blur(40px) saturate(1.6)",
@@ -42,8 +46,7 @@ const MacWin = ({
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
   >
-    {/* Title bar */}
-    <div className="flex items-center gap-2 px-4 py-2.5 border-b border-white/[0.06]">
+    <div className="flex items-center gap-2 px-4 py-2.5 border-b border-white/[0.06]" aria-hidden="true">
       <div className="flex items-center gap-[7px]">
         <span className="w-3 h-3 rounded-full bg-[#FF5F57]" />
         <span className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
@@ -61,6 +64,98 @@ const MacWin = ({
     <div>{children}</div>
   </motion.div>
 );
+
+/* ── Spotlight Search ── */
+const SpotlightSearch = ({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}) => {
+  const [query, setQuery] = useState("");
+  const filteredProjects = query.trim()
+    ? projects.filter(
+        (p) =>
+          p.title.toLowerCase().includes(query.toLowerCase()) ||
+          p.description.toLowerCase().includes(query.toLowerCase()) ||
+          p.tags.some((t) => t.toLowerCase().includes(query.toLowerCase()))
+      )
+    : projects;
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          <motion.div
+            className="fixed inset-0 z-[80] bg-black/40 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+          />
+          <motion.div
+            className="fixed z-[90] top-[18%] left-1/2 w-[90vw] max-w-[580px] rounded-xl overflow-hidden"
+            style={{
+              background: "rgba(30,30,40,0.92)",
+              backdropFilter: "blur(50px) saturate(1.8)",
+              border: "1px solid rgba(255,255,255,0.15)",
+              boxShadow: "0 30px 80px rgba(0,0,0,.5)",
+              transform: "translateX(-50%)",
+            }}
+            initial={{ opacity: 0, y: -10, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.97 }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="flex items-center gap-3 px-5 py-3.5 border-b border-white/[0.08]">
+              <Search size={18} className="text-white/40 flex-shrink-0" aria-hidden="true" />
+              <input
+                type="text"
+                placeholder="Search projects..."
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                className="flex-1 bg-transparent text-white text-[15px] placeholder:text-white/30 outline-none"
+                autoFocus
+                aria-label="Search projects"
+              />
+              <button onClick={onClose} className="text-white/30 hover:text-white/60 focus:outline-none" aria-label="Close search">
+                <X size={16} />
+              </button>
+            </div>
+            <div className="max-h-[340px] overflow-y-auto py-2">
+              {filteredProjects.length > 0 ? (
+                filteredProjects.map((project) => (
+                  <Link
+                    key={project.id}
+                    to={project.externalUrl || `/${project.id}`}
+                    onClick={onClose}
+                    className="flex items-center gap-3 px-5 py-3 hover:bg-white/5 transition-colors group"
+                  >
+                    <img
+                      src={project.logo}
+                      alt=""
+                      className="w-9 h-9 rounded-lg object-cover flex-shrink-0"
+                      style={{ background: project.imageColor }}
+                    />
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-medium text-white group-hover:text-indigo-400 transition-colors truncate">
+                        {project.title}
+                      </p>
+                      <p className="text-[11px] text-white/40 truncate">{project.description}</p>
+                    </div>
+                  </Link>
+                ))
+              ) : (
+                <p className="text-center text-sm text-white/30 py-8">No results found</p>
+              )}
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+};
 
 /* ── Testimonial Grid ── */
 const TestimonialGrid = ({
@@ -84,15 +179,14 @@ const TestimonialGrid = ({
           background: "rgba(255,255,255,0.05)",
           backdropFilter: "blur(24px) saturate(1.4)",
           border: "1px solid rgba(255,255,255,0.1)",
-          boxShadow:
-            "0 20px 48px -12px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,0.08)",
+          boxShadow: "0 20px 48px -12px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,0.08)",
         }}
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: i * 0.1, duration: 0.5 }}
       >
-        <div className="flex gap-1.5 opacity-30 group-hover:opacity-50 transition-opacity">
+        <div className="flex gap-1.5 opacity-30" aria-hidden="true">
           <div className="w-2 h-2 rounded-full bg-white/40" />
           <div className="w-2 h-2 rounded-full bg-white/40" />
           <div className="w-2 h-2 rounded-full bg-white/40" />
@@ -103,18 +197,12 @@ const TestimonialGrid = ({
         <p className="text-sm leading-relaxed text-white/50">{t.subtext}</p>
         <div className="mt-auto flex items-center gap-3 pt-2">
           <div className="w-10 h-10 rounded-full bg-white/10 border border-white/15 flex items-center justify-center text-sm font-semibold text-white/60">
-            {t.author
-              .split(" ")
-              .map((n) => n[0])
-              .join("")}
+            {t.author.split(" ").map((n) => n[0]).join("")}
           </div>
           <div>
-            <span className="text-sm font-semibold text-white block">
-              {t.author}
-            </span>
+            <span className="text-sm font-semibold text-white block">{t.author}</span>
             <span className="text-xs text-white/50">
-              {t.role} ·{" "}
-              <span className="text-indigo-400">{t.company}</span>
+              {t.role} · <span className="text-indigo-400">{t.company}</span>
             </span>
           </div>
         </div>
@@ -124,6 +212,9 @@ const TestimonialGrid = ({
 );
 
 const App = () => {
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [finderCategory, setFinderCategory] = useState<string | null>(null);
+
   const testimonials = [
     { id: "t1", author: "David Rashid", role: "CEO", company: "Concord Systems", text: "Hyebin quickly grasped the business model and technical constraints behind our platform.", subtext: "She didn't just design screens. She transformed backend complexity into seamless, user-first flows that contributed to our business growth." },
     { id: "t2", author: "Elisa Vargas", role: "Product Designer", company: "JSTOR", text: "Hyebin has a rare ability to connect deep research insights with thoughtful design decisions that drive real user impact.", subtext: "Her user-centered thinking and clarity of intent made a lasting impression on our team." },
@@ -149,10 +240,20 @@ const App = () => {
       </a>
       <Navigation />
 
+      {/* Spotlight Search */}
+      <SpotlightSearch isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+
+      {/* Finder Window */}
+      <FinderWindow
+        isOpen={!!finderCategory}
+        onClose={() => setFinderCategory(null)}
+        category={finderCategory || ""}
+      />
+
       <main id="main-content" role="main">
       {/* ═══ macOS DESKTOP HERO ═══ */}
       <section
-        className="relative flex min-h-[900px] w-full flex-col overflow-hidden lg:min-h-screen"
+        className="relative flex min-h-[860px] w-full flex-col overflow-hidden lg:min-h-screen"
         style={{
           background: `
             radial-gradient(ellipse 80% 60% at 20% 80%, rgba(30,64,175,.2) 0%, transparent 50%),
@@ -161,12 +262,10 @@ const App = () => {
             linear-gradient(160deg, #0c0e1a 0%, #111827 30%, #1a1033 55%, #0d1a2f 80%, #080b14 100%)
           `,
         }}
+        aria-label="Hero section"
       >
         {/* Big background name */}
-        <div
-          className="absolute inset-x-0 top-[22%] z-[1] flex items-center justify-center overflow-hidden pointer-events-none"
-          aria-hidden="true"
-        >
+        <div className="absolute inset-x-0 top-[22%] z-[1] flex items-center justify-center overflow-hidden pointer-events-none" aria-hidden="true">
           <span
             className="font-sans font-black text-[clamp(100px,18vw,280px)] tracking-[0.12em] uppercase leading-none whitespace-nowrap select-none"
             style={{ color: "rgba(255,255,255,0.03)" }}
@@ -178,159 +277,133 @@ const App = () => {
         {/* Desktop content */}
         <div className="relative flex-1 px-4 pb-28 pt-6 sm:px-6 md:px-8 lg:px-12 lg:pb-32 z-10">
           <div className="mx-auto max-w-[1200px]">
-            {/* Row 1: Bio window + Folders */}
-            <div className="flex flex-col lg:flex-row gap-5 lg:gap-6 items-start">
-              {/* Bio Window — left */}
-              <MacWin title="Hyebin Park" className="w-full lg:w-[380px] flex-shrink-0" delay={0.15}>
-                <div className="p-6 space-y-5">
-                  {/* Profile */}
-                  <div className="flex items-center gap-4">
-                    <img
-                      src={profilePhoto}
-                      alt="Hyebin Park"
-                      className="w-16 h-16 rounded-2xl object-cover object-[center_20%] border border-white/10"
-                    />
-                    <div>
-                      <h2 className="text-lg font-bold text-white leading-tight">
-                        Hyebin Park
-                      </h2>
-                      <p className="text-[13px] text-white/50 mt-0.5">
-                        Strategic AI Product Designer
-                      </p>
-                      <div className="flex items-center gap-1.5 mt-1.5">
-                        <span className="w-2 h-2 rounded-full bg-green-400" />
-                        <span className="text-[11px] text-green-300 font-medium">
-                          Available for work
-                        </span>
+
+            {/* Spotlight search bar */}
+            <motion.button
+              onClick={() => setSearchOpen(true)}
+              className="mx-auto mb-8 flex items-center gap-2 px-5 py-2 rounded-lg text-[13px] text-white/30 hover:text-white/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+              style={{
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.08)",
+              }}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              aria-label="Open search"
+            >
+              <Search size={14} aria-hidden="true" />
+              <span>Search projects...</span>
+              <span className="ml-6 text-[11px] text-white/20 border border-white/10 rounded px-1.5 py-0.5" aria-hidden="true">⌘K</span>
+            </motion.button>
+
+            {/* Main desktop grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6">
+
+              {/* Left column: Bio + Puzzle */}
+              <div className="lg:col-span-4 space-y-5">
+                {/* Bio Window */}
+                <MacWin title="Hyebin Park" delay={0.15}>
+                  <div className="p-5 space-y-4">
+                    <div className="flex items-center gap-4">
+                      <img
+                        src={profilePhoto}
+                        alt="Hyebin Park"
+                        className="w-14 h-14 rounded-2xl object-cover object-[center_20%] border border-white/10"
+                      />
+                      <div>
+                        <h2 className="text-base font-bold text-white leading-tight">Hyebin Park</h2>
+                        <p className="text-[12px] text-white/50 mt-0.5">Strategic AI Product Designer</p>
+                        <div className="flex items-center gap-1.5 mt-1">
+                          <span className="w-2 h-2 rounded-full bg-green-400" aria-hidden="true" />
+                          <span className="text-[10px] text-green-300 font-medium">Available for work</span>
+                        </div>
                       </div>
                     </div>
+                    <div className="space-y-1.5">
+                      <h1 className="leading-[1.1]">
+                        <span className="text-white/50 text-sm font-normal">Turning </span>
+                        <span className="font-serif text-2xl md:text-3xl font-normal italic text-indigo-400">complexity</span>
+                        <br />
+                        <span className="text-white/30 text-xs font-light">into </span>
+                        <span className="font-serif text-2xl md:text-3xl font-normal italic text-white">clarity.</span>
+                      </h1>
+                      <p className="text-[12px] text-white/40 leading-[1.7]">
+                        From AI algorithms to crypto workflows, I turn ambiguity into structured, usable products that drive real business impact.
+                      </p>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-white/[0.06]">
+                      {[
+                        { src: logoLine, alt: "LINE" },
+                        { src: logoTiktok, alt: "TikTok" },
+                        { src: logoGm, alt: "GM" },
+                        { src: logoNaver, alt: "NAVER" },
+                        { src: logoJstor, alt: "JSTOR" },
+                      ].map((logo) => (
+                        <img key={logo.alt} src={logo.src} alt={logo.alt} className="w-6 h-6 rounded-md object-cover opacity-50 hover:opacity-100 transition-opacity" />
+                      ))}
+                    </div>
                   </div>
+                </MacWin>
 
-                  {/* Tagline */}
-                  <div className="space-y-2">
-                    <h1 className="leading-[1.1]">
-                      <span className="text-white/50 text-base font-normal">
-                        Turning{" "}
-                      </span>
-                      <span className="font-serif text-3xl md:text-4xl font-normal italic text-indigo-400">
-                        complexity
-                      </span>
-                      <br />
-                      <span className="text-white/30 text-sm font-light">
-                        into{" "}
-                      </span>
-                      <span className="font-serif text-3xl md:text-4xl font-normal italic text-white">
-                        clarity.
-                      </span>
-                    </h1>
-                    <p className="text-[13px] text-white/40 leading-[1.7]">
-                      From AI algorithms to crypto workflows, I turn ambiguity
-                      into structured, usable products that drive real business
-                      impact.
-                    </p>
+                {/* Puzzle Widget */}
+                <MacWin title="Design Thinking" delay={0.35}>
+                  <div className="p-4 flex items-center justify-center min-h-[180px]">
+                    <PuzzleAnimation />
                   </div>
+                </MacWin>
+              </div>
 
-                  {/* Company logos */}
-                  <div className="flex flex-wrap items-center gap-2.5 pt-1 border-t border-white/[0.06]">
-                    <img src={logoLine} alt="LINE" className="w-7 h-7 rounded-lg object-cover opacity-60 hover:opacity-100 transition-opacity" />
-                    <img src={logoTiktok} alt="TikTok" className="w-7 h-7 rounded-lg object-cover opacity-60 hover:opacity-100 transition-opacity" />
-                    <img src={logoGm} alt="GM" className="w-7 h-7 rounded-lg object-cover opacity-60 hover:opacity-100 transition-opacity" />
-                    <img src={logoNaver} alt="NAVER" className="w-7 h-7 rounded-lg object-cover opacity-60 hover:opacity-100 transition-opacity" />
-                    <img src={logoJstor} alt="JSTOR" className="w-7 h-7 rounded-lg object-cover opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                </div>
-              </MacWin>
-
-              {/* Folders — right side, clean grid */}
-              <motion.div
-                className="flex-1 pt-2 lg:pt-6"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4, duration: 0.6 }}
-              >
-                <p className="text-[10px] font-semibold tracking-[0.25em] uppercase text-white/25 mb-5 pl-2">
-                  Favorites
-                </p>
-                <div className="grid grid-cols-3 sm:grid-cols-5 gap-y-6 gap-x-4 justify-items-center">
-                  {folders.map((f, i) => (
-                    <motion.a
-                      key={f.label}
-                      href="#work"
-                      className="flex flex-col items-center gap-2 group cursor-pointer"
-                      initial={{ opacity: 0, y: 14 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.5 + i * 0.08 }}
-                    >
-                      <div className="w-[68px] h-[68px] sm:w-[76px] sm:h-[76px] group-hover:scale-110 transition-transform duration-200 drop-shadow-lg">
-                        <img
-                          src={f.icon}
-                          alt={f.label}
-                          className="w-full h-full object-contain"
-                        />
-                      </div>
-                      <span className="text-[11px] font-medium text-white/60 text-center leading-tight group-hover:text-white/90 transition-colors max-w-[80px] drop-shadow-sm">
-                        {f.label}
-                      </span>
-                    </motion.a>
-                  ))}
-                </div>
-              </motion.div>
-            </div>
-
-            {/* Row 2: Puzzle window + Control center */}
-            <div className="flex flex-col lg:flex-row gap-5 lg:gap-6 items-start mt-5 lg:mt-6">
-              {/* Puzzle Window */}
-              <MacWin title="Design Thinking" className="w-full lg:w-[380px] flex-shrink-0" delay={0.35}>
-                <div className="p-5 flex items-center justify-center">
-                  <PuzzleAnimation />
-                </div>
-              </MacWin>
-
-              {/* Control Center */}
-              <MacWin title="Control Center" className="w-[200px] hidden lg:block" delay={0.55}>
-                <div className="p-3.5">
-                  <div className="grid grid-cols-2 gap-1.5 mb-3">
-                    {[
-                      { icon: "📶", label: "Wi-Fi", active: true },
-                      { icon: "🔵", label: "Bluetooth", active: true },
-                      { icon: "🌙", label: "Focus", active: false },
-                      { icon: "✈️", label: "AirDrop", active: false },
-                    ].map((item, i) => (
-                      <div
-                        key={i}
-                        className={`flex items-center gap-1 rounded-lg px-2 py-1.5 text-[9px] font-medium ${
-                          item.active
-                            ? "bg-blue-500/60 text-white"
-                            : "bg-white/[0.06] text-white/40"
-                        }`}
+              {/* Right column: Folders grid */}
+              <div className="lg:col-span-8 space-y-5">
+                {/* Folders */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3, duration: 0.6 }}
+                >
+                  <p className="text-[10px] font-semibold tracking-[0.25em] uppercase text-white/25 mb-5 pl-1" aria-hidden="true">
+                    Favorites
+                  </p>
+                  <div className="grid grid-cols-3 sm:grid-cols-5 gap-y-7 gap-x-5 justify-items-center">
+                    {folders.map((f, i) => (
+                      <motion.button
+                        key={f.label}
+                        onClick={() => setFinderCategory(f.label)}
+                        className="flex flex-col items-center gap-2.5 group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 rounded-lg p-2"
+                        initial={{ opacity: 0, y: 14 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.4 + i * 0.08 }}
+                        aria-label={`Open ${f.label} folder`}
                       >
-                        <span className="text-[10px]">{item.icon}</span>
-                        <span className="truncate">{item.label}</span>
-                      </div>
+                        <div className="w-[72px] h-[72px] sm:w-[80px] sm:h-[80px] group-hover:scale-110 transition-transform duration-200 drop-shadow-lg">
+                          <img src={f.icon} alt="" className="w-full h-full object-contain" />
+                        </div>
+                        <span className="text-[11px] font-medium text-white/60 text-center leading-tight group-hover:text-white/90 transition-colors max-w-[90px] drop-shadow-sm">
+                          {f.label}
+                        </span>
+                      </motion.button>
                     ))}
                   </div>
-                  <div className="space-y-2.5">
-                    <div>
-                      <div className="flex items-center justify-between text-[9px] text-white/40 mb-1">
-                        <span>☀️ Display</span>
-                        <span className="text-white/60">73%</span>
-                      </div>
-                      <div className="h-[3px] rounded-full bg-white/10 overflow-hidden">
-                        <div className="h-full w-[73%] rounded-full bg-white/50" />
-                      </div>
+                </motion.div>
+
+                {/* Quick stats / tagline widget */}
+                <MacWin title="Portfolio Overview" delay={0.5}>
+                  <div className="p-5 grid grid-cols-3 gap-4">
+                    <div className="text-center">
+                      <p className="text-2xl font-bold text-indigo-400">5+</p>
+                      <p className="text-[11px] text-white/40 mt-1">Projects</p>
                     </div>
-                    <div>
-                      <div className="flex items-center justify-between text-[9px] text-white/40 mb-1">
-                        <span>🔊 Volume</span>
-                        <span className="text-white/60">75%</span>
-                      </div>
-                      <div className="h-[3px] rounded-full bg-white/10 overflow-hidden">
-                        <div className="h-full w-[75%] rounded-full bg-white/50" />
-                      </div>
+                    <div className="text-center">
+                      <p className="text-2xl font-bold text-indigo-400">3+</p>
+                      <p className="text-[11px] text-white/40 mt-1">Years Experience</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-2xl font-bold text-indigo-400">$3.5M</p>
+                      <p className="text-[11px] text-white/40 mt-1">Product Impact</p>
                     </div>
                   </div>
-                </div>
-              </MacWin>
+                </MacWin>
+              </div>
             </div>
           </div>
         </div>
@@ -338,18 +411,19 @@ const App = () => {
         {/* Dock */}
         <div
           className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-0 px-3 py-2 rounded-[20px] z-30"
+          role="navigation"
+          aria-label="Quick navigation dock"
           style={{
             background: "rgba(255,255,255,0.08)",
             backdropFilter: "blur(28px) saturate(1.8)",
             border: "1px solid rgba(255,255,255,.15)",
-            boxShadow:
-              "0 8px 40px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.08)",
+            boxShadow: "0 8px 40px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.08)",
           }}
         >
           {(() => {
             const mainItems = [
               { icon: "📂", label: "Work", bg: "linear-gradient(135deg, #7B6EF6, #5B4CD8)", action: () => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" }) },
-              { icon: "💼", label: "Explore", bg: "linear-gradient(135deg, #F472B6, #DB2777)", action: () => document.getElementById("explore")?.scrollIntoView({ behavior: "smooth" }) },
+              { icon: "🔍", label: "Search", bg: "linear-gradient(135deg, #F472B6, #DB2777)", action: () => setSearchOpen(true) },
               { icon: "📋", label: "About", bg: "linear-gradient(135deg, #6EE7B7, #10B981)", action: () => (window.location.href = "/about") },
               { icon: "💬", label: "CV", bg: "linear-gradient(135deg, #FBBF24, #F59E0B)", action: () => window.open("https://drive.google.com/file/d/1l2V4pQCjAZhIhLyRmVh3m2QTw87yLI6P/view?usp=sharing", "_blank") },
             ];
@@ -366,35 +440,35 @@ const App = () => {
                     <button
                       key={i}
                       onClick={item.action}
-                      className="flex flex-col items-center gap-0.5 group"
+                      className="flex flex-col items-center gap-0.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 rounded-lg"
+                      aria-label={item.label}
                     >
                       <div
                         className="w-10 h-10 md:w-11 md:h-11 rounded-[11px] flex items-center justify-center text-lg shadow-md group-hover:scale-110 group-hover:-translate-y-1 group-hover:shadow-lg transition-all duration-200"
                         style={{ background: item.bg }}
+                        aria-hidden="true"
                       >
                         {item.icon}
                       </div>
-                      <span className="text-[8px] font-medium text-white/50">
-                        {item.label}
-                      </span>
+                      <span className="text-[8px] font-medium text-white/50">{item.label}</span>
                     </button>
                   ))}
                 </div>
-                <div className="w-px h-8 bg-white/15 mx-1.5" />
+                <div className="w-px h-8 bg-white/15 mx-1.5" aria-hidden="true" />
                 <div className="px-1">
                   <button
                     onClick={contactItem.action}
-                    className="flex flex-col items-center gap-0.5 group"
+                    className="flex flex-col items-center gap-0.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 rounded-lg"
+                    aria-label="Contact"
                   >
                     <div
                       className="w-10 h-10 md:w-11 md:h-11 rounded-[11px] flex items-center justify-center text-lg shadow-md group-hover:scale-110 group-hover:-translate-y-1 group-hover:shadow-lg transition-all duration-200"
                       style={{ background: contactItem.bg }}
+                      aria-hidden="true"
                     >
                       {contactItem.icon}
                     </div>
-                    <span className="text-[8px] font-medium text-white/50">
-                      {contactItem.label}
-                    </span>
+                    <span className="text-[8px] font-medium text-white/50">{contactItem.label}</span>
                   </button>
                 </div>
               </>
@@ -424,17 +498,13 @@ const App = () => {
             Outputs.
           </h2>
 
-          <div
-            className="grid md:grid-cols-2 gap-x-10 gap-y-16"
-            style={{ gridAutoRows: "1fr" }}
-          >
+          <div className="grid md:grid-cols-2 gap-x-10 gap-y-16" style={{ gridAutoRows: "1fr" }}>
             {projects.map((project, idx) => {
               const card = (
                 <motion.div
                   className="rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-[6px] group flex flex-col h-full"
                   style={{
-                    boxShadow:
-                      "0 12px 40px rgba(0,0,0,.1), 0 4px 12px rgba(0,0,0,.06)",
+                    boxShadow: "0 12px 40px rgba(0,0,0,.1), 0 4px 12px rgba(0,0,0,.06)",
                   }}
                   initial={{ opacity: 0, y: 18 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -442,21 +512,14 @@ const App = () => {
                   transition={{ delay: idx * 0.08 }}
                   key={project.id}
                 >
-                  <div
-                    className="w-full aspect-[16/9] relative overflow-hidden"
-                    style={{ background: project.imageColor }}
-                  >
+                  <div className="w-full aspect-[16/9] relative overflow-hidden" style={{ background: project.imageColor }}>
                     <div className="absolute left-4 md:left-6 top-4 md:top-5 z-10">
                       <img
                         src={project.logo}
                         alt={`${project.title} logo`}
                         loading="lazy"
                         className={`w-auto object-contain ${
-                          project.id === "gm"
-                            ? "h-8 md:h-10"
-                            : project.id === "nurturly"
-                            ? "h-5 md:h-6"
-                            : "h-6 md:h-9"
+                          project.id === "gm" ? "h-8 md:h-10" : project.id === "nurturly" ? "h-5 md:h-6" : "h-6 md:h-9"
                         }`}
                       />
                     </div>
@@ -466,14 +529,12 @@ const App = () => {
                         alt={`${project.title} mockup`}
                         loading="lazy"
                         className={`object-contain max-w-full transition-transform duration-700 group-hover:scale-[1.03] ${
-                          project.id === "concord"
-                            ? "max-h-[95%]"
-                            : "max-h-[88%]"
+                          project.id === "concord" ? "max-h-[95%]" : "max-h-[88%]"
                         }`}
                       />
                     </div>
                     <div className="absolute bottom-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="px-4 py-1.5 rounded-full bg-white/90 text-[11px] font-semibold tracking-wider uppercase text-foreground/80 shadow-md">
+                      <div className="px-4 py-1.5 rounded-full bg-white/90 text-[11px] font-semibold tracking-wider uppercase text-gray-800 shadow-md">
                         VIEW
                       </div>
                     </div>
@@ -497,10 +558,7 @@ const App = () => {
                     </div>
                     <div className="flex flex-wrap gap-[6px] mt-auto">
                       {project.highlights.map((hl, hi) => (
-                        <div
-                          key={hi}
-                          className="relative overflow-hidden rounded-[7px] px-3 py-[6px] cursor-default"
-                        >
+                        <div key={hi} className="relative overflow-hidden rounded-[7px] px-3 py-[6px] cursor-default">
                           <div className="absolute inset-0 bg-white/5" />
                           <div
                             className="absolute inset-0 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-[450ms] ease-out z-0"
@@ -518,13 +576,7 @@ const App = () => {
 
               if (project.externalUrl) {
                 return (
-                  <a
-                    key={project.id}
-                    href={project.externalUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block"
-                  >
+                  <a key={project.id} href={project.externalUrl} target="_blank" rel="noopener noreferrer" className="block">
                     {card}
                   </a>
                 );
@@ -544,29 +596,17 @@ const App = () => {
         id="collab"
         className="relative py-28 sm:py-32 px-4 sm:px-8 md:px-10 overflow-hidden"
         style={{
-          background:
-            "linear-gradient(165deg, #0F0F1A 0%, #1A1A2E 40%, #16213E 70%, #0F0F1A 100%)",
+          background: "linear-gradient(165deg, #0F0F1A 0%, #1A1A2E 40%, #16213E 70%, #0F0F1A 100%)",
         }}
+        aria-labelledby="collab-heading"
       >
-        <div
-          className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full opacity-20 blur-[120px] pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(99,102,241,.6), transparent 70%)",
-          }}
-        />
-        <div
-          className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full opacity-15 blur-[100px] pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(168,85,247,.5), transparent 70%)",
-          }}
-        />
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full opacity-20 blur-[120px] pointer-events-none" style={{ background: "radial-gradient(circle, rgba(99,102,241,.6), transparent 70%)" }} aria-hidden="true" />
+        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full opacity-15 blur-[100px] pointer-events-none" style={{ background: "radial-gradient(circle, rgba(168,85,247,.5), transparent 70%)" }} aria-hidden="true" />
         <div className="relative max-w-[1060px] mx-auto">
           <p className="text-[11px] font-medium tracking-[0.3em] uppercase text-white/40 mb-4">
             Collaboration
           </p>
-          <h2 className="text-[clamp(32px,4.5vw,56px)] font-black leading-[1.1] tracking-tight mb-14 text-white">
+          <h2 id="collab-heading" className="text-[clamp(32px,4.5vw,56px)] font-black leading-[1.1] tracking-tight mb-14 text-white">
             Words from people
             <br className="hidden sm:block" />
             I've worked alongside.
