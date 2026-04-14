@@ -343,16 +343,33 @@ const App = () => {
                         From AI algorithms to crypto workflows, I turn ambiguity into structured, usable products that drive real business impact.
                       </p>
                     </div>
-                    <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-white/[0.06]">
-                      {[
-                        { src: logoLine, alt: "LINE" },
-                        { src: logoTiktok, alt: "TikTok" },
-                        { src: logoGm, alt: "GM" },
-                        { src: logoNaver, alt: "NAVER" },
-                        { src: logoJstor, alt: "JSTOR" },
-                      ].map((logo) => (
-                        <img key={logo.alt} src={logo.src} alt={logo.alt} className="w-6 h-6 rounded-md object-cover opacity-50 hover:opacity-100 transition-opacity" />
-                      ))}
+                  </div>
+                </MacWin>
+
+                {/* Education & Experience Widget */}
+                <MacWin title="Background" delay={0.25}>
+                  <div className="p-5 space-y-4">
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl" aria-hidden="true">🎓</span>
+                      <div>
+                        <p className="text-[15px] font-semibold text-white">MS-HCI @ University of Michigan</p>
+                      </div>
+                    </div>
+                    <div className="space-y-2.5">
+                      <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-white/30">
+                        Experience Designing & Researching For
+                      </p>
+                      <div className="flex flex-wrap items-center gap-2.5">
+                        {[
+                          { src: logoLine, alt: "LINE" },
+                          { src: logoTiktok, alt: "TikTok" },
+                          { src: logoGm, alt: "GM" },
+                          { src: logoNaver, alt: "NAVER" },
+                          { src: logoJstor, alt: "JSTOR" },
+                        ].map((logo) => (
+                          <img key={logo.alt} src={logo.src} alt={logo.alt} className="w-10 h-10 rounded-xl object-cover opacity-70 hover:opacity-100 transition-opacity" />
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </MacWin>
