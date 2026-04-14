@@ -42,12 +42,12 @@
     --radius: 0.75rem;
 
     /* Portfolio specific tokens */
-    --puzzle-piece-1: 0 72% 68%;
-    --puzzle-piece-2: 220 68% 70%;
-    --puzzle-piece-3: 145 58% 62%;
-    --puzzle-piece-4: 35 82% 62%;
-    --puzzle-piece-5: 270 52% 68%;
-    --puzzle-piece-6: 340 62% 68%;
+    --puzzle-piece-1: 260 65% 58%;
+    --puzzle-piece-2: 230 60% 56%;
+    --puzzle-piece-3: 280 55% 62%;
+    --puzzle-piece-4: 245 70% 52%;
+    --puzzle-piece-5: 300 50% 58%;
+    --puzzle-piece-6: 220 65% 60%;
 
     /* Desktop theme tokens */
     --desktop-wallpaper-start: 260 52% 12%;
@@ -112,12 +112,12 @@
     --input: 0 0% 18%;
     --ring: 243 75% 70%;
 
-    --puzzle-piece-1: 0 65% 60%;
-    --puzzle-piece-2: 220 58% 62%;
-    --puzzle-piece-3: 145 50% 55%;
-    --puzzle-piece-4: 35 75% 55%;
-    --puzzle-piece-5: 270 45% 60%;
-    --puzzle-piece-6: 340 55% 60%;
+    --puzzle-piece-1: 260 58% 52%;
+    --puzzle-piece-2: 230 52% 50%;
+    --puzzle-piece-3: 280 48% 55%;
+    --puzzle-piece-4: 245 62% 48%;
+    --puzzle-piece-5: 300 44% 52%;
+    --puzzle-piece-6: 220 58% 54%;
 
     --desktop-wallpaper-start: 260 52% 12%;
     --desktop-wallpaper-mid: 255 42% 16%;

@@ -345,10 +345,10 @@ const App = () => {
           className="relative flex min-h-[920px] w-full flex-col overflow-hidden lg:min-h-screen"
           style={{
             background: `
-              radial-gradient(ellipse 72% 58% at 15% 84%, hsl(var(--desktop-accent) / 0.28) 0%, transparent 52%),
-              radial-gradient(ellipse 56% 42% at 82% 16%, hsl(280 60% 50% / 0.18) 0%, transparent 48%),
-              radial-gradient(ellipse 40% 30% at 48% 58%, hsl(270 40% 60% / 0.1) 0%, transparent 55%),
-              linear-gradient(155deg, hsl(var(--desktop-wallpaper-start)) 0%, hsl(var(--desktop-wallpaper-mid)) 48%, hsl(var(--desktop-wallpaper-end)) 100%)
+              radial-gradient(ellipse 80% 60% at 20% 80%, hsl(270 65% 40% / 0.45) 0%, transparent 50%),
+              radial-gradient(ellipse 60% 50% at 80% 20%, hsl(255 70% 50% / 0.35) 0%, transparent 45%),
+              radial-gradient(ellipse 50% 40% at 50% 50%, hsl(260 55% 45% / 0.2) 0%, transparent 50%),
+              linear-gradient(155deg, hsl(265 50% 16%) 0%, hsl(260 45% 12%) 40%, hsl(255 55% 8%) 100%)
             `,
           }}
           aria-label="Desktop hero"
@@ -356,10 +356,20 @@ const App = () => {
           <div className="relative z-10 flex-1 px-4 pb-10 pt-6 sm:px-6 md:px-8 lg:px-12 lg:pb-32">
             <div className="mx-auto max-w-[1280px]">
 
-              {/* Centered hero header */}
-              <div className="mb-10 flex flex-col items-center text-center lg:mb-14">
+              {/* Large faded name as watermark */}
+              <div className="pointer-events-none select-none text-center mb-6 lg:mb-8">
+                <h1
+                  className="text-[clamp(4rem,15vw,11rem)] font-black leading-[0.85] tracking-[-0.04em] uppercase"
+                  style={{ color: "hsl(260 40% 60% / 0.12)" }}
+                >
+                  HYEBIN PARK
+                </h1>
+              </div>
+
+              {/* Headline + subtitle */}
+              <div className="mb-8 flex flex-col items-center text-center lg:mb-12">
                 <motion.p
-                  className="mb-3 rounded-full px-4 py-1.5 text-[11px] font-bold tracking-[0.28em] uppercase"
+                  className="mb-4 rounded-full px-5 py-2 text-[12px] font-bold tracking-[0.24em] uppercase"
                   style={{
                     color: "hsl(var(--desktop-accent))",
                     background: "hsl(var(--desktop-accent) / 0.14)",
@@ -372,17 +382,24 @@ const App = () => {
                   Strategic AI Product Designer
                 </motion.p>
 
-                <h1
-                  className="text-[clamp(3.2rem,12vw,8.5rem)] font-black leading-[0.9] tracking-[-0.06em]"
+                <motion.h2
+                  className="text-[clamp(2rem,5.5vw,4.5rem)] leading-[1.08] tracking-tight"
                   style={{ color: "hsl(var(--desktop-foreground))" }}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 }}
                 >
-                  HYEBIN PARK
-                </h1>
+                  <span className="font-light">Turning</span>{" "}
+                  <span className="font-serif italic" style={{ color: "hsl(var(--desktop-accent))" }}>complexity</span>
+                  <br />
+                  <span className="font-light">into</span>{" "}
+                  <span className="font-serif italic" style={{ color: "hsl(var(--desktop-accent))" }}>clarity</span>
+                </motion.h2>
 
                 <motion.button
                   type="button"
                   onClick={() => setSearchOpen(true)}
-                  className="mt-5 flex items-center gap-3 rounded-full px-5 py-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))]"
+                  className="mt-6 flex items-center gap-3 rounded-full px-5 py-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))]"
                   style={{
                     color: "hsl(var(--desktop-foreground))",
                     background: "hsl(var(--desktop-search) / 0.86)",
@@ -391,7 +408,7 @@ const App = () => {
                   }}
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.12 }}
+                  transition={{ delay: 0.14 }}
                   aria-label="Open project search"
                   aria-haspopup="dialog"
                 >
@@ -440,57 +457,26 @@ const App = () => {
                         </div>
                       </div>
 
-                      <div
-                        className="grid grid-cols-3 gap-2 border-t p-4"
-                        style={{ borderColor: "hsl(var(--desktop-border) / 0.08)" }}
-                      >
-                        {[
-                          { label: "Focus", value: "AI · Data" },
-                          { label: "Education", value: "MS-HCI" },
-                          { label: "Impact", value: "$3.5M" },
-                        ].map((item) => (
-                          <div
-                            key={item.label}
-                            className="rounded-xl px-3 py-2"
-                            style={{
-                              background: "hsl(var(--desktop-search) / 0.52)",
-                            }}
-                          >
-                            <p className="text-[9px] font-semibold tracking-[0.16em] uppercase" style={{ color: "hsl(var(--desktop-subtle))" }}>
-                              {item.label}
-                            </p>
-                            <p className="mt-1 text-[13px] font-semibold" style={{ color: "hsl(var(--desktop-foreground))" }}>
-                              {item.value}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
                   </MacWin>
 
-                  <div className="mt-6">
-                    <MacWin title="Experience" delay={0.22}>
-                      <div className="flex flex-wrap items-center gap-3 p-5">
-                        {[
-                          { src: logoLine, alt: "LINE" },
-                          { src: logoTiktok, alt: "TikTok" },
-                          { src: logoGm, alt: "GM" },
-                          { src: logoNaver, alt: "NAVER" },
-                          { src: logoJstor, alt: "JSTOR" },
-                        ].map((logo) => (
-                          <div
-                            key={logo.alt}
-                            className="flex h-11 w-11 items-center justify-center rounded-xl p-2"
-                            style={{
-                              background: "hsl(var(--desktop-search) / 0.62)",
-                              border: "1px solid hsl(var(--desktop-border) / 0.08)",
-                            }}
-                          >
-                            <img src={logo.src} alt={logo.alt} className="max-h-full max-w-full object-contain opacity-90" />
-                          </div>
-                        ))}
-                      </div>
-                    </MacWin>
-                  </div>
+                  <MacWin title="Experience" delay={0.22} className="mt-6">
+                    <div className="flex items-center justify-between gap-4 p-5">
+                      {[
+                        { src: logoLine, alt: "LINE" },
+                        { src: logoTiktok, alt: "TikTok" },
+                        { src: logoGm, alt: "GM" },
+                        { src: logoNaver, alt: "NAVER" },
+                        { src: logoJstor, alt: "JSTOR" },
+                      ].map((logo) => (
+                        <div
+                          key={logo.alt}
+                          className="flex h-10 w-10 items-center justify-center rounded-xl"
+                        >
+                          <img src={logo.src} alt={logo.alt} className="max-h-full max-w-full object-contain opacity-80 brightness-[2] grayscale" />
+                        </div>
+                      ))}
+                    </div>
+                  </MacWin>
                 </div>
 
                 <div className="lg:col-span-7">
