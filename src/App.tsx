@@ -479,17 +479,17 @@ const App = () => {
                     </div>
                   </div>
                   <div className="p-6 md:p-7 flex-1 flex flex-col" style={{ background: "rgba(30,30,40,0.8)" }}>
-                    <h3 className="font-serif text-[22px] md:text-[26px] font-semibold leading-[1.2] mb-2 text-foreground">
+                    <h3 className="font-serif text-[22px] md:text-[26px] font-semibold leading-[1.2] mb-2 text-white">
                       {project.title}
                     </h3>
-                    <p className="text-[13.5px] md:text-[14.5px] leading-[1.65] text-muted-foreground mb-4 max-w-[440px]">
+                    <p className="text-[13.5px] md:text-[14.5px] leading-[1.65] text-white/50 mb-4 max-w-[440px]">
                       {project.description}
                     </p>
                     <div className="flex flex-wrap gap-[5px] mb-4">
                       {project.tags.map((tag, ti) => (
                         <span
                           key={ti}
-                          className="inline-block px-2.5 py-[3px] rounded-full text-[10.5px] font-medium border bg-secondary text-muted-foreground border-border"
+                          className="inline-block px-2.5 py-[3px] rounded-full text-[10.5px] font-medium border border-white/10 bg-white/5 text-white/60"
                         >
                           {tag}
                         </span>
