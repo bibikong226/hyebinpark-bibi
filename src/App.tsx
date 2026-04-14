@@ -67,14 +67,39 @@ const SectionWin = ({
   </div>
 );
 
-/* ── macOS folder icon ── */
+/* ── Realistic macOS folder icon ── */
 const DesktopFolderIcon = () => (
-  <svg width="58" height="48" viewBox="0 0 58 48" fill="none" aria-hidden="true">
-    <path d="M4 12C4 9.79 5.79 8 8 8H20L24 2H8C5.79 2 4 3.79 4 6V12Z" fill="#64B5F6" />
-    <rect x="4" y="8" width="50" height="36" rx="5" fill="url(#fg)" />
-    <path d="M4 8H24L20 2H8C5.79 2 4 3.79 4 6V8Z" fill="#64B5F6" />
-    <rect x="4" y="8" width="50" height="1.5" rx="0.75" fill="rgba(255,255,255,0.2)" />
-    <defs><linearGradient id="fg" x1="29" y1="8" x2="29" y2="44" gradientUnits="userSpaceOnUse"><stop stopColor="#42A5F5"/><stop offset="1" stopColor="#1E88E5"/></linearGradient></defs>
+  <svg width="68" height="56" viewBox="0 0 68 56" fill="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="folder-back" x1="34" y1="4" x2="34" y2="52" gradientUnits="userSpaceOnUse">
+        <stop stopColor="#8CB4F0" />
+        <stop offset="1" stopColor="#5A9CF0" />
+      </linearGradient>
+      <linearGradient id="folder-front" x1="34" y1="16" x2="34" y2="52" gradientUnits="userSpaceOnUse">
+        <stop stopColor="#6DB3F8" />
+        <stop offset="0.5" stopColor="#4DA1F5" />
+        <stop offset="1" stopColor="#3D8CE8" />
+      </linearGradient>
+      <linearGradient id="folder-tab" x1="16" y1="4" x2="16" y2="16" gradientUnits="userSpaceOnUse">
+        <stop stopColor="#8CB4F0" />
+        <stop offset="1" stopColor="#6CA5F0" />
+      </linearGradient>
+      <filter id="folder-shadow" x="-4" y="2" width="76" height="60" filterUnits="userSpaceOnUse">
+        <feDropShadow dx="0" dy="2" stdDeviation="3" floodOpacity="0.15" />
+      </filter>
+    </defs>
+    <g filter="url(#folder-shadow)">
+      {/* Back panel */}
+      <rect x="4" y="10" width="60" height="42" rx="5" fill="url(#folder-back)" />
+      {/* Tab */}
+      <path d="M8 10V8C8 5.79 9.79 4 12 4H24C25.1 4 26.14 4.53 26.8 5.4L30 10H8Z" fill="url(#folder-tab)" />
+      {/* Front panel */}
+      <rect x="4" y="16" width="60" height="36" rx="5" fill="url(#folder-front)" />
+      {/* Top highlight line */}
+      <rect x="4" y="16" width="60" height="1.5" rx="0.75" fill="rgba(255,255,255,0.3)" />
+      {/* Subtle inner shadow at top of front */}
+      <rect x="6" y="18" width="56" height="1" rx="0.5" fill="rgba(255,255,255,0.15)" />
+    </g>
   </svg>
 );
 
@@ -115,40 +140,6 @@ const SpotlightSearch = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
   );
 };
 
-/* ── Testimonials ── */
-const TestimonialGrid = ({ testimonials }: { testimonials: { id: string; author: string; role: string; company: string; text: string; subtext: string; }[]; }) => (
-  <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
-    {testimonials.map((t, i) => (
-      <motion.article
-        key={t.id}
-        className={`group flex flex-col gap-5 overflow-hidden rounded-2xl bg-white p-7 transition-transform duration-300 hover:-translate-y-1 md:p-8 ${i % 2 === 1 ? "md:mt-10" : ""}`}
-        style={{ border: "1px solid rgba(0,0,0,0.06)", boxShadow: "0 4px 20px rgba(0,0,0,0.04)" }}
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: i * 0.08 }}
-      >
-        <div className="flex gap-[7px]" aria-hidden="true">
-          <span className="h-2.5 w-2.5 rounded-full" style={{ background: "#FF5F57" }} />
-          <span className="h-2.5 w-2.5 rounded-full" style={{ background: "#FFBD2E" }} />
-          <span className="h-2.5 w-2.5 rounded-full" style={{ background: "#28C840" }} />
-        </div>
-        <p className="font-serif text-[17px] italic leading-relaxed text-black/80 md:text-lg">"{t.text}"</p>
-        <p className="text-[13px] leading-relaxed text-black/45">{t.subtext}</p>
-        <div className="mt-auto flex items-center gap-3 pt-1">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 text-xs font-semibold text-white">
-            {t.author.split(" ").map(n => n[0]).join("")}
-          </div>
-          <div>
-            <span className="block text-sm font-semibold text-black/80">{t.author}</span>
-            <span className="text-[11px] text-black/40">{t.role} · <span className="text-blue-500">{t.company}</span></span>
-          </div>
-        </div>
-      </motion.article>
-    ))}
-  </div>
-);
-
 /* ═══════ MAIN APP ═══════ */
 const App = () => {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -176,7 +167,7 @@ const App = () => {
   ];
 
   return (
-    <div className="overflow-x-hidden font-sans bg-[#f5f5f7]">
+    <div className="overflow-x-hidden font-sans bg-[#f0f0f2]">
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3 focus:z-[100] focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-black">Skip to main content</a>
 
       <Navigation />
@@ -189,9 +180,9 @@ const App = () => {
           className="relative flex min-h-[920px] w-full flex-col overflow-hidden lg:min-h-screen"
           style={{
             background: `
-              radial-gradient(ellipse 70% 55% at 25% 15%, rgba(186,210,248,0.7) 0%, transparent 55%),
-              radial-gradient(ellipse 60% 45% at 80% 75%, rgba(210,195,245,0.4) 0%, transparent 50%),
-              linear-gradient(170deg, #dce5f4 0%, #d0ddef 30%, #c4d4eb 55%, #cdd8ee 80%, #dae2f2 100%)
+              radial-gradient(ellipse 70% 55% at 25% 15%, rgba(186,210,248,0.5) 0%, transparent 55%),
+              radial-gradient(ellipse 60% 45% at 80% 75%, rgba(200,190,230,0.3) 0%, transparent 50%),
+              linear-gradient(170deg, #e8ecf4 0%, #e0e4ee 30%, #d8dce8 55%, #dde1ec 80%, #e6e9f0 100%)
             `,
           }}
           aria-label="Desktop hero"
@@ -199,17 +190,17 @@ const App = () => {
           <div className="relative z-10 flex-1 px-4 pb-10 pt-8 sm:px-6 md:px-8 lg:px-12 lg:pb-36">
             <div className="mx-auto max-w-[1280px]">
 
-              {/* Name + Headline — bolder */}
-              <div className="mb-14 flex flex-col items-center text-center lg:mb-18">
+              {/* Name + Headline */}
+              <div className="mb-16 flex flex-col items-center text-center lg:mb-20">
                 <h1
                   className="pointer-events-none select-none text-[clamp(3.5rem,13vw,9rem)] font-black uppercase leading-[0.85] tracking-[-0.04em]"
-                  style={{ color: "rgba(0,0,0,0.08)", textShadow: "0 1px 20px rgba(0,0,0,0.04)" }}
+                  style={{ color: "rgba(0,0,0,0.12)" }}
                 >
                   HYEBIN PARK
                 </h1>
 
                 <motion.p
-                  className="mb-5 mt-4 rounded-full border border-black/[0.08] bg-white/50 px-5 py-2 text-[12px] font-bold uppercase tracking-[0.22em] text-black/70 backdrop-blur-md"
+                  className="mb-6 mt-5 rounded-full border border-black/[0.08] bg-white/50 px-5 py-2 text-[12px] font-bold uppercase tracking-[0.22em] text-black/70 backdrop-blur-md"
                   initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.06 }}
                 >
                   Strategic AI Product Designer
@@ -228,7 +219,7 @@ const App = () => {
 
                 <motion.button
                   type="button" onClick={() => setSearchOpen(true)}
-                  className="mt-8 flex items-center gap-3 rounded-full border border-black/[0.06] bg-white/60 px-5 py-2.5 backdrop-blur-lg"
+                  className="mt-10 flex items-center gap-3 rounded-full border border-black/[0.06] bg-white/60 px-5 py-2.5 backdrop-blur-lg"
                   style={{ boxShadow: "0 4px 20px rgba(0,0,0,0.05)" }}
                   initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.14 }}
                   aria-label="Open project search"
@@ -240,16 +231,14 @@ const App = () => {
               </div>
 
               {/* Windows grid */}
-              <div className="grid gap-8 lg:grid-cols-12 lg:items-start">
-                <div className="space-y-7 lg:col-span-5">
+              <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
+                <div className="space-y-8 lg:col-span-5">
+                  {/* About — compact widget, no photo */}
                   <MacWin title="About" delay={0.12}>
-                    <div className="flex gap-5 p-5 md:p-6">
-                      <img src={profilePhoto} alt="Hyebin Park" className="h-16 w-16 flex-shrink-0 rounded-2xl object-cover object-[center_20%] shadow-sm" />
-                      <div className="min-w-0">
-                        <p className="text-[15px] font-semibold leading-6 text-black/80">I turn complex AI & data products into clear, trustworthy experiences.</p>
-                        <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-black/[0.04] px-3 py-1 text-[11px] font-semibold text-black/60">
-                          <span className="h-2 w-2 rounded-full bg-green-500" aria-hidden="true" />Open to work
-                        </div>
+                    <div className="p-5 md:p-6">
+                      <p className="text-[15px] font-semibold leading-6 text-black/80">I turn complex AI & data products into clear, trustworthy experiences.</p>
+                      <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-black/[0.04] px-3 py-1 text-[11px] font-semibold text-black/60">
+                        <span className="h-2 w-2 rounded-full bg-green-500" aria-hidden="true" />Open to work
                       </div>
                     </div>
                   </MacWin>
@@ -263,19 +252,19 @@ const App = () => {
                   </MacWin>
                 </div>
 
-                <div className="space-y-10 lg:col-span-7">
+                <div className="space-y-12 lg:col-span-7">
                   <MacWin title="How I Work" delay={0.18}>
-                    <div className="flex items-center justify-center p-4">
+                    <div className="flex items-center justify-center p-6">
                       <PuzzleAnimation onAssembled={handlePuzzleAssembled} profileSrc={profilePhoto} />
                     </div>
                   </MacWin>
 
                   <aside aria-labelledby="folders-heading">
                     <p id="folders-heading" className="mb-5 px-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-black/30">Project Folders</p>
-                    <div className="flex flex-wrap items-start justify-center gap-x-8 gap-y-7 lg:justify-start">
+                    <div className="flex flex-wrap items-start justify-center gap-x-10 gap-y-8 lg:justify-start">
                       {folders.map((f, i) => (
                         <motion.button key={f.label} type="button" onClick={() => setFinderCategory(f.label)}
-                          className="group flex w-[80px] flex-col items-center gap-2 text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+                          className="group flex w-[80px] flex-col items-center gap-2.5 text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
                           initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.22 + i * 0.07 }}
                         >
                           <div className="transition-transform duration-200 group-hover:-translate-y-1"><DesktopFolderIcon /></div>
@@ -326,7 +315,7 @@ const App = () => {
         </section>
 
         {/* ═══════ STRATEGIC OUTPUTS ═══════ */}
-        <section id="work" className="bg-[#f5f5f7] px-4 py-24 sm:px-8 sm:py-32 md:px-10" aria-labelledby="work-heading">
+        <section id="work" className="bg-[#f0f0f2] px-4 py-24 sm:px-8 sm:py-32 md:px-10" aria-labelledby="work-heading">
           <div className="mx-auto max-w-[1200px]">
             <SectionWin title="Notes — Strategic Outputs" className="mb-14">
               <div className="px-6 py-8 md:px-10 md:py-10">
@@ -380,18 +369,40 @@ const App = () => {
           </div>
         </section>
 
-        {/* ═══════ TESTIMONIALS — Same consistent styling ═══════ */}
-        <section id="collab" className="bg-[#f5f5f7] px-4 py-24 sm:px-8 sm:py-28 md:px-10" aria-labelledby="collab-heading">
+        {/* ═══════ TESTIMONIALS — clean cards, no Mac window ═══════ */}
+        <section id="collab" className="bg-[#f0f0f2] px-4 py-24 sm:px-8 sm:py-28 md:px-10" aria-labelledby="collab-heading">
           <div className="mx-auto max-w-[1060px]">
-            <SectionWin title="Messages — Collaboration" className="mb-14">
-              <div className="px-6 py-8 md:px-10 md:py-10">
-                <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.3em] text-black/30">Collaboration</p>
-                <h2 id="collab-heading" className="mb-1 text-[clamp(32px,4.5vw,52px)] font-black leading-[1.1] tracking-tight text-black/85">
-                  Words from people<br className="hidden sm:block" /> I've worked alongside.
-                </h2>
-              </div>
-            </SectionWin>
-            <TestimonialGrid testimonials={testimonials} />
+            <div className="mb-14 text-center">
+              <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.3em] text-black/30">Collaboration</p>
+              <h2 id="collab-heading" className="mb-3 text-[clamp(32px,4.5vw,52px)] font-black leading-[1.1] tracking-tight text-black/85">
+                Words from people<br className="hidden sm:block" /> I've worked alongside.
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
+              {testimonials.map((t, i) => (
+                <motion.article
+                  key={t.id}
+                  className={`group flex flex-col gap-5 overflow-hidden rounded-2xl bg-white p-7 transition-transform duration-300 hover:-translate-y-1 md:p-8 ${i % 2 === 1 ? "md:mt-8" : ""}`}
+                  style={{ border: "1px solid rgba(0,0,0,0.06)", boxShadow: "0 4px 20px rgba(0,0,0,0.04)" }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                >
+                  <p className="font-serif text-[17px] italic leading-relaxed text-black/80 md:text-lg">"{t.text}"</p>
+                  <p className="text-[13px] leading-relaxed text-black/45">{t.subtext}</p>
+                  <div className="mt-auto flex items-center gap-3 pt-1">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 text-xs font-semibold text-white">
+                      {t.author.split(" ").map(n => n[0]).join("")}
+                    </div>
+                    <div>
+                      <span className="block text-sm font-semibold text-black/80">{t.author}</span>
+                      <span className="text-[11px] text-black/40">{t.role} · <span className="text-blue-500">{t.company}</span></span>
+                    </div>
+                  </div>
+                </motion.article>
+              ))}
+            </div>
           </div>
         </section>
 
