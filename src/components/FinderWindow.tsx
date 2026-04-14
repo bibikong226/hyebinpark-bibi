@@ -11,11 +11,11 @@ interface FinderWindowProps {
 }
 
 const categoryProjectMap: Record<string, string[]> = {
-  "AI Products": ["nurturly", "jstor"],
-  "B2B Enterprise": ["concord", "jstor"],
-  "Fintech": ["concord"],
-  "Crypto / Web3": ["concord"],
-  "User Research": ["jstor", "nurturly", "openoff", "gm"],
+  "AI / ML": ["nurturly", "jstor"],
+  "Product Design": ["concord", "nurturly", "openoff", "gm"],
+  "Data & Dev Tools": ["concord"],
+  "Fintech & Web3": ["concord"],
+  "UX Research": ["jstor", "nurturly", "openoff", "gm"],
 };
 
 export const FinderWindow = ({ isOpen, onClose, category }: FinderWindowProps) => {

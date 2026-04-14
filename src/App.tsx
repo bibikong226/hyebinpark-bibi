@@ -12,11 +12,11 @@ import logoTiktok from "@/assets/logo-tiktok.png";
 import logoGm from "@/assets/logo-gm.png";
 import logoNaver from "@/assets/logo-naver.png";
 import logoJstor from "@/assets/logo-jstor.png";
-import folderAi from "@/assets/folder-ai.png";
-import folderEnterprise from "@/assets/folder-enterprise.png";
-import folderFintech from "@/assets/folder-fintech.png";
-import folderResearch from "@/assets/folder-research.png";
-import folderCrypto from "@/assets/folder-crypto.png";
+import folderAiMl from "@/assets/folder-ai-ml.png";
+import folderProduct from "@/assets/folder-product.png";
+import folderDevtools from "@/assets/folder-devtools.png";
+import folderUxr from "@/assets/folder-uxr.png";
+import folderFintechWeb3 from "@/assets/folder-fintech-web3.png";
 import { projects } from "@/data/projects";
 
 /* ── Mac Window Shell ── */
@@ -235,11 +235,11 @@ const App = () => {
   ];
 
   const folders = [
-    { icon: folderAi, label: "AI Products" },
-    { icon: folderEnterprise, label: "B2B Enterprise" },
-    { icon: folderFintech, label: "Fintech" },
-    { icon: folderCrypto, label: "Crypto / Web3" },
-    { icon: folderResearch, label: "User Research" },
+    { icon: folderAiMl, label: "AI / ML" },
+    { icon: folderProduct, label: "Product Design" },
+    { icon: folderDevtools, label: "Data & Dev Tools" },
+    { icon: folderFintechWeb3, label: "Fintech & Web3" },
+    { icon: folderUxr, label: "UX Research" },
   ];
 
   return (
@@ -343,16 +343,33 @@ const App = () => {
                         From AI algorithms to crypto workflows, I turn ambiguity into structured, usable products that drive real business impact.
                       </p>
                     </div>
-                    <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-white/[0.06]">
-                      {[
-                        { src: logoLine, alt: "LINE" },
-                        { src: logoTiktok, alt: "TikTok" },
-                        { src: logoGm, alt: "GM" },
-                        { src: logoNaver, alt: "NAVER" },
-                        { src: logoJstor, alt: "JSTOR" },
-                      ].map((logo) => (
-                        <img key={logo.alt} src={logo.src} alt={logo.alt} className="w-6 h-6 rounded-md object-cover opacity-50 hover:opacity-100 transition-opacity" />
-                      ))}
+                  </div>
+                </MacWin>
+
+                {/* Education & Experience Widget */}
+                <MacWin title="Background" delay={0.25}>
+                  <div className="p-5 space-y-4">
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl" aria-hidden="true">🎓</span>
+                      <div>
+                        <p className="text-[15px] font-semibold text-white">MS-HCI @ University of Michigan</p>
+                      </div>
+                    </div>
+                    <div className="space-y-2.5">
+                      <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-white/30">
+                        Experience Designing & Researching For
+                      </p>
+                      <div className="flex flex-wrap items-center gap-2.5">
+                        {[
+                          { src: logoLine, alt: "LINE" },
+                          { src: logoTiktok, alt: "TikTok" },
+                          { src: logoGm, alt: "GM" },
+                          { src: logoNaver, alt: "NAVER" },
+                          { src: logoJstor, alt: "JSTOR" },
+                        ].map((logo) => (
+                          <img key={logo.alt} src={logo.src} alt={logo.alt} className="w-10 h-10 rounded-xl object-cover opacity-70 hover:opacity-100 transition-opacity" />
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </MacWin>
