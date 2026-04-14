@@ -561,7 +561,7 @@ const App = () => {
             Words from people<br className="hidden sm:block" />I've worked alongside.
           </h2>
 
-          <TestimonialCarousel testimonials={testimonials} />
+          <TestimonialGrid testimonials={testimonials} />
         </div>
       </section>
 
