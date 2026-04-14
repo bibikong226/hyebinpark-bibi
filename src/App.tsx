@@ -228,10 +228,10 @@ const App = () => {
               <motion.div
                 className="relative z-20 overflow-hidden rounded-[28px]"
                 style={{
-                  background: "hsl(var(--background) / 0.96)",
+                  background: "rgba(255,255,255,0.92)",
                   backdropFilter: "blur(40px)",
-                  border: "1px solid hsl(var(--foreground) / 0.08)",
-                  boxShadow: "0 24px 70px rgba(0,0,0,.16), 0 6px 18px rgba(0,0,0,.09)",
+                  border: "1px solid rgba(255,255,255,0.3)",
+                  boxShadow: "0 24px 70px rgba(0,0,0,.35), 0 6px 18px rgba(0,0,0,.2)",
                 }}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -297,10 +297,10 @@ const App = () => {
               <motion.div
                 className="relative z-[22] overflow-hidden rounded-[28px] md:-ml-8 md:mt-10 lg:-ml-12 lg:mt-8 xl:-ml-16"
                 style={{
-                  background: "hsl(var(--background) / 0.96)",
+                  background: "rgba(255,255,255,0.92)",
                   backdropFilter: "blur(40px)",
-                  border: "1px solid hsl(var(--foreground) / 0.08)",
-                  boxShadow: "0 24px 70px rgba(0,0,0,.16), 0 6px 18px rgba(0,0,0,.09)",
+                  border: "1px solid rgba(255,255,255,0.3)",
+                  boxShadow: "0 24px 70px rgba(0,0,0,.35), 0 6px 18px rgba(0,0,0,.2)",
                 }}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
