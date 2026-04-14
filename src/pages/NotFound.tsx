@@ -1,5 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { Layout } from "@/components/Layout";
+import { MacWindow } from "@/components/MacWindow";
 
 const NotFound = () => {
   const location = useLocation();
@@ -9,15 +11,22 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-muted">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">404</h1>
-        <p className="mb-4 text-xl text-muted-foreground">Oops! Page not found</p>
-        <a href="/" className="text-primary underline hover:text-primary/90">
-          Return to Home
-        </a>
+    <Layout>
+      <div className="flex min-h-[60vh] items-center justify-center px-4">
+        <MacWindow title="error-404" className="max-w-md w-full">
+          <div className="text-center p-10 space-y-4">
+            <h1 className="text-5xl font-black text-white">404</h1>
+            <p className="text-lg text-white/50">Oops! Page not found</p>
+            <a
+              href="/"
+              className="inline-block px-6 py-2.5 bg-indigo-500 text-white rounded-full hover:bg-indigo-400 transition-colors font-medium text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+            >
+              Return to Home
+            </a>
+          </div>
+        </MacWindow>
       </div>
-    </div>
+    </Layout>
   );
 };
 
