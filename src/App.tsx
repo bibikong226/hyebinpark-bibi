@@ -91,6 +91,7 @@ const DesktopFolderIcon = () => (
 );
 
 const SpotlightSearch = ({
+  isOpen,
   onClose,
 }: {
   isOpen: boolean;
