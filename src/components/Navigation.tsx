@@ -51,9 +51,9 @@ export const Navigation = () => {
   return (
     <header className="sticky top-0 w-full z-50"
       style={{
-        background: "rgba(0,0,0,.55)",
+        background: "rgba(30,64,175,.45)",
         backdropFilter: "blur(30px) saturate(1.8)",
-        borderBottom: "1px solid rgba(255,255,255,.06)",
+        borderBottom: "1px solid rgba(255,255,255,.12)",
       }}>
       <nav className="flex justify-between items-center px-4 sm:px-8 md:px-10 h-10">
         <Link 
