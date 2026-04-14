@@ -19,7 +19,6 @@ import folderUxr from "@/assets/folder-uxr.png";
 import folderFintechWeb3 from "@/assets/folder-fintech-web3.png";
 import { projects } from "@/data/projects";
 
-/* ── Mac Window Shell ── */
 const MacWin = ({
   children,
   title,
@@ -31,41 +30,48 @@ const MacWin = ({
   className?: string;
   delay?: number;
 }) => (
-  <motion.div
-    className={`rounded-xl overflow-hidden ${className}`}
+  <motion.section
+    className={`overflow-hidden rounded-[24px] ${className}`}
     role="region"
-    aria-label={title || "Window"}
+    aria-label={title || "Desktop window"}
     style={{
-      background: "rgba(30,30,40,0.75)",
-      backdropFilter: "blur(40px) saturate(1.6)",
-      border: "1px solid rgba(255,255,255,0.12)",
+      background:
+        "linear-gradient(180deg, hsl(var(--desktop-panel) / 0.94), hsl(var(--desktop-panel-strong) / 0.9))",
+      backdropFilter: "blur(28px) saturate(1.28)",
+      border: "1px solid hsl(var(--desktop-border) / 0.12)",
       boxShadow:
-        "0 20px 60px rgba(0,0,0,.35), 0 4px 16px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,0.06)",
+        "0 24px 64px hsl(var(--desktop-shadow) / 0.46), inset 0 1px 0 hsl(var(--desktop-border) / 0.12)",
     }}
-    initial={{ opacity: 0, y: 18 }}
+    initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
+    transition={{ duration: 0.55, delay, ease: [0.16, 1, 0.3, 1] }}
   >
-    <div className="flex items-center gap-2 px-4 py-2.5 border-b border-white/[0.06]" aria-hidden="true">
+    <div
+      className="flex items-center gap-2 border-b px-4 py-3"
+      style={{ borderColor: "hsl(var(--desktop-border) / 0.08)" }}
+      aria-hidden="true"
+    >
       <div className="flex items-center gap-[7px]">
-        <span className="w-3 h-3 rounded-full bg-[#FF5F57]" />
-        <span className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
-        <span className="w-3 h-3 rounded-full bg-[#28C840]" />
+        <span className="h-3 w-3 rounded-full" style={{ background: "hsl(4 100% 67%)" }} />
+        <span className="h-3 w-3 rounded-full" style={{ background: "hsl(41 100% 59%)" }} />
+        <span className="h-3 w-3 rounded-full" style={{ background: "hsl(135 59% 49%)" }} />
       </div>
-      {title && (
+      {title ? (
         <>
-          <span className="flex-1 text-center text-[11px] font-medium text-white/40 tracking-wide">
+          <span
+            className="flex-1 text-center text-[11px] font-semibold tracking-[0.16em] uppercase"
+            style={{ color: "hsl(var(--desktop-muted))" }}
+          >
             {title}
           </span>
           <div className="w-[52px]" />
         </>
-      )}
+      ) : null}
     </div>
     <div>{children}</div>
-  </motion.div>
+  </motion.section>
 );
 
-/* ── Spotlight Search ── */
 const SpotlightSearch = ({
   isOpen,
   onClose,
@@ -74,12 +80,17 @@ const SpotlightSearch = ({
   onClose: () => void;
 }) => {
   const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    if (!isOpen) setQuery("");
+  }, [isOpen]);
+
   const filteredProjects = query.trim()
     ? projects.filter(
-        (p) =>
-          p.title.toLowerCase().includes(query.toLowerCase()) ||
-          p.description.toLowerCase().includes(query.toLowerCase()) ||
-          p.tags.some((t) => t.toLowerCase().includes(query.toLowerCase()))
+        (project) =>
+          project.title.toLowerCase().includes(query.toLowerCase()) ||
+          project.description.toLowerCase().includes(query.toLowerCase()) ||
+          project.tags.some((tag) => tag.toLowerCase().includes(query.toLowerCase()))
       )
     : projects;
 
@@ -88,76 +99,102 @@ const SpotlightSearch = ({
       {isOpen && (
         <>
           <motion.div
-            className="fixed inset-0 z-[80] bg-black/40 backdrop-blur-sm"
+            className="fixed inset-0 z-[80]"
+            style={{ background: "hsl(var(--desktop-shadow) / 0.66)", backdropFilter: "blur(10px)" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
+            aria-hidden="true"
           />
-          <motion.div
-            className="fixed z-[90] top-[18%] left-1/2 w-[90vw] max-w-[580px] rounded-xl overflow-hidden"
+
+          <motion.section
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="spotlight-title"
+            className="fixed left-1/2 top-6 z-[90] w-[min(92vw,640px)] -translate-x-1/2 overflow-hidden rounded-[24px]"
             style={{
-              background: "rgba(30,30,40,0.92)",
-              backdropFilter: "blur(50px) saturate(1.8)",
-              border: "1px solid rgba(255,255,255,0.15)",
-              boxShadow: "0 30px 80px rgba(0,0,0,.5)",
-              transform: "translateX(-50%)",
+              background:
+                "linear-gradient(180deg, hsl(var(--desktop-panel) / 0.96), hsl(var(--desktop-panel-strong) / 0.95))",
+              backdropFilter: "blur(36px) saturate(1.2)",
+              border: "1px solid hsl(var(--desktop-border) / 0.12)",
+              boxShadow:
+                "0 32px 80px hsl(var(--desktop-shadow) / 0.6), inset 0 1px 0 hsl(var(--desktop-border) / 0.12)",
             }}
-            initial={{ opacity: 0, y: -10, scale: 0.97 }}
+            initial={{ opacity: 0, y: -12, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -10, scale: 0.97 }}
+            exit={{ opacity: 0, y: -10, scale: 0.98 }}
             transition={{ duration: 0.2 }}
           >
-            <div className="flex items-center gap-3 px-5 py-3.5 border-b border-white/[0.08]">
-              <Search size={18} className="text-white/40 flex-shrink-0" aria-hidden="true" />
+            <h2 id="spotlight-title" className="sr-only">
+              Search projects
+            </h2>
+
+            <div
+              className="flex items-center gap-3 border-b px-5 py-4"
+              style={{ borderColor: "hsl(var(--desktop-border) / 0.08)" }}
+            >
+              <Search size={18} style={{ color: "hsl(var(--desktop-muted))" }} aria-hidden="true" />
               <input
                 type="text"
-                placeholder="Search projects..."
+                placeholder="Search projects, skills, or domains"
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                className="flex-1 bg-transparent text-white text-[15px] placeholder:text-white/30 outline-none"
+                onChange={(event) => setQuery(event.target.value)}
+                className="flex-1 bg-transparent text-[15px] outline-none"
+                style={{ color: "hsl(var(--desktop-foreground))" }}
                 autoFocus
                 aria-label="Search projects"
               />
-              <button onClick={onClose} className="text-white/30 hover:text-white/60 focus:outline-none" aria-label="Close search">
+              <button
+                type="button"
+                onClick={onClose}
+                className="rounded-lg p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))]"
+                style={{ color: "hsl(var(--desktop-muted))" }}
+                aria-label="Close search"
+              >
                 <X size={16} />
               </button>
             </div>
-            <div className="max-h-[340px] overflow-y-auto py-2">
+
+            <div className="max-h-[380px] overflow-y-auto py-2">
               {filteredProjects.length > 0 ? (
                 filteredProjects.map((project) => (
                   <Link
                     key={project.id}
                     to={project.externalUrl || `/${project.id}`}
+                    target={project.externalUrl ? "_blank" : undefined}
+                    rel={project.externalUrl ? "noopener noreferrer" : undefined}
                     onClick={onClose}
-                    className="flex items-center gap-3 px-5 py-3 hover:bg-white/5 transition-colors group"
+                    className="flex items-center gap-3 px-5 py-3 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))]"
+                    style={{ color: "hsl(var(--desktop-foreground))" }}
                   >
                     <img
                       src={project.logo}
                       alt=""
-                      className="w-9 h-9 rounded-lg object-cover flex-shrink-0"
+                      className="h-10 w-10 rounded-xl object-cover"
                       style={{ background: project.imageColor }}
                     />
                     <div className="min-w-0 flex-1">
-                      <p className="text-sm font-medium text-white group-hover:text-indigo-400 transition-colors truncate">
-                        {project.title}
+                      <p className="truncate text-sm font-semibold">{project.title}</p>
+                      <p className="truncate text-[12px]" style={{ color: "hsl(var(--desktop-muted))" }}>
+                        {project.description}
                       </p>
-                      <p className="text-[11px] text-white/40 truncate">{project.description}</p>
                     </div>
                   </Link>
                 ))
               ) : (
-                <p className="text-center text-sm text-white/30 py-8">No results found</p>
+                <p className="px-5 py-8 text-center text-sm" style={{ color: "hsl(var(--desktop-muted))" }}>
+                  No results found.
+                </p>
               )}
             </div>
-          </motion.div>
+          </motion.section>
         </>
       )}
     </AnimatePresence>
   );
 };
 
-/* ── Testimonial Grid ── */
 const TestimonialGrid = ({
   testimonials,
 }: {
@@ -170,43 +207,58 @@ const TestimonialGrid = ({
     subtext: string;
   }[];
 }) => (
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-start">
-    {testimonials.map((t, i) => (
-      <motion.div
-        key={t.id}
-        className={`group relative flex flex-col gap-6 rounded-[24px] p-8 md:p-10 transition-transform duration-500 ease-out hover:-translate-y-1.5 ${i % 2 === 1 ? "md:mt-14" : ""}`}
+  <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-2 lg:gap-8">
+    {testimonials.map((testimonial, index) => (
+      <motion.article
+        key={testimonial.id}
+        className={`group relative flex flex-col gap-6 rounded-[24px] p-8 md:p-10 transition-transform duration-500 ease-out hover:-translate-y-1.5 ${index % 2 === 1 ? "md:mt-14" : ""}`}
         style={{
-          background: "rgba(255,255,255,0.05)",
-          backdropFilter: "blur(24px) saturate(1.4)",
-          border: "1px solid rgba(255,255,255,0.1)",
-          boxShadow: "0 20px 48px -12px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,0.08)",
+          background: "hsl(var(--desktop-panel) / 0.72)",
+          backdropFilter: "blur(24px) saturate(1.2)",
+          border: "1px solid hsl(var(--desktop-border) / 0.08)",
+          boxShadow:
+            "0 20px 48px -12px hsl(var(--desktop-shadow) / 0.4), inset 0 1px 0 hsl(var(--desktop-border) / 0.08)",
         }}
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ delay: i * 0.1, duration: 0.5 }}
+        transition={{ delay: index * 0.1, duration: 0.5 }}
       >
-        <div className="flex gap-1.5 opacity-30" aria-hidden="true">
-          <div className="w-2 h-2 rounded-full bg-white/40" />
-          <div className="w-2 h-2 rounded-full bg-white/40" />
-          <div className="w-2 h-2 rounded-full bg-white/40" />
+        <div className="flex gap-1.5 opacity-40" aria-hidden="true">
+          <div className="h-2 w-2 rounded-full" style={{ background: "hsl(var(--desktop-border) / 0.45)" }} />
+          <div className="h-2 w-2 rounded-full" style={{ background: "hsl(var(--desktop-border) / 0.45)" }} />
+          <div className="h-2 w-2 rounded-full" style={{ background: "hsl(var(--desktop-border) / 0.45)" }} />
         </div>
-        <p className="font-serif text-lg md:text-xl italic leading-relaxed text-white/85">
-          "{t.text}"
+        <p className="font-serif text-lg italic leading-relaxed md:text-xl" style={{ color: "hsl(var(--desktop-foreground) / 0.94)" }}>
+          “{testimonial.text}”
         </p>
-        <p className="text-sm leading-relaxed text-white/50">{t.subtext}</p>
+        <p className="text-sm leading-relaxed" style={{ color: "hsl(var(--desktop-muted))" }}>
+          {testimonial.subtext}
+        </p>
         <div className="mt-auto flex items-center gap-3 pt-2">
-          <div className="w-10 h-10 rounded-full bg-white/10 border border-white/15 flex items-center justify-center text-sm font-semibold text-white/60">
-            {t.author.split(" ").map((n) => n[0]).join("")}
+          <div
+            className="flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold"
+            style={{
+              color: "hsl(var(--desktop-foreground) / 0.78)",
+              background: "hsl(var(--desktop-border) / 0.08)",
+              border: "1px solid hsl(var(--desktop-border) / 0.12)",
+            }}
+          >
+            {testimonial.author
+              .split(" ")
+              .map((name) => name[0])
+              .join("")}
           </div>
           <div>
-            <span className="text-sm font-semibold text-white block">{t.author}</span>
-            <span className="text-xs text-white/50">
-              {t.role} · <span className="text-indigo-400">{t.company}</span>
+            <span className="block text-sm font-semibold" style={{ color: "hsl(var(--desktop-foreground))" }}>
+              {testimonial.author}
+            </span>
+            <span className="text-xs" style={{ color: "hsl(var(--desktop-muted))" }}>
+              {testimonial.role} · <span style={{ color: "hsl(var(--desktop-accent))" }}>{testimonial.company}</span>
             </span>
           </div>
         </div>
-      </motion.div>
+      </motion.article>
     ))}
   </div>
 );
@@ -215,23 +267,55 @@ const App = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [finderCategory, setFinderCategory] = useState<string | null>(null);
 
-  // ⌘K shortcut
   useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
-        e.preventDefault();
-        setSearchOpen((prev) => !prev);
+    const handler = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        setSearchOpen((previous) => !previous);
       }
     };
+
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
   }, []);
 
   const testimonials = [
-    { id: "t1", author: "David Rashid", role: "CEO", company: "Concord Systems", text: "Hyebin quickly grasped the business model and technical constraints behind our platform.", subtext: "She didn't just design screens. She transformed backend complexity into seamless, user-first flows that contributed to our business growth." },
-    { id: "t2", author: "Elisa Vargas", role: "Product Designer", company: "JSTOR", text: "Hyebin has a rare ability to connect deep research insights with thoughtful design decisions that drive real user impact.", subtext: "Her user-centered thinking and clarity of intent made a lasting impression on our team." },
-    { id: "t3", author: "Jae Hoon Shim", role: "Product Strategy Manager", company: "LINE+", text: "Hyebin is one of the most dedicated and driven collaborators I've worked with.", subtext: "She approaches every project with curiosity, a sharp eye for detail, and a user-first mindset. Her passion made our time together impactful." },
-    { id: "t4", author: "Jong Hee Hong", role: "Head of Global Communications", company: "TikTok Korea", text: "What always stands out with Hyebin is how she connects her creativity with real curiosity. She's always asking the right questions.", subtext: "Her energy makes collaboration feel easy, and she's excellent at communicating her ideas." },
+    {
+      id: "t1",
+      author: "David Rashid",
+      role: "CEO",
+      company: "Concord Systems",
+      text: "Hyebin quickly grasped the business model and technical constraints behind our platform.",
+      subtext:
+        "She didn't just design screens. She transformed backend complexity into seamless, user-first flows that contributed to our business growth.",
+    },
+    {
+      id: "t2",
+      author: "Elisa Vargas",
+      role: "Product Designer",
+      company: "JSTOR",
+      text: "Hyebin has a rare ability to connect deep research insights with thoughtful design decisions that drive real user impact.",
+      subtext:
+        "Her user-centered thinking and clarity of intent made a lasting impression on our team.",
+    },
+    {
+      id: "t3",
+      author: "Jae Hoon Shim",
+      role: "Product Strategy Manager",
+      company: "LINE+",
+      text: "Hyebin is one of the most dedicated and driven collaborators I've worked with.",
+      subtext:
+        "She approaches every project with curiosity, a sharp eye for detail, and a user-first mindset. Her passion made our time together impactful.",
+    },
+    {
+      id: "t4",
+      author: "Jong Hee Hong",
+      role: "Head of Global Communications",
+      company: "TikTok Korea",
+      text: "What always stands out with Hyebin is how she connects her creativity with real curiosity. She's always asking the right questions.",
+      subtext:
+        "Her energy makes collaboration feel easy, and she's excellent at communicating her ideas.",
+    },
   ];
 
   const folders = [
@@ -243,414 +327,536 @@ const App = () => {
   ];
 
   return (
-    <div className="overflow-x-hidden font-sans" style={{ background: "#0c0e1a", color: "rgba(255,255,255,0.9)" }}>
+    <div className="overflow-x-hidden font-sans" style={{ background: "hsl(var(--desktop-wallpaper-end))", color: "hsl(var(--desktop-foreground))" }}>
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:rounded-md focus:text-sm focus:font-medium"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3 focus:z-[100] focus:rounded-md focus:px-4 focus:py-2 focus:text-sm focus:font-medium"
+        style={{ background: "hsl(var(--work-surface-1))", color: "hsl(var(--work-foreground))" }}
       >
         Skip to main content
       </a>
+
       <Navigation />
-
-      {/* Spotlight Search */}
       <SpotlightSearch isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
-
-      {/* Finder Window */}
-      <FinderWindow
-        isOpen={!!finderCategory}
-        onClose={() => setFinderCategory(null)}
-        category={finderCategory || ""}
-      />
+      <FinderWindow isOpen={!!finderCategory} onClose={() => setFinderCategory(null)} category={finderCategory || ""} />
 
       <main id="main-content" role="main">
-      {/* ═══ macOS DESKTOP HERO ═══ */}
-      <section
-        className="relative flex min-h-[860px] w-full flex-col overflow-hidden lg:min-h-screen"
-        style={{
-          background: `
-            radial-gradient(ellipse 80% 60% at 20% 80%, rgba(30,64,175,.2) 0%, transparent 50%),
-            radial-gradient(ellipse 70% 50% at 80% 20%, rgba(88,28,135,.15) 0%, transparent 50%),
-            radial-gradient(ellipse 50% 40% at 50% 60%, rgba(15,23,42,.3) 0%, transparent 45%),
-            linear-gradient(160deg, #0c0e1a 0%, #111827 30%, #1a1033 55%, #0d1a2f 80%, #080b14 100%)
-          `,
-        }}
-        aria-label="Hero section"
-      >
-        {/* Big background name */}
-        <div className="absolute inset-x-0 top-[22%] z-[1] flex items-center justify-center overflow-hidden pointer-events-none" aria-hidden="true">
-          <span
-            className="font-sans font-black text-[clamp(100px,18vw,280px)] tracking-[0.12em] uppercase leading-none whitespace-nowrap select-none"
-            style={{ color: "rgba(255,255,255,0.03)" }}
-          >
-            HYEBIN PARK
-          </span>
-        </div>
+        <section
+          className="relative flex min-h-[920px] w-full flex-col overflow-hidden lg:min-h-screen"
+          style={{
+            background: `
+              radial-gradient(ellipse 72% 58% at 15% 84%, hsl(var(--desktop-accent) / 0.22) 0%, transparent 52%),
+              radial-gradient(ellipse 56% 42% at 82% 16%, hsl(var(--puzzle-piece-2) / 0.14) 0%, transparent 48%),
+              radial-gradient(ellipse 40% 30% at 48% 58%, hsl(var(--desktop-border) / 0.08) 0%, transparent 55%),
+              linear-gradient(155deg, hsl(var(--desktop-wallpaper-start)) 0%, hsl(var(--desktop-wallpaper-mid)) 48%, hsl(var(--desktop-wallpaper-end)) 100%)
+            `,
+          }}
+          aria-label="Desktop hero"
+        >
+          <div className="relative z-10 flex-1 px-4 pb-10 pt-6 sm:px-6 md:px-8 lg:px-12 lg:pb-28">
+            <div className="mx-auto max-w-[1280px]">
+              <div className="mb-6 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+                <div
+                  className="inline-flex w-fit items-center gap-3 rounded-full px-4 py-2 text-[12px] font-semibold tracking-[0.14em] uppercase"
+                  style={{
+                    color: "hsl(var(--desktop-muted))",
+                    background: "hsl(var(--desktop-search) / 0.7)",
+                    border: "1px solid hsl(var(--desktop-border) / 0.08)",
+                    boxShadow: "0 12px 32px hsl(var(--desktop-shadow) / 0.24)",
+                  }}
+                >
+                  <span className="h-2.5 w-2.5 rounded-full" style={{ background: "hsl(var(--desktop-success))" }} aria-hidden="true" />
+                  Portfolio.desktop
+                  <span className="hidden text-[11px] normal-case tracking-normal sm:inline" style={{ color: "hsl(var(--desktop-subtle))" }}>
+                    Human-centered systems, AI products, and research-driven product design
+                  </span>
+                </div>
 
-        {/* Desktop content */}
-        <div className="relative flex-1 px-4 pb-28 pt-6 sm:px-6 md:px-8 lg:px-12 lg:pb-32 z-10">
-          <div className="mx-auto max-w-[1200px]">
-
-            {/* Spotlight search bar */}
-            <motion.button
-              onClick={() => setSearchOpen(true)}
-              className="mx-auto mb-8 flex items-center gap-2 px-5 py-2 rounded-lg text-[13px] text-white/30 hover:text-white/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
-              style={{
-                background: "rgba(255,255,255,0.04)",
-                border: "1px solid rgba(255,255,255,0.08)",
-              }}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              aria-label="Open search"
-            >
-              <Search size={14} aria-hidden="true" />
-              <span>Search projects...</span>
-              <span className="ml-6 text-[11px] text-white/20 border border-white/10 rounded px-1.5 py-0.5" aria-hidden="true">⌘K</span>
-            </motion.button>
-
-            {/* Main desktop grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6">
-
-              {/* Left column: Bio + Puzzle */}
-              <div className="lg:col-span-4 space-y-5">
-                {/* Bio Window */}
-                <MacWin title="Hyebin Park" delay={0.15}>
-                  <div className="p-5 space-y-4">
-                    <div className="flex items-center gap-4">
-                      <img
-                        src={profilePhoto}
-                        alt="Hyebin Park"
-                        className="w-14 h-14 rounded-2xl object-cover object-[center_20%] border border-white/10"
-                      />
-                      <div>
-                        <h2 className="text-base font-bold text-white leading-tight">Hyebin Park</h2>
-                        <p className="text-[12px] text-white/50 mt-0.5">Strategic AI Product Designer</p>
-                        <div className="flex items-center gap-1.5 mt-1">
-                          <span className="w-2 h-2 rounded-full bg-green-400" aria-hidden="true" />
-                          <span className="text-[10px] text-green-300 font-medium">Available for work</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="space-y-1.5">
-                      <h1 className="leading-[1.1]">
-                        <span className="text-white/50 text-sm font-normal">Turning </span>
-                        <span className="font-serif text-2xl md:text-3xl font-normal italic text-indigo-400">complexity</span>
-                        <br />
-                        <span className="text-white/30 text-xs font-light">into </span>
-                        <span className="font-serif text-2xl md:text-3xl font-normal italic text-white">clarity.</span>
-                      </h1>
-                      <p className="text-[12px] text-white/40 leading-[1.7]">
-                        From AI algorithms to crypto workflows, I turn ambiguity into structured, usable products that drive real business impact.
-                      </p>
-                    </div>
-                  </div>
-                </MacWin>
-
-                {/* Education & Experience Widget */}
-                <MacWin title="Background" delay={0.25}>
-                  <div className="p-5 space-y-4">
-                    <div className="flex items-center gap-3">
-                      <span className="text-2xl" aria-hidden="true">🎓</span>
-                      <div>
-                        <p className="text-[15px] font-semibold text-white">MS-HCI @ University of Michigan</p>
-                      </div>
-                    </div>
-                    <div className="space-y-2.5">
-                      <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-white/30">
-                        Experience Designing & Researching For
-                      </p>
-                      <div className="flex flex-wrap items-center gap-2.5">
-                        {[
-                          { src: logoLine, alt: "LINE" },
-                          { src: logoTiktok, alt: "TikTok" },
-                          { src: logoGm, alt: "GM" },
-                          { src: logoNaver, alt: "NAVER" },
-                          { src: logoJstor, alt: "JSTOR" },
-                        ].map((logo) => (
-                          <img key={logo.alt} src={logo.src} alt={logo.alt} className="w-10 h-10 rounded-xl object-cover opacity-70 hover:opacity-100 transition-opacity" />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </MacWin>
-
-                {/* Puzzle Widget */}
-                <MacWin title="Design Thinking" delay={0.35}>
-                  <div className="p-4 flex items-center justify-center min-h-[180px]">
-                    <PuzzleAnimation />
-                  </div>
-                </MacWin>
+                <motion.button
+                  type="button"
+                  onClick={() => setSearchOpen(true)}
+                  className="flex w-full items-center gap-3 rounded-full px-4 py-3 text-left lg:max-w-[360px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))]"
+                  style={{
+                    color: "hsl(var(--desktop-foreground))",
+                    background: "hsl(var(--desktop-search) / 0.86)",
+                    border: "1px solid hsl(var(--desktop-border) / 0.08)",
+                    boxShadow: "0 14px 36px hsl(var(--desktop-shadow) / 0.24)",
+                  }}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.08 }}
+                  aria-label="Open project search"
+                  aria-haspopup="dialog"
+                >
+                  <Search size={16} aria-hidden="true" />
+                  <span className="flex-1 text-[14px] font-medium" style={{ color: "hsl(var(--desktop-muted))" }}>
+                    Search projects, domains, and skills
+                  </span>
+                  <span
+                    className="rounded-full px-2.5 py-1 text-[11px] font-semibold"
+                    style={{
+                      color: "hsl(var(--desktop-foreground))",
+                      background: "hsl(var(--desktop-border) / 0.08)",
+                      border: "1px solid hsl(var(--desktop-border) / 0.08)",
+                    }}
+                    aria-hidden="true"
+                  >
+                    ⌘K
+                  </span>
+                </motion.button>
               </div>
 
-              {/* Right column: Folders grid */}
-              <div className="lg:col-span-8 space-y-5">
-                {/* Folders */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.3, duration: 0.6 }}
-                >
-                  <p className="text-[10px] font-semibold tracking-[0.25em] uppercase text-white/25 mb-5 pl-1" aria-hidden="true">
-                    Favorites
-                  </p>
-                  <div className="grid grid-cols-3 sm:grid-cols-5 gap-y-7 gap-x-5 justify-items-center">
-                    {folders.map((f, i) => (
-                      <motion.button
-                        key={f.label}
-                        onClick={() => setFinderCategory(f.label)}
-                        className="flex flex-col items-center gap-2.5 group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 rounded-lg p-2"
-                        initial={{ opacity: 0, y: 14 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4 + i * 0.08 }}
-                        aria-label={`Open ${f.label} folder`}
-                      >
-                        <div className="w-[72px] h-[72px] sm:w-[80px] sm:h-[80px] group-hover:scale-110 transition-transform duration-200 drop-shadow-lg">
-                          <img src={f.icon} alt="" className="w-full h-full object-contain" />
-                        </div>
-                        <span className="text-[11px] font-medium text-white/60 text-center leading-tight group-hover:text-white/90 transition-colors max-w-[90px] drop-shadow-sm">
-                          {f.label}
-                        </span>
-                      </motion.button>
-                    ))}
-                  </div>
-                </motion.div>
+              <div className="relative lg:min-h-[720px]">
+                <div className="flex flex-col gap-5 lg:block">
+                  <div className="lg:absolute lg:left-0 lg:top-0 lg:w-[min(100%,640px)]">
+                    <MacWin title="Intro" delay={0.12}>
+                      <div className="grid gap-6 p-6 md:grid-cols-[104px,minmax(0,1fr)] md:p-7">
+                        <img
+                          src={profilePhoto}
+                          alt="Hyebin Park"
+                          className="h-24 w-24 rounded-[28px] object-cover object-[center_20%]"
+                          style={{
+                            border: "1px solid hsl(var(--desktop-border) / 0.12)",
+                            boxShadow: "0 16px 34px hsl(var(--desktop-shadow) / 0.25)",
+                          }}
+                        />
 
-                {/* Quick stats / tagline widget */}
-                <MacWin title="Portfolio Overview" delay={0.5}>
-                  <div className="p-5 grid grid-cols-3 gap-4">
-                    <div className="text-center">
-                      <p className="text-2xl font-bold text-indigo-400">5+</p>
-                      <p className="text-[11px] text-white/40 mt-1">Projects</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-2xl font-bold text-indigo-400">3+</p>
-                      <p className="text-[11px] text-white/40 mt-1">Years Experience</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-2xl font-bold text-indigo-400">$3.5M</p>
-                      <p className="text-[11px] text-white/40 mt-1">Product Impact</p>
-                    </div>
+                        <div>
+                          <p className="text-[12px] font-semibold tracking-[0.18em] uppercase" style={{ color: "hsl(var(--desktop-muted))" }}>
+                            Strategic AI Product Designer
+                          </p>
+                          <h1 className="mt-3 text-[clamp(2.3rem,5vw,4.6rem)] font-black leading-[0.94] tracking-[-0.04em]" style={{ color: "hsl(var(--desktop-foreground))" }}>
+                            Hyebin Park
+                          </h1>
+                          <p className="mt-4 max-w-[34ch] text-[15px] leading-7" style={{ color: "hsl(var(--desktop-muted))" }}>
+                            I design technically complex products that feel structured, human, and easy to trust — from AI systems to research-heavy workflows and fintech platforms.
+                          </p>
+                          <div className="mt-5 inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[12px] font-semibold"
+                            style={{
+                              color: "hsl(var(--desktop-foreground))",
+                              background: "hsl(var(--desktop-border) / 0.08)",
+                              border: "1px solid hsl(var(--desktop-border) / 0.08)",
+                            }}>
+                            <span className="h-2 w-2 rounded-full" style={{ background: "hsl(var(--desktop-success))" }} aria-hidden="true" />
+                            Available for product design, UX research, and AI product work
+                          </div>
+                        </div>
+                      </div>
+
+                      <div
+                        className="grid gap-3 border-t p-6 pt-5 sm:grid-cols-3 md:px-7"
+                        style={{ borderColor: "hsl(var(--desktop-border) / 0.08)" }}
+                      >
+                        {[
+                          { label: "Projects", value: "5+" },
+                          { label: "Industries", value: "AI · Fintech · Research" },
+                          { label: "Impact", value: "$3.5M startup growth" },
+                        ].map((item) => (
+                          <div
+                            key={item.label}
+                            className="rounded-2xl px-4 py-3"
+                            style={{
+                              background: "hsl(var(--desktop-search) / 0.52)",
+                              border: "1px solid hsl(var(--desktop-border) / 0.06)",
+                            }}
+                          >
+                            <p className="text-[10px] font-semibold tracking-[0.16em] uppercase" style={{ color: "hsl(var(--desktop-subtle))" }}>
+                              {item.label}
+                            </p>
+                            <p className="mt-2 text-sm font-semibold leading-6" style={{ color: "hsl(var(--desktop-foreground))" }}>
+                              {item.value}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </MacWin>
                   </div>
-                </MacWin>
+
+                  <aside className="w-full lg:absolute lg:right-0 lg:top-6 lg:w-[220px]" aria-labelledby="folders-heading">
+                    <div className="mb-4 px-1">
+                      <p id="folders-heading" className="text-[11px] font-semibold tracking-[0.22em] uppercase" style={{ color: "hsl(var(--desktop-muted))" }}>
+                        Project folders
+                      </p>
+                      <p className="mt-1 text-[13px] leading-6" style={{ color: "hsl(var(--desktop-subtle))" }}>
+                        Open a folder to browse related case studies.
+                      </p>
+                    </div>
+                    <div className="grid grid-cols-2 gap-x-4 gap-y-6 lg:grid-cols-2">
+                      {folders.map((folder, index) => (
+                        <motion.button
+                          key={folder.label}
+                          type="button"
+                          onClick={() => setFinderCategory(folder.label)}
+                          className="group flex flex-col items-center gap-2 text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))]"
+                          initial={{ opacity: 0, y: 14 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.22 + index * 0.07 }}
+                          aria-label={`Open ${folder.label} folder`}
+                          aria-haspopup="dialog"
+                        >
+                          <div
+                            className="rounded-[22px] p-3 transition-transform duration-200 group-hover:-translate-y-1 group-hover:scale-[1.02]"
+                            style={{
+                              background:
+                                "linear-gradient(180deg, hsl(var(--desktop-search) / 0.84), hsl(var(--desktop-panel) / 0.7))",
+                              border: "1px solid hsl(var(--desktop-border) / 0.08)",
+                              boxShadow: "0 14px 30px hsl(var(--desktop-shadow) / 0.3)",
+                            }}
+                          >
+                            <img src={folder.icon} alt="" className="h-[74px] w-[74px] object-contain" />
+                          </div>
+                          <span
+                            className="rounded-xl px-2.5 py-1 text-[11px] font-semibold leading-tight"
+                            style={{
+                              color: "hsl(var(--desktop-foreground))",
+                              background: "hsl(var(--desktop-search) / 0.9)",
+                              border: "1px solid hsl(var(--desktop-border) / 0.08)",
+                            }}
+                          >
+                            {folder.label}
+                          </span>
+                        </motion.button>
+                      ))}
+                    </div>
+                  </aside>
+
+                  <div className="lg:absolute lg:right-[248px] lg:top-[96px] lg:w-[min(100%,340px)]">
+                    <MacWin title="Background" delay={0.2}>
+                      <div className="space-y-5 p-6">
+                        <div>
+                          <p className="text-[11px] font-semibold tracking-[0.18em] uppercase" style={{ color: "hsl(var(--desktop-subtle))" }}>
+                            Education
+                          </p>
+                          <p className="mt-2 text-lg font-semibold leading-7" style={{ color: "hsl(var(--desktop-foreground))" }}>
+                            MS-HCI @ University of Michigan
+                          </p>
+                        </div>
+
+                        <div>
+                          <p className="text-[11px] font-semibold tracking-[0.18em] uppercase" style={{ color: "hsl(var(--desktop-subtle))" }}>
+                            Experience
+                          </p>
+                          <div className="mt-3 flex flex-wrap items-center gap-3">
+                            {[
+                              { src: logoLine, alt: "LINE" },
+                              { src: logoTiktok, alt: "TikTok" },
+                              { src: logoGm, alt: "GM" },
+                              { src: logoNaver, alt: "NAVER" },
+                              { src: logoJstor, alt: "JSTOR" },
+                            ].map((logo) => (
+                              <div
+                                key={logo.alt}
+                                className="flex h-12 w-12 items-center justify-center rounded-2xl p-2"
+                                style={{
+                                  background: "hsl(var(--desktop-search) / 0.62)",
+                                  border: "1px solid hsl(var(--desktop-border) / 0.08)",
+                                }}
+                              >
+                                <img src={logo.src} alt={logo.alt} className="max-h-full max-w-full object-contain opacity-90" />
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </MacWin>
+                  </div>
+
+                  <div className="lg:absolute lg:left-[8%] lg:top-[364px] lg:w-[min(100%,520px)]">
+                    <MacWin title="How I Work" delay={0.28}>
+                      <div className="grid items-center gap-6 p-5 md:grid-cols-[minmax(0,1fr)_280px] md:p-6">
+                        <div>
+                          <p className="text-[11px] font-semibold tracking-[0.18em] uppercase" style={{ color: "hsl(var(--desktop-subtle))" }}>
+                            Research → Structure → Outcome
+                          </p>
+                          <h2 className="mt-3 text-[clamp(1.6rem,3vw,2.25rem)] font-black leading-[1.02] tracking-[-0.03em]" style={{ color: "hsl(var(--desktop-foreground))" }}>
+                            I turn ambiguity into clear product decisions.
+                          </h2>
+                          <p className="mt-4 text-[14px] leading-7" style={{ color: "hsl(var(--desktop-muted))" }}>
+                            My process blends UX research, systems thinking, and AI product strategy so the final experience feels intuitive, not overwhelming.
+                          </p>
+                        </div>
+                        <div className="flex justify-center lg:justify-end">
+                          <PuzzleAnimation />
+                        </div>
+                      </div>
+                    </MacWin>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Dock */}
-        <div
-          className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-0 px-3 py-2 rounded-[20px] z-30"
-          role="navigation"
-          aria-label="Quick navigation dock"
-          style={{
-            background: "rgba(255,255,255,0.08)",
-            backdropFilter: "blur(28px) saturate(1.8)",
-            border: "1px solid rgba(255,255,255,.15)",
-            boxShadow: "0 8px 40px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.08)",
-          }}
-        >
-          {(() => {
-            const mainItems = [
-              { icon: "📂", label: "Work", bg: "linear-gradient(135deg, #7B6EF6, #5B4CD8)", action: () => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" }) },
-              { icon: "🔍", label: "Search", bg: "linear-gradient(135deg, #F472B6, #DB2777)", action: () => setSearchOpen(true) },
-              { icon: "📋", label: "About", bg: "linear-gradient(135deg, #6EE7B7, #10B981)", action: () => (window.location.href = "/about") },
-              { icon: "💬", label: "CV", bg: "linear-gradient(135deg, #FBBF24, #F59E0B)", action: () => window.open("https://drive.google.com/file/d/1l2V4pQCjAZhIhLyRmVh3m2QTw87yLI6P/view?usp=sharing", "_blank") },
-            ];
-            const contactItem = {
-              icon: "✉️",
-              label: "Contact",
-              bg: "linear-gradient(135deg, #F87171, #DC2626)",
-              action: () => (window.location.href = "mailto:hyebinp@umich.edu"),
-            };
-            return (
-              <>
-                <div className="flex items-center gap-2 px-1">
-                  {mainItems.map((item, i) => (
-                    <button
-                      key={i}
-                      onClick={item.action}
-                      className="flex flex-col items-center gap-0.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 rounded-lg"
-                      aria-label={item.label}
-                    >
-                      <div
-                        className="w-10 h-10 md:w-11 md:h-11 rounded-[11px] flex items-center justify-center text-lg shadow-md group-hover:scale-110 group-hover:-translate-y-1 group-hover:shadow-lg transition-all duration-200"
-                        style={{ background: item.bg }}
-                        aria-hidden="true"
-                      >
-                        {item.icon}
-                      </div>
-                      <span className="text-[8px] font-medium text-white/50">{item.label}</span>
-                    </button>
-                  ))}
-                </div>
-                <div className="w-px h-8 bg-white/15 mx-1.5" aria-hidden="true" />
-                <div className="px-1">
-                  <button
-                    onClick={contactItem.action}
-                    className="flex flex-col items-center gap-0.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 rounded-lg"
-                    aria-label="Contact"
-                  >
-                    <div
-                      className="w-10 h-10 md:w-11 md:h-11 rounded-[11px] flex items-center justify-center text-lg shadow-md group-hover:scale-110 group-hover:-translate-y-1 group-hover:shadow-lg transition-all duration-200"
-                      style={{ background: contactItem.bg }}
-                      aria-hidden="true"
-                    >
-                      {contactItem.icon}
-                    </div>
-                    <span className="text-[8px] font-medium text-white/50">{contactItem.label}</span>
-                  </button>
-                </div>
-              </>
-            );
-          })()}
-        </div>
-      </section>
+          <div className="relative z-20 px-4 pb-6 sm:px-6 md:px-8 lg:absolute lg:bottom-6 lg:left-1/2 lg:-translate-x-1/2 lg:px-0 lg:pb-0">
+            <div
+              className="mx-auto flex w-fit items-center gap-0 rounded-[22px] px-3 py-2"
+              role="navigation"
+              aria-label="Quick navigation dock"
+              style={{
+                background: "hsl(var(--desktop-search) / 0.88)",
+                backdropFilter: "blur(28px) saturate(1.3)",
+                border: "1px solid hsl(var(--desktop-border) / 0.12)",
+                boxShadow: "0 16px 40px hsl(var(--desktop-shadow) / 0.3)",
+              }}
+            >
+              {(() => {
+                const mainItems = [
+                  {
+                    icon: "📂",
+                    label: "Work",
+                    bg: "linear-gradient(135deg, hsl(250 80% 68%), hsl(243 70% 56%))",
+                    action: () => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" }),
+                  },
+                  {
+                    icon: "🔍",
+                    label: "Search",
+                    bg: "linear-gradient(135deg, hsl(330 82% 72%), hsl(332 74% 48%))",
+                    action: () => setSearchOpen(true),
+                  },
+                  {
+                    icon: "📋",
+                    label: "About",
+                    bg: "linear-gradient(135deg, hsl(158 72% 70%), hsl(160 82% 37%))",
+                    action: () => (window.location.href = "/about"),
+                  },
+                  {
+                    icon: "📄",
+                    label: "CV",
+                    bg: "linear-gradient(135deg, hsl(45 96% 68%), hsl(37 92% 50%))",
+                    action: () =>
+                      window.open(
+                        "https://drive.google.com/file/d/1l2V4pQCjAZhIhLyRmVh3m2QTw87yLI6P/view?usp=sharing",
+                        "_blank"
+                      ),
+                  },
+                ];
 
-      {/* ═══ SELECTED WORK ═══ */}
-      <section
-        id="work"
-        className="py-28 sm:py-36 px-4 sm:px-8 md:px-10"
-        style={{
-          background: "linear-gradient(180deg, #f8f9fc 0%, #f1f3f8 50%, #eef0f5 100%)",
-          borderTop: "1px solid rgba(0,0,0,.06)",
-        }}
-        aria-labelledby="work-heading"
-      >
-        <div className="max-w-[1200px] mx-auto">
-          <p className="text-[11px] font-medium tracking-[0.3em] uppercase text-gray-400 mb-4">
-            Selected Work
-          </p>
-          <h2 id="work-heading" className="text-[clamp(42px,6vw,80px)] font-black leading-[1.05] tracking-tight mb-1 text-gray-900">
-            Strategic
-          </h2>
-          <h2 className="font-serif text-[clamp(42px,6vw,80px)] italic font-normal leading-[1.05] tracking-tight text-gray-300 mb-20">
-            Outputs.
-          </h2>
+                const contactItem = {
+                  icon: "✉️",
+                  label: "Contact",
+                  bg: "linear-gradient(135deg, hsl(0 92% 73%), hsl(0 72% 48%))",
+                  action: () => (window.location.href = "mailto:hyebinp@umich.edu"),
+                };
 
-          <div className="grid md:grid-cols-2 gap-x-10 gap-y-16" style={{ gridAutoRows: "1fr" }}>
-            {projects.map((project, idx) => {
-              const card = (
-                <motion.div
-                  className="rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-[6px] group flex flex-col h-full"
-                  style={{
-                    boxShadow: "0 12px 40px rgba(0,0,0,.1), 0 4px 12px rgba(0,0,0,.06)",
-                  }}
-                  initial={{ opacity: 0, y: 18 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.08 }}
-                  key={project.id}
-                >
-                  <div className="w-full aspect-[16/9] relative overflow-hidden" style={{ background: project.imageColor }}>
-                    <div className="absolute left-4 md:left-6 top-4 md:top-5 z-10">
-                      <img
-                        src={project.logo}
-                        alt={`${project.title} logo`}
-                        loading="lazy"
-                        className={`w-auto object-contain ${
-                          project.id === "gm" ? "h-8 md:h-10" : project.id === "nurturly" ? "h-5 md:h-6" : "h-6 md:h-9"
-                        }`}
-                      />
-                    </div>
-                    <div className="absolute inset-0 flex items-end justify-center px-4 pt-10 md:pt-12">
-                      <img
-                        src={project.mockup}
-                        alt={`${project.title} mockup`}
-                        loading="lazy"
-                        className={`object-contain max-w-full transition-transform duration-700 group-hover:scale-[1.03] ${
-                          project.id === "concord" ? "max-h-[95%]" : "max-h-[88%]"
-                        }`}
-                      />
-                    </div>
-                    <div className="absolute bottom-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="px-4 py-1.5 rounded-full bg-white/90 text-[11px] font-semibold tracking-wider uppercase text-gray-800 shadow-md">
-                        VIEW
-                      </div>
-                    </div>
-                  </div>
-                  <div className="p-6 md:p-7 flex-1 flex flex-col bg-white">
-                    <h3 className="font-serif text-[22px] md:text-[26px] font-semibold leading-[1.2] mb-2 text-gray-900">
-                      {project.title}
-                    </h3>
-                    <p className="text-[13.5px] md:text-[14.5px] leading-[1.65] text-gray-500 mb-4 max-w-[440px]">
-                      {project.description}
-                    </p>
-                    <div className="flex flex-wrap gap-[5px] mb-4">
-                      {project.tags.map((tag, ti) => (
-                        <span
-                          key={ti}
-                          className="inline-block px-2.5 py-[3px] rounded-full text-[10.5px] font-medium border border-gray-200 bg-gray-50 text-gray-500"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="flex flex-wrap gap-[6px] mt-auto">
-                      {project.highlights.map((hl, hi) => (
-                        <div key={hi} className="relative overflow-hidden rounded-[7px] px-3 py-[6px] cursor-default">
-                          <div className="absolute inset-0 bg-gray-100" />
-                          <div
-                            className="absolute inset-0 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-[450ms] ease-out z-0"
-                            style={{ background: project.accentColor }}
-                          />
-                          <span className="relative z-10 text-xs font-medium transition-colors duration-[350ms] group-hover:text-white text-gray-600">
-                            {hl}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              );
-
-              if (project.externalUrl) {
                 return (
-                  <a key={project.id} href={project.externalUrl} target="_blank" rel="noopener noreferrer" className="block">
-                    {card}
-                  </a>
+                  <>
+                    <div className="flex items-center gap-2 px-1">
+                      {mainItems.map((item) => (
+                        <button
+                          key={item.label}
+                          type="button"
+                          onClick={item.action}
+                          className="flex flex-col items-center gap-1 rounded-xl px-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))]"
+                          aria-label={item.label}
+                        >
+                          <div
+                            className="flex h-11 w-11 items-center justify-center rounded-[13px] text-lg shadow-md transition-all duration-200 group-hover:scale-110 md:h-12 md:w-12"
+                            style={{ background: item.bg }}
+                            aria-hidden="true"
+                          >
+                            {item.icon}
+                          </div>
+                          <span className="text-[9px] font-medium" style={{ color: "hsl(var(--desktop-muted))" }}>
+                            {item.label}
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                    <div className="mx-2 h-8 w-px" style={{ background: "hsl(var(--desktop-border) / 0.14)" }} aria-hidden="true" />
+                    <div className="px-1">
+                      <button
+                        type="button"
+                        onClick={contactItem.action}
+                        className="flex flex-col items-center gap-1 rounded-xl px-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))]"
+                        aria-label="Contact"
+                      >
+                        <div className="flex h-11 w-11 items-center justify-center rounded-[13px] text-lg shadow-md md:h-12 md:w-12" style={{ background: contactItem.bg }} aria-hidden="true">
+                          {contactItem.icon}
+                        </div>
+                        <span className="text-[9px] font-medium" style={{ color: "hsl(var(--desktop-muted))" }}>
+                          {contactItem.label}
+                        </span>
+                      </button>
+                    </div>
+                  </>
                 );
-              }
-              return (
-                <Link key={project.id} to={`/${project.id}`} className="block">
-                  {card}
-                </Link>
-              );
-            })}
+              })()}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ═══ TESTIMONIALS ═══ */}
-      <section
-        id="collab"
-        className="relative py-28 sm:py-32 px-4 sm:px-8 md:px-10 overflow-hidden"
-        style={{
-          background: "linear-gradient(165deg, #0F0F1A 0%, #1A1A2E 40%, #16213E 70%, #0F0F1A 100%)",
-        }}
-        aria-labelledby="collab-heading"
-      >
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full opacity-20 blur-[120px] pointer-events-none" style={{ background: "radial-gradient(circle, rgba(99,102,241,.6), transparent 70%)" }} aria-hidden="true" />
-        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full opacity-15 blur-[100px] pointer-events-none" style={{ background: "radial-gradient(circle, rgba(168,85,247,.5), transparent 70%)" }} aria-hidden="true" />
-        <div className="relative max-w-[1060px] mx-auto">
-          <p className="text-[11px] font-medium tracking-[0.3em] uppercase text-white/40 mb-4">
-            Collaboration
-          </p>
-          <h2 id="collab-heading" className="text-[clamp(32px,4.5vw,56px)] font-black leading-[1.1] tracking-tight mb-14 text-white">
-            Words from people
-            <br className="hidden sm:block" />
-            I've worked alongside.
-          </h2>
-          <TestimonialGrid testimonials={testimonials} />
-        </div>
-      </section>
+        <section
+          id="work"
+          className="px-4 py-28 sm:px-8 sm:py-36 md:px-10"
+          style={{
+            background:
+              "linear-gradient(180deg, hsl(var(--work-surface-1)) 0%, hsl(var(--work-surface-2)) 50%, hsl(var(--work-surface-3)) 100%)",
+            borderTop: "1px solid hsl(var(--work-border) / 0.8)",
+          }}
+          aria-labelledby="work-heading"
+        >
+          <div className="mx-auto max-w-[1200px]">
+            <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.3em]" style={{ color: "hsl(var(--work-subtle))" }}>
+              Selected Work
+            </p>
+            <h2
+              id="work-heading"
+              className="mb-1 text-[clamp(42px,6vw,80px)] font-black leading-[1.05] tracking-tight"
+              style={{ color: "hsl(var(--work-foreground))" }}
+            >
+              Strategic Outputs.
+            </h2>
+            <p className="mb-20 max-w-[700px] text-[16px] leading-7" style={{ color: "hsl(var(--work-muted))" }}>
+              End-to-end product thinking across AI, research, fintech, and technically complex systems.
+            </p>
 
-      <div id="cta-section">
-        <Footer />
-      </div>
+            <div className="grid gap-x-10 gap-y-16 md:grid-cols-2" style={{ gridAutoRows: "1fr" }}>
+              {projects.map((project, index) => {
+                const card = (
+                  <motion.article
+                    className="group flex h-full flex-col overflow-hidden rounded-xl transition-all duration-300 hover:-translate-y-[6px]"
+                    style={{ boxShadow: "0 12px 40px hsl(var(--desktop-shadow) / 0.1), 0 4px 12px hsl(var(--desktop-shadow) / 0.08)" }}
+                    initial={{ opacity: 0, y: 18 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.08 }}
+                  >
+                    <div className="relative aspect-[16/9] w-full overflow-hidden" style={{ background: project.imageColor }}>
+                      <div className="absolute left-4 top-4 z-10 md:left-6 md:top-5">
+                        <img
+                          src={project.logo}
+                          alt={`${project.title} logo`}
+                          loading="lazy"
+                          className={`w-auto object-contain ${
+                            project.id === "gm"
+                              ? "h-8 md:h-10"
+                              : project.id === "nurturly"
+                                ? "h-5 md:h-6"
+                                : "h-6 md:h-9"
+                          }`}
+                        />
+                      </div>
+                      <div className="absolute inset-0 flex items-end justify-center px-4 pt-10 md:pt-12">
+                        <img
+                          src={project.mockup}
+                          alt={`${project.title} mockup`}
+                          loading="lazy"
+                          className={`max-w-full object-contain transition-transform duration-700 group-hover:scale-[1.03] ${
+                            project.id === "concord" ? "max-h-[95%]" : "max-h-[88%]"
+                          }`}
+                        />
+                      </div>
+                      <div className="absolute bottom-4 right-4 z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                        <div className="rounded-full bg-white/95 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-slate-800 shadow-md">
+                          View
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex flex-1 flex-col bg-white p-6 md:p-7">
+                      <h3 className="mb-2 font-serif text-[22px] font-semibold leading-[1.2] md:text-[26px]" style={{ color: "hsl(var(--work-foreground))" }}>
+                        {project.title}
+                      </h3>
+                      <p className="mb-4 max-w-[440px] text-[14px] leading-[1.65]" style={{ color: "hsl(var(--work-muted))" }}>
+                        {project.description}
+                      </p>
+                      <div className="mb-4 flex flex-wrap gap-[6px]">
+                        {project.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="inline-block rounded-full border px-2.5 py-[4px] text-[10.5px] font-medium"
+                            style={{
+                              color: "hsl(var(--work-muted))",
+                              borderColor: "hsl(var(--work-border))",
+                              background: "hsl(var(--work-surface-2))",
+                            }}
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="mt-auto flex flex-wrap gap-[6px]">
+                        {project.highlights.map((highlight) => (
+                          <div key={highlight} className="relative cursor-default overflow-hidden rounded-[7px] px-3 py-[6px]">
+                            <div className="absolute inset-0" style={{ background: "hsl(var(--work-surface-2))" }} />
+                            <div
+                              className="absolute inset-0 z-0 origin-left scale-x-0 transition-transform duration-[450ms] ease-out group-hover:scale-x-100"
+                              style={{ background: project.accentColor }}
+                            />
+                            <span className="relative z-10 text-xs font-medium transition-colors duration-[350ms] group-hover:text-white" style={{ color: "hsl(var(--work-muted))" }}>
+                              {highlight}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.article>
+                );
+
+                if (project.externalUrl) {
+                  return (
+                    <a
+                      key={project.id}
+                      href={project.externalUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))] focus-visible:ring-offset-4"
+                    >
+                      {card}
+                    </a>
+                  );
+                }
+
+                return (
+                  <Link
+                    key={project.id}
+                    to={`/${project.id}`}
+                    className="block rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))] focus-visible:ring-offset-4"
+                  >
+                    {card}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="collab"
+          className="relative overflow-hidden px-4 py-28 sm:px-8 sm:py-32 md:px-10"
+          style={{
+            background:
+              "linear-gradient(165deg, hsl(var(--desktop-panel-strong)) 0%, hsl(var(--desktop-panel)) 42%, hsl(var(--desktop-wallpaper-mid)) 100%)",
+          }}
+          aria-labelledby="collab-heading"
+        >
+          <div
+            className="pointer-events-none absolute left-1/4 top-0 h-[500px] w-[500px] rounded-full opacity-20 blur-[120px]"
+            style={{ background: "radial-gradient(circle, hsl(var(--desktop-accent) / 0.6), transparent 70%)" }}
+            aria-hidden="true"
+          />
+          <div
+            className="pointer-events-none absolute bottom-0 right-1/4 h-[400px] w-[400px] rounded-full opacity-15 blur-[100px]"
+            style={{ background: "radial-gradient(circle, hsl(var(--puzzle-piece-2) / 0.5), transparent 70%)" }}
+            aria-hidden="true"
+          />
+          <div className="relative mx-auto max-w-[1060px]">
+            <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.3em]" style={{ color: "hsl(var(--desktop-muted))" }}>
+              Collaboration
+            </p>
+            <h2 id="collab-heading" className="mb-14 text-[clamp(32px,4.5vw,56px)] font-black leading-[1.1] tracking-tight" style={{ color: "hsl(var(--desktop-foreground))" }}>
+              Words from people
+              <br className="hidden sm:block" />
+              I've worked alongside.
+            </h2>
+            <TestimonialGrid testimonials={testimonials} />
+          </div>
+        </section>
+
+        <div id="cta-section">
+          <Footer />
+        </div>
       </main>
     </div>
   );
 };
 
 export default App;
-

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { X, ChevronRight } from "lucide-react";
@@ -20,150 +20,262 @@ const categoryProjectMap: Record<string, string[]> = {
 
 export const FinderWindow = ({ isOpen, onClose, category }: FinderWindowProps) => {
   const matchedIds = categoryProjectMap[category] || [];
-  const matchedProjects = projects.filter((p) => matchedIds.includes(p.id));
-  const [selectedProject, setSelectedProject] = useState<Project | null>(
-    matchedProjects[0] || null
+  const matchedProjects = useMemo(
+    () => projects.filter((project) => matchedIds.includes(project.id)),
+    [matchedIds]
   );
+
+  const [selectedProject, setSelectedProject] = useState<Project | null>(matchedProjects[0] || null);
+
+  useEffect(() => {
+    setSelectedProject(matchedProjects[0] || null);
+  }, [category, matchedProjects]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onClose]);
 
   return (
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Backdrop */}
           <motion.div
-            className="fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm"
+            className="fixed inset-0 z-[60]"
+            style={{ background: "hsl(var(--desktop-shadow) / 0.72)", backdropFilter: "blur(10px)" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
+            aria-hidden="true"
           />
 
-          {/* Finder Window */}
-          <motion.div
-            className="fixed z-[70] top-[10%] left-1/2 w-[90vw] max-w-[840px] rounded-xl overflow-hidden"
+          <motion.section
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="finder-title"
+            className="fixed inset-x-4 top-4 bottom-4 z-[70] mx-auto flex w-auto max-w-[1080px] flex-col overflow-hidden rounded-[24px]"
             style={{
-              background: "rgba(30,30,40,0.92)",
-              backdropFilter: "blur(50px) saturate(1.8)",
-              border: "1px solid rgba(255,255,255,0.15)",
-              boxShadow: "0 30px 80px rgba(0,0,0,.5), 0 8px 24px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,0.08)",
-              transform: "translateX(-50%)",
+              background:
+                "linear-gradient(180deg, hsl(var(--desktop-panel) / 0.96), hsl(var(--desktop-panel-strong) / 0.94))",
+              backdropFilter: "blur(36px) saturate(1.2)",
+              border: "1px solid hsl(var(--desktop-border) / 0.12)",
+              boxShadow:
+                "0 32px 80px hsl(var(--desktop-shadow) / 0.68), inset 0 1px 0 hsl(var(--desktop-border) / 0.12)",
             }}
-            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            initial={{ opacity: 0, y: 24, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.97 }}
-            transition={{ type: "spring", stiffness: 300, damping: 28 }}
+            exit={{ opacity: 0, y: 16, scale: 0.98 }}
+            transition={{ type: "spring", stiffness: 260, damping: 28 }}
           >
-            {/* Title bar */}
-            <div className="flex items-center gap-2 px-4 py-2.5 border-b border-white/[0.08]">
-              <div className="flex items-center gap-[7px]">
-                <button
-                  onClick={onClose}
-                  className="w-3 h-3 rounded-full bg-[#FF5F57] hover:brightness-110 transition-all focus:outline-none"
-                  aria-label="Close window"
-                />
-                <span className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
-                <span className="w-3 h-3 rounded-full bg-[#28C840]" />
+            <div className="flex items-center gap-3 border-b px-4 py-3 sm:px-5"
+              style={{ borderColor: "hsl(var(--desktop-border) / 0.08)" }}>
+              <div className="flex items-center gap-[7px]" aria-hidden="true">
+                <span className="h-3 w-3 rounded-full" style={{ background: "hsl(4 100% 67%)" }} />
+                <span className="h-3 w-3 rounded-full" style={{ background: "hsl(41 100% 59%)" }} />
+                <span className="h-3 w-3 rounded-full" style={{ background: "hsl(135 59% 49%)" }} />
               </div>
-              <span className="flex-1 text-center text-[12px] font-medium text-white/50 tracking-wide">
-                {category}
-              </span>
-              <button onClick={onClose} className="text-white/30 hover:text-white/60 transition-colors focus:outline-none" aria-label="Close">
-                <X size={14} />
+
+              <div className="min-w-0 flex-1 text-center">
+                <h2 id="finder-title" className="truncate text-[12px] font-semibold tracking-[0.16em] uppercase"
+                  style={{ color: "hsl(var(--desktop-muted))" }}>
+                  {category}
+                </h2>
+                <p className="mt-1 text-[11px]" style={{ color: "hsl(var(--desktop-subtle))" }}>
+                  {matchedProjects.length} related project{matchedProjects.length === 1 ? "" : "s"}
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={onClose}
+                className="rounded-lg p-2 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))]"
+                style={{ color: "hsl(var(--desktop-muted))" }}
+                aria-label="Close project window"
+              >
+                <X size={16} />
               </button>
             </div>
 
-            {/* Content: Sidebar + Preview */}
-            <div className="flex h-[55vh] max-h-[500px]">
-              {/* Sidebar — project list */}
-              <div
-                className="w-[240px] flex-shrink-0 border-r border-white/[0.06] overflow-y-auto"
-                style={{ background: "rgba(20,20,30,0.5)" }}
+            <div className="flex min-h-0 flex-1 flex-col md:flex-row">
+              <aside
+                className="border-b md:w-[280px] md:flex-shrink-0 md:border-b-0 md:border-r"
+                style={{
+                  borderColor: "hsl(var(--desktop-border) / 0.08)",
+                  background: "hsl(var(--desktop-search) / 0.56)",
+                }}
               >
-                <div className="p-3">
-                  <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-white/25 px-2 mb-2">
-                    {matchedProjects.length} Projects
+                <div className="max-h-[220px] overflow-y-auto p-3 md:max-h-none md:h-full">
+                  <p
+                    className="mb-3 px-2 text-[10px] font-semibold tracking-[0.22em] uppercase"
+                    style={{ color: "hsl(var(--desktop-subtle))" }}
+                  >
+                    Projects
                   </p>
-                  {matchedProjects.map((project) => (
-                    <button
-                      key={project.id}
-                      onClick={() => setSelectedProject(project)}
-                      className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all mb-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 ${
-                        selectedProject?.id === project.id
-                          ? "bg-indigo-500/20 text-white"
-                          : "text-white/60 hover:bg-white/5 hover:text-white/80"
-                      }`}
-                    >
-                      <img
-                        src={project.logo}
-                        alt=""
-                        className="w-8 h-8 rounded-lg object-cover flex-shrink-0"
-                        style={{ background: project.imageColor }}
-                      />
-                      <div className="min-w-0">
-                        <p className="text-sm font-medium truncate">{project.title}</p>
-                        <p className="text-[10px] text-white/40 truncate">{project.role}</p>
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              </div>
+                  <div className="space-y-1.5">
+                    {matchedProjects.map((project) => {
+                      const isActive = selectedProject?.id === project.id;
 
-              {/* Preview panel */}
-              <div className="flex-1 overflow-y-auto">
-                {selectedProject ? (
-                  <div className="p-6 space-y-5">
-                    {/* Mockup preview */}
-                    <div
-                      className="w-full aspect-[16/10] rounded-lg overflow-hidden flex items-center justify-center"
-                      style={{ background: selectedProject.imageColor }}
-                    >
-                      <img
-                        src={selectedProject.mockup}
-                        alt={`${selectedProject.title} preview`}
-                        className="max-w-[85%] max-h-[85%] object-contain"
-                      />
-                    </div>
-
-                    {/* Info */}
-                    <div className="space-y-3">
-                      <div className="flex items-start justify-between gap-4">
-                        <div>
-                          <h3 className="text-xl font-semibold text-white">{selectedProject.title}</h3>
-                          <p className="text-sm text-white/40 mt-0.5">{selectedProject.role} · {selectedProject.duration}</p>
-                        </div>
-                        <Link
-                          to={selectedProject.externalUrl || `/${selectedProject.id}`}
-                          target={selectedProject.externalUrl ? "_blank" : undefined}
-                          onClick={onClose}
-                          className="flex items-center gap-1 px-4 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-400 transition-colors text-sm font-medium flex-shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+                      return (
+                        <button
+                          key={project.id}
+                          type="button"
+                          onClick={() => setSelectedProject(project)}
+                          className="flex w-full items-center gap-3 rounded-2xl px-3 py-3 text-left transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))]"
+                          style={{
+                            color: isActive ? "hsl(var(--desktop-foreground))" : "hsl(var(--desktop-muted))",
+                            background: isActive
+                              ? "linear-gradient(180deg, hsl(var(--desktop-accent) / 0.26), hsl(var(--desktop-accent) / 0.14))"
+                              : "transparent",
+                            border: isActive
+                              ? "1px solid hsl(var(--desktop-accent) / 0.32)"
+                              : "1px solid transparent",
+                          }}
+                          aria-pressed={isActive}
                         >
-                          View
-                          <ChevronRight size={14} />
-                        </Link>
+                          <img
+                            src={project.logo}
+                            alt=""
+                            className="h-10 w-10 rounded-xl object-cover"
+                            style={{ background: project.imageColor }}
+                          />
+                          <div className="min-w-0">
+                            <p className="truncate text-sm font-semibold">{project.title}</p>
+                            <p className="truncate text-[11px]" style={{ color: "hsl(var(--desktop-subtle))" }}>
+                              {project.role}
+                            </p>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </aside>
+
+              <div className="min-h-0 min-w-0 flex-1">
+                {selectedProject ? (
+                  <div className="h-full overflow-y-auto p-4 sm:p-6 lg:p-7">
+                    <div className="grid gap-6 xl:grid-cols-[minmax(0,1.15fr)_minmax(280px,0.85fr)]">
+                      <div className="space-y-4">
+                        <div
+                          className="flex aspect-[16/10] w-full items-center justify-center overflow-hidden rounded-[22px] p-4 sm:p-6"
+                          style={{
+                            background: selectedProject.imageColor,
+                            boxShadow: "inset 0 1px 0 hsl(var(--desktop-border) / 0.18)",
+                          }}
+                        >
+                          <img
+                            src={selectedProject.mockup}
+                            alt={`${selectedProject.title} preview`}
+                            className="max-h-full max-w-full object-contain"
+                          />
+                        </div>
+
+                        <div
+                          className="rounded-[20px] border p-4"
+                          style={{
+                            borderColor: "hsl(var(--desktop-border) / 0.08)",
+                            background: "hsl(var(--desktop-search) / 0.42)",
+                          }}
+                        >
+                          <p className="text-[11px] font-semibold tracking-[0.16em] uppercase"
+                            style={{ color: "hsl(var(--desktop-subtle))" }}>
+                            Highlights
+                          </p>
+                          <div className="mt-3 space-y-2.5">
+                            {selectedProject.highlights.map((highlight) => (
+                              <p key={highlight} className="text-sm leading-6" style={{ color: "hsl(var(--desktop-muted))" }}>
+                                {highlight}
+                              </p>
+                            ))}
+                          </div>
+                        </div>
                       </div>
-                      <p className="text-[13px] text-white/50 leading-relaxed">{selectedProject.description}</p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {selectedProject.tags.map((tag, i) => (
-                          <span key={i} className="px-2.5 py-1 text-[10px] font-medium bg-white/5 text-white/50 rounded-full border border-white/10">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      <div className="space-y-1.5 pt-2 border-t border-white/[0.06]">
-                        {selectedProject.highlights.map((hl, i) => (
-                          <p key={i} className="text-xs text-white/60">{hl}</p>
-                        ))}
+
+                      <div className="flex flex-col justify-between gap-5">
+                        <div className="space-y-5">
+                          <div>
+                            <p className="text-[11px] font-semibold tracking-[0.16em] uppercase"
+                              style={{ color: "hsl(var(--desktop-subtle))" }}>
+                              Selected project
+                            </p>
+                            <h3 className="mt-2 text-3xl font-black leading-tight" style={{ color: "hsl(var(--desktop-foreground))" }}>
+                              {selectedProject.title}
+                            </h3>
+                            <p className="mt-2 text-sm leading-6" style={{ color: "hsl(var(--desktop-muted))" }}>
+                              {selectedProject.role} · {selectedProject.duration} · {selectedProject.team}
+                            </p>
+                          </div>
+
+                          <p className="text-[15px] leading-7" style={{ color: "hsl(var(--desktop-muted))" }}>
+                            {selectedProject.description}
+                          </p>
+
+                          <div className="flex flex-wrap gap-2">
+                            {selectedProject.tags.map((tag) => (
+                              <span
+                                key={tag}
+                                className="rounded-full px-3 py-1 text-[11px] font-semibold tracking-[0.08em]"
+                                style={{
+                                  color: "hsl(var(--desktop-foreground))",
+                                  background: "hsl(var(--desktop-accent) / 0.16)",
+                                  border: "1px solid hsl(var(--desktop-accent) / 0.18)",
+                                }}
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div
+                          className="rounded-[20px] border p-4"
+                          style={{
+                            borderColor: "hsl(var(--desktop-border) / 0.08)",
+                            background: "hsl(var(--desktop-search) / 0.42)",
+                          }}
+                        >
+                          <p className="text-[11px] font-semibold tracking-[0.16em] uppercase"
+                            style={{ color: "hsl(var(--desktop-subtle))" }}>
+                            Case study preview
+                          </p>
+                          <p className="mt-3 text-sm leading-6" style={{ color: "hsl(var(--desktop-muted))" }}>
+                            Open the full case study for the deeper product story, process, and outcomes.
+                          </p>
+                          <Link
+                            to={selectedProject.externalUrl || `/${selectedProject.id}`}
+                            target={selectedProject.externalUrl ? "_blank" : undefined}
+                            rel={selectedProject.externalUrl ? "noopener noreferrer" : undefined}
+                            onClick={onClose}
+                            className="mt-4 inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold transition-transform hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))]"
+                            style={{
+                              color: "hsl(var(--primary-foreground))",
+                              background: "hsl(var(--primary))",
+                              boxShadow: "0 14px 28px hsl(var(--desktop-shadow) / 0.2)",
+                            }}
+                          >
+                            View case study
+                            <ChevronRight size={16} />
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </div>
                 ) : (
-                  <div className="flex items-center justify-center h-full text-white/30 text-sm">
-                    No projects in this category
+                  <div className="flex h-full items-center justify-center px-6 text-center text-sm"
+                    style={{ color: "hsl(var(--desktop-muted))" }}>
+                    No projects are mapped to this folder yet.
                   </div>
                 )}
               </div>
             </div>
-          </motion.div>
+          </motion.section>
         </>
       )}
     </AnimatePresence>
