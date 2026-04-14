@@ -12,11 +12,11 @@ import logoTiktok from "@/assets/logo-tiktok.png";
 import logoGm from "@/assets/logo-gm.png";
 import logoNaver from "@/assets/logo-naver.png";
 import logoJstor from "@/assets/logo-jstor.png";
-import folderAi from "@/assets/folder-ai.png";
-import folderEnterprise from "@/assets/folder-enterprise.png";
-import folderFintech from "@/assets/folder-fintech.png";
-import folderResearch from "@/assets/folder-research.png";
-import folderCrypto from "@/assets/folder-crypto.png";
+import folderAiMl from "@/assets/folder-ai-ml.png";
+import folderProduct from "@/assets/folder-product.png";
+import folderDevtools from "@/assets/folder-devtools.png";
+import folderUxr from "@/assets/folder-uxr.png";
+import folderFintechWeb3 from "@/assets/folder-fintech-web3.png";
 import { projects } from "@/data/projects";
 
 /* ── Mac Window Shell ── */
