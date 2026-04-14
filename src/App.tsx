@@ -202,239 +202,224 @@ const App = () => {
       {/* ═══════════════════════════════════════
            macOS DESKTOP HERO
       ═══════════════════════════════════════ */}
-      <section className="relative flex min-h-[860px] w-full flex-col overflow-hidden lg:min-h-[calc(100vh-40px)]"
-        style={{
-          background: `
-            radial-gradient(ellipse 60% 50% at 70% 60%, rgba(59,130,246,.12) 0%, transparent 55%),
-            radial-gradient(ellipse 50% 40% at 20% 30%, rgba(139,92,246,.08) 0%, transparent 50%),
-            #0a0a0f
-          `
-        }}>
+      <section className="relative flex min-h-[860px] w-full flex-col overflow-hidden lg:min-h-[calc(100vh-40px)]">
+        {/* macOS Wallpaper Background */}
+        <img 
+          src={macosWallpaper} 
+          alt="" 
+          className="absolute inset-0 w-full h-full object-cover" 
+          width={1920} 
+          height={1080}
+          aria-hidden="true"
+        />
+        <div className="absolute inset-0 bg-black/10" />
 
         {/* Desktop Surface */}
         <div className="relative flex-1 overflow-hidden px-4 pb-28 pt-8 sm:px-6 md:px-8 lg:px-10 lg:pb-32 lg:pt-12">
 
           {/* macOS Control Center Widget — top right */}
           <motion.div
-            className="absolute top-4 right-4 z-20 hidden lg:block"
+            className="absolute top-4 right-4 z-20 hidden xl:block"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.5 }}
           >
-            <div className="rounded-2xl p-4 w-[200px]" style={{
-              background: "rgba(40,40,50,.75)",
+            <div className="rounded-2xl p-3.5 w-[180px]" style={{
+              background: "rgba(30,30,40,.7)",
               backdropFilter: "blur(30px) saturate(1.5)",
-              border: "1px solid rgba(255,255,255,.08)",
+              border: "1px solid rgba(255,255,255,.1)",
               boxShadow: "0 12px 40px rgba(0,0,0,.4)",
             }}>
-              <div className="grid grid-cols-2 gap-2 mb-3">
+              <div className="grid grid-cols-2 gap-1.5 mb-2.5">
                 {[
                   { icon: "📶", label: "Wi-Fi", active: true },
                   { icon: "🔵", label: "Bluetooth", active: true },
                   { icon: "🌙", label: "Focus", active: false },
                   { icon: "✈️", label: "AirDrop", active: false },
                 ].map((item, i) => (
-                  <div key={i} className={`flex items-center gap-1.5 rounded-xl px-2.5 py-2 text-[10px] font-medium ${item.active ? 'bg-blue-500/80 text-white' : 'bg-white/8 text-white/50'}`}>
-                    <span className="text-xs">{item.icon}</span>
+                  <div key={i} className={`flex items-center gap-1 rounded-lg px-2 py-1.5 text-[9px] font-medium ${item.active ? 'bg-blue-500/80 text-white' : 'bg-white/8 text-white/50'}`}>
+                    <span className="text-[10px]">{item.icon}</span>
                     <span className="truncate">{item.label}</span>
                   </div>
                 ))}
               </div>
-              <div className="space-y-2.5">
-                <div className="flex items-center justify-between text-[10px] text-white/50">
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-[9px] text-white/50">
                   <span>Display</span>
                   <span className="text-white/70">73%</span>
                 </div>
-                <div className="h-1 rounded-full bg-white/10 overflow-hidden">
+                <div className="h-[3px] rounded-full bg-white/10 overflow-hidden">
                   <div className="h-full w-[73%] rounded-full bg-white/60" />
                 </div>
-                <div className="flex items-center justify-between text-[10px] text-white/50">
+                <div className="flex items-center justify-between text-[9px] text-white/50">
                   <span>🔊 Volume</span>
                   <span className="text-white/70">75%</span>
                 </div>
-                <div className="h-1 rounded-full bg-white/10 overflow-hidden">
+                <div className="h-[3px] rounded-full bg-white/10 overflow-hidden">
                   <div className="h-full w-[75%] rounded-full bg-white/60" />
                 </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Background name text */}
-          <div className="absolute inset-x-0 top-6 z-[1] flex items-center justify-center overflow-hidden pointer-events-none lg:top-10" aria-hidden="true">
-            <span
-              className="font-sans font-black text-[clamp(72px,12vw,190px)] tracking-[0.14em] uppercase leading-none whitespace-nowrap select-none"
-              style={{ color: "rgba(255,255,255,0.03)" }}
+          {/* Main content area — centered bio window + floating puzzle */}
+          <div className="relative z-10 mx-auto flex h-full w-full max-w-[1100px] items-start justify-center pt-10 md:pt-14 lg:pt-16">
+            
+            {/* Bio Window — main focus */}
+            <motion.div
+              className="relative z-20 w-full max-w-[620px] overflow-hidden rounded-2xl"
+              style={{
+                background: "rgba(255,255,255,0.92)",
+                backdropFilter: "blur(40px)",
+                border: "1px solid rgba(255,255,255,0.35)",
+                boxShadow: "0 30px 80px rgba(0,0,0,.4), 0 8px 20px rgba(0,0,0,.25)",
+              }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             >
-              HYEBIN PARK
-            </span>
-          </div>
-
-          <div className="relative z-10 mx-auto flex h-full w-full max-w-[1500px] items-start justify-center">
-            <div className="grid w-full items-start gap-6 pt-24 md:grid-cols-[minmax(0,1.12fr)_minmax(320px,0.88fr)] md:pt-20 lg:grid-cols-[minmax(0,1.14fr)_minmax(380px,0.9fr)] lg:gap-0 lg:pt-28 xl:grid-cols-[minmax(0,1.12fr)_minmax(430px,0.88fr)]">
-              <motion.div
-                className="relative z-20 overflow-hidden rounded-[28px]"
-                style={{
-                  background: "rgba(255,255,255,0.92)",
-                  backdropFilter: "blur(40px)",
-                  border: "1px solid rgba(255,255,255,0.3)",
-                  boxShadow: "0 24px 70px rgba(0,0,0,.35), 0 6px 18px rgba(0,0,0,.2)",
-                }}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              <div
+                className="flex h-10 items-center gap-3 border-b px-3.5"
+                style={{ background: "rgba(245,245,248,0.95)", borderColor: "rgba(0,0,0,0.06)" }}
               >
-                <div
-                  className="flex h-11 items-center gap-3 border-b px-3.5"
-                  style={{ background: "rgba(245,245,248,0.9)", borderColor: "rgba(0,0,0,0.06)" }}
-                >
-                  <TitleBarDots />
-                  <span className="flex-1 text-center text-xs font-medium text-muted-foreground">hyebin-park.portfolio</span>
-                </div>
+                <TitleBarDots />
+                <span className="flex-1 text-center text-[11px] font-medium text-muted-foreground">hyebin-park.portfolio</span>
+              </div>
 
-                <div className="flex flex-col gap-6 p-8 pb-8 sm:p-9 lg:min-h-[520px] lg:justify-center lg:p-11 xl:min-h-[560px] xl:p-14">
-                  <div className="space-y-2">
-                    <div className="flex flex-wrap items-baseline gap-2 md:gap-3">
-                      <span className="text-[clamp(22px,2.2vw,30px)] text-muted-foreground">Turning</span>
-                      <span className="font-serif text-[clamp(48px,5.8vw,82px)] italic text-primary leading-none">complexity</span>
-                    </div>
-                    <div className="flex flex-wrap items-baseline gap-2 md:gap-3">
-                      <span className="text-[clamp(22px,2.2vw,30px)] text-muted-foreground">into</span>
-                      <span className="font-serif text-[clamp(48px,5.8vw,82px)] italic text-primary leading-none">clarity.</span>
-                    </div>
+              <div className="flex flex-col gap-5 p-7 sm:p-8 lg:p-10">
+                <div className="space-y-1.5">
+                  <div className="flex flex-wrap items-baseline gap-2 md:gap-2.5">
+                    <span className="text-[clamp(18px,2vw,24px)] text-muted-foreground">Turning</span>
+                    <span className="font-serif text-[clamp(40px,5vw,68px)] italic text-primary leading-none">complexity</span>
                   </div>
-
-                  <p className="max-w-[44rem] text-[15px] leading-[1.8] text-muted-foreground md:text-[1.05rem]">
-                    From AI algorithms to crypto workflows,<br className="hidden sm:block" />
-                    I turn ambiguity into structured, usable products<br className="hidden sm:block" />
-                    that drive real business impact.
-                  </p>
-
-                  <div className="flex items-center gap-2 border-t border-border pt-5 text-base font-medium text-foreground md:text-[1.05rem]">
-                    🎓 MS-HCI @ University of Michigan
-                  </div>
-
-                  <div>
-                    <p className="mb-3.5 text-[11px] tracking-[0.12em] uppercase text-muted-foreground">Experience designing & researching for</p>
-                    <div className="flex flex-wrap items-center gap-3.5">
-                      <img src={logoLine} alt="LINE" className="w-10 h-10 rounded-xl object-cover shadow-md" />
-                      <img src={logoTiktok} alt="TikTok" className="w-10 h-10 rounded-xl object-cover shadow-md" />
-                      <img src={logoGm} alt="GM" className="w-10 h-10 rounded-xl object-cover shadow-md" />
-                      <img src={logoNaver} alt="NAVER" className="w-10 h-10 rounded-xl object-cover shadow-md" />
-                      <img src={logoJstor} alt="JSTOR" className="w-10 h-10 rounded-xl object-cover shadow-md" />
-                    </div>
-                  </div>
-
-                  <div className="flex flex-wrap gap-3 pt-2">
-                    <a href="mailto:hyebinp@umich.edu" className="inline-flex items-center gap-[5px] rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-all hover:-translate-y-px hover:opacity-90">
-                      hyebinp@umich.edu ↗
-                    </a>
-                    <a
-                      href="https://www.linkedin.com/in/hyebinpark/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-[5px] rounded-full border-[1.5px] border-foreground/15 px-5 py-3 text-sm font-medium transition-all hover:-translate-y-px hover:border-primary hover:text-primary"
-                    >
-                      LinkedIn ↗
-                    </a>
+                  <div className="flex flex-wrap items-baseline gap-2 md:gap-2.5">
+                    <span className="text-[clamp(18px,2vw,24px)] text-muted-foreground">into</span>
+                    <span className="font-serif text-[clamp(40px,5vw,68px)] italic text-primary leading-none">clarity.</span>
                   </div>
                 </div>
-              </motion.div>
 
-              <motion.div
-                className="relative z-[22] overflow-hidden rounded-[28px] md:-ml-8 md:mt-10 lg:-ml-12 lg:mt-8 xl:-ml-16"
-                style={{
-                  background: "rgba(255,255,255,0.92)",
-                  backdropFilter: "blur(40px)",
-                  border: "1px solid rgba(255,255,255,0.3)",
-                  boxShadow: "0 24px 70px rgba(0,0,0,.35), 0 6px 18px rgba(0,0,0,.2)",
-                }}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <div
-                  className="flex h-11 items-center gap-3 border-b px-3.5"
-                  style={{ background: "rgba(245,245,248,0.9)", borderColor: "rgba(0,0,0,0.06)" }}
-                >
-                  <TitleBarDots />
-                  <span className="flex-1 text-center text-xs font-medium text-muted-foreground">
-                    puzzle.complexity — {puzzleStatus === 'assembled' ? 'assembled ✓' : 'assembling'}
-                  </span>
+                <p className="max-w-[40rem] text-[14px] leading-[1.75] text-muted-foreground md:text-[15px]">
+                  From AI algorithms to crypto workflows,<br className="hidden sm:block" />
+                  I turn ambiguity into structured, usable products<br className="hidden sm:block" />
+                  that drive real business impact.
+                </p>
+
+                <div className="flex items-center gap-2 border-t border-border pt-4 text-sm font-medium text-foreground md:text-[15px]">
+                  🎓 MS-HCI @ University of Michigan
                 </div>
 
-                <div
-                  className="flex h-[38px] items-center gap-2 border-b px-3"
-                  style={{ background: "hsl(var(--secondary) / 0.78)", borderColor: "hsl(var(--foreground) / 0.05)" }}
-                >
-                  <button
-                    onClick={handleScatter}
-                    className="rounded-[8px] border bg-background px-3 py-1 text-[11px] font-medium text-foreground transition-colors hover:bg-secondary"
-                    style={{ borderColor: "hsl(var(--foreground) / 0.14)" }}
+                <div>
+                  <p className="mb-3 text-[10px] tracking-[0.12em] uppercase text-muted-foreground">Experience designing & researching for</p>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <img src={logoLine} alt="LINE" className="w-9 h-9 rounded-xl object-cover shadow-md" />
+                    <img src={logoTiktok} alt="TikTok" className="w-9 h-9 rounded-xl object-cover shadow-md" />
+                    <img src={logoGm} alt="GM" className="w-9 h-9 rounded-xl object-cover shadow-md" />
+                    <img src={logoNaver} alt="NAVER" className="w-9 h-9 rounded-xl object-cover shadow-md" />
+                    <img src={logoJstor} alt="JSTOR" className="w-9 h-9 rounded-xl object-cover shadow-md" />
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-2.5 pt-1">
+                  <a href="mailto:hyebinp@umich.edu" className="inline-flex items-center gap-[5px] rounded-full bg-primary px-4 py-2.5 text-[13px] font-medium text-primary-foreground transition-all hover:-translate-y-px hover:opacity-90">
+                    hyebinp@umich.edu ↗
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/hyebinpark/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-[5px] rounded-full border-[1.5px] border-foreground/15 px-4 py-2.5 text-[13px] font-medium transition-all hover:-translate-y-px hover:border-primary hover:text-primary"
                   >
-                    ↺ Scatter
-                  </button>
-                  <span className="ml-auto text-[11px] text-muted-foreground">
-                    {puzzleStatus === 'assembled' ? 'solved ✓' : 'watch it assemble →'}
-                  </span>
+                    LinkedIn ↗
+                  </a>
                 </div>
+              </div>
+            </motion.div>
 
-                <div
-                  className="relative flex flex-col items-center px-4 pb-4 pt-5 sm:px-5"
-                  style={{ background: "hsl(var(--secondary) / 0.5)" }}
-                  onMouseEnter={() => setIsHovering(true)}
-                  onMouseLeave={() => setIsHovering(false)}
-                >
-                  <div className="relative h-[258px] w-[352px] max-w-full lg:h-[276px] lg:w-[372px]">
-                    <AnimatePresence>
-                      {animationPhase !== "photo" && puzzlePieces.map((p, i) =>
-                        (visiblePieces.includes(i) || animationPhase === "assembling" || animationPhase === "assembled") && (
-                          <motion.div
-                            key={p.id}
-                            className="absolute"
-                            initial={{ opacity: 0, scale: 0.6 }}
-                            animate={{
-                              x: animationPhase === "scattered" ? p.messy.x : p.final.x,
-                              y: animationPhase === "scattered" ? p.messy.y : p.final.y,
-                              rotate: animationPhase === "scattered" ? p.messy.r : 0,
-                              opacity: 1,
-                              scale: animationPhase === "scattered" ? 0.97 : 1,
-                            }}
-                            exit={{ opacity: 0, scale: 1.02, transition: { duration: 0.4, delay: i * 0.02 } }}
-                            transition={{
-                              duration: animationPhase === "scattered" ? 1.0 : 1.6,
-                              ease: [0.25, 0.46, 0.45, 0.94],
-                              delay: animationPhase === "scattered" ? 0 : i * 0.35,
-                            }}
-                            style={{ willChange: "transform", zIndex: animationPhase === "scattered" ? 6 - i : i + 1 }}
-                          >
-                            <PuzzleTile color={p.color} label={p.label} variant={p.variant as keyof typeof JIGSAW_PATHS} />
-                          </motion.div>
-                        )
-                      )}
-                    </AnimatePresence>
+            {/* Puzzle — small floating preview window */}
+            <motion.div
+              className="absolute right-0 top-16 z-[22] hidden md:block w-[280px] lg:w-[320px] xl:right-[-40px] overflow-hidden rounded-2xl"
+              style={{
+                background: "rgba(255,255,255,0.92)",
+                backdropFilter: "blur(40px)",
+                border: "1px solid rgba(255,255,255,0.35)",
+                boxShadow: "0 24px 60px rgba(0,0,0,.35), 0 6px 16px rgba(0,0,0,.2)",
+              }}
+              initial={{ opacity: 0, y: 20, rotate: 2 }}
+              animate={{ opacity: 1, y: 0, rotate: 2 }}
+              transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div
+                className="flex h-8 items-center gap-2 border-b px-3"
+                style={{ background: "rgba(245,245,248,0.95)", borderColor: "rgba(0,0,0,0.06)" }}
+              >
+                <div className="flex gap-[5px]">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
+                </div>
+                <span className="flex-1 text-center text-[10px] font-medium text-muted-foreground">
+                  {puzzleStatus === 'assembled' ? 'assembled ✓' : 'assembling…'}
+                </span>
+              </div>
 
-                    <AnimatePresence>
-                      {animationPhase === "photo" && (
+              <div
+                className="relative flex flex-col items-center px-3 pb-3 pt-3"
+                style={{ background: "hsl(var(--secondary) / 0.5)" }}
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => setIsHovering(false)}
+              >
+                <div className="relative h-[180px] w-[260px] max-w-full scale-[0.75] origin-center">
+                  <AnimatePresence>
+                    {animationPhase !== "photo" && puzzlePieces.map((p, i) =>
+                      (visiblePieces.includes(i) || animationPhase === "assembling" || animationPhase === "assembled") && (
                         <motion.div
-                          className="absolute inset-0 flex items-center justify-center"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.5 }}
-                          style={{ zIndex: 20 }}
+                          key={p.id}
+                          className="absolute"
+                          initial={{ opacity: 0, scale: 0.6 }}
+                          animate={{
+                            x: animationPhase === "scattered" ? p.messy.x : p.final.x,
+                            y: animationPhase === "scattered" ? p.messy.y : p.final.y,
+                            rotate: animationPhase === "scattered" ? p.messy.r : 0,
+                            opacity: 1,
+                            scale: animationPhase === "scattered" ? 0.97 : 1,
+                          }}
+                          exit={{ opacity: 0, scale: 1.02, transition: { duration: 0.4, delay: i * 0.02 } }}
+                          transition={{
+                            duration: animationPhase === "scattered" ? 1.0 : 1.6,
+                            ease: [0.25, 0.46, 0.45, 0.94],
+                            delay: animationPhase === "scattered" ? 0 : i * 0.35,
+                          }}
+                          style={{ willChange: "transform", zIndex: animationPhase === "scattered" ? 6 - i : i + 1 }}
                         >
-                          <img src={profilePhoto} alt="Hyebin Park" className="w-full h-full rounded-xl object-cover object-[center_20%]" />
+                          <PuzzleTile color={p.color} label={p.label} variant={p.variant as keyof typeof JIGSAW_PATHS} />
                         </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
+                      )
+                    )}
+                  </AnimatePresence>
 
-                  <p className="pb-1 pt-3 text-center text-[10px] tracking-[0.06em] text-muted-foreground/40">
-                    {puzzleStatus === 'assembled' ? '← scatter to replay' : 'pieces assembling…'}
-                  </p>
+                  <AnimatePresence>
+                    {animationPhase === "photo" && (
+                      <motion.div
+                        className="absolute inset-0 flex items-center justify-center"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.5 }}
+                        style={{ zIndex: 20 }}
+                      >
+                        <img src={profilePhoto} alt="Hyebin Park" className="w-full h-full rounded-lg object-cover object-[center_20%]" />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
-              </motion.div>
-            </div>
+                <button
+                  onClick={handleScatter}
+                  className="text-[9px] font-medium text-muted-foreground/50 hover:text-muted-foreground transition-colors"
+                >
+                  {puzzleStatus === 'assembled' ? '↺ scatter' : '▶ assembling…'}
+                </button>
+              </div>
+            </motion.div>
           </div>
 
         </div>
@@ -442,10 +427,10 @@ const App = () => {
         {/* Dock — macOS style with colored icon tiles */}
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-0 px-3 py-2.5 rounded-[22px] z-30"
           style={{
-            background: "rgba(30,30,40,.65)",
+            background: "rgba(30,30,40,.55)",
             backdropFilter: "blur(28px) saturate(1.8)",
-            border: "1px solid rgba(255,255,255,.15)",
-            boxShadow: "0 8px 40px rgba(0,0,0,.3), 0 2px 8px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.08)",
+            border: "1px solid rgba(255,255,255,.12)",
+            boxShadow: "0 8px 40px rgba(0,0,0,.3), 0 2px 8px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.06)",
           }}>
           {(() => {
             const mainItems = [
@@ -461,24 +446,23 @@ const App = () => {
                 <div className="flex items-center gap-2.5 px-1.5">
                   {mainItems.map((item, i) => (
                     <button key={i} onClick={item.action} className="flex flex-col items-center gap-1 group">
-                      <div className="w-12 h-12 md:w-14 md:h-14 rounded-[14px] flex items-center justify-center text-2xl shadow-md group-hover:scale-110 group-hover:shadow-lg transition-all duration-200"
+                      <div className="w-11 h-11 md:w-12 md:h-12 rounded-[12px] flex items-center justify-center text-xl shadow-md group-hover:scale-110 group-hover:shadow-lg transition-all duration-200"
                         style={{ background: item.bg }}>
                         {item.icon}
                       </div>
-                      <span className="text-[9px] font-medium tracking-wide text-white/50">{item.label}</span>
+                      <span className="text-[8px] font-medium tracking-wide text-white/50">{item.label}</span>
                     </button>
                   ))}
                 </div>
-                {/* Divider */}
-                <div className="w-px h-10 bg-white/15 mx-2.5" />
+                <div className="w-px h-8 bg-white/15 mx-2" />
                 <div className="px-1.5">
                   <button onClick={contactItem.action}
                     className="flex flex-col items-center gap-1 group">
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-[14px] flex items-center justify-center text-2xl shadow-md group-hover:scale-110 group-hover:shadow-lg transition-all duration-200"
+                    <div className="w-11 h-11 md:w-12 md:h-12 rounded-[12px] flex items-center justify-center text-xl shadow-md group-hover:scale-110 group-hover:shadow-lg transition-all duration-200"
                       style={{ background: contactItem.bg }}>
                       {contactItem.icon}
                     </div>
-                    <span className="text-[9px] font-medium tracking-wide text-white/50">{contactItem.label}</span>
+                    <span className="text-[8px] font-medium tracking-wide text-white/50">{contactItem.label}</span>
                   </button>
                 </div>
               </>
