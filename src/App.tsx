@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import profilePhoto from "@/assets/profile-photo.jpg";
-import macosWallpaper from "@/assets/macos-wallpaper.jpg";
 import logoLine from "@/assets/logo-line.png";
 import logoTiktok from "@/assets/logo-tiktok.png";
 import logoGm from "@/assets/logo-gm.png";
