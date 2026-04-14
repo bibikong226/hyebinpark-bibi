@@ -578,6 +578,7 @@ const App = () => {
       <div id="cta-section">
         <Footer />
       </div>
+      </main>
     </div>
   );
 };
