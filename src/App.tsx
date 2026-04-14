@@ -494,19 +494,19 @@ const App = () => {
         id="work"
         className="py-28 sm:py-36 px-4 sm:px-8 md:px-10"
         style={{
-          background: "linear-gradient(180deg, #0c0e1a 0%, #111827 50%, #0f1420 100%)",
-          borderTop: "1px solid rgba(255,255,255,.06)",
+          background: "linear-gradient(180deg, #f8f9fc 0%, #f1f3f8 50%, #eef0f5 100%)",
+          borderTop: "1px solid rgba(0,0,0,.06)",
         }}
         aria-labelledby="work-heading"
       >
         <div className="max-w-[1200px] mx-auto">
-          <p className="text-[11px] font-medium tracking-[0.3em] uppercase text-white/30 mb-4">
+          <p className="text-[11px] font-medium tracking-[0.3em] uppercase text-gray-400 mb-4">
             Selected Work
           </p>
-          <h2 id="work-heading" className="text-[clamp(42px,6vw,80px)] font-black leading-[1.05] tracking-tight mb-1 text-white">
+          <h2 id="work-heading" className="text-[clamp(42px,6vw,80px)] font-black leading-[1.05] tracking-tight mb-1 text-gray-900">
             Strategic
           </h2>
-          <h2 className="font-serif text-[clamp(42px,6vw,80px)] italic font-normal leading-[1.05] tracking-tight text-white/20 mb-20">
+          <h2 className="font-serif text-[clamp(42px,6vw,80px)] italic font-normal leading-[1.05] tracking-tight text-gray-300 mb-20">
             Outputs.
           </h2>
 
