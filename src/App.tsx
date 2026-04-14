@@ -553,11 +553,18 @@ const App = () => {
         </div>
       </section>
 
-      {/* ═══ TESTIMONIALS — Featured quote carousel ═══ */}
-      <section id="collab" className="py-28 sm:py-32 px-4 sm:px-8 md:px-10 border-t border-border">
-        <div className="max-w-[1060px] mx-auto">
-          <p className="text-[11px] font-medium tracking-[0.3em] uppercase text-muted-foreground mb-4">Collaboration</p>
-          <h2 className="text-[clamp(32px,4.5vw,56px)] font-black leading-[1.1] tracking-tight mb-14">
+      {/* ═══ TESTIMONIALS — Dark backdrop for frosted glass ═══ */}
+      <section id="collab" className="relative py-28 sm:py-32 px-4 sm:px-8 md:px-10 overflow-hidden"
+        style={{
+          background: "linear-gradient(165deg, #0F0F1A 0%, #1A1A2E 40%, #16213E 70%, #0F0F1A 100%)",
+        }}>
+        {/* Ambient glow blobs */}
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full opacity-20 blur-[120px] pointer-events-none" style={{ background: "radial-gradient(circle, rgba(99,102,241,.6), transparent 70%)" }} />
+        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full opacity-15 blur-[100px] pointer-events-none" style={{ background: "radial-gradient(circle, rgba(168,85,247,.5), transparent 70%)" }} />
+
+        <div className="relative max-w-[1060px] mx-auto">
+          <p className="text-[11px] font-medium tracking-[0.3em] uppercase text-white/40 mb-4">Collaboration</p>
+          <h2 className="text-[clamp(32px,4.5vw,56px)] font-black leading-[1.1] tracking-tight mb-14 text-white">
             Words from people<br className="hidden sm:block" />I've worked alongside.
           </h2>
 
