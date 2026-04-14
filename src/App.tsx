@@ -501,12 +501,12 @@ const App = () => {
                           key={hi}
                           className="relative overflow-hidden rounded-[7px] px-3 py-[6px] cursor-default"
                         >
-                          <div className="absolute inset-0 bg-secondary" />
+                          <div className="absolute inset-0 bg-white/5" />
                           <div
                             className="absolute inset-0 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-[450ms] ease-out z-0"
                             style={{ background: project.accentColor }}
                           />
-                          <span className="relative z-10 text-xs font-medium transition-colors duration-[350ms] group-hover:text-white text-foreground/75">
+                          <span className="relative z-10 text-xs font-medium transition-colors duration-[350ms] group-hover:text-white text-white/60">
                             {hl}
                           </span>
                         </div>
