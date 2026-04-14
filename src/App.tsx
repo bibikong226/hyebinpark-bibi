@@ -470,13 +470,13 @@ const App = () => {
           <h2 className="text-[clamp(42px,6vw,80px)] font-black leading-[1.05] tracking-tight mb-1">Strategic</h2>
           <h2 className="font-serif text-[clamp(42px,6vw,80px)] italic font-normal leading-[1.05] tracking-tight text-muted-foreground/30 mb-20">Outputs.</h2>
 
-          <div className="grid md:grid-cols-2 gap-x-10 gap-y-16">
+          <div className="grid md:grid-cols-2 gap-x-10 gap-y-16" style={{ gridAutoRows: "1fr" }}>
             {projects.map((project, idx) => {
               const dark = isDarkBg(project.id);
 
               const card = (
                 <motion.div
-                  className="rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-[6px] group flex flex-col"
+                  className="rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-[6px] group flex flex-col h-full"
                   style={{ boxShadow: "0 12px 40px rgba(0,0,0,.1), 0 4px 12px rgba(0,0,0,.06)" }}
                   initial={{ opacity: 0, y: 18 }}
                   whileInView={{ opacity: 1, y: 0 }}
