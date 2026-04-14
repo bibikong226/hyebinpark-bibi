@@ -204,20 +204,65 @@ const App = () => {
       <section className="relative flex min-h-[860px] w-full flex-col overflow-hidden lg:min-h-[calc(100vh-40px)]"
         style={{
           background: `
-            radial-gradient(ellipse 80% 60% at 20% 80%, rgba(59,130,246,.35) 0%, transparent 55%),
-            radial-gradient(ellipse 70% 50% at 80% 20%, rgba(139,92,246,.3) 0%, transparent 50%),
-            radial-gradient(ellipse 50% 40% at 50% 50%, rgba(6,182,212,.15) 0%, transparent 45%),
-            radial-gradient(ellipse 60% 50% at 10% 20%, rgba(16,185,129,.12) 0%, transparent 40%),
-            linear-gradient(145deg, #0c1220 0%, #111827 25%, #1e1b4b 50%, #0f172a 75%, #0c1220 100%)
+            radial-gradient(ellipse 60% 50% at 70% 60%, rgba(59,130,246,.12) 0%, transparent 55%),
+            radial-gradient(ellipse 50% 40% at 20% 30%, rgba(139,92,246,.08) 0%, transparent 50%),
+            #0a0a0f
           `
         }}>
 
         {/* Desktop Surface */}
-        <div className="relative flex-1 overflow-hidden px-4 pb-28 pt-20 sm:px-6 md:px-8 lg:px-10 lg:pb-32 lg:pt-28">
+        <div className="relative flex-1 overflow-hidden px-4 pb-28 pt-8 sm:px-6 md:px-8 lg:px-10 lg:pb-32 lg:pt-12">
+
+          {/* macOS Control Center Widget — top right */}
+          <motion.div
+            className="absolute top-4 right-4 z-20 hidden lg:block"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
+          >
+            <div className="rounded-2xl p-4 w-[200px]" style={{
+              background: "rgba(40,40,50,.75)",
+              backdropFilter: "blur(30px) saturate(1.5)",
+              border: "1px solid rgba(255,255,255,.08)",
+              boxShadow: "0 12px 40px rgba(0,0,0,.4)",
+            }}>
+              <div className="grid grid-cols-2 gap-2 mb-3">
+                {[
+                  { icon: "📶", label: "Wi-Fi", active: true },
+                  { icon: "🔵", label: "Bluetooth", active: true },
+                  { icon: "🌙", label: "Focus", active: false },
+                  { icon: "✈️", label: "AirDrop", active: false },
+                ].map((item, i) => (
+                  <div key={i} className={`flex items-center gap-1.5 rounded-xl px-2.5 py-2 text-[10px] font-medium ${item.active ? 'bg-blue-500/80 text-white' : 'bg-white/8 text-white/50'}`}>
+                    <span className="text-xs">{item.icon}</span>
+                    <span className="truncate">{item.label}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="space-y-2.5">
+                <div className="flex items-center justify-between text-[10px] text-white/50">
+                  <span>Display</span>
+                  <span className="text-white/70">73%</span>
+                </div>
+                <div className="h-1 rounded-full bg-white/10 overflow-hidden">
+                  <div className="h-full w-[73%] rounded-full bg-white/60" />
+                </div>
+                <div className="flex items-center justify-between text-[10px] text-white/50">
+                  <span>🔊 Volume</span>
+                  <span className="text-white/70">75%</span>
+                </div>
+                <div className="h-1 rounded-full bg-white/10 overflow-hidden">
+                  <div className="h-full w-[75%] rounded-full bg-white/60" />
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Background name text */}
           <div className="absolute inset-x-0 top-6 z-[1] flex items-center justify-center overflow-hidden pointer-events-none lg:top-10" aria-hidden="true">
             <span
               className="font-sans font-black text-[clamp(72px,12vw,190px)] tracking-[0.14em] uppercase leading-none whitespace-nowrap select-none"
-              style={{ color: "rgba(255,255,255,0.06)" }}
+              style={{ color: "rgba(255,255,255,0.03)" }}
             >
               HYEBIN PARK
             </span>
