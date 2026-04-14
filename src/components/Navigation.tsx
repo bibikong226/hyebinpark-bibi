@@ -49,11 +49,11 @@ export const Navigation = () => {
   };
 
   return (
-    <header className="sticky top-0 w-full z-50 border-b"
+    <header className="sticky top-0 w-full z-50"
       style={{
-        background: "rgba(12,18,32,.72)",
-        backdropFilter: "blur(24px) saturate(1.6)",
-        borderColor: "rgba(255,255,255,.08)",
+        background: "rgba(0,0,0,.55)",
+        backdropFilter: "blur(30px) saturate(1.8)",
+        borderBottom: "1px solid rgba(255,255,255,.06)",
       }}>
       <nav className="flex justify-between items-center px-4 sm:px-8 md:px-10 h-10">
         <Link 
