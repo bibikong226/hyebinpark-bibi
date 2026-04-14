@@ -27,7 +27,6 @@ export const Navigation = () => {
     if (href.startsWith("/#")) {
       e.preventDefault();
       const sectionId = href.substring(2);
-
       if (location.pathname === "/") {
         const element = document.getElementById(sectionId);
         if (element) element.scrollIntoView({ behavior: "smooth" });
@@ -49,19 +48,23 @@ export const Navigation = () => {
   };
 
   return (
-    <header className="sticky top-0 w-full z-50"
+    <header
+      className="sticky top-0 w-full z-50"
+      role="banner"
       style={{
-        background: "rgba(30,64,175,.45)",
+        background: "rgba(12,14,26,0.8)",
         backdropFilter: "blur(30px) saturate(1.8)",
-        borderBottom: "1px solid rgba(255,255,255,.12)",
-      }}>
-      <nav className="flex justify-between items-center px-4 sm:px-8 md:px-10 h-10">
-        <Link 
-          to="/" 
+        borderBottom: "1px solid rgba(255,255,255,.08)",
+      }}
+    >
+      <nav className="flex justify-between items-center px-4 sm:px-8 md:px-10 h-10" role="navigation" aria-label="Main navigation">
+        <Link
+          to="/"
           onClick={handleLogoClick}
-          className="font-bold tracking-[0.08em] text-[13px] uppercase text-white/85"
+          className="font-bold tracking-[0.08em] text-[13px] uppercase text-white/85 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded-sm"
+          aria-label="Hyebin Park — home"
         >
-          <span className="mr-1.5 opacity-60">⌘</span>
+          <span className="mr-1.5 opacity-60" aria-hidden="true">⌘</span>
           Hyebin Park
         </Link>
 
@@ -74,29 +77,33 @@ export const Navigation = () => {
               onClick={(e) => !link.external && handleNavClick(e, link.href)}
               target={link.external ? "_blank" : undefined}
               rel={link.external ? "noopener noreferrer" : undefined}
-              className="text-[11px] font-medium tracking-[0.18em] uppercase text-white/60 hover:text-white transition-colors"
+              className="text-[11px] font-medium tracking-[0.18em] uppercase text-white/60 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 rounded-sm"
+              aria-current={location.pathname === link.href ? "page" : undefined}
             >
               {link.label}
             </a>
           ))}
           <a
             href="mailto:hyebinp@umich.edu"
-            className="px-4 py-1.5 bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-opacity text-[11px] font-medium"
+            className="px-4 py-1.5 bg-indigo-500 text-white rounded-full hover:bg-indigo-400 transition-colors text-[11px] font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+            aria-label="Contact Hyebin via email"
           >
             Contact
           </a>
-          <span className="text-[11px] text-white/40 font-medium tracking-wide hidden lg:block">
-            {currentTime.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })} {currentTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}
+          <span className="text-[11px] text-white/40 font-medium tracking-wide hidden lg:block" aria-hidden="true">
+            {currentTime.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })}{" "}
+            {currentTime.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })}
           </span>
         </div>
 
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden p-2 hover:bg-white/10 rounded-lg transition-colors text-white/80"
-          aria-label="Toggle menu"
+          className="md:hidden p-2 hover:bg-white/10 rounded-lg transition-colors text-white/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isMenuOpen}
         >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          {isMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
         </button>
 
         {/* Mobile Menu */}
@@ -107,8 +114,15 @@ export const Navigation = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: "100%" }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="fixed inset-y-0 right-0 w-3/4 max-w-sm bg-background border-l border-border md:hidden"
-              style={{ top: 0 }}
+              className="fixed inset-y-0 right-0 w-3/4 max-w-sm md:hidden"
+              style={{
+                top: 0,
+                background: "rgba(12,14,26,0.95)",
+                backdropFilter: "blur(30px)",
+                borderLeft: "1px solid rgba(255,255,255,.1)",
+              }}
+              role="dialog"
+              aria-label="Navigation menu"
             >
               <div className="flex flex-col p-8 pt-24 gap-6">
                 {navLinks.map((link) => (
@@ -121,7 +135,7 @@ export const Navigation = () => {
                     }}
                     target={link.external ? "_blank" : undefined}
                     rel={link.external ? "noopener noreferrer" : undefined}
-                    className="text-2xl text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-2xl text-white/60 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 rounded-sm"
                   >
                     {link.label}
                   </a>
@@ -129,7 +143,7 @@ export const Navigation = () => {
                 <a
                   href="mailto:hyebinp@umich.edu"
                   onClick={() => setIsMenuOpen(false)}
-                  className="text-2xl text-primary font-medium"
+                  className="text-2xl text-indigo-400 font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 rounded-sm"
                 >
                   Contact
                 </a>
@@ -146,8 +160,9 @@ export const Navigation = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsMenuOpen(false)}
-              className="fixed inset-0 bg-foreground/20 backdrop-blur-sm md:hidden"
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm md:hidden"
               style={{ zIndex: -1 }}
+              aria-hidden="true"
             />
           )}
         </AnimatePresence>

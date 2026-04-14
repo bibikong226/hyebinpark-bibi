@@ -21,7 +21,7 @@ const contactSchema = z.object({
 type ContactFormData = z.infer<typeof contactSchema>;
 
 const socialLinks = [
-  { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com" },
+  { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/in/hyebinp/" },
   { icon: Instagram, label: "Instagram", href: "https://instagram.com" },
 ];
 
@@ -45,14 +45,14 @@ const Contact = () => {
   return (
     <Layout>
       {/* Hero */}
-      <section className="section-padding pt-24 md:pt-32 bg-gradient-to-b from-background to-card/30">
-        <div className="container-narrow">
+      <section className="px-4 sm:px-8 md:px-10 pt-12 md:pt-16 pb-8" aria-labelledby="contact-heading">
+        <div className="max-w-3xl mx-auto">
           <motion.div className="space-y-4" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <p className="text-muted-foreground tracking-wide">Contact</p>
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-tight">
-              Let's start a <span className="text-primary italic">conversation</span>
+            <p className="text-white/40 tracking-wide text-sm">Contact</p>
+            <h1 id="contact-heading" className="font-serif text-4xl md:text-5xl lg:text-6xl leading-tight text-white">
+              Let's start a <span className="text-indigo-400 italic">conversation</span>
             </h1>
-            <p className="text-lg text-muted-foreground max-w-xl">
+            <p className="text-lg text-white/50 max-w-xl">
               Have a project in mind or just want to chat? I'd love to hear from you.
             </p>
           </motion.div>
@@ -60,8 +60,8 @@ const Contact = () => {
       </section>
 
       {/* Contact Form & Info */}
-      <section className="section-padding">
-        <div className="container-narrow">
+      <section className="px-4 sm:px-8 md:px-10 py-8 md:py-12">
+        <div className="max-w-3xl mx-auto">
           <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">
             {/* Form */}
             <motion.div className="lg:col-span-3" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.2 }}>
@@ -71,26 +71,32 @@ const Contact = () => {
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                       <FormField control={form.control} name="name" render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Name</FormLabel>
-                          <FormControl><Input placeholder="Your name" {...field} className="bg-secondary/50 border-border focus:border-primary" /></FormControl>
+                          <FormLabel className="text-white/70">Name</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Your name" {...field} className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-indigo-400" />
+                          </FormControl>
                           <FormMessage />
                         </FormItem>
                       )} />
                       <FormField control={form.control} name="email" render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Email</FormLabel>
-                          <FormControl><Input type="email" placeholder="your@email.com" {...field} className="bg-secondary/50 border-border focus:border-primary" /></FormControl>
+                          <FormLabel className="text-white/70">Email</FormLabel>
+                          <FormControl>
+                            <Input type="email" placeholder="your@email.com" {...field} className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-indigo-400" />
+                          </FormControl>
                           <FormMessage />
                         </FormItem>
                       )} />
                       <FormField control={form.control} name="message" render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Message</FormLabel>
-                          <FormControl><Textarea placeholder="Tell me about your project..." rows={6} {...field} className="bg-secondary/50 border-border focus:border-primary resize-none" /></FormControl>
+                          <FormLabel className="text-white/70">Message</FormLabel>
+                          <FormControl>
+                            <Textarea placeholder="Tell me about your project..." rows={6} {...field} className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-indigo-400 resize-none" />
+                          </FormControl>
                           <FormMessage />
                         </FormItem>
                       )} />
-                      <Button type="submit" size="lg" disabled={isSubmitting} className="w-full md:w-auto">
+                      <Button type="submit" size="lg" disabled={isSubmitting} className="w-full md:w-auto bg-indigo-500 text-white hover:bg-indigo-400">
                         {isSubmitting ? "Sending..." : "Send message"}
                       </Button>
                     </form>
@@ -104,22 +110,22 @@ const Contact = () => {
               <MacWindow title="contact-info">
                 <div className="p-6 space-y-6">
                   <div className="space-y-4">
-                    <h2 className="font-serif text-xl">Get in touch</h2>
-                    <a href="mailto:hello@hyebinpark.com" className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors">
-                      <Mail className="w-5 h-5" /><span>hello@hyebinpark.com</span>
+                    <h2 className="font-serif text-xl text-white">Get in touch</h2>
+                    <a href="mailto:hyebinp@umich.edu" className="flex items-center gap-3 text-white/50 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 rounded-sm">
+                      <Mail className="w-5 h-5" aria-hidden="true" /><span>hyebinp@umich.edu</span>
                     </a>
-                    <div className="flex items-center gap-3 text-muted-foreground">
-                      <MapPin className="w-5 h-5" /><span>San Francisco, CA</span>
+                    <div className="flex items-center gap-3 text-white/50">
+                      <MapPin className="w-5 h-5" aria-hidden="true" /><span>Ann Arbor, MI</span>
                     </div>
                   </div>
                   <div className="space-y-4">
-                    <h2 className="font-serif text-xl">Connect</h2>
+                    <h2 className="font-serif text-xl text-white">Connect</h2>
                     <div className="flex gap-4">
                       {socialLinks.map((link) => (
                         <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer"
-                          className="w-12 h-12 rounded-lg bg-secondary/50 border border-border flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
+                          className="w-12 h-12 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:border-indigo-400 hover:text-indigo-400 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
                           aria-label={link.label}>
-                          <link.icon className="w-5 h-5" />
+                          <link.icon className="w-5 h-5" aria-hidden="true" />
                         </a>
                       ))}
                     </div>
@@ -129,7 +135,7 @@ const Contact = () => {
 
               <MacWindow>
                 <div className="p-5">
-                  <p className="text-muted-foreground text-sm">
+                  <p className="text-white/40 text-sm">
                     I typically respond within 24-48 hours. For urgent inquiries, feel free to reach out on LinkedIn.
                   </p>
                 </div>

@@ -140,9 +140,16 @@ const App = () => {
   ];
 
   return (
-    <div className="bg-background text-foreground overflow-x-hidden font-sans">
+    <div className="overflow-x-hidden font-sans" style={{ background: "#0c0e1a", color: "rgba(255,255,255,0.9)" }}>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:rounded-md focus:text-sm focus:font-medium"
+      >
+        Skip to main content
+      </a>
       <Navigation />
 
+      <main id="main-content" role="main">
       {/* ═══ macOS DESKTOP HERO ═══ */}
       <section
         className="relative flex min-h-[900px] w-full flex-col overflow-hidden lg:min-h-screen"
@@ -399,16 +406,21 @@ const App = () => {
       {/* ═══ SELECTED WORK ═══ */}
       <section
         id="work"
-        className="py-28 sm:py-36 px-4 sm:px-8 md:px-10 border-t border-border bg-secondary/50"
+        className="py-28 sm:py-36 px-4 sm:px-8 md:px-10"
+        style={{
+          background: "linear-gradient(180deg, #0c0e1a 0%, #111827 50%, #0f1420 100%)",
+          borderTop: "1px solid rgba(255,255,255,.06)",
+        }}
+        aria-labelledby="work-heading"
       >
         <div className="max-w-[1200px] mx-auto">
-          <p className="text-[11px] font-medium tracking-[0.3em] uppercase text-muted-foreground mb-4">
+          <p className="text-[11px] font-medium tracking-[0.3em] uppercase text-white/30 mb-4">
             Selected Work
           </p>
-          <h2 className="text-[clamp(42px,6vw,80px)] font-black leading-[1.05] tracking-tight mb-1">
+          <h2 id="work-heading" className="text-[clamp(42px,6vw,80px)] font-black leading-[1.05] tracking-tight mb-1 text-white">
             Strategic
           </h2>
-          <h2 className="font-serif text-[clamp(42px,6vw,80px)] italic font-normal leading-[1.05] tracking-tight text-muted-foreground/30 mb-20">
+          <h2 className="font-serif text-[clamp(42px,6vw,80px)] italic font-normal leading-[1.05] tracking-tight text-white/20 mb-20">
             Outputs.
           </h2>
 
@@ -466,18 +478,18 @@ const App = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="p-6 md:p-7 flex-1 flex flex-col bg-background">
-                    <h3 className="font-serif text-[22px] md:text-[26px] font-semibold leading-[1.2] mb-2 text-foreground">
+                  <div className="p-6 md:p-7 flex-1 flex flex-col" style={{ background: "rgba(30,30,40,0.8)" }}>
+                    <h3 className="font-serif text-[22px] md:text-[26px] font-semibold leading-[1.2] mb-2 text-white">
                       {project.title}
                     </h3>
-                    <p className="text-[13.5px] md:text-[14.5px] leading-[1.65] text-muted-foreground mb-4 max-w-[440px]">
+                    <p className="text-[13.5px] md:text-[14.5px] leading-[1.65] text-white/50 mb-4 max-w-[440px]">
                       {project.description}
                     </p>
                     <div className="flex flex-wrap gap-[5px] mb-4">
                       {project.tags.map((tag, ti) => (
                         <span
                           key={ti}
-                          className="inline-block px-2.5 py-[3px] rounded-full text-[10.5px] font-medium border bg-secondary text-muted-foreground border-border"
+                          className="inline-block px-2.5 py-[3px] rounded-full text-[10.5px] font-medium border border-white/10 bg-white/5 text-white/60"
                         >
                           {tag}
                         </span>
@@ -489,12 +501,12 @@ const App = () => {
                           key={hi}
                           className="relative overflow-hidden rounded-[7px] px-3 py-[6px] cursor-default"
                         >
-                          <div className="absolute inset-0 bg-secondary" />
+                          <div className="absolute inset-0 bg-white/5" />
                           <div
                             className="absolute inset-0 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-[450ms] ease-out z-0"
                             style={{ background: project.accentColor }}
                           />
-                          <span className="relative z-10 text-xs font-medium transition-colors duration-[350ms] group-hover:text-white text-foreground/75">
+                          <span className="relative z-10 text-xs font-medium transition-colors duration-[350ms] group-hover:text-white text-white/60">
                             {hl}
                           </span>
                         </div>
@@ -566,6 +578,7 @@ const App = () => {
       <div id="cta-section">
         <Footer />
       </div>
+      </main>
     </div>
   );
 };
