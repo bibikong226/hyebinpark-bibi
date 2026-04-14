@@ -481,37 +481,27 @@ const App = () => {
                         Open a folder to browse related case studies.
                       </p>
                     </div>
-                    <div className="grid grid-cols-2 gap-x-4 gap-y-6 lg:grid-cols-2">
+                    <div className="grid grid-cols-3 gap-x-2 gap-y-5 lg:grid-cols-3">
                       {folders.map((folder, index) => (
                         <motion.button
                           key={folder.label}
                           type="button"
                           onClick={() => setFinderCategory(folder.label)}
-                          className="group flex flex-col items-center gap-2 text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))]"
+                          className="group flex flex-col items-center gap-1.5 text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))] rounded-xl p-1"
                           initial={{ opacity: 0, y: 14 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.22 + index * 0.07 }}
                           aria-label={`Open ${folder.label} folder`}
                           aria-haspopup="dialog"
                         >
-                          <div
-                            className="rounded-[22px] p-3 transition-transform duration-200 group-hover:-translate-y-1 group-hover:scale-[1.02]"
-                            style={{
-                              background:
-                                "linear-gradient(180deg, hsl(var(--desktop-search) / 0.84), hsl(var(--desktop-panel) / 0.7))",
-                              border: "1px solid hsl(var(--desktop-border) / 0.08)",
-                              boxShadow: "0 14px 30px hsl(var(--desktop-shadow) / 0.3)",
-                            }}
-                          >
-                            <img src={folder.icon} alt="" className="h-[74px] w-[74px] object-contain" />
-                          </div>
+                          <img
+                            src={folder.icon}
+                            alt=""
+                            className="h-16 w-16 object-contain transition-transform duration-200 group-hover:-translate-y-1 group-hover:scale-105 drop-shadow-lg"
+                          />
                           <span
-                            className="rounded-xl px-2.5 py-1 text-[11px] font-semibold leading-tight"
-                            style={{
-                              color: "hsl(var(--desktop-foreground))",
-                              background: "hsl(var(--desktop-search) / 0.9)",
-                              border: "1px solid hsl(var(--desktop-border) / 0.08)",
-                            }}
+                            className="text-[10px] font-medium leading-tight max-w-[72px]"
+                            style={{ color: "hsl(var(--desktop-foreground) / 0.85)" }}
                           >
                             {folder.label}
                           </span>
