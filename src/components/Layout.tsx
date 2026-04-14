@@ -30,7 +30,7 @@ export const Layout = ({ children, footerVariant = "purple" }: LayoutProps) => {
       <main id="main-content" className="relative flex-1 pt-10 md:pt-12" role="main">
         {children}
       </main>
-      <Footer variant={footerVariant} />
+      <Footer />
     </div>
   );
 };
