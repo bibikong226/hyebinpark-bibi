@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -14,8 +14,14 @@ const navLinks = [
 
 export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [currentTime, setCurrentTime] = useState(new Date());
   const location = useLocation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const timer = setInterval(() => setCurrentTime(new Date()), 60000);
+    return () => clearInterval(timer);
+  }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith("/#")) {
@@ -43,11 +49,11 @@ export const Navigation = () => {
   };
 
   return (
-    <header className="sticky top-0 w-full z-50 border-b"
+    <header className="sticky top-0 w-full z-50"
       style={{
-        background: "rgba(12,18,32,.72)",
-        backdropFilter: "blur(24px) saturate(1.6)",
-        borderColor: "rgba(255,255,255,.08)",
+        background: "rgba(0,0,0,.55)",
+        backdropFilter: "blur(30px) saturate(1.8)",
+        borderBottom: "1px solid rgba(255,255,255,.06)",
       }}>
       <nav className="flex justify-between items-center px-4 sm:px-8 md:px-10 h-10">
         <Link 
@@ -79,6 +85,9 @@ export const Navigation = () => {
           >
             Contact
           </a>
+          <span className="text-[11px] text-white/40 font-medium tracking-wide hidden lg:block">
+            {currentTime.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })} {currentTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}
+          </span>
         </div>
 
         {/* Mobile Menu Button */}
