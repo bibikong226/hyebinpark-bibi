@@ -403,36 +403,37 @@ const App = () => {
           }}>
           {(() => {
             const mainItems = [
-              { icon: "📂", bg: "linear-gradient(135deg, #7B6EF6, #5B4CD8)", action: () => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" }), active: true },
-              { icon: "💼", bg: "linear-gradient(135deg, #F472B6, #DB2777)", action: () => document.getElementById("explore")?.scrollIntoView({ behavior: "smooth" }), active: false },
-              { icon: "📋", bg: "linear-gradient(135deg, #6EE7B7, #10B981)", action: () => window.location.href = "/about", active: false },
-              { icon: "💬", bg: "linear-gradient(135deg, #FBBF24, #F59E0B)", action: () => window.open("https://drive.google.com/file/d/1l2V4pQCjAZhIhLyRmVh3m2QTw87yLI6P/view?usp=sharing", "_blank"), active: false },
+              { icon: "📂", label: "Work", bg: "linear-gradient(135deg, #7B6EF6, #5B4CD8)", action: () => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" }), active: true },
+              { icon: "💼", label: "Explore", bg: "linear-gradient(135deg, #F472B6, #DB2777)", action: () => document.getElementById("explore")?.scrollIntoView({ behavior: "smooth" }), active: false },
+              { icon: "📋", label: "About", bg: "linear-gradient(135deg, #6EE7B7, #10B981)", action: () => window.location.href = "/about", active: false },
+              { icon: "💬", label: "CV", bg: "linear-gradient(135deg, #FBBF24, #F59E0B)", action: () => window.open("https://drive.google.com/file/d/1l2V4pQCjAZhIhLyRmVh3m2QTw87yLI6P/view?usp=sharing", "_blank"), active: false },
             ];
-            const contactItem = { icon: "✉️", bg: "linear-gradient(135deg, #F87171, #DC2626)", action: () => window.location.href = "mailto:hyebinp@umich.edu", active: false };
+            const contactItem = { icon: "✉️", label: "Contact", bg: "linear-gradient(135deg, #F87171, #DC2626)", action: () => window.location.href = "mailto:hyebinp@umich.edu", active: false };
 
             return (
               <>
                 <div className="flex items-center gap-2.5 px-1.5">
                   {mainItems.map((item, i) => (
-                    <button key={i} onClick={item.action} className="flex flex-col items-center gap-1.5 group">
+                    <button key={i} onClick={item.action} className="flex flex-col items-center gap-1 group">
                       <div className="w-12 h-12 md:w-14 md:h-14 rounded-[14px] flex items-center justify-center text-2xl shadow-md group-hover:scale-110 group-hover:shadow-lg transition-all duration-200"
                         style={{ background: item.bg }}>
                         {item.icon}
                       </div>
-                      {item.active && <div className="w-1 h-1 rounded-full bg-foreground/40" />}
-                      {!item.active && <div className="w-1 h-1 rounded-full bg-foreground/20" />}
+                      <span className="text-[9px] font-medium tracking-wide text-foreground/50">{item.label}</span>
                     </button>
                   ))}
                 </div>
                 {/* Divider */}
                 <div className="w-px h-10 bg-foreground/10 mx-2.5" />
-                <div className="flex flex-col items-center gap-1.5 group px-1.5">
+                <div className="px-1.5">
                   <button onClick={contactItem.action}
-                    className="w-12 h-12 md:w-14 md:h-14 rounded-[14px] flex items-center justify-center text-2xl shadow-md group-hover:scale-110 group-hover:shadow-lg transition-all duration-200"
-                    style={{ background: contactItem.bg }}>
-                    {contactItem.icon}
+                    className="flex flex-col items-center gap-1 group">
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-[14px] flex items-center justify-center text-2xl shadow-md group-hover:scale-110 group-hover:shadow-lg transition-all duration-200"
+                      style={{ background: contactItem.bg }}>
+                      {contactItem.icon}
+                    </div>
+                    <span className="text-[9px] font-medium tracking-wide text-foreground/50">{contactItem.label}</span>
                   </button>
-                  <div className="w-1 h-1 rounded-full bg-foreground/20" />
                 </div>
               </>
             );
