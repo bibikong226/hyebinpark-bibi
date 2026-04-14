@@ -416,27 +416,50 @@ const App = () => {
 
         </div>
 
-        {/* Dock — icon style matching header */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1 px-3 py-2 rounded-2xl z-30"
+        {/* Dock — macOS style with colored icon tiles */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-0 px-3 py-2.5 rounded-[22px] z-30"
           style={{
-            background: "rgba(236,236,242,.72)",
-            backdropFilter: "blur(24px) saturate(1.6)",
-            border: "1px solid rgba(0,0,0,.06)",
-            boxShadow: "0 8px 32px rgba(0,0,0,.08)",
+            background: "rgba(240,240,245,.75)",
+            backdropFilter: "blur(28px) saturate(1.8)",
+            border: "1px solid rgba(255,255,255,.5)",
+            boxShadow: "0 8px 40px rgba(0,0,0,.1), 0 2px 8px rgba(0,0,0,.06), inset 0 1px 0 rgba(255,255,255,.6)",
           }}>
-          {[
-            { label: "Work", icon: "💼", action: () => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" }) },
-            { label: "Explore", icon: "🔍", action: () => document.getElementById("explore")?.scrollIntoView({ behavior: "smooth" }) },
-            { label: "About", icon: "👤", action: () => window.location.href = "/about" },
-            { label: "CV", icon: "📄", action: () => window.open("https://drive.google.com/file/d/1l2V4pQCjAZhIhLyRmVh3m2QTw87yLI6P/view?usp=sharing", "_blank") },
-            { label: "Contact", icon: "✉️", action: () => window.location.href = "mailto:hyebinp@umich.edu" },
-          ].map((item) => (
-            <button key={item.label} onClick={item.action}
-              className="flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl hover:bg-white/50 transition-colors group">
-              <span className="text-xl group-hover:scale-110 transition-transform">{item.icon}</span>
-              <span className="text-[9px] font-medium text-foreground/60">{item.label}</span>
-            </button>
-          ))}
+          {(() => {
+            const mainItems = [
+              { icon: "📂", bg: "linear-gradient(135deg, #7B6EF6, #5B4CD8)", action: () => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" }), active: true },
+              { icon: "💼", bg: "linear-gradient(135deg, #F472B6, #DB2777)", action: () => document.getElementById("explore")?.scrollIntoView({ behavior: "smooth" }), active: false },
+              { icon: "📋", bg: "linear-gradient(135deg, #6EE7B7, #10B981)", action: () => window.location.href = "/about", active: false },
+              { icon: "💬", bg: "linear-gradient(135deg, #FBBF24, #F59E0B)", action: () => window.open("https://drive.google.com/file/d/1l2V4pQCjAZhIhLyRmVh3m2QTw87yLI6P/view?usp=sharing", "_blank"), active: false },
+            ];
+            const contactItem = { icon: "✉️", bg: "linear-gradient(135deg, #F87171, #DC2626)", action: () => window.location.href = "mailto:hyebinp@umich.edu", active: false };
+
+            return (
+              <>
+                <div className="flex items-center gap-2.5 px-1.5">
+                  {mainItems.map((item, i) => (
+                    <button key={i} onClick={item.action} className="flex flex-col items-center gap-1.5 group">
+                      <div className="w-12 h-12 md:w-14 md:h-14 rounded-[14px] flex items-center justify-center text-2xl shadow-md group-hover:scale-110 group-hover:shadow-lg transition-all duration-200"
+                        style={{ background: item.bg }}>
+                        {item.icon}
+                      </div>
+                      {item.active && <div className="w-1 h-1 rounded-full bg-foreground/40" />}
+                      {!item.active && <div className="w-1 h-1 rounded-full bg-foreground/20" />}
+                    </button>
+                  ))}
+                </div>
+                {/* Divider */}
+                <div className="w-px h-10 bg-foreground/10 mx-2.5" />
+                <div className="flex flex-col items-center gap-1.5 group px-1.5">
+                  <button onClick={contactItem.action}
+                    className="w-12 h-12 md:w-14 md:h-14 rounded-[14px] flex items-center justify-center text-2xl shadow-md group-hover:scale-110 group-hover:shadow-lg transition-all duration-200"
+                    style={{ background: contactItem.bg }}>
+                    {contactItem.icon}
+                  </button>
+                  <div className="w-1 h-1 rounded-full bg-foreground/20" />
+                </div>
+              </>
+            );
+          })()}
         </div>
       </section>
 
