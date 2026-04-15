@@ -41,7 +41,7 @@ const MacWin = ({
       </div>
       {title && (
         <>
-          <span className="flex-1 text-center text-[11px] font-medium tracking-wide text-black/40">{title}</span>
+          <span className="flex-1 text-center text-[14px] font-medium tracking-wide text-black/40">{title}</span>
           <div className="w-[52px]" />
         </>
       )}
@@ -240,7 +240,7 @@ const App = () => {
                 </h1>
 
                 <motion.p
-                  className="mb-10 mt-8 rounded-full border border-black/[0.08] bg-white/50 px-5 py-2 text-[12px] font-bold uppercase tracking-[0.22em] text-black/70 backdrop-blur-md"
+                  className="mb-10 mt-8 rounded-full border border-black/[0.08] bg-white/50 px-5 py-2 text-[14px] font-bold uppercase tracking-[0.22em] text-black/70 backdrop-blur-md"
                   initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.06 }}
                 >
                   Strategic AI Product Designer
@@ -268,7 +268,7 @@ const App = () => {
                         <img src={memojiImg} alt="Hyebin memoji" className="h-24 w-24 flex-shrink-0 object-contain drop-shadow-md" style={{ background: "transparent" }} />
                         <div>
                           <p className="text-[15px] font-semibold leading-6 text-black/80">I turn complex AI & data products into clear, trustworthy experiences.</p>
-                          <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-black/[0.04] px-3 py-1 text-[11px] font-semibold text-black/60">
+                          <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-black/[0.04] px-3 py-1 text-[14px] font-semibold text-black/60">
                             <span className="h-2 w-2 rounded-full bg-green-500" aria-hidden="true" />Open to work
                           </div>
                         </div>
