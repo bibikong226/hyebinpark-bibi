@@ -438,7 +438,7 @@ const App = () => {
                     {highlightKeywords(t.subtext, t.keywords)}
                   </p>
                   <div className="mt-auto flex items-center gap-3 border-t border-black/[0.06] pt-4">
-                    <img src={t.avatar} alt={t.author} className="h-14 w-14 rounded-full object-cover" />
+                    <img src={t.avatar} alt={t.author} className="h-20 w-20 rounded-full object-cover" />
                     <div>
                       <span className="block text-[14px] font-semibold text-black/80">{t.author}</span>
                       <span className="text-[14px] text-black/45">{t.role} · <span className="text-[#4338CA]">{t.company}</span></span>
