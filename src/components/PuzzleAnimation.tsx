@@ -13,12 +13,12 @@ interface PuzzlePiece {
 }
 
 const pieces: PuzzlePiece[] = [
-  { label: "User", sublabel: "Needs", color: "#E8443A", row: 0, col: 0, startX: -60, startY: -40, startRotate: -12 },
-  { label: "Data", sublabel: "Complexity", color: "#F59E0B", row: 0, col: 1, startX: 55, startY: -50, startRotate: 10 },
-  { label: "Business", sublabel: "Goals", color: "#22C55E", row: 1, col: 0, startX: -65, startY: 8, startRotate: 8 },
-  { label: "Tech", sublabel: "Constraints", color: "#EC4899", row: 1, col: 1, startX: 60, startY: 15, startRotate: -11 },
-  { label: "Edge", sublabel: "Cases", color: "#8B5CF6", row: 2, col: 0, startX: -55, startY: 50, startRotate: 7 },
-  { label: "Emerging", sublabel: "Tech", color: "#3B82F6", row: 2, col: 1, startX: 50, startY: 60, startRotate: -9 },
+  { label: "User", sublabel: "Needs", color: "#E8443A", row: 0, col: 0, startX: -35, startY: -25, startRotate: -8 },
+  { label: "Data", sublabel: "Complexity", color: "#F59E0B", row: 0, col: 1, startX: 35, startY: -30, startRotate: 7 },
+  { label: "Business", sublabel: "Goals", color: "#22C55E", row: 1, col: 0, startX: -40, startY: 5, startRotate: 6 },
+  { label: "Tech", sublabel: "Constraints", color: "#EC4899", row: 1, col: 1, startX: 38, startY: 8, startRotate: -7 },
+  { label: "Edge", sublabel: "Cases", color: "#8B5CF6", row: 2, col: 0, startX: -32, startY: 30, startRotate: 5 },
+  { label: "Emerging", sublabel: "Tech", color: "#3B82F6", row: 2, col: 1, startX: 30, startY: 35, startRotate: -6 },
 ];
 
 const PIECE_W = 140;
@@ -78,22 +78,22 @@ export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProp
   const prefersReducedMotion = useReducedMotion();
   const [isHovered, setIsHovered] = useState(false);
   const [showPhoto, setShowPhoto] = useState(prefersReducedMotion ? true : false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleMouseEnter = () => {
     if (prefersReducedMotion) return;
     setIsHovered(true);
-    // After pieces assemble, show photo
-    setTimeout(() => {
+    timerRef.current = setTimeout(() => {
       setShowPhoto(true);
       onAssembled?.();
-    }, 1800);
+    }, 2000);
   };
 
   const handleMouseLeave = () => {
     if (prefersReducedMotion) return;
+    if (timerRef.current) clearTimeout(timerRef.current);
     setShowPhoto(false);
-    // Small delay before scattering pieces back
-    setTimeout(() => setIsHovered(false), 300);
+    setTimeout(() => setIsHovered(false), 200);
   };
 
   const totalW = COLS * PIECE_W + TAB_R;
@@ -117,7 +117,7 @@ export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProp
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ delay: 1.5 }}
+            transition={{ delay: 1.2 }}
           >
             <span className="rounded-full bg-white/80 px-4 py-1.5 text-[11px] font-semibold text-black/50 shadow-sm backdrop-blur-md">
               Hover to assemble ✨
@@ -126,7 +126,7 @@ export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProp
         )}
       </AnimatePresence>
 
-      {/* Puzzle pieces */}
+      {/* Puzzle pieces — scattered positions stay INSIDE the container */}
       <AnimatePresence>
         {!showPhoto && pieces.map((piece, index) => {
           const x = piece.col * PIECE_W;
@@ -140,22 +140,22 @@ export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProp
                 x: piece.startX,
                 y: piece.startY,
                 opacity: 0,
-                scale: 0.88,
+                scale: 0.92,
                 rotate: piece.startRotate,
               }}
               animate={{
                 x: isHovered ? 0 : piece.startX,
                 y: isHovered ? 0 : piece.startY,
                 opacity: 1,
-                scale: isHovered ? 1 : 0.9,
+                scale: isHovered ? 1 : 0.93,
                 rotate: isHovered ? 0 : piece.startRotate,
               }}
-              exit={{ opacity: 0, scale: 0.92, transition: { duration: 0.4 } }}
+              exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.35 } }}
               transition={{
                 type: "spring",
-                stiffness: isHovered ? 40 : 60,
-                damping: 16,
-                delay: isHovered ? index * 0.12 : 0.05 + index * 0.06,
+                stiffness: isHovered ? 35 : 70,
+                damping: 18,
+                delay: isHovered ? index * 0.1 : 0.03 + index * 0.04,
               }}
             >
               <PuzzlePieceSVG piece={piece} index={index} />
@@ -164,12 +164,11 @@ export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProp
         })}
       </AnimatePresence>
 
-      {/* Photo reveal */}
+      {/* Photo reveal — no border/outline */}
       <AnimatePresence>
         {showPhoto && profileSrc && (
           <motion.div
             className="absolute inset-0 overflow-hidden rounded-2xl"
-            style={{ boxShadow: "0 8px 30px rgba(0,0,0,0.1)" }}
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.96, transition: { duration: 0.35 } }}
