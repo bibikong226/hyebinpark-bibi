@@ -13,17 +13,17 @@ interface PuzzlePiece {
 }
 
 const pieces: PuzzlePiece[] = [
-  { label: "User", sublabel: "Needs", color: "#E8443A", row: 0, col: 0, startX: -140, startY: -100, startRotate: -22 },
-  { label: "Data", sublabel: "Complexity", color: "#F59E0B", row: 0, col: 1, startX: 30, startY: -130, startRotate: 18 },
-  { label: "Business", sublabel: "Goals", color: "#22C55E", row: 1, col: 0, startX: -120, startY: 30, startRotate: 16 },
-  { label: "Tech", sublabel: "Constraints", color: "#EC4899", row: 1, col: 1, startX: 50, startY: 50, startRotate: -20 },
-  { label: "Edge", sublabel: "Cases", color: "#8B5CF6", row: 2, col: 0, startX: -150, startY: 120, startRotate: 14 },
-  { label: "Emerging", sublabel: "Tech", color: "#3B82F6", row: 2, col: 1, startX: 60, startY: 150, startRotate: -18 },
+  { label: "User", sublabel: "Needs", color: "#E8443A", row: 0, col: 0, startX: -90, startY: -60, startRotate: -18 },
+  { label: "Data", sublabel: "Complexity", color: "#F59E0B", row: 0, col: 1, startX: 80, startY: -80, startRotate: 15 },
+  { label: "Business", sublabel: "Goals", color: "#22C55E", row: 1, col: 0, startX: -100, startY: 10, startRotate: 12 },
+  { label: "Tech", sublabel: "Constraints", color: "#EC4899", row: 1, col: 1, startX: 90, startY: 20, startRotate: -16 },
+  { label: "Edge", sublabel: "Cases", color: "#8B5CF6", row: 2, col: 0, startX: -80, startY: 70, startRotate: 10 },
+  { label: "Emerging", sublabel: "Tech", color: "#3B82F6", row: 2, col: 1, startX: 70, startY: 90, startRotate: -14 },
 ];
 
-const PIECE_W = 130;
-const PIECE_H = 90;
-const TAB_R = 12;
+const PIECE_W = 140;
+const PIECE_H = 95;
+const TAB_R = 13;
 const CORNER_R = 10;
 const COLS = 2;
 const ROWS = 3;
@@ -50,8 +50,8 @@ const PuzzlePieceSVG = ({ piece, index }: { piece: PuzzlePiece; index: number })
             {hasBlankTop && <circle cx={PIECE_W / 2} cy={0} r={TAB_R} fill="black" />}
           </mask>
           <linearGradient id={glossId} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="rgba(255,255,255,0.25)" />
-            <stop offset="100%" stopColor="rgba(0,0,0,0.1)" />
+            <stop offset="0%" stopColor="rgba(255,255,255,0.22)" />
+            <stop offset="100%" stopColor="rgba(0,0,0,0.08)" />
           </linearGradient>
         </defs>
         <g mask={`url(#${maskId})`}>
@@ -60,8 +60,8 @@ const PuzzlePieceSVG = ({ piece, index }: { piece: PuzzlePiece; index: number })
         </g>
       </svg>
       <div className="absolute left-0 top-0 flex flex-col items-center justify-center px-1 text-center" style={{ width: PIECE_W, height: PIECE_H }}>
-        <span className="text-[11px] font-extrabold uppercase leading-tight tracking-[0.04em] text-white drop-shadow-sm">{piece.label}</span>
-        <span className="text-[8px] font-semibold uppercase tracking-[0.08em] text-white/75">{piece.sublabel}</span>
+        <span className="text-[13px] font-extrabold uppercase leading-tight tracking-[0.04em] text-white drop-shadow-sm">{piece.label}</span>
+        <span className="text-[9px] font-semibold uppercase tracking-[0.08em] text-white/75">{piece.sublabel}</span>
       </div>
     </div>
   );
@@ -76,7 +76,7 @@ export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProp
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: false, margin: "-40px" });
   const prefersReducedMotion = useReducedMotion();
-  const [phase, setPhase] = useState<"scattered" | "assembling" | "assembled" | "photo" | "pause">(
+  const [phase, setPhase] = useState<"scattered" | "assembling" | "assembled" | "photo">(
     prefersReducedMotion ? "photo" : "scattered"
   );
 
@@ -84,16 +84,16 @@ export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProp
     setPhase("scattered");
   }, []);
 
-  // Scatter → assemble (slow: 3s scatter view)
+  // Scatter for 4s so user can read labels
   useEffect(() => {
     if (prefersReducedMotion) { setPhase("photo"); onAssembled?.(); return; }
     if (isInView && phase === "scattered") {
-      const t = setTimeout(() => setPhase("assembling"), 3000);
+      const t = setTimeout(() => setPhase("assembling"), 4000);
       return () => clearTimeout(t);
     }
   }, [isInView, prefersReducedMotion, phase]);
 
-  // Assemble → assembled → photo → pause → restart
+  // Assemble slowly → photo → restart
   useEffect(() => {
     if (phase === "assembling") {
       const t = setTimeout(() => {
@@ -101,13 +101,12 @@ export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProp
         setTimeout(() => {
           setPhase("photo");
           onAssembled?.();
-        }, 800);
-      }, 2000);
+        }, 1000);
+      }, 2500);
       return () => clearTimeout(t);
     }
     if (phase === "photo") {
-      // Show photo for 3s then restart
-      const t = setTimeout(() => startCycle(), 3000);
+      const t = setTimeout(() => startCycle(), 4000);
       return () => clearTimeout(t);
     }
   }, [phase, onAssembled, startCycle]);
@@ -124,7 +123,7 @@ export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProp
       aria-label="Puzzle that reveals Hyebin's profile photo"
     >
       <AnimatePresence>
-        {phase !== "photo" && phase !== "pause" && pieces.map((piece, index) => {
+        {phase !== "photo" && pieces.map((piece, index) => {
           const x = piece.col * PIECE_W;
           const y = piece.row * PIECE_H;
           const isAssembling = phase === "assembling" || phase === "assembled";
@@ -137,22 +136,22 @@ export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProp
                 x: piece.startX,
                 y: piece.startY,
                 opacity: 0,
-                scale: 0.7,
+                scale: 0.82,
                 rotate: piece.startRotate,
               }}
               animate={{
                 x: isAssembling ? 0 : piece.startX,
                 y: isAssembling ? 0 : piece.startY,
                 opacity: 1,
-                scale: isAssembling ? 1 : 0.85,
+                scale: isAssembling ? 1 : 0.88,
                 rotate: isAssembling ? 0 : piece.startRotate,
               }}
-              exit={{ opacity: 0, scale: 0.92, transition: { duration: 0.4 } }}
+              exit={{ opacity: 0, scale: 0.92, transition: { duration: 0.5 } }}
               transition={{
                 type: "spring",
-                stiffness: 50,
-                damping: 12,
-                delay: isAssembling ? index * 0.15 : 0.1 + index * 0.1,
+                stiffness: 35,
+                damping: 14,
+                delay: isAssembling ? index * 0.18 : 0.15 + index * 0.12,
               }}
             >
               <PuzzlePieceSVG piece={piece} index={index} />
@@ -168,8 +167,8 @@ export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProp
             style={{ boxShadow: "0 8px 30px rgba(0,0,0,0.1)" }}
             initial={{ opacity: 0, scale: 0.94 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.94, transition: { duration: 0.4 } }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            exit={{ opacity: 0, scale: 0.94, transition: { duration: 0.5 } }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
             <img
               src={profileSrc}
