@@ -1,8 +1,7 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-import { Layout } from "@/components/Layout";
-import { MacWindow } from "@/components/MacWindow";
+import { Navigation } from "@/components/Navigation";
+import { Footer } from "@/components/Footer";
 import aboutProfile from "@/assets/about-profile.jpg";
 import expMichigan from "@/assets/exp-michigan.png";
 import expConcord from "@/assets/exp-concord.png";
@@ -14,6 +13,36 @@ import hobbyPeople from "@/assets/hobby-people.png";
 import hobbyChallenges from "@/assets/hobby-challenges.png";
 import hobbyTheater from "@/assets/hobby-theater.jpg";
 
+/* ── Consistent Mac window ── */
+const MacWin = ({ children, title }: { children: React.ReactNode; title: string }) => (
+  <motion.div
+    className="overflow-hidden rounded-2xl bg-white"
+    style={{ border: "1px solid rgba(0,0,0,0.07)", boxShadow: "0 8px 32px rgba(0,0,0,0.06)" }}
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.5 }}
+  >
+    <div className="flex items-center gap-2 border-b border-black/[0.06] px-4 py-2.5" aria-hidden="true">
+      <div className="flex items-center gap-[7px]">
+        <span className="h-3 w-3 rounded-full" style={{ background: "#FF5F57" }} />
+        <span className="h-3 w-3 rounded-full" style={{ background: "#FFBD2E" }} />
+        <span className="h-3 w-3 rounded-full" style={{ background: "#28C840" }} />
+      </div>
+      <span className="flex-1 text-center text-[11px] font-medium tracking-wide text-black/35">{title}</span>
+      <div className="w-[52px]" />
+    </div>
+    <div>{children}</div>
+  </motion.div>
+);
+
+const SectionHeader = ({ eyebrow, title }: { eyebrow: string; title: string }) => (
+  <div className="mb-10 md:mb-14">
+    <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.3em] text-black/30">{eyebrow}</p>
+    <h2 className="text-[clamp(28px,4vw,48px)] font-bold leading-[1.1] tracking-tight text-black/85">{title}</h2>
+  </div>
+);
+
 const hobbies = [
   { image: hobbyTravel, caption: "✈️ Loves to travel and experience new culture" },
   { image: hobbyPeople, caption: "🤝 Enjoys meeting different people and stories" },
@@ -22,11 +51,11 @@ const hobbies = [
 ];
 
 const experiences = [
-  { period: "2024 – Present", title: "MS-HCI @ University of Michigan", description: "Blending UX research, design strategy, and emerging tech to create more human-centered products. From automotive UX to Generative AI and accessibility, I explore how technology can serve people better.", image: expMichigan },
-  { period: "2023 – Present", title: "UX Designer @ Concord AI", description: "Led the 0-to-1 design of Concord's first client-facing product, fostering close collaboration with C-level, product, and engineering stakeholders. My final design for the institutional OTC trading and asset management MVP increased user trust and trading speed.", image: expConcord },
-  { period: "2023", title: "Product Strategy Research Assistant @ LINE", description: "Explored how Generative AI, blockchain, and Web3 could evolve into user-centered products. Translated market trends, usability gaps, and interaction patterns into strategic insights.", image: expLine },
-  { period: "2022", title: "Global Communications Intern @ TikTok", description: "Created digital content that helped creators navigate TikTok's tools. Worked across global cross-functional teams on campaigns like Internet Safety Month and TikTok Shop.", image: expTiktok },
-  { period: "2020 – 2021", title: "UX Research & Strategy Intern @ NAVER Corp", description: "Connected user insights with service and marketing strategies. Led qualitative research including interviews, FGIs, and social listening to uncover user needs and shape content.", image: expNaver },
+  { period: "2024 – Present", title: "MS-HCI @ University of Michigan", description: "Blending UX research, design strategy, and emerging tech to create more human-centered products.", image: expMichigan },
+  { period: "2023 – Present", title: "UX Designer @ Concord AI", description: "Led the 0-to-1 design of Concord's first client-facing product, fostering close collaboration with C-level, product, and engineering stakeholders.", image: expConcord },
+  { period: "2023", title: "Product Strategy Research Assistant @ LINE", description: "Explored how Generative AI, blockchain, and Web3 could evolve into user-centered products.", image: expLine },
+  { period: "2022", title: "Global Communications Intern @ TikTok", description: "Created digital content that helped creators navigate TikTok's tools across global teams.", image: expTiktok },
+  { period: "2020 – 2021", title: "UX Research & Strategy Intern @ NAVER Corp", description: "Connected user insights with service and marketing strategies through qualitative research.", image: expNaver },
 ];
 
 const workValues = [
@@ -37,177 +66,120 @@ const workValues = [
 
 const About = () => {
   return (
-    <Layout>
-      {/* Hero Section */}
-      <section className="pt-12 sm:pt-16 md:pt-20 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-8 md:px-16" aria-labelledby="about-heading">
-        <div className="max-w-6xl mx-auto">
-          <motion.h1
-            id="about-heading"
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif italic text-indigo-400 mb-8 sm:mb-12 md:mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            Meet Hyebin!
-          </motion.h1>
+    <div className="overflow-x-hidden font-sans bg-[#f0f1f5]">
+      <Navigation />
 
-          <MacWindow title="about-hyebin.md">
-            <div className="grid md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-start p-6 sm:p-8 md:p-10">
-              {/* Profile Photo */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                <img
-                  src={aboutProfile}
-                  alt="Hyebin Park smiling at camera"
-                  className="w-full max-w-sm md:max-w-md rounded-xl shadow-lg mx-auto md:mx-0"
-                />
-              </motion.div>
+      <main id="main-content" role="main">
+        {/* Hero */}
+        <section className="px-4 pt-16 pb-8 sm:px-8 md:px-10" aria-labelledby="about-heading">
+          <div className="mx-auto max-w-[1000px]">
+            <motion.div className="mb-10" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+              <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.3em] text-black/30">About</p>
+              <h1 id="about-heading" className="text-[clamp(32px,5vw,56px)] font-bold tracking-tight text-black/85">
+                Meet Hyebin! 👋
+              </h1>
+            </motion.div>
 
-              {/* Bio */}
-              <motion.div
-                className="space-y-4 sm:space-y-6"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-              >
-                <p className="text-lg sm:text-xl text-white/80 leading-relaxed">
-                  Hi, I'm Hyebin Park, but you can call me Bibi 👋
-                </p>
-                <p className="text-base sm:text-lg text-white/50 leading-relaxed">
-                  I'm a <span className="font-semibold text-white">strategic product designer</span> who turns complex problems in <span className="font-semibold text-white">emerging tech</span> into tangible <span className="font-semibold text-white">business impact</span>. I use research-backed insight to bring a human touch to powerful new systems, from AI algorithms to crypto workflows.
-                </p>
-                <p className="text-base sm:text-lg text-white/50 leading-relaxed">
-                  As a Master's student in <span className="font-semibold text-white">Human-Computer Interaction</span> at the University of Michigan, I specialize in bridging the gap between <span className="font-semibold text-white">user needs, technical possibilities, and business goals</span>.
-                </p>
-                <a
-                  href="https://drive.google.com/file/d/1l2V4pQCjAZhIhLyRmVh3m2QTw87yLI6P/view?usp=sharing"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-white text-[#0c0e1a] rounded-full hover:bg-white/90 transition-all font-medium text-sm sm:text-base mt-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
-                >
-                  View Resume
-                  <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
-                </a>
-              </motion.div>
-            </div>
-          </MacWindow>
-        </div>
-      </section>
-
-      {/* Experience Section */}
-      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-8 md:px-16" aria-labelledby="experience-heading">
-        <div className="max-w-6xl mx-auto">
-          <motion.h2
-            id="experience-heading"
-            className="text-2xl sm:text-3xl md:text-4xl font-medium text-white mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            What I have been exploring and learning 🚀
-          </motion.h2>
-
-          <div className="mt-10 sm:mt-12 md:mt-16 space-y-6">
-            {experiences.map((exp, index) => (
-              <motion.div
-                key={exp.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <MacWindow>
-                  <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start p-5 sm:p-6">
-                    <div className="flex-shrink-0">
-                      <img src={exp.image} alt={exp.title} className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full object-cover shadow-md" />
-                    </div>
-                    <div className="flex-1 text-center sm:text-left">
-                      <span className="text-xs sm:text-sm text-indigo-400 font-medium">{exp.period}</span>
-                      <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mt-2 mb-3 sm:mb-4">{exp.title}</h3>
-                      <p className="text-sm sm:text-base text-white/50 leading-relaxed">{exp.description}</p>
-                    </div>
-                  </div>
-                </MacWindow>
-              </motion.div>
-            ))}
+            <MacWin title="about-hyebin.md">
+              <div className="grid gap-8 p-6 sm:p-8 md:grid-cols-2 md:gap-12 md:p-10">
+                <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}>
+                  <img src={aboutProfile} alt="Hyebin Park smiling at camera" className="w-full max-w-sm rounded-xl shadow-lg" />
+                </motion.div>
+                <motion.div className="space-y-5" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}>
+                  <p className="text-lg text-black/70 leading-relaxed">Hi, I'm Hyebin Park, but you can call me Bibi 👋</p>
+                  <p className="text-[15px] text-black/50 leading-relaxed">
+                    I'm a <span className="font-semibold text-black/80">strategic product designer</span> who turns complex problems in <span className="font-semibold text-black/80">emerging tech</span> into tangible <span className="font-semibold text-black/80">business impact</span>.
+                  </p>
+                  <p className="text-[15px] text-black/50 leading-relaxed">
+                    As a Master's student in <span className="font-semibold text-black/80">Human-Computer Interaction</span> at the University of Michigan, I specialize in bridging <span className="font-semibold text-black/80">user needs, technical possibilities, and business goals</span>.
+                  </p>
+                  <a
+                    href="https://drive.google.com/file/d/1l2V4pQCjAZhIhLyRmVh3m2QTw87yLI6P/view?usp=sharing"
+                    target="_blank" rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full bg-[#4338CA] px-5 py-2.5 text-[13px] font-medium text-white transition-all hover:bg-[#3730A3]"
+                  >
+                    View Resume <ArrowUpRight className="h-4 w-4" />
+                  </a>
+                </motion.div>
+              </div>
+            </MacWin>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* How I Work Section */}
-      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-8 md:px-16" aria-labelledby="how-heading">
-        <div className="max-w-6xl mx-auto">
-          <motion.h2
-            id="how-heading"
-            className="text-2xl sm:text-3xl md:text-4xl font-medium text-white mb-10 sm:mb-12 md:mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            How I Work
-          </motion.h2>
-
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-            {workValues.map((value, index) => (
-              <motion.div
-                key={value.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <MacWindow>
-                  <div className="p-6 sm:p-8">
-                    <h3 className="text-xl sm:text-2xl font-serif italic text-indigo-400 mb-3 sm:mb-4">
-                      <span className="mr-2" aria-hidden="true">{value.emoji}</span>
-                      {value.title}
-                    </h3>
-                    <p className="text-sm sm:text-base text-white/50 leading-relaxed">{value.description}</p>
-                  </div>
-                </MacWindow>
-              </motion.div>
-            ))}
+        {/* Experience */}
+        <section id="experience" className="px-4 py-20 sm:px-8 md:px-10" aria-labelledby="exp-heading">
+          <div className="mx-auto max-w-[1000px]">
+            <MacWin title="Finder — Experience">
+              <div className="p-6 sm:p-8 md:p-10">
+                <SectionHeader eyebrow="Experience" title="What I've been exploring and learning 🚀" />
+                <div className="space-y-5">
+                  {experiences.map((exp, i) => (
+                    <motion.div key={exp.title} className="flex gap-5 rounded-xl bg-[#f7f8fa] p-5" style={{ border: "1px solid rgba(0,0,0,0.04)" }}
+                      initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}
+                    >
+                      <img src={exp.image} alt={exp.title} className="hidden h-16 w-16 flex-shrink-0 rounded-xl object-cover sm:block" />
+                      <div>
+                        <p className="text-[11px] font-medium text-[#4338CA]">{exp.period}</p>
+                        <h3 className="mt-1 text-[16px] font-semibold text-black/80">{exp.title}</h3>
+                        <p className="mt-1.5 text-[13px] leading-relaxed text-black/45">{exp.description}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </MacWin>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Outside of Design Work */}
-      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-8 md:px-16" aria-labelledby="hobbies-heading">
-        <div className="max-w-6xl mx-auto">
-          <motion.h2
-            id="hobbies-heading"
-            className="text-2xl sm:text-3xl md:text-4xl font-medium text-white mb-8 sm:mb-10 md:mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            Outside of Design Work
-          </motion.h2>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-            {hobbies.map((hobby, index) => (
-              <motion.div
-                key={hobby.caption}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <MacWindow>
-                  <div className="aspect-[3/4] overflow-hidden">
-                    <img src={hobby.image} alt={hobby.caption} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
-                  </div>
-                  <p className="text-white/50 text-xs sm:text-sm leading-relaxed p-3">{hobby.caption}</p>
-                </MacWindow>
-              </motion.div>
-            ))}
+        {/* How I Work */}
+        <section className="px-4 py-20 sm:px-8 md:px-10" aria-labelledby="how-heading">
+          <div className="mx-auto max-w-[1000px]">
+            <MacWin title="Notes — How I Work">
+              <div className="p-6 sm:p-8 md:p-10">
+                <SectionHeader eyebrow="Values" title="How I Work" />
+                <div className="grid gap-5 sm:grid-cols-3">
+                  {workValues.map((v, i) => (
+                    <motion.div key={v.title} className="rounded-xl bg-[#f7f8fa] p-5" style={{ border: "1px solid rgba(0,0,0,0.04)" }}
+                      initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
+                    >
+                      <h3 className="mb-2 text-lg font-semibold text-black/80">
+                        <span className="mr-2">{v.emoji}</span>{v.title}
+                      </h3>
+                      <p className="text-[13px] leading-relaxed text-black/45">{v.description}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </MacWin>
           </div>
-        </div>
-      </section>
-    </Layout>
+        </section>
+
+        {/* Outside of Design */}
+        <section className="px-4 py-20 sm:px-8 md:px-10" aria-labelledby="hobbies-heading">
+          <div className="mx-auto max-w-[1000px]">
+            <MacWin title="Photos — Outside of Design">
+              <div className="p-6 sm:p-8 md:p-10">
+                <SectionHeader eyebrow="Beyond Design" title="Outside of Design Work" />
+                <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+                  {hobbies.map((h, i) => (
+                    <motion.div key={h.caption} className="overflow-hidden rounded-xl bg-[#f7f8fa]" style={{ border: "1px solid rgba(0,0,0,0.04)" }}
+                      initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
+                    >
+                      <div className="aspect-[3/4] overflow-hidden">
+                        <img src={h.image} alt={h.caption} className="h-full w-full object-cover transition-transform duration-300 hover:scale-105" />
+                      </div>
+                      <p className="p-3 text-[12px] leading-relaxed text-black/50">{h.caption}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </MacWin>
+          </div>
+        </section>
+
+        <div id="cta-section"><Footer /></div>
+      </main>
+    </div>
   );
 };
 
