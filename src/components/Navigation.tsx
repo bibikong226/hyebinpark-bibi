@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Search } from "lucide-react";
 
-const CV_LINK = "https://drive.google.com/file/d/1l2V4pQCjAZhIhLyRmVh3m2QTw87yLI6P/view?usp=sharing";
+const CV_LINK = "https://drive.google.com/file/d/1eJfszR-U-Q8KHsuMs1b4Vy68Mjd-uVjS/view?usp=sharing";
 
 const navLinks = [
   { href: "/#work", label: "WORK" },
