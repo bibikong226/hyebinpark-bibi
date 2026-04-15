@@ -1,5 +1,5 @@
 import { motion, useInView, useReducedMotion, AnimatePresence } from "framer-motion";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 
 interface PuzzlePiece {
   label: string;
@@ -76,25 +76,57 @@ export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProp
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: false, margin: "-40px" });
   const prefersReducedMotion = useReducedMotion();
-  const [isHovered, setIsHovered] = useState(false);
-  const [showPhoto, setShowPhoto] = useState(prefersReducedMotion ? true : false);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // Phases: scattered → assembling → assembled → photo → (loop back to scattered)
+  const [phase, setPhase] = useState<"scattered" | "assembling" | "assembled" | "photo">(
+    prefersReducedMotion ? "photo" : "scattered"
+  );
+  const [hasClicked, setHasClicked] = useState(false);
 
-  const handleMouseEnter = () => {
-    if (prefersReducedMotion) return;
-    setIsHovered(true);
-    timerRef.current = setTimeout(() => {
-      setShowPhoto(true);
-      onAssembled?.();
-    }, 2000);
-  };
+  const handleClick = useCallback(() => {
+    if (phase === "scattered" && !hasClicked) {
+      setHasClicked(true);
+      setPhase("assembling");
+    }
+  }, [phase, hasClicked]);
 
-  const handleMouseLeave = () => {
-    if (prefersReducedMotion) return;
-    if (timerRef.current) clearTimeout(timerRef.current);
-    setShowPhoto(false);
-    setTimeout(() => setIsHovered(false), 200);
-  };
+  // Assembling → assembled → photo
+  useEffect(() => {
+    if (phase === "assembling") {
+      const t = setTimeout(() => {
+        setPhase("assembled");
+        setTimeout(() => {
+          setPhase("photo");
+          onAssembled?.();
+        }, 800);
+      }, 2200);
+      return () => clearTimeout(t);
+    }
+  }, [phase, onAssembled]);
+
+  // Photo → scatter → assemble loop (after first click)
+  useEffect(() => {
+    if (phase === "photo" && hasClicked) {
+      const t = setTimeout(() => {
+        setPhase("scattered");
+        // Auto-assemble after scatter
+        setTimeout(() => setPhase("assembling"), 3500);
+      }, 3500);
+      return () => clearTimeout(t);
+    }
+  }, [phase, hasClicked]);
+
+  // Re-trigger assembling→assembled→photo when looping
+  useEffect(() => {
+    if (phase === "assembling" && hasClicked) {
+      const t = setTimeout(() => {
+        setPhase("assembled");
+        setTimeout(() => {
+          setPhase("photo");
+        }, 800);
+      }, 2200);
+      return () => clearTimeout(t);
+    }
+  }, [phase, hasClicked]);
 
   const totalW = COLS * PIECE_W + TAB_R;
   const totalH = ROWS * PIECE_H + TAB_R;
@@ -105,13 +137,12 @@ export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProp
       className="relative cursor-pointer"
       style={{ width: totalW, height: totalH }}
       role="img"
-      aria-label="Hover to assemble puzzle and reveal Hyebin's photo"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      aria-label="Click to assemble puzzle and reveal Hyebin's photo"
+      onClick={handleClick}
     >
-      {/* Hover hint */}
+      {/* Click hint — only before first click */}
       <AnimatePresence>
-        {!isHovered && !showPhoto && isInView && (
+        {!hasClicked && phase === "scattered" && isInView && (
           <motion.div
             className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center"
             initial={{ opacity: 0 }}
@@ -120,17 +151,18 @@ export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProp
             transition={{ delay: 1.2 }}
           >
             <span className="rounded-full bg-white/80 px-4 py-1.5 text-[11px] font-semibold text-black/50 shadow-sm backdrop-blur-md">
-              Hover to assemble ✨
+              Click to assemble ✨
             </span>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Puzzle pieces — scattered positions stay INSIDE the container */}
+      {/* Puzzle pieces */}
       <AnimatePresence>
-        {!showPhoto && pieces.map((piece, index) => {
+        {phase !== "photo" && pieces.map((piece, index) => {
           const x = piece.col * PIECE_W;
           const y = piece.row * PIECE_H;
+          const isAssembling = phase === "assembling" || phase === "assembled";
           return (
             <motion.div
               key={piece.label + piece.sublabel}
@@ -144,18 +176,18 @@ export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProp
                 rotate: piece.startRotate,
               }}
               animate={{
-                x: isHovered ? 0 : piece.startX,
-                y: isHovered ? 0 : piece.startY,
+                x: isAssembling ? 0 : piece.startX,
+                y: isAssembling ? 0 : piece.startY,
                 opacity: 1,
-                scale: isHovered ? 1 : 0.93,
-                rotate: isHovered ? 0 : piece.startRotate,
+                scale: isAssembling ? 1 : 0.93,
+                rotate: isAssembling ? 0 : piece.startRotate,
               }}
-              exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.35 } }}
+              exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.4 } }}
               transition={{
                 type: "spring",
-                stiffness: isHovered ? 35 : 70,
+                stiffness: isAssembling ? 35 : 70,
                 damping: 18,
-                delay: isHovered ? index * 0.1 : 0.03 + index * 0.04,
+                delay: isAssembling ? index * 0.12 : 0.03 + index * 0.05,
               }}
             >
               <PuzzlePieceSVG piece={piece} index={index} />
@@ -164,14 +196,14 @@ export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProp
         })}
       </AnimatePresence>
 
-      {/* Photo reveal — no border/outline */}
+      {/* Photo reveal */}
       <AnimatePresence>
-        {showPhoto && profileSrc && (
+        {phase === "photo" && profileSrc && (
           <motion.div
             className="absolute inset-0 overflow-hidden rounded-2xl"
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.96, transition: { duration: 0.35 } }}
+            exit={{ opacity: 0, scale: 0.96, transition: { duration: 0.4 } }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
             <img
