@@ -70,7 +70,7 @@ const About = () => {
     <div className="overflow-x-hidden font-sans" style={{ background: "linear-gradient(180deg, #DDD5EE 0%, #DDE4F0 20%, #E0ECF0 45%, #F0EDE6 70%, #F5F0EB 100%)" }}>
       <Navigation />
       {/* Hero */}
-      <section className="px-4 pt-8 pb-4 sm:px-8 md:px-10" aria-labelledby="about-heading">
+      <section className="px-4 pt-8 pb-16 sm:px-8 sm:pb-20 md:px-10 md:pb-24" aria-labelledby="about-heading">
         <div className="mx-auto max-w-[1000px]">
           <motion.div className="mb-8" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <p className="mb-2 text-[14px] font-medium uppercase tracking-[0.3em] text-black/40">About</p>
