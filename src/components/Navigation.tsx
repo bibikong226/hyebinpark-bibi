@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 
 const CV_LINK = "https://drive.google.com/file/d/1l2V4pQCjAZhIhLyRmVh3m2QTw87yLI6P/view?usp=sharing";
 
@@ -12,7 +12,11 @@ const navLinks = [
   { href: CV_LINK, label: "CV", external: true },
 ];
 
-export const Navigation = () => {
+interface NavigationProps {
+  onSearchOpen?: () => void;
+}
+
+export const Navigation = ({ onSearchOpen }: NavigationProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [scrolled, setScrolled] = useState(false);
@@ -70,6 +74,13 @@ export const Navigation = () => {
                 className="rounded-sm text-[11px] font-medium uppercase tracking-[0.18em] text-black/50 transition-opacity hover:text-black/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
               >{link.label}</a>
             ))}
+            {onSearchOpen && (
+              <button onClick={onSearchOpen} className="flex items-center gap-1.5 rounded-full border border-black/[0.06] bg-black/[0.03] px-3 py-1 text-[11px] font-medium text-black/40 transition-colors hover:bg-black/[0.06]">
+                <Search size={12} />
+                <span>Search</span>
+                <span className="ml-1 rounded bg-black/[0.06] px-1 py-0.5 text-[9px] font-semibold text-black/30">⌘K</span>
+              </button>
+            )}
             <a href="mailto:hyebinp@umich.edu" className="rounded-full bg-[#4338CA] px-4 py-1.5 text-[11px] font-medium text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">Contact</a>
             <span className="hidden text-[11px] font-medium tracking-wide text-black/25 lg:block" aria-hidden="true">
               {currentTime.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })} {currentTime.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })}
@@ -90,6 +101,9 @@ export const Navigation = () => {
                     <a key={link.href} href={link.href} onClick={e => { if (!link.external) handleNavClick(e, link.href); setIsMenuOpen(false); }}
                       target={link.external ? "_blank" : undefined} className="text-2xl text-black/60">{link.label}</a>
                   ))}
+                  {onSearchOpen && (
+                    <button onClick={() => { onSearchOpen(); setIsMenuOpen(false); }} className="text-left text-2xl text-black/60">Search</button>
+                  )}
                   <a href="mailto:hyebinp@umich.edu" onClick={() => setIsMenuOpen(false)} className="text-2xl font-medium text-[#4338CA]">Contact</a>
                 </div>
               </motion.div>
