@@ -225,16 +225,16 @@ const App = () => {
             <div className="mx-auto max-w-[1280px]">
 
               {/* Name + Headline */}
-              <div className="mb-20 flex flex-col items-center text-center lg:mb-28">
+              <div className="mb-24 flex flex-col items-center text-center lg:mb-32">
                 <h1
                   className="pointer-events-none select-none text-[clamp(3.5rem,13vw,9rem)] font-black uppercase leading-[0.85] tracking-[-0.04em]"
-                  style={{ color: "rgba(0,0,0,0.10)" }}
+                  style={{ color: "rgba(0,0,0,0.18)" }}
                 >
                   HYEBIN PARK
                 </h1>
 
                 <motion.p
-                  className="mb-10 mt-8 rounded-full border border-black/[0.08] bg-white/50 px-5 py-2 text-[14px] font-bold uppercase tracking-[0.22em] text-black/70 backdrop-blur-md"
+                  className="mb-14 mt-10 rounded-full border border-black/[0.08] bg-white/50 px-5 py-2 text-[14px] font-bold uppercase tracking-[0.22em] text-black/70 backdrop-blur-md"
                   initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.06 }}
                 >
                   Strategic AI Product Designer
@@ -244,10 +244,10 @@ const App = () => {
                   className="text-[clamp(2.2rem,6vw,5rem)] leading-[1.08] tracking-tight"
                   initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
                 >
-                  <span className="font-normal text-black/50">Turning</span>{" "}
+                  <span className="font-normal text-black/70">Turning</span>{" "}
                   <span className="font-serif italic text-[#4338CA]">complexity</span>
                   <br />
-                  <span className="font-normal text-black/50">into</span>{" "}
+                  <span className="font-normal text-black/70">into</span>{" "}
                   <span className="font-serif italic text-[#4338CA]">clarity</span>
                 </motion.h2>
               </div>
@@ -349,7 +349,7 @@ const App = () => {
         </section>
 
         {/* ═══════ SELECTED WORK ═══════ */}
-        <section id="work" className="px-4 py-24 sm:px-8 sm:py-32 md:px-10" aria-labelledby="work-heading">
+        <section id="work" className="px-4 py-28 sm:px-8 sm:py-36 md:px-10" aria-labelledby="work-heading">
           <div className="mx-auto max-w-[1200px]">
             <SectionWindowHeader
               windowTitle="Finder — Selected Work"
@@ -404,7 +404,7 @@ const App = () => {
         </section>
 
         {/* ═══════ TESTIMONIALS ═══════ */}
-        <section id="collab" className="px-4 py-24 sm:px-8 sm:py-28 md:px-10" aria-labelledby="collab-heading">
+        <section id="collab" className="px-4 py-28 sm:px-8 sm:py-36 md:px-10" aria-labelledby="collab-heading">
           <div className="mx-auto max-w-[1200px]">
             <SectionWindowHeader
               windowTitle="Notes — Collaboration"
