@@ -172,43 +172,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="section-padding text-white" style={{ background: "rgba(20,20,40,0.95)" }}>
-        <div className="container-narrow text-center">
-          <motion.div
-            className="space-y-8"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <h2 className="font-serif text-4xl md:text-5xl">
-              Let's Connect
-            </h2>
-            <p className="text-white/80 max-w-2xl mx-auto text-lg leading-relaxed">
-              I'm always excited to connect with fellow designers, researchers, and innovators. Whether you have a project in mind or just want to talk about design and technology, I'd love to hear from you. Let's talk! 👩‍💻
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-2">
-              <a
-                href="mailto:hyebinp@umich.edu"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-background text-foreground rounded-full font-medium hover:opacity-90 transition-opacity"
-              >
-                hyebinp@umich.edu
-                <span className="text-sm">↗</span>
-              </a>
-              <a
-                href="https://www.linkedin.com/in/hyebinpark/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white/20 text-white rounded-full font-medium hover:bg-white/30 transition-colors border border-white/30"
-              >
-                LinkedIn
-                <span className="text-sm">↗</span>
-              </a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
     </Layout>
   );
 };
