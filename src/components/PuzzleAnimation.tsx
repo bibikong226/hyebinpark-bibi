@@ -173,7 +173,7 @@ export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProp
         {phase === "photo" && profileSrc && (
           <motion.div
             className="absolute flex items-center justify-center overflow-hidden rounded-2xl"
-            style={{ left: PADDING - 6, top: PADDING - 6, width: totalW + 12, height: totalH + 12 }}
+            style={{ left: PADDING - 16, top: PADDING - 16, width: totalW + 32, height: totalH + 32 }}
             initial={{ opacity: 0, scale: 0.97 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.97, transition: { duration: 0.35 } }}
