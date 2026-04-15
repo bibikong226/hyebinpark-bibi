@@ -1,4 +1,4 @@
-import { motion, useInView, useReducedMotion, AnimatePresence } from "framer-motion";
+import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 interface PuzzlePiece {
@@ -12,14 +12,13 @@ interface PuzzlePiece {
   startRotate: number;
 }
 
-/* 3 columns × 2 rows — wider, shorter, fits landscape */
 const pieces: PuzzlePiece[] = [
-  { label: "User", sublabel: "Needs", color: "#E8443A", row: 0, col: 0, startX: -60, startY: -40, startRotate: -10 },
-  { label: "Data", sublabel: "Complexity", color: "#F59E0B", row: 0, col: 1, startX: 8, startY: -50, startRotate: 8 },
-  { label: "Business", sublabel: "Goals", color: "#22C55E", row: 0, col: 2, startX: 55, startY: -35, startRotate: -7 },
-  { label: "Tech", sublabel: "Constraints", color: "#EC4899", row: 1, col: 0, startX: -55, startY: 45, startRotate: 9 },
-  { label: "Edge", sublabel: "Cases", color: "#8B5CF6", row: 1, col: 1, startX: 12, startY: 55, startRotate: -8 },
-  { label: "Emerging", sublabel: "Tech", color: "#3B82F6", row: 1, col: 2, startX: 60, startY: 40, startRotate: 7 },
+  { label: "User", sublabel: "Needs", color: "#E8443A", row: 0, col: 0, startX: -32, startY: -18, startRotate: -8 },
+  { label: "Data", sublabel: "Complexity", color: "#F59E0B", row: 0, col: 1, startX: 0, startY: -24, startRotate: 6 },
+  { label: "Business", sublabel: "Goals", color: "#22C55E", row: 0, col: 2, startX: 28, startY: -16, startRotate: -5 },
+  { label: "Tech", sublabel: "Constraints", color: "#EC4899", row: 1, col: 0, startX: -28, startY: 22, startRotate: 7 },
+  { label: "Edge", sublabel: "Cases", color: "#8B5CF6", row: 1, col: 1, startX: 4, startY: 26, startRotate: -6 },
+  { label: "Emerging", sublabel: "Tech", color: "#3B82F6", row: 1, col: 2, startX: 30, startY: 18, startRotate: 5 },
 ];
 
 const PIECE_W = 130;
@@ -74,109 +73,105 @@ interface PuzzleAnimationProps {
 }
 
 export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProps) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { once: false, margin: "-60px" });
   const prefersReducedMotion = useReducedMotion();
   const [phase, setPhase] = useState<"scattered" | "assembling" | "assembled" | "photo">(
     prefersReducedMotion ? "photo" : "scattered"
   );
-  const timerRef = useRef<ReturnType<typeof setTimeout>>();
-  const hasTriggered = useRef(false);
+  const timersRef = useRef<number[]>([]);
 
-  const clearTimer = () => {
-    if (timerRef.current) clearTimeout(timerRef.current);
-  };
-
-  // Auto-trigger assembly when scrolled into view
   useEffect(() => {
-    if (isInView && phase === "scattered" && !hasTriggered.current) {
-      hasTriggered.current = true;
-      const t = setTimeout(() => setPhase("assembling"), 600);
-      return () => clearTimeout(t);
+    if (prefersReducedMotion) return;
+
+    timersRef.current.forEach(window.clearTimeout);
+    timersRef.current = [];
+
+    if (phase === "scattered") {
+      timersRef.current.push(window.setTimeout(() => setPhase("assembling"), 1200));
     }
-  }, [isInView, phase]);
-
-  // State machine
-  useEffect(() => {
-    clearTimer();
 
     if (phase === "assembling") {
-      timerRef.current = setTimeout(() => setPhase("assembled"), 2000);
-    } else if (phase === "assembled") {
-      timerRef.current = setTimeout(() => {
-        setPhase("photo");
-        onAssembled?.();
-      }, 700);
-    } else if (phase === "photo") {
-      timerRef.current = setTimeout(() => {
-        hasTriggered.current = false;
-        setPhase("scattered");
-      }, 4000);
+      timersRef.current.push(window.setTimeout(() => setPhase("assembled"), 1800));
     }
 
-    return clearTimer;
-  }, [phase, onAssembled]);
+    if (phase === "assembled") {
+      timersRef.current.push(
+        window.setTimeout(() => {
+          setPhase("photo");
+          onAssembled?.();
+        }, 700)
+      );
+    }
 
+    if (phase === "photo") {
+      timersRef.current.push(window.setTimeout(() => setPhase("scattered"), 3200));
+    }
+
+    return () => {
+      timersRef.current.forEach(window.clearTimeout);
+      timersRef.current = [];
+    };
+  }, [phase, onAssembled, prefersReducedMotion]);
 
   const totalW = COLS * PIECE_W + TAB_R;
   const totalH = ROWS * PIECE_H + TAB_R;
 
   return (
     <div
-      ref={containerRef}
       className="relative"
       style={{ width: totalW, height: totalH }}
       role="img"
       aria-label="Animated puzzle showing how Hyebin works"
     >
-      {/* Puzzle pieces */}
-      <AnimatePresence>
-        {phase !== "photo" && pieces.map((piece, index) => {
-          const x = piece.col * PIECE_W;
-          const y = piece.row * PIECE_H;
-          const isAssembling = phase === "assembling" || phase === "assembled";
-          return (
-            <motion.div
-              key={piece.label + piece.sublabel}
-              className="absolute"
-              style={{ left: x, top: y }}
-              initial={{
-                x: piece.startX,
-                y: piece.startY,
-                opacity: 0,
-                scale: 0.92,
-                rotate: piece.startRotate,
-              }}
-              animate={{
-                x: isAssembling ? 0 : piece.startX,
-                y: isAssembling ? 0 : piece.startY,
-                opacity: 1,
-                scale: isAssembling ? 1 : 0.93,
-                rotate: isAssembling ? 0 : piece.startRotate,
-              }}
-              exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.4 } }}
-              transition={{
-                type: "spring",
-                stiffness: isAssembling ? 38 : 70,
-                damping: 18,
-                delay: isAssembling ? index * 0.1 : 0.03 + index * 0.04,
-              }}
-            >
-              <PuzzlePieceSVG piece={piece} index={index} />
-            </motion.div>
-          );
-        })}
+      <AnimatePresence mode="wait">
+        {phase !== "photo" && (
+          <motion.div
+            key={phase}
+            className="absolute inset-0"
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            {pieces.map((piece, index) => {
+              const x = piece.col * PIECE_W;
+              const y = piece.row * PIECE_H;
+              const isAssembling = phase === "assembling" || phase === "assembled";
+
+              return (
+                <motion.div
+                  key={piece.label + piece.sublabel}
+                  className="absolute"
+                  style={{ left: x, top: y }}
+                  initial={false}
+                  animate={{
+                    x: isAssembling ? 0 : piece.startX,
+                    y: isAssembling ? 0 : piece.startY,
+                    opacity: 1,
+                    scale: isAssembling ? 1 : 0.94,
+                    rotate: isAssembling ? 0 : piece.startRotate,
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: isAssembling ? 46 : 70,
+                    damping: 20,
+                    delay: isAssembling ? index * 0.08 : index * 0.03,
+                  }}
+                >
+                  <PuzzlePieceSVG piece={piece} index={index} />
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        )}
       </AnimatePresence>
 
-      {/* Photo reveal */}
       <AnimatePresence>
         {phase === "photo" && profileSrc && (
           <motion.div
             className="absolute inset-0 flex items-center justify-center overflow-hidden rounded-2xl"
-            initial={{ opacity: 0, scale: 0.96 }}
+            initial={{ opacity: 0, scale: 0.97 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.96, transition: { duration: 0.4 } }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            exit={{ opacity: 0, scale: 0.97, transition: { duration: 0.35 } }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
             <img
               src={profileSrc}
