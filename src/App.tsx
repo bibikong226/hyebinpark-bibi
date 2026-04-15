@@ -329,7 +329,7 @@ const App = () => {
                   { icon: "🧭", label: "Explore", bg: "linear-gradient(135deg,#F472B6,#DB2777)", action: () => document.getElementById("explore")?.scrollIntoView({ behavior: "smooth" }) },
                   { icon: "📋", label: "About", bg: "linear-gradient(135deg,#34D399,#059669)", action: () => (window.location.href = "/about") },
                   { icon: "💼", label: "Experience", bg: "linear-gradient(135deg,#FB923C,#EA580C)", action: () => (window.location.href = "/about#experience") },
-                  { icon: "📄", label: "CV", bg: "linear-gradient(135deg,#FBBF24,#D97706)", action: () => window.open("https://drive.google.com/file/d/1l2V4pQCjAZhIhLyRmVh3m2QTw87yLI6P/view?usp=sharing", "_blank") },
+                  { icon: "📄", label: "CV", bg: "linear-gradient(135deg,#FBBF24,#D97706)", action: () => window.open("https://drive.google.com/file/d/1eJfszR-U-Q8KHsuMs1b4Vy68Mjd-uVjS/view?usp=sharing", "_blank") },
                 ];
                 const contact = { icon: "✉️", label: "Contact", bg: "linear-gradient(135deg,#F87171,#DC2626)", action: () => window.open("https://www.linkedin.com/in/hyebinp/", "_blank") };
                 return (
