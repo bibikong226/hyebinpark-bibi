@@ -48,11 +48,11 @@ const imageReveal = {
 };
 
 /* ── Consistent layout constants ── */
-const MAX_W = "max-w-[960px]";            // unified content width
+const MAX_W = "max-w-[960px]";
 const SECTION_PX = "px-4 sm:px-8 md:px-10";
 const SECTION_PY = "py-12 sm:py-16 md:py-20";
-const BODY = "text-sm sm:text-base leading-relaxed text-black/55"; // unified body text
-const BODY_STRONG = "font-semibold text-black/80";                 // emphasis in body
+const BODY = "text-sm sm:text-base leading-relaxed text-black/55";
+const BODY_STRONG = "font-semibold text-black/80";
 const PINK = "#DB2777";
 
 /* ── Mac window — only for Project Details ── */
@@ -105,9 +105,7 @@ const sections = [
   { id: 'summary', label: 'Summary' },
   { id: 'problem', label: 'Problem' },
   { id: 'solution', label: 'Solution', isDark: true },
-  { id: 'research-survey', label: 'Survey' },
-  { id: 'research-community', label: 'Community' },
-  { id: 'research-competitive', label: 'Competitive' },
+  { id: 'user-research', label: 'User Research' },
   { id: 'principles', label: 'Principles' },
   { id: 'ideation', label: 'Ideation' },
   { id: 'iterations', label: 'Iterations' },
@@ -233,73 +231,105 @@ const Nurturly = () => {
           </div>
         </section>
 
-        {/* ═══════ USER RESEARCH — split into 3 separate cards ═══════ */}
+        {/* ═══════ USER RESEARCH ═══════ */}
+        <section id="user-research" className={`${SECTION_PX} ${SECTION_PY}`}>
+          <div className={`mx-auto ${MAX_W} space-y-8`}>
 
-        {/* Survey */}
-        <section id="research-survey" className={`${SECTION_PX} ${SECTION_PY}`}>
-          <div className={`mx-auto ${MAX_W}`}>
+            {/* Survey */}
             <WhiteCard>
               <SectionHeader eyebrow="SURVEY INSIGHTS" title={<>Survey as a Compass: Finding <span style={{ color: PINK }}>Where to Focus</span></>} />
+              <p className={`${BODY} mb-2`}>
+                I initially assumed that moms might need support throughout the entire motherhood journey. But <span className={BODY_STRONG}>after conducting 22 surveys</span> with women during pregnancy and postpartum, I was able to <span className={BODY_STRONG}>narrow the focus.</span>
+              </p>
               <p className={`${BODY} mb-6`}>
-                We conducted a <span className={BODY_STRONG}>survey with 93 participants</span> to explore the challenges moms face and understand what kind of support they need most.
+                The responses revealed that support gaps are most critical during <span className={BODY_STRONG}>pregnancy and postpartum,</span> and that <span className={BODY_STRONG}>moms need tools designed for their own recovery.</span>
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <motion.img src={surveyChartClean} alt="Survey results chart" className="w-full rounded-xl max-w-[420px] mx-auto" {...imageReveal} />
                 <motion.img src={surveyStats} alt="Survey statistics" className="w-full rounded-xl max-w-[420px] mx-auto" {...imageReveal} />
               </div>
+              <PinkBox>💡 These findings helped me narrow the focus to <strong>mom-centered recovery support</strong> during pregnancy and postpartum, not just general parenting help.</PinkBox>
+            </WhiteCard>
+
+            {/* Interview Insights */}
+            <WhiteCard>
+              <SectionHeader eyebrow="INTERVIEW INSIGHTS" title={<>Zooming In: What <span style={{ color: PINK }}>Moms</span> Are Actually <span style={{ color: PINK }}>Experiencing</span></>} />
+              <p className={`${BODY} mb-2`}>
+                Interviewed 5 moms to understand the emotional, physical, and mental challenges they face during <span className={BODY_STRONG}>pregnancy and postpartum.</span>
+              </p>
+              <p className={`${BODY} mb-6`}>
+                Their stories revealed a deep need for <span className={BODY_STRONG}>reliable answers, emotional support, and personalized guidance</span> beyond medical facts.
+              </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <motion.img src={emotionalSupportGapComplete} alt="Emotional Support Gap" className="w-full rounded-xl max-w-[420px] mx-auto" {...imageReveal} />
                 <motion.img src={informationOverloadComplete} alt="Information Overload" className="w-full rounded-xl max-w-[420px] mx-auto" {...imageReveal} />
               </div>
             </WhiteCard>
-          </div>
-        </section>
 
-        {/* Community Research */}
-        <section id="research-community" className={`${SECTION_PX} ${SECTION_PY}`}>
-          <div className={`mx-auto ${MAX_W}`}>
+            {/* Digital Ethnography */}
             <WhiteCard>
-              <SectionHeader eyebrow="COMMUNITY RESEARCH" title={<>Online Communities Reveal <span style={{ color: PINK }}>Moms' Real Needs</span></>} />
+              <SectionHeader eyebrow="DIGITAL ETHNOGRAPHY" title={<>These Gaps Often Push Moms Toward <span style={{ color: PINK }}>Online Communities</span> In Search Of <span style={{ color: PINK }}>Connection</span></>} />
               <p className={`${BODY} mb-6`}>
-                Analyzing online parenting communities such as <span className={BODY_STRONG}>What to Expect, Reddit, and BabyCenter</span> uncovered critical gaps in emotional support and peer connection.
+                Analyzed conversations on <span className={BODY_STRONG}>Reddit, Instagram, TikTok, and Facebook</span> to see how they seek guidance and connection during pregnancy and postpartum.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <motion.img src={onlineCommunities1} alt="Online community research" className="w-full rounded-xl max-w-[420px] mx-auto" {...imageReveal} />
                 <motion.img src={onlineCommunities2} alt="Online community insights" className="w-full rounded-xl max-w-[420px] mx-auto" {...imageReveal} />
               </div>
             </WhiteCard>
-          </div>
-        </section>
 
-        {/* Competitive Analysis */}
-        <section id="research-competitive" className={`${SECTION_PX} ${SECTION_PY}`}>
-          <div className={`mx-auto ${MAX_W}`}>
+            {/* Competitive Analysis */}
             <WhiteCard>
-              <SectionHeader eyebrow="COMPETITIVE ANALYSIS" title={<>Understanding <span style={{ color: PINK }}>What's Missing</span> in Existing Solutions</>} />
+              <SectionHeader eyebrow="COMPETITIVE ANALYSIS" title={<>These Gaps Present a <span style={{ color: PINK }}>Clear Opportunity</span></>} />
               <p className={`${BODY} mb-6`}>
-                We analyzed existing platforms like <span className={BODY_STRONG}>What to Expect, Peanut, and BabyCenter</span> to identify opportunities for differentiation and improvement.
+                Despite strong communities and a wealth of content, existing platforms often fall short in delivering <span className={BODY_STRONG}>verified, personalized guidance</span> and fostering <span className={BODY_STRONG}>deep, meaningful connections</span> between moms.
               </p>
               <motion.img src={competitiveAnalysis} alt="Competitive analysis chart" className="w-full rounded-xl max-w-[720px] mx-auto" {...imageReveal} />
             </WhiteCard>
+
           </div>
         </section>
 
-        {/* ═══════ PRINCIPLES ═══════ */}
+        {/* ═══════ DESIGN STRATEGY / PRINCIPLES ═══════ */}
         <section id="principles" className={`${SECTION_PX} ${SECTION_PY}`}>
           <div className={`mx-auto ${MAX_W}`}>
             <WhiteCard>
-              <SectionHeader eyebrow="DESIGN PRINCIPLES" title={<>Guiding our design with <span style={{ color: PINK }}>empathy-centered values</span></>} />
+              <SectionHeader eyebrow="DESIGN STRATEGY" title={<>So How Can Our <span style={{ color: PINK }}>Design</span> Truly <span style={{ color: PINK }}>Support Moms?</span></>} />
+              <p className={`${BODY} mb-2`}>
+                Based on what I heard and observed, I realized that moms weren't just asking for information. They were asking to be <span className={BODY_STRONG}>seen, supported, and protected.</span>
+              </p>
+              <p className={`${BODY} mb-8`}>
+                I translated those pain points <span className={BODY_STRONG}>into design goals</span> that shaped the heart of Nurturly. The result: a solution grounded in <span className={BODY_STRONG}>empathy, trust, and real human connection.</span>
+              </p>
+
+              {/* Pain Points */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                {[
+                  { label: 'PAIN POINT 1', emoji: '💔', title: 'Emotional Needs Unmet', desc: "Focus always on baby, not mom's recovery" },
+                  { label: 'PAIN POINT 2', emoji: '⚠️', title: 'Information Overload', desc: 'Flooded with advice, lacking clarity' },
+                  { label: 'PAIN POINT 3', emoji: '🏊', title: 'Missing Connection', desc: 'Need empathetic 1:1 support' },
+                ].map((p, i) => (
+                  <motion.div key={i} className="rounded-xl p-4 text-center" style={{ background: "rgba(219,39,119,0.04)", border: "1px solid rgba(219,39,119,0.10)" }} {...fadeInUp}>
+                    <p className="text-[10px] font-semibold uppercase tracking-wider mb-2" style={{ color: PINK }}>{p.label}</p>
+                    <div className="text-2xl mb-2">{p.emoji}</div>
+                    <h3 className="font-semibold text-sm mb-1 text-black/80">{p.title}</h3>
+                    <p className="text-xs sm:text-sm text-black/50">{p.desc}</p>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Design Principles — pink cards */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {[
-                  { label: 'Principle 1', emoji: '🤝', title: 'Empathy First', desc: 'Every design decision centers on the real emotional needs of moms.' },
-                  { label: 'Principle 2', emoji: '🔒', title: 'Trust & Safety', desc: 'Building a safe space where moms feel comfortable sharing and seeking help.' },
-                  { label: 'Principle 3', emoji: '✨', title: 'Simplicity', desc: 'Reducing complexity so moms can find what they need without feeling overwhelmed.' },
+                  { label: 'DESIGN PRINCIPLE 1', emoji: '👀', title: 'See the Mom', desc: 'Support beyond the baby with validation and structured recovery tools.' },
+                  { label: 'DESIGN PRINCIPLE 2', emoji: '🎯', title: 'Deliver Clarity', desc: 'Cut through information overload with personalized, reliable guidance.' },
+                  { label: 'DESIGN PRINCIPLE 3', emoji: '🤝', title: 'Foster Safety', desc: 'Create a judgment-free space where moms feel heard and safe.' },
                 ].map((p, i) => (
-                  <motion.div key={i} className="rounded-xl p-4" style={{ background: "rgba(219,39,119,0.06)", border: "1px solid rgba(219,39,119,0.12)" }} {...fadeInUp}>
-                    <p className="text-[10px] font-semibold opacity-80 mb-2 uppercase tracking-wider">{p.label}</p>
+                  <motion.div key={i} className="rounded-xl p-4 text-center text-white" style={{ background: PINK }} {...fadeInUp}>
+                    <p className="text-[10px] font-semibold uppercase tracking-wider mb-2 text-white/70">{p.label}</p>
                     <div className="text-2xl mb-2">{p.emoji}</div>
                     <h3 className="font-semibold text-sm mb-1">{p.title}</h3>
-                    <p className="text-xs sm:text-sm text-black/60">{p.desc}</p>
+                    <p className="text-xs sm:text-sm text-white/80">{p.desc}</p>
                   </motion.div>
                 ))}
               </div>
@@ -340,7 +370,7 @@ const Nurturly = () => {
           </div>
         </section>
 
-        {/* ═══════ ITERATIONS — same max-w ═══════ */}
+        {/* ═══════ ITERATIONS ═══════ */}
         <section id="iterations" className={`${SECTION_PX} ${SECTION_PY}`}>
           <div className={`mx-auto ${MAX_W}`}>
             <WhiteCard>
@@ -376,7 +406,7 @@ const Nurturly = () => {
           </div>
         </section>
 
-        {/* ═══════ HIGH-FI — same max-w, constrained images ═══════ */}
+        {/* ═══════ HIGH-FI ═══════ */}
         <section id="highfi" className={`${SECTION_PX} ${SECTION_PY}`}>
           <div className={`mx-auto ${MAX_W}`}>
             <WhiteCard>
