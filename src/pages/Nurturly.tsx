@@ -50,7 +50,7 @@ const imageReveal = {
 /* ── Consistent layout constants ── */
 const MAX_W = "max-w-[960px]";
 const SECTION_PX = "px-4 sm:px-8 md:px-10";
-const SECTION_PY = "py-12 sm:py-16 md:py-20";
+const SECTION_GAP = "py-10 sm:py-14 md:py-16";
 const BODY = "text-sm sm:text-base leading-relaxed text-black/55";
 const BODY_STRONG = "font-semibold text-black/80";
 const PINK = "#DB2777";
