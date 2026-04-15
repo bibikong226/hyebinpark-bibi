@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
@@ -14,7 +13,6 @@ import hobbyPeople from "@/assets/hobby-people.png";
 import hobbyChallenges from "@/assets/hobby-challenges.png";
 import hobbyTheater from "@/assets/hobby-theater.jpg";
 
-/* ── Mac window matching main page ── */
 const MacWin = ({ children, title }: { children: React.ReactNode; title: string }) => (
   <motion.div
     className="overflow-hidden rounded-2xl bg-white"
@@ -44,77 +42,6 @@ const SectionHeader = ({ eyebrow, title }: { eyebrow: string; title: string }) =
   </div>
 );
 
-/* ── Photo Shuffle Widget ── */
-const PhotoShuffleWidget = ({ hobbies }: { hobbies: { image: string; caption: string }[] }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex(prev => (prev + 1) % hobbies.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [hobbies.length]);
-
-  return (
-    <div className="flex flex-col items-center gap-6">
-      {/* Main photo stack */}
-      <div className="relative h-[400px] w-[320px] sm:h-[480px] sm:w-[380px]">
-        {hobbies.map((h, i) => {
-          const offset = (i - currentIndex + hobbies.length) % hobbies.length;
-          const isActive = offset === 0;
-          const zIndex = hobbies.length - offset;
-          const rotate = offset === 0 ? 0 : offset === 1 ? 4 : offset === 2 ? -3 : 6;
-          const scale = isActive ? 1 : 1 - offset * 0.04;
-          const y = offset * 8;
-
-          return (
-            <motion.div
-              key={h.caption}
-              className="absolute inset-0 cursor-pointer overflow-hidden rounded-[24px] bg-white"
-              style={{
-                zIndex,
-                boxShadow: isActive
-                  ? "0 20px 60px rgba(0,0,0,0.15), 0 4px 16px rgba(0,0,0,0.08)"
-                  : "0 8px 24px rgba(0,0,0,0.08)",
-                border: "1px solid rgba(0,0,0,0.06)",
-              }}
-              animate={{
-                rotate,
-                scale,
-                y,
-                opacity: offset > 2 ? 0 : 1,
-              }}
-              transition={{ type: "spring", stiffness: 80, damping: 20 }}
-              onClick={() => setCurrentIndex((currentIndex + 1) % hobbies.length)}
-            >
-              <div className="h-[75%] overflow-hidden">
-                <img src={h.image} alt={h.caption} className="h-full w-full object-cover" />
-              </div>
-              <div className="flex h-[25%] items-center px-6">
-                <p className="text-[16px] leading-snug text-black/60">{h.caption}</p>
-              </div>
-            </motion.div>
-          );
-        })}
-      </div>
-
-      {/* Dots */}
-      <div className="flex items-center gap-2">
-        {hobbies.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setCurrentIndex(i)}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              i === currentIndex ? "w-6 bg-[#4338CA]" : "w-2 bg-black/15"
-            }`}
-            aria-label={`Show photo ${i + 1}`}
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
-
 const hobbies = [
   { image: hobbyTravel, caption: "✈️ Loves to travel and experience new culture" },
   { image: hobbyPeople, caption: "🤝 Enjoys meeting different people and stories" },
@@ -135,6 +62,8 @@ const workValues = [
   { title: "Strategy", emoji: "🎯", description: "Bridging user needs with business goals through data-driven insights and strategic thinking" },
   { title: "Creativity", emoji: "✨", description: "Exploring innovative approaches and emerging technologies to solve complex design challenges" },
 ];
+
+const SECTION_SPACING = "px-4 py-20 sm:px-8 sm:py-24 md:px-10";
 
 const About = () => {
   return (
@@ -180,7 +109,7 @@ const About = () => {
         </section>
 
         {/* Experience */}
-        <section id="experience" className="px-4 py-28 sm:px-8 sm:py-36 md:px-10" aria-labelledby="exp-heading">
+        <section id="experience" className={SECTION_SPACING} aria-labelledby="exp-heading">
           <div className="mx-auto max-w-[1000px]">
             <MacWin title="Finder — Experience">
               <div className="p-6 sm:p-8 md:p-10">
@@ -205,7 +134,7 @@ const About = () => {
         </section>
 
         {/* How I Work */}
-        <section className="px-4 py-28 sm:px-8 sm:py-36 md:px-10" aria-labelledby="how-heading">
+        <section className={SECTION_SPACING} aria-labelledby="how-heading">
           <div className="mx-auto max-w-[1000px]">
             <MacWin title="Notes — How I Work">
               <div className="p-6 sm:p-8 md:p-10">
@@ -227,13 +156,36 @@ const About = () => {
           </div>
         </section>
 
-        {/* Outside of Design — Photo Shuffle */}
-        <section className="px-4 py-28 sm:px-8 sm:py-36 md:px-10" aria-labelledby="hobbies-heading">
+        {/* Outside of Design */}
+        <section className={SECTION_SPACING} aria-labelledby="hobbies-heading">
           <div className="mx-auto max-w-[1000px]">
-            <SectionHeader eyebrow="Beyond Design" title="Outside of Design Work" />
-            <div className="flex justify-center">
-              <PhotoShuffleWidget hobbies={hobbies} />
-            </div>
+            <MacWin title="Photos — Outside of Design">
+              <div className="p-6 sm:p-8 md:p-10">
+                <SectionHeader eyebrow="Beyond Design" title="Outside of Design Work" />
+                <div className="grid grid-cols-2 gap-5 md:grid-cols-4">
+                  {hobbies.map((h, i) => (
+                    <motion.div
+                      key={h.caption}
+                      className="group overflow-hidden rounded-xl bg-[#f7f8fa] transition-all duration-300 hover:shadow-lg hover:z-10 hover:scale-[1.06]"
+                      style={{ border: "1px solid rgba(0,0,0,0.04)" }}
+                      initial={{ opacity: 0, y: 14 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.08 }}
+                    >
+                      <div className="aspect-[3/4] overflow-hidden">
+                        <img
+                          src={h.image}
+                          alt={h.caption}
+                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                      </div>
+                      <p className="p-4 text-[14px] leading-snug text-black/55">{h.caption}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </MacWin>
           </div>
         </section>
 
