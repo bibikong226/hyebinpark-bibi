@@ -6,7 +6,7 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { PuzzleAnimation } from "@/components/PuzzleAnimation";
 import { FinderWindow } from "@/components/FinderWindow";
-import profilePhoto from "@/assets/profile-photo.jpg";
+import profileHero from "@/assets/profile-hero.png";
 import memojiImg from "@/assets/memoji.png";
 import logoLine from "@/assets/logo-line.png";
 import logoTiktok from "@/assets/logo-tiktok.png";
@@ -295,7 +295,7 @@ const App = () => {
                 <div className="lg:col-span-7">
                   <MacWin title="How I Work" delay={0.18}>
                     <div className="flex items-center justify-center p-3">
-                      <PuzzleAnimation onAssembled={handlePuzzleAssembled} profileSrc={profilePhoto} />
+                      <PuzzleAnimation onAssembled={handlePuzzleAssembled} profileSrc={profileHero} />
                     </div>
                   </MacWin>
                 </div>
