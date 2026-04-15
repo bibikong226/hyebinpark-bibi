@@ -124,7 +124,7 @@ const Nurturly = () => {
       <main id="main-content" role="main">
 
         {/* Baby pink gradient zone: hero → project details */}
-        <div style={{ background: "linear-gradient(180deg, #F9E8F2 0%, #F5E0ED 40%, #F0DAE6 70%, #FFFFFF 100%)" }}>
+        <div style={{ background: "#FDF2F8" }}>
 
           {/* ═══════ HERO ═══════ */}
           <section id="hero" className={`${SECTION_PX} pt-8 pb-10 sm:pt-12 sm:pb-14`}>
@@ -138,12 +138,16 @@ const Nurturly = () => {
             </div>
           </section>
 
-          {/* Hero Mockup */}
-          <section className={`${SECTION_PX} pb-10 sm:pb-14 md:px-12 lg:px-20`}>
-            <motion.div className={`rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 lg:p-10 mx-auto ${MAX_W}`} style={{ background: PINK }}
-              initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.3 }}>
-              <img src={newMockupImage} alt="Nurturly App Mockup" className="w-full h-auto hover:scale-105 transition-transform duration-500" />
-            </motion.div>
+          {/* Hero Mockup — MacWin */}
+          <section className={`${SECTION_PX} pb-10 sm:pb-14`}>
+            <div className={`mx-auto ${MAX_W}`}>
+              <MacWin title="Nurturly — Preview">
+                <motion.div className="p-4 sm:p-6 md:p-8" style={{ background: PINK }}
+                  initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.3 }}>
+                  <img src={newMockupImage} alt="Nurturly App Mockup" className="w-full h-auto hover:scale-105 transition-transform duration-500" />
+                </motion.div>
+              </MacWin>
+            </div>
           </section>
 
           {/* Project Details — MacWin */}
@@ -237,7 +241,7 @@ const Nurturly = () => {
 
         {/* ═══════ USER RESEARCH ═══════ */}
         <section id="user-research" className={`${SECTION_PX} ${SECTION_GAP}`}>
-          <div className={`mx-auto ${MAX_W} space-y-8`}>
+          <div className={`mx-auto ${MAX_W} space-y-14 sm:space-y-16 md:space-y-20`}>
 
             {/* Survey */}
             <Section>
