@@ -213,7 +213,7 @@ const App = () => {
       <SpotlightSearch isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
       <FinderWindow isOpen={!!finderCategory} onClose={() => setFinderCategory(null)} category={finderCategory || ""} />
 
-      <main id="main-content" role="main">
+      <main id="main-content" role="main" className="overflow-hidden">
         {/* ═══════ HERO ═══════ */}
         <section
           className="relative flex min-h-[100dvh] w-full flex-col overflow-hidden lg:min-h-screen"
