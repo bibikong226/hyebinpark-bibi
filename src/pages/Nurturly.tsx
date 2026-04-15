@@ -74,11 +74,10 @@ const MacWin = ({ children, title, className = "" }: { children: React.ReactNode
   </motion.div>
 );
 
-/* ── Clean white card ── */
-const WhiteCard = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
+/* ── Section wrapper (no card, just animation) ── */
+const Section = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
   <motion.div
-    className={`rounded-2xl bg-white p-6 sm:p-8 md:p-10 ${className}`}
-    style={{ border: "1px solid rgba(0,0,0,0.06)", boxShadow: "0 2px 16px rgba(0,0,0,0.04)" }}
+    className={className}
     initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
   >
     {children}
