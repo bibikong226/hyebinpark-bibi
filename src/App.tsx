@@ -263,20 +263,20 @@ const App = () => {
                   <MacWin title="About" delay={0.12}>
                     <div className="p-4 sm:p-5 md:p-6">
                       <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-start sm:gap-4">
-                        <img src={memojiImg} alt="Hyebin memoji" className="h-24 w-24 flex-shrink-0 object-contain drop-shadow-md sm:h-32 sm:w-32" style={{ background: "transparent" }} />
-                        <div>
-                          <p className="text-center text-[14px] font-semibold leading-6 text-black/80 sm:text-left sm:text-[15px]">I turn ambiguity into clear, trustworthy products that drive real business impact.</p>
-                          <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-black/[0.04] px-3 py-1 text-[13px] font-semibold text-black/60 sm:text-[14px]">
+                        <img src={memojiImg} alt="Hyebin memoji" className="h-20 w-20 flex-shrink-0 object-contain drop-shadow-md sm:h-32 sm:w-32" style={{ background: "transparent" }} />
+                        <div className="min-w-0">
+                          <p className="text-center text-[13px] font-semibold leading-5 text-black/80 sm:text-left sm:text-[15px] sm:leading-6">I turn ambiguity into clear, trustworthy products that drive real business impact.</p>
+                          <div className="mt-2 inline-flex items-center gap-2 rounded-full bg-black/[0.04] px-3 py-1 text-[12px] font-semibold text-black/60 sm:mt-3 sm:text-[14px]">
                             <span className="h-2 w-2 rounded-full bg-green-500" aria-hidden="true" />Open to work
                           </div>
                         </div>
                       </div>
                       {/* Experience logos */}
-                      <div className="mt-5 border-t border-black/[0.05] pt-4">
-                        <p className="mb-3 text-[14px] font-semibold uppercase tracking-[0.2em] text-black/30">Experience designing & researching for</p>
-                        <div className="flex items-center gap-3">
+                      <div className="mt-4 border-t border-black/[0.05] pt-3 sm:mt-5 sm:pt-4">
+                        <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-black/30 sm:mb-3 sm:text-[14px] sm:tracking-[0.2em]">Experience designing & researching for</p>
+                        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                           {experienceLogos.map(logo => (
-                            <img key={logo.alt} src={logo.src} alt={logo.alt} className="h-8 w-8 rounded-lg object-contain" />
+                            <img key={logo.alt} src={logo.src} alt={logo.alt} className="h-7 w-7 rounded-lg object-contain sm:h-8 sm:w-8" />
                           ))}
                         </div>
                       </div>
@@ -303,12 +303,12 @@ const App = () => {
                 {/* Right: Puzzle widget card */}
                 <div className="lg:col-span-7 flex items-start justify-center">
                   <MacWin title="How I Work" delay={0.18} className="w-full lg:w-fit">
-                    <div className="px-3 py-4 sm:px-5 sm:py-5 md:px-6 md:py-6">
-                      <p className="mx-auto mb-4 max-w-[380px] text-center text-[13px] leading-relaxed text-black/55 sm:mb-5 sm:text-[14px]">
+                    <div className="px-3 py-3 sm:px-5 sm:py-5 md:px-6 md:py-6">
+                      <p className="mx-auto mb-3 max-w-[380px] text-center text-[12px] leading-relaxed text-black/55 sm:mb-5 sm:text-[14px]">
                         I bring together diverse perspectives — then piece them into clear, cohesive product experiences.
                       </p>
-                      <div className="relative flex items-center justify-center overflow-hidden rounded-[24px] bg-black/[0.03] px-2 py-4 sm:px-6 sm:py-8">
-                        <div className="w-full max-w-[480px] origin-center scale-[0.65] sm:scale-[0.85] md:scale-100">
+                      <div className="relative flex items-center justify-center overflow-hidden rounded-[16px] sm:rounded-[24px] bg-black/[0.03] px-1 py-2 sm:px-6 sm:py-8">
+                        <div className="w-full max-w-[480px] origin-top scale-[0.55] sm:scale-[0.85] md:scale-100" style={{ marginBottom: "-45%", smMarginBottom: "0" }}>
                           <PuzzleAnimation onAssembled={handlePuzzleAssembled} profileSrc={profileHero} />
                         </div>
                       </div>
