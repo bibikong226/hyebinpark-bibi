@@ -24,7 +24,7 @@ const MacWin = ({
   children, title, className = "", delay = 0,
 }: { children: React.ReactNode; title?: string; className?: string; delay?: number; }) => (
   <motion.section
-    className={`overflow-hidden rounded-2xl ${className}`}
+    className={`overflow-hidden rounded-2xl max-w-full ${className}`}
     role="region"
     aria-label={title || "Desktop window"}
     style={{
