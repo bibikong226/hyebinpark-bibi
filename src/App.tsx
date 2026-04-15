@@ -257,13 +257,13 @@ const App = () => {
               </div>
 
               {/* Windows grid */}
-              <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
+              <div className="grid gap-6 sm:gap-10 lg:grid-cols-12 lg:items-start">
                 {/* Left: About + Folders */}
-                <div className="space-y-8 lg:col-span-5">
+                <div className="space-y-6 sm:space-y-8 lg:col-span-5">
                   <MacWin title="About" delay={0.12}>
-                    <div className="p-5 md:p-6">
-                      <div className="flex items-start gap-4">
-                        <img src={memojiImg} alt="Hyebin memoji" className="h-32 w-32 flex-shrink-0 object-contain drop-shadow-md" style={{ background: "transparent" }} />
+                    <div className="p-4 sm:p-5 md:p-6">
+                      <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-start sm:gap-4">
+                        <img src={memojiImg} alt="Hyebin memoji" className="h-24 w-24 flex-shrink-0 object-contain drop-shadow-md sm:h-32 sm:w-32" style={{ background: "transparent" }} />
                         <div>
                           <p className="text-[15px] font-semibold leading-6 text-black/80">I turn ambiguity into clear, trustworthy products that drive real business impact.</p>
                           <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-black/[0.04] px-3 py-1 text-[14px] font-semibold text-black/60">
