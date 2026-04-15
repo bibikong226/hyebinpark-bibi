@@ -300,7 +300,7 @@ const App = () => {
                 </div>
 
                 {/* Right: Puzzle widget card */}
-                <div className="lg:col-span-7 flex items-start justify-center">
+                <div className="min-w-0 w-full overflow-hidden lg:col-span-7 flex items-start justify-center">
                   <MacWin title="How I Work" delay={0.18} className="w-full lg:w-fit">
                     <div className="px-3 py-3 sm:px-5 sm:py-5 md:px-6 md:py-6">
                       <p className="mx-auto mb-3 max-w-[380px] text-center text-[12px] leading-relaxed text-black/55 sm:mb-5 sm:text-[14px]">
