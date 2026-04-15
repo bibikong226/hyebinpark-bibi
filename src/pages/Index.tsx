@@ -99,7 +99,7 @@ const Index = () => {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-36 lg:gap-y-44">
+          <div className="grid md:grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-24 lg:gap-y-28">
             {projects.map((project, index) => (
               <ProjectCard key={project.id} {...project} index={index} />
             ))}
@@ -110,7 +110,7 @@ const Index = () => {
       {/* Testimonial Section */}
       <section className="section-padding pt-16 md:pt-20 lg:pt-24 pb-16 md:pb-20 lg:pb-24 bg-card/50">
         <div className="container-wide">
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
             {[
               {
                 id: "t1",
@@ -147,7 +147,7 @@ const Index = () => {
             ].map((testimonial, index) => (
               <motion.blockquote
                 key={testimonial.id}
-                className="bg-background p-8 rounded-lg space-y-6"
+                className="bg-background p-6 md:p-7 rounded-lg space-y-5"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
