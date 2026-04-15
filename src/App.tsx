@@ -229,9 +229,9 @@ const App = () => {
             <div className="mx-auto max-w-[1280px]">
 
               {/* Name + Headline */}
-              <div className="mb-12 flex flex-col items-center text-center sm:mb-16 lg:mb-32">
+              <div className="mb-12 flex flex-col items-center text-center sm:mb-16 lg:mb-32 overflow-hidden w-full">
                 <h1
-                  className="pointer-events-none select-none text-[clamp(2.5rem,13vw,9rem)] font-black uppercase leading-[0.85] tracking-[-0.04em]"
+                  className="pointer-events-none select-none text-[clamp(2.5rem,11vw,9rem)] font-black uppercase leading-[0.85] tracking-[-0.04em] w-full"
                   style={{ color: "rgba(0,0,0,0.12)" }}
                 >
                   HYEBIN PARK
@@ -257,9 +257,9 @@ const App = () => {
               </div>
 
               {/* Windows grid */}
-              <div className="grid gap-6 sm:gap-10 lg:grid-cols-12 lg:items-start">
+              <div className="grid grid-cols-1 gap-6 sm:gap-10 lg:grid-cols-12 lg:items-start">
                 {/* Left: About + Folders */}
-                <div className="min-w-0 space-y-6 sm:space-y-8 lg:col-span-5 overflow-hidden">
+                <div className="min-w-0 w-full space-y-6 sm:space-y-8 lg:col-span-5 overflow-hidden">
                   <MacWin title="About" delay={0.12}>
                     <div className="px-5 py-3 sm:p-5 md:p-6">
                       <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-start sm:gap-4">
@@ -300,7 +300,7 @@ const App = () => {
                 </div>
 
                 {/* Right: Puzzle widget card */}
-                <div className="lg:col-span-7 flex items-start justify-center">
+                <div className="min-w-0 w-full overflow-hidden lg:col-span-7 flex items-start justify-center">
                   <MacWin title="How I Work" delay={0.18} className="w-full lg:w-fit">
                     <div className="px-3 py-3 sm:px-5 sm:py-5 md:px-6 md:py-6">
                       <p className="mx-auto mb-3 max-w-[380px] text-center text-[12px] leading-relaxed text-black/55 sm:mb-5 sm:text-[14px]">
