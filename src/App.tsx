@@ -231,8 +231,8 @@ const App = () => {
               {/* Name + Headline */}
               <div className="mb-24 flex flex-col items-center text-center lg:mb-32">
                 <h1
-                  className="pointer-events-none select-none text-[clamp(3.5rem,13vw,9rem)] font-black uppercase leading-[0.85] tracking-[-0.04em] text-black/[0.06]"
-                  style={{ WebkitTextStroke: "1.5px rgba(0,0,0,0.08)" }}
+                  className="pointer-events-none select-none text-[clamp(3.5rem,13vw,9rem)] font-black uppercase leading-[0.85] tracking-[-0.04em]"
+                  style={{ color: "rgba(0,0,0,0.12)" }}
                 >
                   HYEBIN PARK
                 </h1>
