@@ -83,10 +83,10 @@ const Index = () => {
       </section>
 
       {/* Selected Work Section */}
-      <section id="work" className="section-padding pt-32 md:pt-48 lg:pt-56">
+      <section id="work" className="section-padding pt-24 md:pt-32 lg:pt-40 pb-24 md:pb-32 lg:pb-40">
         <div className="container-wide">
           <motion.div
-            className="mb-12"
+            className="mb-12 md:mb-14 lg:mb-16"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -99,7 +99,7 @@ const Index = () => {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-20 lg:gap-y-24">
+          <div className="grid md:grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-28 lg:gap-y-32">
             {projects.map((project, index) => (
               <ProjectCard key={project.id} {...project} index={index} />
             ))}
@@ -108,7 +108,7 @@ const Index = () => {
       </section>
 
       {/* Testimonial Section */}
-      <section className="section-padding bg-card/50">
+      <section className="section-padding pt-24 md:pt-32 lg:pt-40 pb-24 md:pb-32 lg:pb-40 bg-card/50">
         <div className="container-wide">
           <div className="grid md:grid-cols-2 gap-8">
             {[
