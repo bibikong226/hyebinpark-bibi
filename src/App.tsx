@@ -173,20 +173,6 @@ const highlightKeywords = (text: string, keywords: string[]) => {
 
 /* ═══════ MAIN APP ═══════ */
 const App = () => {
-  // Debug: find overflowing elements
-  useEffect(() => {
-    const check = () => {
-      const docWidth = document.documentElement.clientWidth;
-      document.querySelectorAll('*').forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.right > docWidth + 1 && rect.width > 10) {
-          console.log('OVERFLOW_FOUND:', el.tagName, el.className?.toString().substring(0, 80), 'right:', Math.round(rect.right), 'docWidth:', docWidth);
-        }
-      });
-      console.log('DOC_WIDTH:', docWidth, 'BODY_SCROLL:', document.body.scrollWidth);
-    };
-    setTimeout(check, 2000);
-  }, []);
   const [searchOpen, setSearchOpen] = useState(false);
   const [finderCategory, setFinderCategory] = useState<string | null>(null);
 
@@ -239,8 +225,8 @@ const App = () => {
           }}
           aria-label="Desktop hero"
         >
-          <div className="relative z-10 flex-1 px-5 pb-10 pt-6 sm:px-6 sm:pt-8 md:px-8 lg:px-12 lg:pb-56" style={{ outline: "2px solid red" }}>
-            <div className="mx-auto max-w-[1280px]" style={{ outline: "2px solid blue" }}>
+          <div className="relative z-10 flex-1 px-5 pb-10 pt-6 sm:px-6 sm:pt-8 md:px-8 lg:px-12 lg:pb-56">
+            <div className="mx-auto max-w-[1280px]">
 
               {/* Name + Headline */}
               <div className="mb-12 flex flex-col items-center text-center sm:mb-16 lg:mb-32 overflow-hidden w-full">
