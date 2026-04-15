@@ -226,7 +226,7 @@ const App = () => {
             <div className="mx-auto max-w-[1280px]">
 
               {/* Name + Headline */}
-              <div className="mb-16 flex flex-col items-center text-center lg:mb-20">
+              <div className="mb-20 flex flex-col items-center text-center lg:mb-28">
                 <h1
                   className="pointer-events-none select-none text-[clamp(3.5rem,13vw,9rem)] font-black uppercase leading-[0.85] tracking-[-0.04em]"
                   style={{ color: "rgba(0,0,0,0.10)" }}
@@ -235,20 +235,20 @@ const App = () => {
                 </h1>
 
                 <motion.p
-                  className="mb-8 mt-6 rounded-full border border-black/[0.08] bg-white/50 px-5 py-2 text-[12px] font-bold uppercase tracking-[0.22em] text-black/70 backdrop-blur-md"
+                  className="mb-10 mt-8 rounded-full border border-black/[0.08] bg-white/50 px-5 py-2 text-[12px] font-bold uppercase tracking-[0.22em] text-black/70 backdrop-blur-md"
                   initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.06 }}
                 >
                   Strategic AI Product Designer
                 </motion.p>
 
                 <motion.h2
-                  className="text-[clamp(2.2rem,6vw,5rem)] font-semibold leading-[1.02] tracking-tight"
+                  className="text-[clamp(2.2rem,6vw,5rem)] leading-[1.08] tracking-tight"
                   initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
                 >
-                  <span className="text-black/50">Turning</span>{" "}
+                  <span className="font-light text-black/35">Turning</span>{" "}
                   <span className="font-serif italic font-bold text-[#4338CA]">complexity</span>
                   <br />
-                  <span className="text-black/50">into</span>{" "}
+                  <span className="font-light text-black/35">into</span>{" "}
                   <span className="font-serif italic font-bold text-[#4338CA]">clarity</span>
                 </motion.h2>
               </div>
