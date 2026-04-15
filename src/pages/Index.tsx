@@ -99,7 +99,7 @@ const Index = () => {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+          <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
             {projects.map((project, index) => (
               <ProjectCard key={project.id} {...project} index={index} />
             ))}
