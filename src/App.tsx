@@ -55,24 +55,29 @@ const SectionWindowHeader = ({ windowTitle, eyebrow, title, titleAccent, subtitl
   windowTitle: string; eyebrow: string; title: string; titleAccent?: string; subtitle?: string;
 }) => (
   <motion.div
-    className="overflow-hidden rounded-2xl bg-white"
-    style={{ border: "1px solid rgba(0,0,0,0.07)", boxShadow: "0 8px 28px rgba(0,0,0,0.05)" }}
+    className="overflow-hidden rounded-2xl"
+    style={{
+      background: "rgba(255,255,255,0.25)",
+      backdropFilter: "blur(40px) saturate(1.8)",
+      border: "1px solid rgba(255,255,255,0.4)",
+      boxShadow: "0 12px 40px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.5)",
+    }}
     initial={{ opacity: 0, y: 16 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.45 }}
   >
-    <div className="flex items-center gap-2 border-b border-black/[0.06] px-4 py-2.5" aria-hidden="true">
+    <div className="flex items-center gap-2 border-b border-white/[0.15] px-4 py-2.5" aria-hidden="true">
       <div className="flex items-center gap-[7px]">
         <span className="h-3 w-3 rounded-full" style={{ background: "#FF5F57" }} />
         <span className="h-3 w-3 rounded-full" style={{ background: "#FFBD2E" }} />
         <span className="h-3 w-3 rounded-full" style={{ background: "#28C840" }} />
       </div>
-      <span className="flex-1 text-center text-[11px] font-medium tracking-wide text-black/35">{windowTitle}</span>
+      <span className="flex-1 text-center text-[14px] font-medium tracking-wide text-black/35">{windowTitle}</span>
       <div className="w-[52px]" />
     </div>
     <div className="px-8 py-8 md:px-10 md:py-10">
-      <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.3em] text-black/30">{eyebrow}</p>
+      <p className="mb-3 text-[14px] font-medium uppercase tracking-[0.3em] text-black/30">{eyebrow}</p>
       <h2 className="text-[clamp(40px,6vw,72px)] font-black leading-[1] tracking-tight text-black/90">
         {title}
         {titleAccent && (
@@ -82,7 +87,7 @@ const SectionWindowHeader = ({ windowTitle, eyebrow, title, titleAccent, subtitl
           </>
         )}
       </h2>
-      {subtitle && <p className="mt-4 max-w-[560px] text-[15px] leading-7 text-black/45">{subtitle}</p>}
+      {subtitle && <p className="mt-4 max-w-[560px] text-[16px] leading-7 text-black/50">{subtitle}</p>}
     </div>
   </motion.div>
 );

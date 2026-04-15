@@ -1,4 +1,4 @@
-import { motion, useInView, useReducedMotion, AnimatePresence } from "framer-motion";
+import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState, useCallback } from "react";
 
 interface PuzzlePiece {
@@ -60,8 +60,8 @@ const PuzzlePieceSVG = ({ piece, index }: { piece: PuzzlePiece; index: number })
         </g>
       </svg>
       <div className="absolute left-0 top-0 flex flex-col items-center justify-center px-1 text-center" style={{ width: PIECE_W, height: PIECE_H }}>
-        <span className="text-[13px] font-extrabold uppercase leading-tight tracking-[0.04em] text-white drop-shadow-sm">{piece.label}</span>
-        <span className="text-[9px] font-semibold uppercase tracking-[0.08em] text-white/75">{piece.sublabel}</span>
+        <span className="text-[14px] font-extrabold uppercase leading-tight tracking-[0.04em] text-white drop-shadow-sm">{piece.label}</span>
+        <span className="text-[11px] font-semibold uppercase tracking-[0.08em] text-white/75">{piece.sublabel}</span>
       </div>
     </div>
   );
@@ -74,59 +74,43 @@ interface PuzzleAnimationProps {
 
 export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { once: false, margin: "-40px" });
   const prefersReducedMotion = useReducedMotion();
-  // Phases: scattered → assembling → assembled → photo → (loop back to scattered)
   const [phase, setPhase] = useState<"scattered" | "assembling" | "assembled" | "photo">(
     prefersReducedMotion ? "photo" : "scattered"
   );
-  const [hasClicked, setHasClicked] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout>>();
+
+  const clearTimer = () => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+  };
 
   const handleClick = useCallback(() => {
-    if (phase === "scattered" && !hasClicked) {
-      setHasClicked(true);
+    if (phase === "scattered") {
       setPhase("assembling");
     }
-  }, [phase, hasClicked]);
+  }, [phase]);
 
-  // Assembling → assembled → photo
+  // Single unified state machine
   useEffect(() => {
+    clearTimer();
+
     if (phase === "assembling") {
-      const t = setTimeout(() => {
+      timerRef.current = setTimeout(() => {
         setPhase("assembled");
-        setTimeout(() => {
-          setPhase("photo");
-          onAssembled?.();
-        }, 800);
       }, 2200);
-      return () => clearTimeout(t);
-    }
-  }, [phase, onAssembled]);
-
-  // Photo → scatter → assemble loop (after first click)
-  useEffect(() => {
-    if (phase === "photo" && hasClicked) {
-      const t = setTimeout(() => {
+    } else if (phase === "assembled") {
+      timerRef.current = setTimeout(() => {
+        setPhase("photo");
+        onAssembled?.();
+      }, 800);
+    } else if (phase === "photo") {
+      timerRef.current = setTimeout(() => {
         setPhase("scattered");
-        // Auto-assemble after scatter
-        setTimeout(() => setPhase("assembling"), 3500);
       }, 3500);
-      return () => clearTimeout(t);
     }
-  }, [phase, hasClicked]);
 
-  // Re-trigger assembling→assembled→photo when looping
-  useEffect(() => {
-    if (phase === "assembling" && hasClicked) {
-      const t = setTimeout(() => {
-        setPhase("assembled");
-        setTimeout(() => {
-          setPhase("photo");
-        }, 800);
-      }, 2200);
-      return () => clearTimeout(t);
-    }
-  }, [phase, hasClicked]);
+    return clearTimer;
+  }, [phase, onAssembled]);
 
   const totalW = COLS * PIECE_W + TAB_R;
   const totalH = ROWS * PIECE_H + TAB_R;
@@ -137,20 +121,20 @@ export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProp
       className="relative cursor-pointer"
       style={{ width: totalW, height: totalH }}
       role="img"
-      aria-label="Click to assemble puzzle and reveal Hyebin's photo"
+      aria-label="Click to assemble puzzle and reveal photo"
       onClick={handleClick}
     >
-      {/* Click hint — only before first click */}
+      {/* Click hint */}
       <AnimatePresence>
-        {!hasClicked && phase === "scattered" && isInView && (
+        {phase === "scattered" && (
           <motion.div
             className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ delay: 1.2 }}
+            transition={{ delay: 0.8 }}
           >
-            <span className="rounded-full bg-white/80 px-4 py-1.5 text-[11px] font-semibold text-black/50 shadow-sm backdrop-blur-md">
+            <span className="rounded-full bg-white/80 px-4 py-1.5 text-[14px] font-semibold text-black/50 shadow-sm backdrop-blur-md">
               Click to assemble ✨
             </span>
           </motion.div>
