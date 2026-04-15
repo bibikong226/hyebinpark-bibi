@@ -238,7 +238,7 @@ const App = () => {
                 </h1>
 
                 <motion.p
-                  className="mb-14 mt-10 rounded-full border border-black/[0.08] bg-white/50 px-5 py-2 text-[14px] font-bold uppercase tracking-[0.22em] text-black/70 backdrop-blur-md"
+                  className="mb-16 mt-14 rounded-full border border-black/[0.08] bg-white/50 px-5 py-2 text-[14px] font-bold uppercase tracking-[0.22em] text-black/70 backdrop-blur-md"
                   initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.06 }}
                 >
                   Strategic AI Product Designer
