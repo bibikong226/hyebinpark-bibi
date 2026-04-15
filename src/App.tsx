@@ -232,7 +232,7 @@ const App = () => {
               <div className="mb-24 flex flex-col items-center text-center lg:mb-32">
                 <h1
                   className="pointer-events-none select-none text-[clamp(3.5rem,13vw,9rem)] font-black uppercase leading-[0.85] tracking-[-0.04em]"
-                  style={{ color: "rgba(0,0,0,0.18)" }}
+                  style={{ color: "rgba(0,0,0,0.28)" }}
                 >
                   HYEBIN PARK
                 </h1>
@@ -419,11 +419,11 @@ const App = () => {
               titleAccent="Voices."
             />
 
-            <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2">
               {testimonials.map((t, i) => (
                 <motion.article
                   key={t.id}
-                  className="flex flex-col gap-4 rounded-xl bg-white p-6 md:p-7"
+                  className="flex flex-col gap-5 rounded-xl bg-white p-7 md:p-9"
                   style={{ border: "1px solid rgba(0,0,0,0.06)", boxShadow: "0 2px 12px rgba(0,0,0,0.04)" }}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -437,7 +437,7 @@ const App = () => {
                     {highlightKeywords(t.subtext, t.keywords)}
                   </p>
                   <div className="mt-auto flex items-center gap-3 border-t border-black/[0.06] pt-4">
-                    <img src={t.avatar} alt={t.author} className="h-12 w-12 rounded-full object-cover" />
+                    <img src={t.avatar} alt={t.author} className="h-14 w-14 rounded-full object-cover" />
                     <div>
                       <span className="block text-[14px] font-semibold text-black/80">{t.author}</span>
                       <span className="text-[14px] text-black/45">{t.role} · <span className="text-[#4338CA]">{t.company}</span></span>
