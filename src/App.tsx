@@ -15,7 +15,7 @@ import logoNaver from "@/assets/logo-naver.png";
 import logoJstor from "@/assets/logo-jstor.png";
 import { projects } from "@/data/projects";
 
-/* ── Mac window wrapper ── */
+/* ── Mac window wrapper (for hero widgets) ── */
 const MacWin = ({
   children, title, className = "", delay = 0,
 }: { children: React.ReactNode; title?: string; className?: string; delay?: number; }) => (
@@ -50,24 +50,39 @@ const MacWin = ({
   </motion.section>
 );
 
-/* ── Section title bar only (white bar with traffic lights, content below without window) ── */
-const SectionTitleBar = ({ title }: { title: string }) => (
+/* ── Section header inside white Mac window (title bar + section name + subtitle) ── */
+const SectionWindowHeader = ({ windowTitle, eyebrow, title, titleAccent, subtitle }: {
+  windowTitle: string; eyebrow: string; title: string; titleAccent?: string; subtitle?: string;
+}) => (
   <motion.div
-    className="mb-8 overflow-hidden rounded-xl bg-white"
-    style={{ border: "1px solid rgba(0,0,0,0.07)", boxShadow: "0 4px 16px rgba(0,0,0,0.04)" }}
+    className="overflow-hidden rounded-2xl bg-white"
+    style={{ border: "1px solid rgba(0,0,0,0.07)", boxShadow: "0 8px 28px rgba(0,0,0,0.05)" }}
     initial={{ opacity: 0, y: 16 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.45 }}
   >
-    <div className="flex items-center gap-2 px-4 py-2.5" aria-hidden="true">
+    <div className="flex items-center gap-2 border-b border-black/[0.06] px-4 py-2.5" aria-hidden="true">
       <div className="flex items-center gap-[7px]">
         <span className="h-3 w-3 rounded-full" style={{ background: "#FF5F57" }} />
         <span className="h-3 w-3 rounded-full" style={{ background: "#FFBD2E" }} />
         <span className="h-3 w-3 rounded-full" style={{ background: "#28C840" }} />
       </div>
-      <span className="flex-1 text-center text-[11px] font-medium tracking-wide text-black/35">{title}</span>
+      <span className="flex-1 text-center text-[11px] font-medium tracking-wide text-black/35">{windowTitle}</span>
       <div className="w-[52px]" />
+    </div>
+    <div className="px-8 py-8 md:px-10 md:py-10">
+      <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.3em] text-black/30">{eyebrow}</p>
+      <h2 className="text-[clamp(40px,6vw,72px)] font-black leading-[1] tracking-tight text-black/90">
+        {title}
+        {titleAccent && (
+          <>
+            <br />
+            <span className="font-serif italic font-normal text-black/20">{titleAccent}</span>
+          </>
+        )}
+      </h2>
+      {subtitle && <p className="mt-4 max-w-[560px] text-[15px] leading-7 text-black/45">{subtitle}</p>}
     </div>
   </motion.div>
 );
@@ -186,15 +201,6 @@ const App = () => {
     { src: logoJstor, alt: "JSTOR" },
   ];
 
-  /* ── Consistent section header ── */
-  const SectionHeader = ({ eyebrow, title, subtitle }: { eyebrow: string; title: string; subtitle?: string }) => (
-    <div className="mb-10 md:mb-14">
-      <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.3em] text-black/30">{eyebrow}</p>
-      <h2 className="mb-2 text-[clamp(28px,4vw,48px)] font-bold leading-[1.1] tracking-tight text-black/85">{title}</h2>
-      {subtitle && <p className="max-w-[560px] text-[15px] leading-7 text-black/45">{subtitle}</p>}
-    </div>
-  );
-
   return (
     <div className="overflow-x-hidden font-sans bg-[#f0f1f5]">
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3 focus:z-[100] focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-black">Skip to main content</a>
@@ -249,12 +255,12 @@ const App = () => {
 
               {/* Windows grid */}
               <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
-                {/* Left: About + Experience + Folders */}
+                {/* Left: About + Folders */}
                 <div className="space-y-8 lg:col-span-5">
                   <MacWin title="About" delay={0.12}>
                     <div className="p-5 md:p-6">
                       <div className="flex items-start gap-4">
-                        <img src={memojiImg} alt="Hyebin memoji" className="h-14 w-14 flex-shrink-0 rounded-full object-contain" />
+                        <img src={memojiImg} alt="Hyebin memoji" className="h-20 w-20 flex-shrink-0 object-contain" />
                         <div>
                           <p className="text-[15px] font-semibold leading-6 text-black/80">I turn complex AI & data products into clear, trustworthy experiences.</p>
                           <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-black/[0.04] px-3 py-1 text-[11px] font-semibold text-black/60">
@@ -291,26 +297,42 @@ const App = () => {
                   </aside>
                 </div>
 
-                {/* Right: Puzzle window */}
+                {/* Right: Puzzle as widget (no window chrome) */}
                 <div className="lg:col-span-7">
-                  <MacWin title="How I Work" delay={0.18}>
-                    <div className="flex items-center justify-center p-3">
+                  <motion.div
+                    className="overflow-hidden rounded-2xl"
+                    style={{
+                      background: "rgba(255,255,255,0.45)",
+                      backdropFilter: "blur(30px) saturate(1.4)",
+                      border: "1px solid rgba(255,255,255,0.5)",
+                      boxShadow: "0 12px 40px rgba(0,0,0,0.06)",
+                    }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.55, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    <div className="px-3 pt-3 pb-2">
+                      <p className="text-center text-[10px] font-semibold uppercase tracking-[0.2em] text-black/30">How I Work</p>
+                    </div>
+                    <div className="flex items-center justify-center px-4 pb-4">
                       <PuzzleAnimation onAssembled={handlePuzzleAssembled} profileSrc={profileHero} />
                     </div>
-                  </MacWin>
+                  </motion.div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Dock — removed Experience, removed Search */}
+          {/* Dock */}
           <div className="relative z-20 px-4 pb-6 sm:px-6 md:px-8 lg:absolute lg:bottom-6 lg:left-1/2 lg:-translate-x-1/2 lg:px-0 lg:pb-0">
             <div className="mx-auto flex w-fit items-center gap-0 rounded-2xl px-3 py-2" role="navigation" aria-label="Quick navigation dock"
               style={{ background: "rgba(255,255,255,0.5)", backdropFilter: "blur(28px) saturate(1.5)", border: "1px solid rgba(255,255,255,0.55)", boxShadow: "0 8px 32px rgba(0,0,0,0.07)" }}>
               {(() => {
                 const items = [
                   { icon: "📂", label: "Work", bg: "linear-gradient(135deg,#6366F1,#4F46E5)", action: () => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" }) },
+                  { icon: "🧭", label: "Explore", bg: "linear-gradient(135deg,#F472B6,#DB2777)", action: () => document.getElementById("explore")?.scrollIntoView({ behavior: "smooth" }) },
                   { icon: "📋", label: "About", bg: "linear-gradient(135deg,#34D399,#059669)", action: () => (window.location.href = "/about") },
+                  { icon: "💼", label: "Experience", bg: "linear-gradient(135deg,#FB923C,#EA580C)", action: () => (window.location.href = "/about#experience") },
                   { icon: "📄", label: "CV", bg: "linear-gradient(135deg,#FBBF24,#D97706)", action: () => window.open("https://drive.google.com/file/d/1l2V4pQCjAZhIhLyRmVh3m2QTw87yLI6P/view?usp=sharing", "_blank") },
                 ];
                 const contact = { icon: "✉️", label: "Contact", bg: "linear-gradient(135deg,#F87171,#DC2626)", action: () => (window.location.href = "mailto:hyebinp@umich.edu") };
@@ -341,10 +363,15 @@ const App = () => {
         {/* ═══════ SELECTED WORK ═══════ */}
         <section id="work" className="bg-[#f0f1f5] px-4 py-24 sm:px-8 sm:py-32 md:px-10" aria-labelledby="work-heading">
           <div className="mx-auto max-w-[1200px]">
-            <SectionTitleBar title="Finder — Selected Work" />
-            <SectionHeader eyebrow="Selected Work" title="Strategic Outputs." subtitle="End-to-end product thinking across AI, research, fintech, and technically complex systems." />
+            <SectionWindowHeader
+              windowTitle="Finder — Selected Work"
+              eyebrow="SELECTED WORK"
+              title="Strategic"
+              titleAccent="Outputs."
+              subtitle="End-to-end product thinking across AI, research, fintech, and technically complex systems."
+            />
 
-            <div className="grid gap-8 md:grid-cols-2 lg:gap-10">
+            <div className="mt-10 grid gap-8 md:grid-cols-2 lg:gap-10">
               {projects.map((project, index) => {
                 const card = (
                   <motion.article
@@ -391,10 +418,14 @@ const App = () => {
         {/* ═══════ TESTIMONIALS ═══════ */}
         <section id="collab" className="bg-[#f0f1f5] px-4 py-24 sm:px-8 sm:py-28 md:px-10" aria-labelledby="collab-heading">
           <div className="mx-auto max-w-[1200px]">
-            <SectionTitleBar title="Notes — Collaboration" />
-            <SectionHeader eyebrow="Collaboration" title="Words from people I've worked alongside." />
+            <SectionWindowHeader
+              windowTitle="Notes — Collaboration"
+              eyebrow="COLLABORATION"
+              title="Words from"
+              titleAccent="people I've worked alongside."
+            />
 
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
               {testimonials.map((t, i) => (
                 <motion.article
                   key={t.id}
