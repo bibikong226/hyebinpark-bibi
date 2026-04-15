@@ -216,7 +216,7 @@ const App = () => {
       <main id="main-content" role="main">
         {/* ═══════ HERO ═══════ */}
         <section
-          className="relative flex min-h-[920px] w-full flex-col overflow-hidden lg:min-h-screen"
+          className="relative flex min-h-[100dvh] w-full flex-col overflow-hidden lg:min-h-screen"
           style={{
             background: `
               radial-gradient(ellipse 70% 55% at 25% 15%, rgba(200,180,230,0.25) 0%, transparent 55%),
