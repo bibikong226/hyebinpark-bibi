@@ -57,7 +57,7 @@ export const ProjectCard = ({
 
           {/* Content Section */}
           <div 
-            className="p-4 sm:p-6 md:p-8 space-y-3 sm:space-y-5"
+            className="p-4 sm:p-6 md:p-8 space-y-3 sm:space-y-5 flex flex-col"
             style={{ backgroundColor: imageColor }}
           >
             {/* Project Title */}
@@ -82,19 +82,19 @@ export const ProjectCard = ({
               ))}
             </div>
 
-            {/* Highlights - consistent vertical stack */}
-            <div className="flex flex-col gap-1.5 sm:gap-2">
+            {/* Highlights - consistent alignment */}
+            <div className="flex flex-col gap-1.5 sm:gap-2 items-start">
               {highlights.map((highlight, highlightIndex) => (
                 <div
                   key={highlightIndex}
-                  className="relative overflow-hidden px-2 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm rounded-md font-medium w-fit"
+                  className="relative overflow-hidden px-2 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm rounded-md font-medium"
                 >
                   <div className="absolute inset-0 bg-zinc-200" />
                   <div 
                     className="absolute inset-0 z-0 origin-left transition-transform duration-500 ease-out scale-x-0 group-hover:scale-x-100" 
                     style={{ backgroundColor: accentColor }} 
                   />
-                  <span className="relative z-10 text-zinc-700 group-hover:text-white transition-colors duration-300">
+                  <span className="relative z-10 text-zinc-700 group-hover:text-white transition-colors duration-300 whitespace-nowrap">
                     {highlight}
                   </span>
                 </div>
