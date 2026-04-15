@@ -14,6 +14,10 @@ import logoGm from "@/assets/logo-gm.png";
 import logoNaver from "@/assets/logo-naver.png";
 import logoJstor from "@/assets/logo-jstor.png";
 import { projects } from "@/data/projects";
+import memojiDavid from "@/assets/memoji-david.png";
+import memojiElisa from "@/assets/memoji-elisa.png";
+import memojiJonghee from "@/assets/memoji-jonghee.png";
+import memojiJaehoon from "@/assets/memoji-jaehoon.png";
 
 /* ── Mac window wrapper (for hero widgets) ── */
 const MacWin = ({
@@ -183,10 +187,10 @@ const App = () => {
   }, []);
 
   const testimonials = [
-    { id: "t1", author: "David Rashid", role: "CEO", company: "Concord Systems", text: "Hyebin quickly grasped the business model and technical constraints behind our platform.", subtext: "She transformed backend complexity into seamless, user-first flows that contributed to our business growth.", keywords: ["business model", "technical constraints", "business growth"] },
-    { id: "t2", author: "Elisa Vargas", role: "Product Designer", company: "JSTOR", text: "Hyebin has a rare ability to connect deep research insights with thoughtful design decisions.", subtext: "Her user-centered thinking and clarity of intent made a lasting impression on our team.", keywords: ["research insights", "design decisions", "user-centered thinking"] },
-    { id: "t3", author: "Jae Hoon Shim", role: "Product Strategy Manager", company: "LINE+", text: "Hyebin is one of the most dedicated and driven collaborators I've worked with.", subtext: "She approaches every project with curiosity, a sharp eye for detail, and a user-first mindset.", keywords: ["dedicated", "driven", "sharp eye for detail"] },
-    { id: "t4", author: "Jong Hee Hong", role: "Head of Global Communications", company: "TikTok Korea", text: "What always stands out with Hyebin is how she connects her creativity with real curiosity.", subtext: "Her energy makes collaboration feel easy, and she's excellent at communicating her ideas.", keywords: ["creativity", "real curiosity", "communicating her ideas"] },
+    { id: "t1", author: "David Rashid", role: "CEO", company: "Concord Systems", avatar: memojiDavid, text: "Hyebin quickly grasped the business model and technical constraints behind our platform.", subtext: "She transformed backend complexity into seamless, user-first flows that contributed to our business growth.", keywords: ["business model", "technical constraints", "business growth"] },
+    { id: "t2", author: "Elisa Vargas", role: "Product Designer", company: "JSTOR", avatar: memojiElisa, text: "Hyebin has a rare ability to connect deep research insights with thoughtful design decisions.", subtext: "Her user-centered thinking and clarity of intent made a lasting impression on our team.", keywords: ["research insights", "design decisions", "user-centered thinking"] },
+    { id: "t3", author: "Jae Hoon Shim", role: "Product Strategy Manager", company: "LINE+", avatar: memojiJaehoon, text: "Hyebin is one of the most dedicated and driven collaborators I've worked with.", subtext: "She approaches every project with curiosity, a sharp eye for detail, and a user-first mindset.", keywords: ["dedicated", "driven", "sharp eye for detail"] },
+    { id: "t4", author: "Jong Hee Hong", role: "Head of Global Communications", company: "TikTok Korea", avatar: memojiJonghee, text: "What always stands out with Hyebin is how she connects her creativity with real curiosity.", subtext: "Her energy makes collaboration feel easy, and she's excellent at communicating her ideas.", keywords: ["creativity", "real curiosity", "communicating her ideas"] },
   ];
 
   const folders = [
@@ -433,9 +437,7 @@ const App = () => {
                     {highlightKeywords(t.subtext, t.keywords)}
                   </p>
                   <div className="mt-auto flex items-center gap-3 border-t border-black/[0.06] pt-4">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 text-[14px] font-semibold text-white">
-                      {t.author.split(" ").map(n => n[0]).join("")}
-                    </div>
+                    <img src={t.avatar} alt={t.author} className="h-9 w-9 rounded-full object-cover" />
                     <div>
                       <span className="block text-[14px] font-semibold text-black/80">{t.author}</span>
                       <span className="text-[14px] text-black/45">{t.role} · <span className="text-[#4338CA]">{t.company}</span></span>
