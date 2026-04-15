@@ -34,11 +34,22 @@ export const Footer = () => {
         </div>
       </section>
 
-      <footer className="flex flex-col items-center justify-between gap-4 px-8 py-7 sm:flex-row md:px-10" role="contentinfo" style={{ background: "#13132a", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-        <span className="font-serif text-[17px] italic text-white/25">Hyebin Park</span>
-        <div className="flex gap-5">
-          {[{ label: "Email", href: "mailto:hyebinp@umich.edu" }, { label: "LinkedIn", href: "https://www.linkedin.com/in/hyebinp/", ext: true }, { label: "Resume", href: CV_LINK, ext: true }, { label: "hyebinparkbibi.com", href: "https://hyebinparkbibi.com" }].map(l => (
-            <a key={l.label} href={l.href} target={l.ext ? "_blank" : undefined} rel={l.ext ? "noopener noreferrer" : undefined} className="rounded-sm text-xs tracking-wide text-white/25 transition-colors hover:text-white/50">{l.label}</a>
+      <footer
+        className="flex h-11 items-center justify-between px-4 sm:px-8 md:px-10"
+        role="contentinfo"
+        style={{
+          background: "rgba(20,20,40,0.95)",
+          backdropFilter: "blur(20px) saturate(1.5)",
+          borderTop: "1px solid rgba(255,255,255,0.06)",
+        }}
+      >
+        <span className="font-bold uppercase tracking-[0.08em] text-white/40 text-[13px]">
+          <span className="mr-1.5 opacity-40" aria-hidden="true">⌘</span>
+          Hyebin Park
+        </span>
+        <div className="flex items-center gap-6">
+          {[{ label: "Email", href: "mailto:hyebinp@umich.edu" }, { label: "LinkedIn", href: "https://www.linkedin.com/in/hyebinp/", ext: true }, { label: "Resume", href: CV_LINK, ext: true }].map(l => (
+            <a key={l.label} href={l.href} target={l.ext ? "_blank" : undefined} rel={l.ext ? "noopener noreferrer" : undefined} className="text-[11px] font-medium uppercase tracking-[0.18em] text-white/30 transition-colors hover:text-white/60">{l.label}</a>
           ))}
         </div>
       </footer>

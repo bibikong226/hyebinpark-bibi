@@ -75,16 +75,13 @@ export const Navigation = ({ onSearchOpen }: NavigationProps) => {
               >{link.label}</a>
             ))}
             {onSearchOpen && (
-              <button onClick={onSearchOpen} className="flex items-center gap-1.5 rounded-full border border-black/[0.06] bg-black/[0.03] px-3 py-1 text-[11px] font-medium text-black/40 transition-colors hover:bg-black/[0.06]">
+              <button onClick={onSearchOpen} className="flex items-center gap-2 rounded-full border border-black/[0.06] bg-black/[0.03] px-4 py-1 text-[11px] font-medium text-black/40 transition-colors hover:bg-black/[0.06]" style={{ minWidth: 180 }}>
                 <Search size={12} />
-                <span>Search</span>
-                <span className="ml-1 rounded bg-black/[0.06] px-1 py-0.5 text-[9px] font-semibold text-black/30">⌘K</span>
+                <span className="flex-1 text-left">Search projects…</span>
+                <span className="rounded bg-black/[0.06] px-1 py-0.5 text-[9px] font-semibold text-black/30">⌘K</span>
               </button>
             )}
             <a href="mailto:hyebinp@umich.edu" className="rounded-full bg-[#4338CA] px-4 py-1.5 text-[11px] font-medium text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">Contact</a>
-            <span className="hidden text-[11px] font-medium tracking-wide text-black/25 lg:block" aria-hidden="true">
-              {currentTime.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })} {currentTime.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })}
-            </span>
           </div>
 
           <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="rounded-lg p-2 text-black/50 md:hidden" aria-label={isMenuOpen ? "Close menu" : "Open menu"} aria-expanded={isMenuOpen}>
