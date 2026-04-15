@@ -87,11 +87,11 @@ export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProp
     timersRef.current = [];
 
     if (phase === "scattered") {
-      timersRef.current.push(window.setTimeout(() => setPhase("assembling"), 1200));
+      timersRef.current.push(window.setTimeout(() => setPhase("assembling"), 2000));
     }
 
     if (phase === "assembling") {
-      timersRef.current.push(window.setTimeout(() => setPhase("assembled"), 1800));
+      timersRef.current.push(window.setTimeout(() => setPhase("assembled"), 2800));
     }
 
     if (phase === "assembled") {
@@ -157,9 +157,9 @@ export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProp
               }}
               transition={{
                 type: "spring",
-                stiffness: 50,
-                damping: 18,
-                delay: index * 0.06,
+                stiffness: 35,
+                damping: 22,
+                delay: index * 0.1,
               }}
             >
               <PuzzlePieceSVG piece={piece} index={index} />
