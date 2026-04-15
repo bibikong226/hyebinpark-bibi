@@ -8,7 +8,7 @@ const Index = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="min-h-[80vh] flex items-center justify-center relative overflow-hidden pt-12 pb-28 md:pt-16 md:pb-36">
+      <section className="min-h-[80vh] flex items-center justify-center relative overflow-hidden pt-12 pb-16 md:pt-16 md:pb-20 lg:pb-24">
         {/* Background Name Treatment - Decorative backdrop behind hero */}
         <div
           className="absolute inset-0 flex items-center justify-center select-none pointer-events-none overflow-hidden"
@@ -83,7 +83,7 @@ const Index = () => {
       </section>
 
       {/* Selected Work Section */}
-      <section id="work" className="section-padding pt-24 md:pt-32 lg:pt-40 pb-16 md:pb-20 lg:pb-24">
+      <section id="work" className="section-padding pt-16 md:pt-20 lg:pt-24 pb-16 md:pb-20 lg:pb-24">
         <div className="container-wide">
           <motion.div
             className="mb-12 md:mb-14 lg:mb-16"
