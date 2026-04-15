@@ -219,8 +219,9 @@ const App = () => {
           className="relative flex min-h-[100dvh] w-full flex-col overflow-hidden lg:min-h-screen"
           style={{
             background: `
-              radial-gradient(ellipse 70% 55% at 25% 15%, rgba(200,180,230,0.25) 0%, transparent 55%),
-              radial-gradient(ellipse 60% 45% at 80% 75%, rgba(180,210,230,0.2) 0%, transparent 50%)
+              radial-gradient(ellipse 65% 50% at 20% 10%, rgba(139,92,246,0.18) 0%, rgba(167,139,250,0.08) 40%, transparent 60%),
+              radial-gradient(ellipse 50% 40% at 75% 70%, rgba(96,165,250,0.15) 0%, transparent 50%),
+              radial-gradient(ellipse 35% 30% at 85% 85%, rgba(250,204,21,0.08) 0%, transparent 45%)
             `,
           }}
           aria-label="Desktop hero"
