@@ -261,7 +261,7 @@ const App = () => {
                       <div className="flex items-start gap-4">
                         <img src={memojiImg} alt="Hyebin memoji" className="h-24 w-24 flex-shrink-0 object-contain drop-shadow-md" style={{ background: "transparent" }} />
                         <div>
-                          <p className="text-[15px] font-semibold leading-6 text-black/80">I turn complex AI & data products into clear, trustworthy experiences.</p>
+                          <p className="text-[15px] font-semibold leading-6 text-black/80">I turn ambiguity into clear, trustworthy products that drive real business impact.</p>
                           <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-black/[0.04] px-3 py-1 text-[14px] font-semibold text-black/60">
                             <span className="h-2 w-2 rounded-full bg-green-500" aria-hidden="true" />Open to work
                           </div>
