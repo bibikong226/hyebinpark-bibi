@@ -285,7 +285,7 @@ const App = () => {
                 </div>
 
                 {/* How I Work — appears 2nd on mobile, right column on desktop */}
-                <div className="order-2 lg:order-3 lg:col-span-7 flex items-start justify-center">
+                <div className="order-2 lg:order-3 lg:col-span-7 lg:col-start-4 lg:-ml-16 lg:mt-8 relative z-10 flex items-start justify-center">
                   <MacWin title="How I Work" delay={0.18} className="w-fit">
                     <div className="px-5 py-5 md:px-6 md:py-6">
                       <p className="mx-auto mb-5 max-w-[380px] text-center text-[14px] leading-relaxed text-black/55">
