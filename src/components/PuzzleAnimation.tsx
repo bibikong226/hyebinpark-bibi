@@ -13,12 +13,12 @@ interface PuzzlePiece {
 }
 
 const pieces: PuzzlePiece[] = [
-  { label: "User", sublabel: "Needs", color: "#E8443A", row: 0, col: 0, startX: -32, startY: -18, startRotate: -8 },
-  { label: "Data", sublabel: "Complexity", color: "#F59E0B", row: 0, col: 1, startX: 0, startY: -24, startRotate: 6 },
-  { label: "Business", sublabel: "Goals", color: "#22C55E", row: 0, col: 2, startX: 28, startY: -16, startRotate: -5 },
-  { label: "Tech", sublabel: "Constraints", color: "#EC4899", row: 1, col: 0, startX: -28, startY: 22, startRotate: 7 },
-  { label: "Edge", sublabel: "Cases", color: "#8B5CF6", row: 1, col: 1, startX: 4, startY: 26, startRotate: -6 },
-  { label: "Emerging", sublabel: "Tech", color: "#3B82F6", row: 1, col: 2, startX: 30, startY: 18, startRotate: 5 },
+  { label: "User", sublabel: "Needs", color: "#E8443A", row: 0, col: 0, startX: -20, startY: -14, startRotate: -6 },
+  { label: "Data", sublabel: "Complexity", color: "#F59E0B", row: 0, col: 1, startX: 0, startY: -18, startRotate: 5 },
+  { label: "Business", sublabel: "Goals", color: "#22C55E", row: 0, col: 2, startX: 20, startY: -12, startRotate: -4 },
+  { label: "Tech", sublabel: "Constraints", color: "#EC4899", row: 1, col: 0, startX: -18, startY: 16, startRotate: 5 },
+  { label: "Edge", sublabel: "Cases", color: "#8B5CF6", row: 1, col: 1, startX: 3, startY: 20, startRotate: -5 },
+  { label: "Emerging", sublabel: "Tech", color: "#3B82F6", row: 1, col: 2, startX: 22, startY: 14, startRotate: 4 },
 ];
 
 const PIECE_W = 130;
@@ -27,6 +27,7 @@ const TAB_R = 12;
 const CORNER_R = 10;
 const COLS = 3;
 const ROWS = 2;
+const PADDING = 40; // extra padding so scattered pieces aren't clipped
 
 const PuzzlePieceSVG = ({ piece, index }: { piece: PuzzlePiece; index: number }) => {
   const hasTabRight = piece.col < COLS - 1;
@@ -115,59 +116,64 @@ export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProp
   const totalW = COLS * PIECE_W + TAB_R;
   const totalH = ROWS * PIECE_H + TAB_R;
 
+  const isScattered = phase === "scattered";
+  const isAssembling = phase === "assembling" || phase === "assembled";
+  const showPuzzle = phase !== "photo";
+
   return (
     <div
       className="relative"
-      style={{ width: totalW, height: totalH }}
+      style={{ width: totalW + PADDING * 2, height: totalH + PADDING * 2 }}
       role="img"
       aria-label="Animated puzzle showing how Hyebin works"
     >
-      <AnimatePresence mode="wait">
-        {phase !== "photo" && (
-          <motion.div
-            key={phase}
-            className="absolute inset-0"
-            initial={{ opacity: 1 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            {pieces.map((piece, index) => {
-              const x = piece.col * PIECE_W;
-              const y = piece.row * PIECE_H;
-              const isAssembling = phase === "assembling" || phase === "assembled";
+      {/* Puzzle pieces - single persistent container, no remounting */}
+      <div
+        className="absolute"
+        style={{
+          left: PADDING,
+          top: PADDING,
+          width: totalW,
+          height: totalH,
+          opacity: showPuzzle ? 1 : 0,
+          transition: "opacity 0.4s ease",
+          pointerEvents: showPuzzle ? "auto" : "none",
+        }}
+      >
+        {pieces.map((piece, index) => {
+          const x = piece.col * PIECE_W;
+          const y = piece.row * PIECE_H;
 
-              return (
-                <motion.div
-                  key={piece.label + piece.sublabel}
-                  className="absolute"
-                  style={{ left: x, top: y }}
-                  initial={false}
-                  animate={{
-                    x: isAssembling ? 0 : piece.startX,
-                    y: isAssembling ? 0 : piece.startY,
-                    opacity: 1,
-                    scale: isAssembling ? 1 : 0.94,
-                    rotate: isAssembling ? 0 : piece.startRotate,
-                  }}
-                  transition={{
-                    type: "spring",
-                    stiffness: isAssembling ? 46 : 70,
-                    damping: 20,
-                    delay: isAssembling ? index * 0.08 : index * 0.03,
-                  }}
-                >
-                  <PuzzlePieceSVG piece={piece} index={index} />
-                </motion.div>
-              );
-            })}
-          </motion.div>
-        )}
-      </AnimatePresence>
+          return (
+            <motion.div
+              key={piece.label + piece.sublabel}
+              className="absolute"
+              style={{ left: x, top: y }}
+              animate={{
+                x: isAssembling ? 0 : isScattered ? piece.startX : 0,
+                y: isAssembling ? 0 : isScattered ? piece.startY : 0,
+                scale: isAssembling ? 1 : isScattered ? 0.94 : 1,
+                rotate: isAssembling ? 0 : isScattered ? piece.startRotate : 0,
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 50,
+                damping: 18,
+                delay: index * 0.06,
+              }}
+            >
+              <PuzzlePieceSVG piece={piece} index={index} />
+            </motion.div>
+          );
+        })}
+      </div>
 
+      {/* Photo overlay */}
       <AnimatePresence>
         {phase === "photo" && profileSrc && (
           <motion.div
-            className="absolute inset-0 flex items-center justify-center overflow-hidden rounded-2xl"
+            className="absolute flex items-center justify-center overflow-hidden rounded-2xl"
+            style={{ left: PADDING, top: PADDING, width: totalW, height: totalH }}
             initial={{ opacity: 0, scale: 0.97 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.97, transition: { duration: 0.35 } }}
