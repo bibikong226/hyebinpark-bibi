@@ -170,7 +170,7 @@ const Nurturly = () => {
         {/* ═══════ SUMMARY ═══════ */}
         <section id="summary" className={`${SECTION_PX} ${SECTION_PY}`}>
           <div className={`mx-auto ${MAX_W}`}>
-            <WhiteCard>
+            <Section>
               <SectionHeader eyebrow="SUMMARY" title={<>Nurturly was created during the <span style={{ color: PINK }}>Tech Innovation Jam</span>, a competitive 5-week <span style={{ color: PINK }}>hackathon</span> at the University of Michigan.</>} />
               <p className={BODY}>
                 Designed to address the <span className={BODY_STRONG}>emotional isolation</span> and <span className={BODY_STRONG}>overwhelming information</span> moms face during <span className={BODY_STRONG}>pregnancy and postpartum,</span> Nurturly connects them to a safe, supportive community and tailored resources through <span className={BODY_STRONG}>AI-driven personalization.</span>
@@ -183,19 +183,19 @@ const Nurturly = () => {
                 <PinkBox>🌟 As the <strong>main UX designer</strong>, I drove the product from discovery to delivery, <strong>translating research into strategic design solutions.</strong> I focused on designing the <strong>AI-powered matching feature and contextual chatbot,</strong> grounded in insights from interviews, surveys, and competitive analysis.</PinkBox>
                 <PinkBox>🚀 Our team won <strong>Runner-Up & People's Choice Awards</strong>, securing <strong>$5,000 in funding</strong> to advance Nurturly as a scalable postpartum support platform.</PinkBox>
               </div>
-            </WhiteCard>
+            </Section>
           </div>
         </section>
 
         {/* ═══════ PROBLEM ═══════ */}
         <section id="problem" className={`${SECTION_PX} ${SECTION_PY}`}>
           <div className={`mx-auto ${MAX_W}`}>
-            <WhiteCard>
+            <Section>
               <SectionHeader eyebrow="PROBLEM" title={<>Pregnancy & Postpartum Support is <span style={{ color: PINK }}>Scattered, Confusing,</span> and Leaves <span style={{ color: PINK }}>Moms Feeling Alone.</span></>} />
               <p className={BODY}>
                 From pregnancy to postpartum, moms experience profound changes, but <span className={BODY_STRONG}>support remains fragmented and baby-focused.</span> With <span className={BODY_STRONG}>unreliable, conflicting resources</span> and no clear guidance, moms are <span className={BODY_STRONG}>left to figure it out alone.</span>
               </p>
-            </WhiteCard>
+            </Section>
           </div>
         </section>
 
@@ -235,7 +235,7 @@ const Nurturly = () => {
           <div className={`mx-auto ${MAX_W} space-y-8`}>
 
             {/* Survey */}
-            <WhiteCard>
+            <Section>
               <SectionHeader eyebrow="SURVEY INSIGHTS" title={<>Survey as a Compass: Finding <span style={{ color: PINK }}>Where to Focus</span></>} />
               <p className={`${BODY} mb-2`}>
                 I initially assumed that moms might need support throughout the entire motherhood journey. But <span className={BODY_STRONG}>after conducting 22 surveys</span> with women during pregnancy and postpartum, I was able to <span className={BODY_STRONG}>narrow the focus.</span>
@@ -248,10 +248,10 @@ const Nurturly = () => {
                 <motion.img src={surveyStats} alt="Survey statistics" className="w-full rounded-xl max-w-[420px] mx-auto" {...imageReveal} />
               </div>
               <PinkBox>💡 These findings helped me narrow the focus to <strong>mom-centered recovery support</strong> during pregnancy and postpartum, not just general parenting help.</PinkBox>
-            </WhiteCard>
+            </Section>
 
             {/* Interview Insights */}
-            <WhiteCard>
+            <Section>
               <SectionHeader eyebrow="INTERVIEW INSIGHTS" title={<>Zooming In: What <span style={{ color: PINK }}>Moms</span> Are Actually <span style={{ color: PINK }}>Experiencing</span></>} />
               <p className={`${BODY} mb-2`}>
                 Interviewed 5 moms to understand the emotional, physical, and mental challenges they face during <span className={BODY_STRONG}>pregnancy and postpartum.</span>
@@ -263,10 +263,10 @@ const Nurturly = () => {
                 <motion.img src={emotionalSupportGapComplete} alt="Emotional Support Gap" className="w-full rounded-xl max-w-[420px] mx-auto" {...imageReveal} />
                 <motion.img src={informationOverloadComplete} alt="Information Overload" className="w-full rounded-xl max-w-[420px] mx-auto" {...imageReveal} />
               </div>
-            </WhiteCard>
+            </Section>
 
             {/* Digital Ethnography */}
-            <WhiteCard>
+            <Section>
               <SectionHeader eyebrow="DIGITAL ETHNOGRAPHY" title={<>These Gaps Often Push Moms Toward <span style={{ color: PINK }}>Online Communities</span> In Search Of <span style={{ color: PINK }}>Connection</span></>} />
               <p className={`${BODY} mb-6`}>
                 Analyzed conversations on <span className={BODY_STRONG}>Reddit, Instagram, TikTok, and Facebook</span> to see how they seek guidance and connection during pregnancy and postpartum.
@@ -275,16 +275,16 @@ const Nurturly = () => {
                 <motion.img src={onlineCommunities1} alt="Online community research" className="w-full rounded-xl max-w-[420px] mx-auto" {...imageReveal} />
                 <motion.img src={onlineCommunities2} alt="Online community insights" className="w-full rounded-xl max-w-[420px] mx-auto" {...imageReveal} />
               </div>
-            </WhiteCard>
+            </Section>
 
             {/* Competitive Analysis */}
-            <WhiteCard>
+            <Section>
               <SectionHeader eyebrow="COMPETITIVE ANALYSIS" title={<>These Gaps Present a <span style={{ color: PINK }}>Clear Opportunity</span></>} />
               <p className={`${BODY} mb-6`}>
                 Despite strong communities and a wealth of content, existing platforms often fall short in delivering <span className={BODY_STRONG}>verified, personalized guidance</span> and fostering <span className={BODY_STRONG}>deep, meaningful connections</span> between moms.
               </p>
               <motion.img src={competitiveAnalysis} alt="Competitive analysis chart" className="w-full rounded-xl max-w-[720px] mx-auto" {...imageReveal} />
-            </WhiteCard>
+            </Section>
 
           </div>
         </section>
@@ -292,7 +292,7 @@ const Nurturly = () => {
         {/* ═══════ DESIGN STRATEGY / PRINCIPLES ═══════ */}
         <section id="principles" className={`${SECTION_PX} ${SECTION_PY}`}>
           <div className={`mx-auto ${MAX_W}`}>
-            <WhiteCard>
+            <Section>
               <SectionHeader eyebrow="DESIGN STRATEGY" title={<>So How Can Our <span style={{ color: PINK }}>Design</span> Truly <span style={{ color: PINK }}>Support Moms?</span></>} />
               <p className={`${BODY} mb-2`}>
                 Based on what I heard and observed, I realized that moms weren't just asking for information. They were asking to be <span className={BODY_STRONG}>seen, supported, and protected.</span>
@@ -332,7 +332,7 @@ const Nurturly = () => {
                   </motion.div>
                 ))}
               </div>
-            </WhiteCard>
+            </Section>
           </div>
         </section>
 
@@ -352,27 +352,27 @@ const Nurturly = () => {
         {/* ═══════ IDEATION ═══════ */}
         <section id="ideation" className={`${SECTION_PX} ${SECTION_PY}`}>
           <div className={`mx-auto ${MAX_W}`}>
-            <WhiteCard>
+            <Section>
               <SectionHeader eyebrow="IDEATION" title={<>Visualized solutions through <span style={{ color: PINK }}>low-fidelity designs</span> to explore effective layouts and gather feedback.</>} />
               <motion.img src={lowFiWireframes} alt="Low-fidelity wireframes" className="w-full max-w-[720px] mx-auto" {...fadeInUp} />
-            </WhiteCard>
+            </Section>
           </div>
         </section>
 
         {/* Mid-fi */}
         <section className={`${SECTION_PX} ${SECTION_PY}`}>
           <div className={`mx-auto ${MAX_W}`}>
-            <WhiteCard>
+            <Section>
               <SectionHeader eyebrow="MID-FI WIREFRAME" title={<>Building on early concepts, I created <span style={{ color: PINK }}>mid-fidelity</span> prototypes to validate <span style={{ color: PINK }}>navigation logic and content prioritization.</span></>} />
               <motion.img src={highFidelityMockups} alt="Mid-fidelity mockups" className="w-full max-w-[760px] mx-auto" {...fadeInUp} />
-            </WhiteCard>
+            </Section>
           </div>
         </section>
 
         {/* ═══════ ITERATIONS ═══════ */}
         <section id="iterations" className={`${SECTION_PX} ${SECTION_PY}`}>
           <div className={`mx-auto ${MAX_W}`}>
-            <WhiteCard>
+            <Section>
               <SectionHeader eyebrow="DESIGN ITERATIONS" title={<>Through user testing and feedback, I iterated on <span style={{ color: PINK }}>key interaction points</span> to improve usability.</>} />
 
               {[
@@ -401,14 +401,14 @@ const Nurturly = () => {
                   </div>
                 </motion.div>
               ))}
-            </WhiteCard>
+            </Section>
           </div>
         </section>
 
         {/* ═══════ HIGH-FI ═══════ */}
         <section id="highfi" className={`${SECTION_PX} ${SECTION_PY}`}>
           <div className={`mx-auto ${MAX_W}`}>
-            <WhiteCard>
+            <Section>
               <p className="mb-6 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.3em] text-black/30">HIGH-FI DESIGN</p>
               <div className="space-y-12">
                 {[
@@ -423,20 +423,20 @@ const Nurturly = () => {
                   </motion.div>
                 ))}
               </div>
-            </WhiteCard>
+            </Section>
           </div>
         </section>
 
         {/* ═══════ RESULT ═══════ */}
         <section id="result" className={`${SECTION_PX} ${SECTION_PY}`}>
           <div className={`mx-auto ${MAX_W}`}>
-            <WhiteCard>
+            <Section>
               <SectionHeader eyebrow="RESULT" title={<>Our team won <span style={{ color: PINK }}>Runner-Up & People's Choice Awards</span>, securing <span style={{ color: PINK }}>$5,000</span> in funding to advance Nurturly.</>} />
               <p className={`${BODY} mb-3`}>Creating Nurturly was a meaningful journey of growth, teamwork, and dedication to creating real impact.</p>
               <p className={`${BODY} mb-3`}>Seeing moms resonate with Nurturly's mission was one of the most rewarding moments of this project. We won <span className={BODY_STRONG}>Runner-Up & People's Choice</span> award at <span className={BODY_STRONG}>TECH+INNOVATION JAM</span>, <span className={BODY_STRONG}>securing $5,000</span> in funding to continue building Nurturly.</p>
               <p className={`${BODY} mb-6`}>This experience deepened my belief in <span className={BODY_STRONG}>empathy-driven UX</span> and <span className={BODY_STRONG}>research-backed design</span>, and we're now continuing to develop our MVP.</p>
               <motion.img src={teamAwards} alt="Team holding award checks" className="w-full rounded-xl max-w-[700px] mx-auto" {...fadeInUp} />
-            </WhiteCard>
+            </Section>
           </div>
         </section>
 
