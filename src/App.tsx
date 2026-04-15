@@ -232,7 +232,7 @@ const App = () => {
               <div className="mb-24 flex flex-col items-center text-center lg:mb-32">
                 <h1
                   className="pointer-events-none select-none text-[clamp(3.5rem,13vw,9rem)] font-black uppercase leading-[0.85] tracking-[-0.04em]"
-                  style={{ color: "rgba(0,0,0,0.05)" }}
+                  style={{ color: "rgba(255,255,255,0.5)" }}
                 >
                   HYEBIN PARK
                 </h1>
@@ -363,6 +363,7 @@ const App = () => {
               title="Strategic"
               titleAccent="Outputs."
               subtitle="End-to-end product thinking across AI, research, fintech, and technically complex systems."
+              subtitleClassName="whitespace-nowrap"
             />
 
             <div className="mt-10 grid gap-8 md:grid-cols-2 lg:gap-10">
@@ -386,13 +387,13 @@ const App = () => {
                     </div>
                     <div className="flex flex-1 flex-col p-5 md:p-6">
                       <h3 className="mb-2 font-serif text-[20px] font-semibold leading-[1.2] text-black/85 md:text-[22px]">{project.title}</h3>
-                      <p className="mb-3 max-w-[440px] text-[14px] leading-[1.65] text-black/60">{project.description}</p>
-                      <div className="mb-3 flex flex-wrap gap-[5px]">
+                      <p className="mb-3 min-h-[46px] max-w-[440px] text-[14px] leading-[1.65] text-black/60">{project.description}</p>
+                      <div className="mb-3 min-h-[30px] flex flex-wrap gap-[5px]">
                         {project.tags.map(tag => <span key={tag} className="inline-block rounded-full border border-black/[0.08] bg-black/[0.02] px-2.5 py-[3px] text-[14px] font-medium text-black/55">{tag}</span>)}
                       </div>
-                      <div className="mt-auto flex flex-wrap gap-[5px]">
+                      <div className="mt-auto flex flex-col gap-[5px]">
                         {project.highlights.map(h => (
-                          <div key={h} className="relative cursor-default overflow-hidden rounded-md px-2.5 py-[5px]">
+                          <div key={h} className="relative cursor-default overflow-hidden rounded-md px-2.5 py-[5px] w-fit">
                             <div className="absolute inset-0 bg-black/[0.03]" />
                             <div className="absolute inset-0 z-0 origin-left scale-x-0 transition-transform duration-[450ms] ease-out group-hover:scale-x-100" style={{ background: project.accentColor }} />
                             <span className="relative z-10 text-[14px] font-medium text-black/55 transition-colors duration-[350ms] group-hover:text-white">{h}</span>
