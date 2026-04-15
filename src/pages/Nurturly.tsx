@@ -318,7 +318,7 @@ const Nurturly = () => {
                   { label: 'PAIN POINT 3', emoji: '🏊', title: 'Missing Connection', desc: 'Need empathetic 1:1 support' },
                 ].map((p, i) => (
                   <motion.div key={i} className="rounded-xl p-4 text-center" style={{ background: "rgba(219,39,119,0.04)", border: "1px solid rgba(219,39,119,0.10)" }} {...fadeInUp}>
-                    <p className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: PINK }}>{p.label}</p>
+                    <p className="text-sm font-semibold uppercase tracking-wider mb-2" style={{ color: PINK }}>{p.label}</p>
                     <div className="text-2xl mb-2">{p.emoji}</div>
                     <h3 className="font-semibold text-sm mb-1 text-black/80">{p.title}</h3>
                     <p className="text-sm text-black/50">{p.desc}</p>
@@ -334,7 +334,7 @@ const Nurturly = () => {
                   { label: 'DESIGN PRINCIPLE 3', emoji: '🤝', title: 'Foster Safety', desc: 'Create a judgment-free space where moms feel heard and safe.' },
                 ].map((p, i) => (
                   <motion.div key={i} className="rounded-xl p-4 text-center text-white" style={{ background: PINK }} {...fadeInUp}>
-                    <p className="text-xs font-semibold uppercase tracking-wider mb-2 text-white/70">{p.label}</p>
+                    <p className="text-sm font-semibold uppercase tracking-wider mb-2 text-white/70">{p.label}</p>
                     <div className="text-2xl mb-2">{p.emoji}</div>
                     <h3 className="font-semibold text-sm mb-1">{p.title}</h3>
                     <p className="text-sm text-white/80">{p.desc}</p>
@@ -390,7 +390,7 @@ const Nurturly = () => {
                 { num: "#3", subtitle: "Creating Meaningful Connections Between", accent: "Moms", first: communityFirstDesign, final: communityFinalDesign, firstQuote: '"I don\'t love swiping through too many people."', finalQuote: '"It\'s easier to find someone I relate to when they\'re grouped."', insight: <>By <span style={{ color: PINK }} className="font-semibold">surfacing shared traits</span> and <span style={{ color: PINK }} className="font-semibold">grouping similar users,</span> we made connections feel easier, faster, and more genuine.</> },
               ].map((iter, i) => (
                 <motion.div key={i} className={i < 2 ? "mb-14 pb-14 border-b border-black/[0.06]" : ""} {...fadeInUp}>
-                  <p className="text-xs font-semibold uppercase tracking-wider text-black/35 mb-1">DESIGN ITERATION {iter.num}</p>
+                  <p className="text-sm font-semibold uppercase tracking-wider text-black/35 mb-1">DESIGN ITERATION {iter.num}</p>
                   <h3 className="font-serif text-lg sm:text-xl md:text-2xl mb-5 text-black/85">{iter.subtitle} <span style={{ color: PINK }}>{iter.accent}</span></h3>
                   <div className="flex flex-col sm:flex-row gap-4 items-center">
                     <div className="flex-1 text-center">
