@@ -381,8 +381,13 @@ const App = () => {
               {projects.map((project, index) => {
                 const card = (
                   <motion.article
-                    className="group flex h-full flex-col overflow-hidden rounded-xl bg-white transition-all duration-300 hover:-translate-y-1.5"
-                    style={{ border: "1px solid rgba(0,0,0,0.06)", boxShadow: "0 2px 12px rgba(0,0,0,0.04)" }}
+                    className="group flex h-full flex-col overflow-hidden rounded-xl transition-all duration-300 hover:-translate-y-1.5"
+                    style={{
+                      background: "rgba(255,255,255,0.3)",
+                      backdropFilter: "blur(40px) saturate(1.8)",
+                      border: "1px solid rgba(255,255,255,0.45)",
+                      boxShadow: "0 8px 32px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.5)",
+                    }}
                     initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.08 }}
                   >
                     <div className="relative aspect-[16/9] w-full overflow-hidden" style={{ background: project.imageColor }}>
@@ -393,21 +398,21 @@ const App = () => {
                         <img src={project.mockup} alt={`${project.title} mockup`} loading="lazy" className={`max-w-full object-contain transition-transform duration-700 group-hover:scale-[1.03] ${project.id === "concord" ? "max-h-[95%]" : "max-h-[88%]"}`} />
                       </div>
                       <div className="absolute bottom-4 right-4 z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                        <div className="rounded-full bg-white/95 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-black/80 shadow-md">View</div>
+                        <div className="rounded-full bg-white/95 px-4 py-1.5 text-[14px] font-semibold uppercase tracking-wider text-black/80 shadow-md">View</div>
                       </div>
                     </div>
                     <div className="flex flex-1 flex-col p-5 md:p-6">
                       <h3 className="mb-2 font-serif text-[20px] font-semibold leading-[1.2] text-black/85 md:text-[22px]">{project.title}</h3>
-                      <p className="mb-3 max-w-[440px] text-[13px] leading-[1.65] text-black/60">{project.description}</p>
+                      <p className="mb-3 max-w-[440px] text-[14px] leading-[1.65] text-black/60">{project.description}</p>
                       <div className="mb-3 flex flex-wrap gap-[5px]">
-                        {project.tags.map(tag => <span key={tag} className="inline-block rounded-full border border-black/[0.08] bg-black/[0.02] px-2.5 py-[3px] text-[10px] font-medium text-black/55">{tag}</span>)}
+                        {project.tags.map(tag => <span key={tag} className="inline-block rounded-full border border-black/[0.08] bg-black/[0.02] px-2.5 py-[3px] text-[14px] font-medium text-black/55">{tag}</span>)}
                       </div>
                       <div className="mt-auto flex flex-wrap gap-[5px]">
                         {project.highlights.map(h => (
                           <div key={h} className="relative cursor-default overflow-hidden rounded-md px-2.5 py-[5px]">
                             <div className="absolute inset-0 bg-black/[0.03]" />
                             <div className="absolute inset-0 z-0 origin-left scale-x-0 transition-transform duration-[450ms] ease-out group-hover:scale-x-100" style={{ background: project.accentColor }} />
-                            <span className="relative z-10 text-[11px] font-medium text-black/55 transition-colors duration-[350ms] group-hover:text-white">{h}</span>
+                            <span className="relative z-10 text-[14px] font-medium text-black/55 transition-colors duration-[350ms] group-hover:text-white">{h}</span>
                           </div>
                         ))}
                       </div>
@@ -427,16 +432,21 @@ const App = () => {
             <SectionWindowHeader
               windowTitle="Notes — Collaboration"
               eyebrow="COLLABORATION"
-              title="Words from"
-              titleAccent="people I've worked alongside."
+              title="Collaborator"
+              titleAccent="Voices."
             />
 
             <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
               {testimonials.map((t, i) => (
                 <motion.article
                   key={t.id}
-                  className="flex flex-col gap-4 rounded-xl bg-white p-6 md:p-7"
-                  style={{ border: "1px solid rgba(0,0,0,0.06)", boxShadow: "0 2px 12px rgba(0,0,0,0.04)" }}
+                  className="flex flex-col gap-4 rounded-xl p-6 md:p-7"
+                  style={{
+                    background: "rgba(255,255,255,0.3)",
+                    backdropFilter: "blur(40px) saturate(1.8)",
+                    border: "1px solid rgba(255,255,255,0.45)",
+                    boxShadow: "0 8px 32px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.5)",
+                  }}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -445,16 +455,16 @@ const App = () => {
                   <p className="font-serif text-[16px] italic leading-relaxed text-black/75">
                     "{highlightKeywords(t.text, t.keywords)}"
                   </p>
-                  <p className="text-[13px] leading-relaxed text-black/50">
+                  <p className="text-[14px] leading-relaxed text-black/50">
                     {highlightKeywords(t.subtext, t.keywords)}
                   </p>
-                  <div className="mt-auto flex items-center gap-3 border-t border-black/[0.06] pt-4">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 text-xs font-semibold text-white">
+                  <div className="mt-auto flex items-center gap-3 border-t border-white/[0.2] pt-4">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 text-[14px] font-semibold text-white">
                       {t.author.split(" ").map(n => n[0]).join("")}
                     </div>
                     <div>
-                      <span className="block text-sm font-semibold text-black/80">{t.author}</span>
-                      <span className="text-[11px] text-black/45">{t.role} · <span className="text-[#4338CA]">{t.company}</span></span>
+                      <span className="block text-[14px] font-semibold text-black/80">{t.author}</span>
+                      <span className="text-[14px] text-black/45">{t.role} · <span className="text-[#4338CA]">{t.company}</span></span>
                     </div>
                   </div>
                 </motion.article>
