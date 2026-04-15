@@ -378,7 +378,7 @@ const App = () => {
                         <img src={project.logo} alt={`${project.title} logo`} loading="lazy" className={`w-auto object-contain ${project.id === "gm" ? "h-8 md:h-10" : project.id === "nurturly" ? "h-5 md:h-6" : "h-6 md:h-9"}`} />
                       </div>
                       <div className="absolute inset-0 flex items-end justify-center px-4 pt-10 md:pt-12">
-                        <img src={project.mockup} alt={`${project.title} mockup`} loading="lazy" className={`max-w-full object-contain transition-transform duration-700 group-hover:scale-[1.03] ${project.id === "concord" ? "max-h-[105%] scale-110" : "max-h-[88%]"}`} />
+                        <img src={project.mockup} alt={`${project.title} mockup`} loading="lazy" className={`max-w-full object-contain transition-transform duration-700 group-hover:scale-[1.03] ${project.id === "concord" ? "max-h-[105%] scale-110" : "max-h-[100%] scale-105"}`} />
                       </div>
                       <div className="absolute bottom-4 right-4 z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                         <div className="rounded-full bg-white/95 px-4 py-1.5 text-[14px] font-semibold uppercase tracking-wider text-black/80 shadow-md">View</div>
