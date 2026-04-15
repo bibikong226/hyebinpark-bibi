@@ -166,7 +166,7 @@ const highlightKeywords = (text: string, keywords: string[]) => {
   const parts = text.split(regex);
   return parts.map((part, i) =>
     keywords.some(k => k.toLowerCase() === part.toLowerCase())
-      ? <span key={i} className="font-semibold text-black/90">{part}</span>
+      ? <span key={i} className="font-semibold" style={{ color: "#4338CA" }}>{part}</span>
       : part
   );
 };
