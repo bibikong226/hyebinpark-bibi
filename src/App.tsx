@@ -24,10 +24,10 @@ const MacWin = ({
     role="region"
     aria-label={title || "Desktop window"}
     style={{
-      background: "rgba(255,255,255,0.6)",
-      backdropFilter: "blur(40px) saturate(1.6)",
-      border: "1px solid rgba(255,255,255,0.65)",
-      boxShadow: "0 12px 40px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)",
+      background: "rgba(255,255,255,0.25)",
+      backdropFilter: "blur(40px) saturate(1.8)",
+      border: "1px solid rgba(255,255,255,0.4)",
+      boxShadow: "0 12px 40px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.5)",
     }}
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
@@ -245,11 +245,11 @@ const App = () => {
                   className="text-[clamp(2.2rem,6vw,5rem)] leading-[1.08] tracking-tight"
                   initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
                 >
-                  <span className="font-light text-black/35">Turning</span>{" "}
-                  <span className="font-serif italic font-bold text-[#4338CA]">complexity</span>
+                  <span className="font-light text-black/60">Turning</span>{" "}
+                  <span className="font-serif italic text-[#4338CA]">complexity</span>
                   <br />
-                  <span className="font-light text-black/35">into</span>{" "}
-                  <span className="font-serif italic font-bold text-[#4338CA]">clarity</span>
+                  <span className="font-light text-black/60">into</span>{" "}
+                  <span className="font-serif italic text-[#4338CA]">clarity</span>
                 </motion.h2>
               </div>
 
@@ -260,7 +260,7 @@ const App = () => {
                   <MacWin title="About" delay={0.12}>
                     <div className="p-5 md:p-6">
                       <div className="flex items-start gap-4">
-                        <img src={memojiImg} alt="Hyebin memoji" className="h-20 w-20 flex-shrink-0 object-contain" />
+                        <img src={memojiImg} alt="Hyebin memoji" className="h-24 w-24 flex-shrink-0 object-contain drop-shadow-md" style={{ background: "transparent" }} />
                         <div>
                           <p className="text-[15px] font-semibold leading-6 text-black/80">I turn complex AI & data products into clear, trustworthy experiences.</p>
                           <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-black/[0.04] px-3 py-1 text-[11px] font-semibold text-black/60">
@@ -297,22 +297,23 @@ const App = () => {
                   </aside>
                 </div>
 
-                {/* Right: Puzzle as widget (no window chrome) */}
+                {/* Right: Puzzle as photo widget */}
                 <div className="lg:col-span-7">
                   <motion.div
-                    className="overflow-hidden rounded-2xl"
+                    className="overflow-hidden rounded-[28px]"
                     style={{
-                      background: "rgba(255,255,255,0.45)",
-                      backdropFilter: "blur(30px) saturate(1.4)",
-                      border: "1px solid rgba(255,255,255,0.5)",
-                      boxShadow: "0 12px 40px rgba(0,0,0,0.06)",
+                      background: "rgba(255,255,255,0.2)",
+                      backdropFilter: "blur(40px) saturate(1.8)",
+                      border: "1px solid rgba(255,255,255,0.35)",
+                      boxShadow: "0 16px 48px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.5)",
                     }}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.55, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
                   >
-                    <div className="px-3 pt-3 pb-2">
-                      <p className="text-center text-[10px] font-semibold uppercase tracking-[0.2em] text-black/30">How I Work</p>
+                    <div className="flex items-center justify-between px-5 pt-4 pb-1">
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-black/30">How I Work</p>
+                      <p className="text-[10px] font-medium text-black/20">Click to reveal ✨</p>
                     </div>
                     <div className="flex items-center justify-center px-4 pb-4">
                       <PuzzleAnimation onAssembled={handlePuzzleAssembled} profileSrc={profileHero} />
@@ -326,7 +327,7 @@ const App = () => {
           {/* Dock */}
           <div className="relative z-20 px-4 pb-6 sm:px-6 md:px-8 lg:absolute lg:bottom-6 lg:left-1/2 lg:-translate-x-1/2 lg:px-0 lg:pb-0">
             <div className="mx-auto flex w-fit items-center gap-0 rounded-2xl px-3 py-2" role="navigation" aria-label="Quick navigation dock"
-              style={{ background: "rgba(255,255,255,0.5)", backdropFilter: "blur(28px) saturate(1.5)", border: "1px solid rgba(255,255,255,0.55)", boxShadow: "0 8px 32px rgba(0,0,0,0.07)" }}>
+              style={{ background: "rgba(255,255,255,0.2)", backdropFilter: "blur(40px) saturate(1.8)", border: "1px solid rgba(255,255,255,0.35)", boxShadow: "0 8px 32px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.5)" }}>
               {(() => {
                 const items = [
                   { icon: "📂", label: "Work", bg: "linear-gradient(135deg,#6366F1,#4F46E5)", action: () => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" }) },
