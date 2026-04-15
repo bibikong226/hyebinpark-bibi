@@ -202,7 +202,7 @@ const App = () => {
   ];
 
   return (
-    <div className="overflow-x-hidden font-sans bg-[#f0f1f5]">
+    <div className="overflow-x-hidden font-sans bg-[#f5f5f7]">
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3 focus:z-[100] focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-black">Skip to main content</a>
 
       <Navigation onSearchOpen={() => setSearchOpen(true)} />
@@ -215,9 +215,9 @@ const App = () => {
           className="relative flex min-h-[920px] w-full flex-col overflow-hidden lg:min-h-screen"
           style={{
             background: `
-              radial-gradient(ellipse 70% 55% at 25% 15%, rgba(200,210,235,0.5) 0%, transparent 55%),
-              radial-gradient(ellipse 60% 45% at 80% 75%, rgba(210,200,230,0.25) 0%, transparent 50%),
-              linear-gradient(170deg, #e9ecf2 0%, #e2e5ed 30%, #dde0ea 55%, #e0e3ec 80%, #e7eaf0 100%)
+              radial-gradient(ellipse 70% 55% at 25% 15%, rgba(210,220,245,0.4) 0%, transparent 55%),
+              radial-gradient(ellipse 60% 45% at 80% 75%, rgba(220,210,240,0.2) 0%, transparent 50%),
+              linear-gradient(170deg, #f7f8fc 0%, #f2f3f8 30%, #eeeff6 55%, #f1f2f8 80%, #f5f6fa 100%)
             `,
           }}
           aria-label="Desktop hero"
