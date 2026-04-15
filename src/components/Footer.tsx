@@ -10,7 +10,7 @@ export const Footer = () => {
       <section
         className="px-4 py-24 sm:px-8 sm:py-32 md:px-10"
         style={{
-          background: "#DDD5EE",
+          background: "rgba(20,20,40,0.95)",
         }}
         aria-labelledby="connect-heading"
       >
@@ -18,15 +18,15 @@ export const Footer = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           >
-            <h2 id="connect-heading" className="font-serif text-4xl italic text-black/85 md:text-5xl">Let's Connect</h2>
-            <p className="mx-auto mt-5 max-w-[420px] text-[16px] leading-[1.7] text-black/65">
+            <h2 id="connect-heading" className="font-serif text-4xl italic text-white/90 md:text-5xl">Let's Connect</h2>
+            <p className="mx-auto mt-5 max-w-[420px] text-[16px] leading-[1.7] text-white/70">
               I'm always excited to connect with fellow designers, researchers, and innovators. Let's talk! 👩‍💻
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-3">
               <a href="mailto:hyebinp@umich.edu" className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-[14px] font-medium text-white transition-all hover:opacity-90" style={{ background: "#4338CA" }}>
                 hyebinp@umich.edu <ArrowUpRight className="h-4 w-4" />
               </a>
-              <a href="https://www.linkedin.com/in/hyebinp/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/60 px-6 py-3 text-[14px] font-medium text-black/70 transition-all hover:bg-white/80">
+              <a href="https://www.linkedin.com/in/hyebinp/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3 text-[14px] font-medium text-white/80 transition-all hover:bg-white/20">
                 LinkedIn <ArrowUpRight className="h-4 w-4" />
               </a>
             </div>

@@ -8,7 +8,7 @@ const Index = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="min-h-[80vh] flex items-center justify-center relative overflow-hidden py-12 md:py-16">
+      <section className="min-h-[80vh] flex items-center justify-center relative overflow-hidden pt-12 pb-28 md:pt-16 md:pb-36">
         {/* Background Name Treatment - Decorative backdrop behind hero */}
         <div
           className="absolute inset-0 flex items-center justify-center select-none pointer-events-none overflow-hidden"
