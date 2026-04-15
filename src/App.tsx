@@ -295,7 +295,7 @@ const App = () => {
                 <div className="lg:col-span-7">
                   <MacWin title="How I Work" delay={0.18}>
                     <div className="flex items-center justify-center p-3">
-                      <PuzzleAnimation onAssembled={handlePuzzleAssembled} profileSrc={profilePhoto} />
+                      <PuzzleAnimation onAssembled={handlePuzzleAssembled} profileSrc={profileHero} />
                     </div>
                   </MacWin>
                 </div>
