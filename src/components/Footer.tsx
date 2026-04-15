@@ -10,7 +10,7 @@ export const Footer = () => {
       <section
         className="px-4 py-24 sm:px-8 sm:py-32 md:px-10"
         style={{
-          background: "linear-gradient(180deg, #1a1a2e 0%, #16162a 100%)",
+          background: "transparent",
         }}
         aria-labelledby="connect-heading"
       >
