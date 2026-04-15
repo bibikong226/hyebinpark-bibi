@@ -138,7 +138,7 @@ const workValues = [
 
 const About = () => {
   return (
-    <div className="overflow-x-hidden font-sans" style={{ background: "linear-gradient(180deg, #DDD5EE 0%, #DDE4F0 20%, #E0ECF0 45%, #F0EDE6 70%, #F5F0EB 90%, #2A2545 95%, #1a1a2e 100%)" }}>
+    <div className="overflow-x-hidden font-sans" style={{ background: "#DDD5EE" }}>
       <Navigation />
 
       <main id="main-content" role="main">
