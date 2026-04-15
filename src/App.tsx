@@ -6,7 +6,7 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { PuzzleAnimation } from "@/components/PuzzleAnimation";
 import { FinderWindow } from "@/components/FinderWindow";
-import profilePhoto from "@/assets/profile-photo.jpg";
+import profileHero from "@/assets/profile-hero.png";
 import memojiImg from "@/assets/memoji.png";
 import logoLine from "@/assets/logo-line.png";
 import logoTiktok from "@/assets/logo-tiktok.png";
