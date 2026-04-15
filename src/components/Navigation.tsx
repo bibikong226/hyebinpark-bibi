@@ -81,47 +81,49 @@ export const Navigation = ({ onSearchOpen }: NavigationProps) => {
           <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="rounded-lg p-2 text-black/50 md:hidden" aria-label={isMenuOpen ? "Close menu" : "Open menu"} aria-expanded={isMenuOpen}>
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
-
-          <AnimatePresence>
-            {isMenuOpen && (
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsMenuOpen(false)} className="fixed inset-0 z-[98] bg-black/20 md:hidden" />
-            )}
-          </AnimatePresence>
-          <AnimatePresence>
-            {isMenuOpen && (
-              <motion.div initial={{ opacity: 0, x: "100%" }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: "100%" }}
-                transition={{ type: "spring", damping: 26, stiffness: 300 }}
-                className="fixed inset-y-0 right-0 z-[99] w-3/4 max-w-sm md:hidden"
-                style={{
-                  background: "rgba(255,255,255,0.92)",
-                  backdropFilter: "blur(40px) saturate(1.8)",
-                  borderLeft: "1px solid rgba(0,0,0,0.06)",
-                  boxShadow: "-8px 0 30px rgba(0,0,0,0.08)",
-                }}
-              >
-                <button onClick={() => setIsMenuOpen(false)} className="absolute right-4 top-4 rounded-lg p-2 text-black/50" aria-label="Close menu">
-                  <X size={22} />
-                </button>
-                <div className="flex h-full flex-col justify-center gap-5 px-10">
-                  {navLinks.map(link => (
-                    <a key={link.href} href={link.href} onClick={e => { if (!link.external) handleNavClick(e, link.href); setIsMenuOpen(false); }}
-                      target={link.external ? "_blank" : undefined} className="text-lg font-medium tracking-wide text-black/70 transition-colors hover:text-black">{link.label}</a>
-                  ))}
-                  {onSearchOpen && (
-                    <button onClick={() => { onSearchOpen(); setIsMenuOpen(false); }} className="flex items-center gap-2 text-left text-lg font-medium tracking-wide text-black/70">
-                      <Search size={16} className="opacity-50" />Search
-                    </button>
-                  )}
-                  <a href="mailto:hyebinp@umich.edu" onClick={() => setIsMenuOpen(false)}
-                    className="mt-2 inline-block self-start rounded-full px-6 py-2 text-sm font-medium text-white"
-                    style={{ background: "#4338CA" }}
-                  >Contact</a>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
         </nav>
       </header>
+
+      {/* Mobile drawer — rendered outside header for proper z-index layering */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsMenuOpen(false)} className="fixed inset-0 z-[101] bg-black/20 md:hidden" />
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div initial={{ opacity: 0, x: "100%" }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: "100%" }}
+            transition={{ type: "spring", damping: 26, stiffness: 300 }}
+            className="fixed inset-y-0 right-0 z-[102] w-3/4 max-w-xs md:hidden"
+            style={{
+              background: "rgba(255,255,255,0.96)",
+              backdropFilter: "blur(40px) saturate(1.8)",
+              borderLeft: "1px solid rgba(0,0,0,0.06)",
+              boxShadow: "-8px 0 30px rgba(0,0,0,0.1)",
+            }}
+          >
+            <button onClick={() => setIsMenuOpen(false)} className="absolute right-4 top-3 rounded-lg p-2 text-black/50" aria-label="Close menu">
+              <X size={22} />
+            </button>
+            <div className="flex h-full flex-col justify-center gap-6 px-10">
+              {navLinks.map(link => (
+                <a key={link.href} href={link.href} onClick={e => { if (!link.external) handleNavClick(e, link.href); setIsMenuOpen(false); }}
+                  target={link.external ? "_blank" : undefined} className="text-lg font-medium tracking-wide text-black/70 transition-colors hover:text-black">{link.label}</a>
+              ))}
+              {onSearchOpen && (
+                <button onClick={() => { onSearchOpen(); setIsMenuOpen(false); }} className="flex items-center gap-2 text-left text-lg font-medium tracking-wide text-black/70">
+                  <Search size={16} className="opacity-50" />Search
+                </button>
+              )}
+              <a href="mailto:hyebinp@umich.edu" onClick={() => setIsMenuOpen(false)}
+                className="mt-2 inline-block self-start rounded-full px-6 py-2 text-sm font-medium text-white"
+                style={{ background: "#4338CA" }}
+              >Contact</a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="h-11" aria-hidden="true" />
     </>
   );
