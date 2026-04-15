@@ -241,7 +241,7 @@ const Nurturly = () => {
 
         {/* ═══════ USER RESEARCH ═══════ */}
         <section id="user-research" className={`${SECTION_PX} ${SECTION_GAP}`}>
-          <div className={`mx-auto ${MAX_W} space-y-14 sm:space-y-16 md:space-y-20`}>
+          <div className={`mx-auto ${MAX_W} space-y-20 sm:space-y-24 md:space-y-28`}>
 
             {/* Survey */}
             <Section>
