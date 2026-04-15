@@ -173,7 +173,7 @@ const Index = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-primary text-white">
+      <section className="section-padding text-white" style={{ background: "rgba(20,20,40,0.95)" }}>
         <div className="container-narrow text-center">
           <motion.div
             className="space-y-8"
