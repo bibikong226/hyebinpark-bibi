@@ -226,7 +226,7 @@ const App = () => {
           aria-label="Desktop hero"
         >
           <div className="relative z-10 flex-1 px-5 pb-10 pt-6 sm:px-6 sm:pt-8 md:px-8 lg:px-12 lg:pb-56">
-            <div className="mx-auto max-w-[1280px] w-full" style={{ maxWidth: "calc(100vw - 40px)" }}>
+            <div className="mx-auto max-w-[1280px]">
 
               {/* Name + Headline */}
               <div className="mb-12 flex flex-col items-center text-center sm:mb-16 lg:mb-32">
