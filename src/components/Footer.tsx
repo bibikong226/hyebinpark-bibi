@@ -8,7 +8,7 @@ export const Footer = () => {
     <>
       {/* Let's Connect */}
       <section
-        className="px-4 py-24 sm:px-8 sm:py-32 md:px-10"
+        className="px-4 pt-16 pb-16 sm:px-8 sm:pt-20 sm:pb-20 md:px-10 md:pt-24 md:pb-24"
         style={{
           background: "rgba(20,20,40,0.95)",
         }}
