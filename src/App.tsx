@@ -232,7 +232,7 @@ const App = () => {
               <div className="mb-24 flex flex-col items-center text-center lg:mb-32">
                 <h1
                   className="pointer-events-none select-none text-[clamp(3.5rem,13vw,9rem)] font-black uppercase leading-[0.85] tracking-[-0.04em]"
-                  style={{ color: "rgba(255,255,255,0.5)" }}
+                  style={{ color: "rgba(0,0,0,0.07)" }}
                 >
                   HYEBIN PARK
                 </h1>
@@ -285,7 +285,7 @@ const App = () => {
 
                   {/* Folders */}
                   <aside aria-labelledby="folders-heading">
-                    <p id="folders-heading" className="mb-5 px-1 text-[14px] font-semibold uppercase tracking-[0.22em] text-black/30">Project Folders</p>
+                    <p id="folders-heading" className="mb-5 px-1 text-[14px] font-semibold uppercase tracking-[0.22em] text-black/50">Project Folders</p>
                     <div className="grid grid-cols-3 gap-y-6 gap-x-4 sm:grid-cols-5 lg:grid-cols-3">
                       {folders.map((f, i) => (
                         <motion.button key={f.label} type="button" onClick={() => setFinderCategory(f.label)}
@@ -293,7 +293,7 @@ const App = () => {
                           initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.22 + i * 0.07 }}
                         >
                           <div className="transition-transform duration-200 group-hover:-translate-y-1"><DesktopFolderIcon /></div>
-                          <span className="text-[14px] font-medium leading-tight text-black/55">{f.label}</span>
+                          <span className="text-[14px] font-medium leading-tight text-black/70">{f.label}</span>
                         </motion.button>
                       ))}
                     </div>
