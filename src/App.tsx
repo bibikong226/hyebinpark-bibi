@@ -261,7 +261,7 @@ const App = () => {
                 {/* Left: About + Folders */}
                 <div className="min-w-0 space-y-6 sm:space-y-8 lg:col-span-5 overflow-hidden">
                   <MacWin title="About" delay={0.12}>
-                    <div className="px-4 py-3 sm:p-5 md:p-6">
+                    <div className="px-5 py-3 sm:p-5 md:p-6">
                       <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-start sm:gap-4">
                         <img src={memojiImg} alt="Hyebin memoji" className="h-16 w-16 flex-shrink-0 object-contain drop-shadow-md sm:h-32 sm:w-32" style={{ background: "transparent" }} />
                         <div>
