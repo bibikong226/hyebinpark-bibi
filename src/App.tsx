@@ -308,7 +308,7 @@ const App = () => {
                         I bring together diverse perspectives — then piece them into clear, cohesive product experiences.
                       </p>
                       <div className="relative flex items-center justify-center overflow-hidden rounded-[16px] sm:rounded-[24px] bg-black/[0.03] px-1 py-2 sm:px-6 sm:py-8">
-                        <div className="w-full max-w-[480px] origin-top scale-[0.55] sm:scale-[0.85] md:scale-100" style={{ marginBottom: "-45%", smMarginBottom: "0" }}>
+                        <div className="w-full max-w-[480px] origin-top scale-[0.55] sm:scale-[0.85] md:scale-100 mb-[-45%] sm:mb-0">
                           <PuzzleAnimation onAssembled={handlePuzzleAssembled} profileSrc={profileHero} />
                         </div>
                       </div>
