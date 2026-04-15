@@ -225,27 +225,27 @@ const App = () => {
           }}
           aria-label="Desktop hero"
         >
-          <div className="relative z-10 flex-1 px-4 pb-10 pt-8 sm:px-6 md:px-8 lg:px-12 lg:pb-56">
+          <div className="relative z-10 flex-1 px-4 pb-10 pt-6 sm:px-6 sm:pt-8 md:px-8 lg:px-12 lg:pb-56">
             <div className="mx-auto max-w-[1280px]">
 
               {/* Name + Headline */}
-              <div className="mb-24 flex flex-col items-center text-center lg:mb-32">
+              <div className="mb-12 flex flex-col items-center text-center sm:mb-16 lg:mb-32">
                 <h1
-                  className="pointer-events-none select-none text-[clamp(3.5rem,13vw,9rem)] font-black uppercase leading-[0.85] tracking-[-0.04em]"
+                  className="pointer-events-none select-none text-[clamp(2.5rem,13vw,9rem)] font-black uppercase leading-[0.85] tracking-[-0.04em]"
                   style={{ color: "rgba(0,0,0,0.12)" }}
                 >
                   HYEBIN PARK
                 </h1>
 
                 <motion.p
-                  className="mb-16 mt-14 rounded-full border border-black/[0.08] bg-white/50 px-5 py-2 text-[14px] font-bold uppercase tracking-[0.22em] text-black/70 backdrop-blur-md"
+                  className="mb-8 mt-6 rounded-full border border-black/[0.08] bg-white/50 px-4 py-1.5 text-[12px] font-bold uppercase tracking-[0.22em] text-black/70 backdrop-blur-md sm:mb-16 sm:mt-14 sm:px-5 sm:py-2 sm:text-[14px]"
                   initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.06 }}
                 >
                   Strategic AI Product Designer
                 </motion.p>
 
                 <motion.h2
-                  className="text-[clamp(2.2rem,6vw,5rem)] leading-[1.08] tracking-tight"
+                  className="text-[clamp(1.8rem,6vw,5rem)] leading-[1.08] tracking-tight"
                   initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
                 >
                   <span className="font-normal text-black/70">Turning</span>{" "}
