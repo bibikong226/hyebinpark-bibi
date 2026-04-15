@@ -206,7 +206,7 @@ const App = () => {
   ];
 
   return (
-    <div className="overflow-x-hidden font-sans" style={{ background: "linear-gradient(180deg, #DDD5EE 0%, #DDE4F0 20%, #E0ECF0 45%, #F0EDE6 70%, #F5F0EB 90%, #2A2545 95%, #1a1a2e 100%)" }}>
+    <div className="overflow-x-hidden font-sans" style={{ background: "linear-gradient(180deg, #DDD5EE 0%, #DDE4F0 20%, #E0ECF0 45%, #F0EDE6 70%, #F5F0EB 100%)" }}>
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3 focus:z-[100] focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-black">Skip to main content</a>
 
       <Navigation onSearchOpen={() => setSearchOpen(true)} />
@@ -231,8 +231,8 @@ const App = () => {
               {/* Name + Headline */}
               <div className="mb-24 flex flex-col items-center text-center lg:mb-32">
                 <h1
-                  className="pointer-events-none select-none text-[clamp(3.5rem,13vw,9rem)] font-black uppercase leading-[0.85] tracking-[-0.04em]"
-                  style={{ color: "rgba(0,0,0,0.07)" }}
+                  className="pointer-events-none select-none text-[clamp(3.5rem,13vw,9rem)] font-black uppercase leading-[0.85] tracking-[-0.04em] text-black/[0.06]"
+                  style={{ WebkitTextStroke: "1.5px rgba(0,0,0,0.08)" }}
                 >
                   HYEBIN PARK
                 </h1>
