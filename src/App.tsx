@@ -225,7 +225,7 @@ const App = () => {
           }}
           aria-label="Desktop hero"
         >
-          <div className="relative z-10 flex-1 px-4 pb-10 pt-8 sm:px-6 md:px-8 lg:px-12 lg:pb-48">
+          <div className="relative z-10 flex-1 px-4 pb-10 pt-8 sm:px-6 md:px-8 lg:px-12 lg:pb-56">
             <div className="mx-auto max-w-[1280px]">
 
               {/* Name + Headline */}
@@ -385,12 +385,12 @@ const App = () => {
                       </div>
                     </div>
                     <div className="flex flex-1 flex-col p-5 md:p-6">
-                      <h3 className="mb-2 font-serif text-[20px] font-semibold leading-[1.2] text-black/85 md:text-[22px]">{project.title}</h3>
-                      <p className="mb-3 min-h-[46px] max-w-[440px] text-[14px] leading-[1.65] text-black/60">{project.description}</p>
-                      <div className="mb-3 min-h-[30px] flex flex-wrap gap-[5px]">
+                      <h3 className="font-serif text-[20px] font-semibold leading-[1.2] text-black/85 md:text-[22px]">{project.title}</h3>
+                      <p className="mt-2 min-h-[68px] max-w-[440px] text-[14px] leading-[1.65] text-black/60">{project.description}</p>
+                      <div className="mt-4 min-h-[32px] flex flex-wrap items-start gap-[5px]">
                         {project.tags.map(tag => <span key={tag} className="inline-block rounded-full border border-black/[0.08] bg-black/[0.02] px-2.5 py-[3px] text-[14px] font-medium text-black/55">{tag}</span>)}
                       </div>
-                      <div className="mt-auto flex flex-col gap-[5px]">
+                      <div className="mt-4 flex flex-col gap-[5px]">
                         {project.highlights.map(h => (
                           <div key={h} className="relative cursor-default overflow-hidden rounded-md px-2.5 py-[5px] w-fit">
                             <div className="absolute inset-0 bg-black/[0.03]" />
