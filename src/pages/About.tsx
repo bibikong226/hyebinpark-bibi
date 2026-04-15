@@ -186,7 +186,8 @@ const About = () => {
           </MacWin>
         </div>
       </section>
-    </Layout>
+      <Footer />
+    </div>
   );
 };
 
