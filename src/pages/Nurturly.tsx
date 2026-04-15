@@ -50,7 +50,7 @@ const imageReveal = {
 /* ── Consistent layout constants ── */
 const MAX_W = "max-w-[960px]";
 const SECTION_PX = "px-4 sm:px-8 md:px-10";
-const SECTION_PY = "py-12 sm:py-16 md:py-20";
+const SECTION_GAP = "py-10 sm:py-14 md:py-16";
 const BODY = "text-sm sm:text-base leading-relaxed text-black/55";
 const BODY_STRONG = "font-semibold text-black/80";
 const PINK = "#DB2777";
@@ -74,11 +74,10 @@ const MacWin = ({ children, title, className = "" }: { children: React.ReactNode
   </motion.div>
 );
 
-/* ── Clean white card ── */
-const WhiteCard = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
+/* ── Section wrapper (no card, just animation) ── */
+const Section = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
   <motion.div
-    className={`rounded-2xl bg-white p-6 sm:p-8 md:p-10 ${className}`}
-    style={{ border: "1px solid rgba(0,0,0,0.06)", boxShadow: "0 2px 16px rgba(0,0,0,0.04)" }}
+    className={className}
     initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
   >
     {children}
@@ -118,60 +117,65 @@ const Nurturly = () => {
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
-    <div className="overflow-x-hidden font-sans" style={{ background: "linear-gradient(180deg, #F5E6F0 0%, #F0E4EE 15%, #EDE4F0 30%, #E8E4F0 50%, #F0EDE6 75%, #F5F0EB 100%)" }}>
+    <div className="overflow-x-hidden font-sans bg-white">
       <Navigation />
       <SectionNav sections={sections} />
 
       <main id="main-content" role="main">
 
-        {/* ═══════ HERO ═══════ */}
-        <section id="hero" className={`${SECTION_PX} pt-8 pb-10 sm:pt-12 sm:pb-14`}>
-          <div className={`mx-auto ${MAX_W} text-center`}>
-            <motion.img src={nurturlyLogo} alt="Nurturly Logo" className="max-w-[180px] sm:max-w-[260px] md:max-w-[320px] mx-auto mb-4 sm:mb-6"
-              initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} />
-            <motion.p className={`${BODY} font-semibold text-black/70`}
-              initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
-              Designing an AI-driven platform that connects new moms<br className="hidden sm:inline" /> to personalized resources and peer support
-            </motion.p>
-          </div>
-        </section>
+        {/* Baby pink gradient zone: hero → project details */}
+        <div style={{ background: "linear-gradient(180deg, #F9E8F2 0%, #F5E0ED 40%, #F0DAE6 70%, #FFFFFF 100%)" }}>
 
-        {/* Hero Mockup */}
-        <section className={`${SECTION_PX} pb-10 sm:pb-14 md:px-12 lg:px-20`}>
-          <motion.div className={`rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 lg:p-10 mx-auto ${MAX_W}`} style={{ background: PINK }}
-            initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.3 }}>
-            <img src={newMockupImage} alt="Nurturly App Mockup" className="w-full h-auto hover:scale-105 transition-transform duration-500" />
-          </motion.div>
-        </section>
+          {/* ═══════ HERO ═══════ */}
+          <section id="hero" className={`${SECTION_PX} pt-8 pb-10 sm:pt-12 sm:pb-14`}>
+            <div className={`mx-auto ${MAX_W} text-center`}>
+              <motion.img src={nurturlyLogo} alt="Nurturly Logo" className="max-w-[180px] sm:max-w-[260px] md:max-w-[320px] mx-auto mb-4 sm:mb-6"
+                initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} />
+              <motion.p className={`${BODY} font-semibold text-black/70`}
+                initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
+                Designing an AI-driven platform that connects new moms<br className="hidden sm:inline" /> to personalized resources and peer support
+              </motion.p>
+            </div>
+          </section>
 
-        {/* Project Details — MacWin */}
-        <section className={`${SECTION_PX} pb-10 sm:pb-14`}>
-          <div className={`mx-auto ${MAX_W}`}>
-            <MacWin title="Finder — Project Details">
-              <div className="p-6 sm:p-8 md:p-10">
-                <motion.div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8"
-                  initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.5 }}>
-                  {[
-                    { title: 'SKILLS', content: 'User Research\nUX/UI Design\nInteractive Prototyping\nUsability Testing' },
-                    { title: 'MY ROLE', content: 'UX Design Lead' },
-                    { title: 'TIMELINE', content: '2 Months\nOct. 2024 - Nov. 2024' },
-                    { title: 'TEAM', content: '2 UX designers\nproduct manager\nbusiness analyst' },
-                  ].map((item, i) => (
-                    <div key={i} className="text-left">
-                      <h4 className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-black/35 mb-2">{item.title}</h4>
-                      <p className="text-xs sm:text-sm text-black/75 whitespace-pre-line leading-relaxed">{item.content}</p>
-                    </div>
-                  ))}
-                </motion.div>
-              </div>
-            </MacWin>
-          </div>
-        </section>
+          {/* Hero Mockup */}
+          <section className={`${SECTION_PX} pb-10 sm:pb-14 md:px-12 lg:px-20`}>
+            <motion.div className={`rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 lg:p-10 mx-auto ${MAX_W}`} style={{ background: PINK }}
+              initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.3 }}>
+              <img src={newMockupImage} alt="Nurturly App Mockup" className="w-full h-auto hover:scale-105 transition-transform duration-500" />
+            </motion.div>
+          </section>
+
+          {/* Project Details — MacWin */}
+          <section className={`${SECTION_PX} pb-14 sm:pb-20`}>
+            <div className={`mx-auto ${MAX_W}`}>
+              <MacWin title="Finder — Project Details">
+                <div className="p-6 sm:p-8 md:p-10">
+                  <motion.div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8"
+                    initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.5 }}>
+                    {[
+                      { title: 'SKILLS', content: 'User Research\nUX/UI Design\nInteractive Prototyping\nUsability Testing' },
+                      { title: 'MY ROLE', content: 'UX Design Lead' },
+                      { title: 'TIMELINE', content: '2 Months\nOct. 2024 - Nov. 2024' },
+                      { title: 'TEAM', content: '2 UX designers\nproduct manager\nbusiness analyst' },
+                    ].map((item, i) => (
+                      <div key={i} className="text-left">
+                        <h4 className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-black/35 mb-2">{item.title}</h4>
+                        <p className="text-xs sm:text-sm text-black/75 whitespace-pre-line leading-relaxed">{item.content}</p>
+                      </div>
+                    ))}
+                  </motion.div>
+                </div>
+              </MacWin>
+            </div>
+          </section>
+
+        </div>{/* end pink gradient zone */}
 
         {/* ═══════ SUMMARY ═══════ */}
-        <section id="summary" className={`${SECTION_PX} ${SECTION_PY}`}>
+        <section id="summary" className={`${SECTION_PX} ${SECTION_GAP}`}>
           <div className={`mx-auto ${MAX_W}`}>
-            <WhiteCard>
+            <Section>
               <SectionHeader eyebrow="SUMMARY" title={<>Nurturly was created during the <span style={{ color: PINK }}>Tech Innovation Jam</span>, a competitive 5-week <span style={{ color: PINK }}>hackathon</span> at the University of Michigan.</>} />
               <p className={BODY}>
                 Designed to address the <span className={BODY_STRONG}>emotional isolation</span> and <span className={BODY_STRONG}>overwhelming information</span> moms face during <span className={BODY_STRONG}>pregnancy and postpartum,</span> Nurturly connects them to a safe, supportive community and tailored resources through <span className={BODY_STRONG}>AI-driven personalization.</span>
@@ -184,19 +188,19 @@ const Nurturly = () => {
                 <PinkBox>🌟 As the <strong>main UX designer</strong>, I drove the product from discovery to delivery, <strong>translating research into strategic design solutions.</strong> I focused on designing the <strong>AI-powered matching feature and contextual chatbot,</strong> grounded in insights from interviews, surveys, and competitive analysis.</PinkBox>
                 <PinkBox>🚀 Our team won <strong>Runner-Up & People's Choice Awards</strong>, securing <strong>$5,000 in funding</strong> to advance Nurturly as a scalable postpartum support platform.</PinkBox>
               </div>
-            </WhiteCard>
+            </Section>
           </div>
         </section>
 
         {/* ═══════ PROBLEM ═══════ */}
-        <section id="problem" className={`${SECTION_PX} ${SECTION_PY}`}>
+        <section id="problem" className={`${SECTION_PX} ${SECTION_GAP}`}>
           <div className={`mx-auto ${MAX_W}`}>
-            <WhiteCard>
+            <Section>
               <SectionHeader eyebrow="PROBLEM" title={<>Pregnancy & Postpartum Support is <span style={{ color: PINK }}>Scattered, Confusing,</span> and Leaves <span style={{ color: PINK }}>Moms Feeling Alone.</span></>} />
               <p className={BODY}>
                 From pregnancy to postpartum, moms experience profound changes, but <span className={BODY_STRONG}>support remains fragmented and baby-focused.</span> With <span className={BODY_STRONG}>unreliable, conflicting resources</span> and no clear guidance, moms are <span className={BODY_STRONG}>left to figure it out alone.</span>
               </p>
-            </WhiteCard>
+            </Section>
           </div>
         </section>
 
@@ -232,11 +236,11 @@ const Nurturly = () => {
         </section>
 
         {/* ═══════ USER RESEARCH ═══════ */}
-        <section id="user-research" className={`${SECTION_PX} ${SECTION_PY}`}>
+        <section id="user-research" className={`${SECTION_PX} ${SECTION_GAP}`}>
           <div className={`mx-auto ${MAX_W} space-y-8`}>
 
             {/* Survey */}
-            <WhiteCard>
+            <Section>
               <SectionHeader eyebrow="SURVEY INSIGHTS" title={<>Survey as a Compass: Finding <span style={{ color: PINK }}>Where to Focus</span></>} />
               <p className={`${BODY} mb-2`}>
                 I initially assumed that moms might need support throughout the entire motherhood journey. But <span className={BODY_STRONG}>after conducting 22 surveys</span> with women during pregnancy and postpartum, I was able to <span className={BODY_STRONG}>narrow the focus.</span>
@@ -249,10 +253,10 @@ const Nurturly = () => {
                 <motion.img src={surveyStats} alt="Survey statistics" className="w-full rounded-xl max-w-[420px] mx-auto" {...imageReveal} />
               </div>
               <PinkBox>💡 These findings helped me narrow the focus to <strong>mom-centered recovery support</strong> during pregnancy and postpartum, not just general parenting help.</PinkBox>
-            </WhiteCard>
+            </Section>
 
             {/* Interview Insights */}
-            <WhiteCard>
+            <Section>
               <SectionHeader eyebrow="INTERVIEW INSIGHTS" title={<>Zooming In: What <span style={{ color: PINK }}>Moms</span> Are Actually <span style={{ color: PINK }}>Experiencing</span></>} />
               <p className={`${BODY} mb-2`}>
                 Interviewed 5 moms to understand the emotional, physical, and mental challenges they face during <span className={BODY_STRONG}>pregnancy and postpartum.</span>
@@ -264,10 +268,10 @@ const Nurturly = () => {
                 <motion.img src={emotionalSupportGapComplete} alt="Emotional Support Gap" className="w-full rounded-xl max-w-[420px] mx-auto" {...imageReveal} />
                 <motion.img src={informationOverloadComplete} alt="Information Overload" className="w-full rounded-xl max-w-[420px] mx-auto" {...imageReveal} />
               </div>
-            </WhiteCard>
+            </Section>
 
             {/* Digital Ethnography */}
-            <WhiteCard>
+            <Section>
               <SectionHeader eyebrow="DIGITAL ETHNOGRAPHY" title={<>These Gaps Often Push Moms Toward <span style={{ color: PINK }}>Online Communities</span> In Search Of <span style={{ color: PINK }}>Connection</span></>} />
               <p className={`${BODY} mb-6`}>
                 Analyzed conversations on <span className={BODY_STRONG}>Reddit, Instagram, TikTok, and Facebook</span> to see how they seek guidance and connection during pregnancy and postpartum.
@@ -276,24 +280,24 @@ const Nurturly = () => {
                 <motion.img src={onlineCommunities1} alt="Online community research" className="w-full rounded-xl max-w-[420px] mx-auto" {...imageReveal} />
                 <motion.img src={onlineCommunities2} alt="Online community insights" className="w-full rounded-xl max-w-[420px] mx-auto" {...imageReveal} />
               </div>
-            </WhiteCard>
+            </Section>
 
             {/* Competitive Analysis */}
-            <WhiteCard>
+            <Section>
               <SectionHeader eyebrow="COMPETITIVE ANALYSIS" title={<>These Gaps Present a <span style={{ color: PINK }}>Clear Opportunity</span></>} />
               <p className={`${BODY} mb-6`}>
                 Despite strong communities and a wealth of content, existing platforms often fall short in delivering <span className={BODY_STRONG}>verified, personalized guidance</span> and fostering <span className={BODY_STRONG}>deep, meaningful connections</span> between moms.
               </p>
               <motion.img src={competitiveAnalysis} alt="Competitive analysis chart" className="w-full rounded-xl max-w-[720px] mx-auto" {...imageReveal} />
-            </WhiteCard>
+            </Section>
 
           </div>
         </section>
 
         {/* ═══════ DESIGN STRATEGY / PRINCIPLES ═══════ */}
-        <section id="principles" className={`${SECTION_PX} ${SECTION_PY}`}>
+        <section id="principles" className={`${SECTION_PX} ${SECTION_GAP}`}>
           <div className={`mx-auto ${MAX_W}`}>
-            <WhiteCard>
+            <Section>
               <SectionHeader eyebrow="DESIGN STRATEGY" title={<>So How Can Our <span style={{ color: PINK }}>Design</span> Truly <span style={{ color: PINK }}>Support Moms?</span></>} />
               <p className={`${BODY} mb-2`}>
                 Based on what I heard and observed, I realized that moms weren't just asking for information. They were asking to be <span className={BODY_STRONG}>seen, supported, and protected.</span>
@@ -333,7 +337,7 @@ const Nurturly = () => {
                   </motion.div>
                 ))}
               </div>
-            </WhiteCard>
+            </Section>
           </div>
         </section>
 
@@ -351,29 +355,29 @@ const Nurturly = () => {
         </section>
 
         {/* ═══════ IDEATION ═══════ */}
-        <section id="ideation" className={`${SECTION_PX} ${SECTION_PY}`}>
+        <section id="ideation" className={`${SECTION_PX} ${SECTION_GAP}`}>
           <div className={`mx-auto ${MAX_W}`}>
-            <WhiteCard>
+            <Section>
               <SectionHeader eyebrow="IDEATION" title={<>Visualized solutions through <span style={{ color: PINK }}>low-fidelity designs</span> to explore effective layouts and gather feedback.</>} />
               <motion.img src={lowFiWireframes} alt="Low-fidelity wireframes" className="w-full max-w-[720px] mx-auto" {...fadeInUp} />
-            </WhiteCard>
+            </Section>
           </div>
         </section>
 
         {/* Mid-fi */}
-        <section className={`${SECTION_PX} ${SECTION_PY}`}>
+        <section className={`${SECTION_PX} ${SECTION_GAP}`}>
           <div className={`mx-auto ${MAX_W}`}>
-            <WhiteCard>
+            <Section>
               <SectionHeader eyebrow="MID-FI WIREFRAME" title={<>Building on early concepts, I created <span style={{ color: PINK }}>mid-fidelity</span> prototypes to validate <span style={{ color: PINK }}>navigation logic and content prioritization.</span></>} />
               <motion.img src={highFidelityMockups} alt="Mid-fidelity mockups" className="w-full max-w-[760px] mx-auto" {...fadeInUp} />
-            </WhiteCard>
+            </Section>
           </div>
         </section>
 
         {/* ═══════ ITERATIONS ═══════ */}
-        <section id="iterations" className={`${SECTION_PX} ${SECTION_PY}`}>
+        <section id="iterations" className={`${SECTION_PX} ${SECTION_GAP}`}>
           <div className={`mx-auto ${MAX_W}`}>
-            <WhiteCard>
+            <Section>
               <SectionHeader eyebrow="DESIGN ITERATIONS" title={<>Through user testing and feedback, I iterated on <span style={{ color: PINK }}>key interaction points</span> to improve usability.</>} />
 
               {[
@@ -402,14 +406,14 @@ const Nurturly = () => {
                   </div>
                 </motion.div>
               ))}
-            </WhiteCard>
+            </Section>
           </div>
         </section>
 
         {/* ═══════ HIGH-FI ═══════ */}
-        <section id="highfi" className={`${SECTION_PX} ${SECTION_PY}`}>
+        <section id="highfi" className={`${SECTION_PX} ${SECTION_GAP}`}>
           <div className={`mx-auto ${MAX_W}`}>
-            <WhiteCard>
+            <Section>
               <p className="mb-6 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.3em] text-black/30">HIGH-FI DESIGN</p>
               <div className="space-y-12">
                 {[
@@ -424,20 +428,20 @@ const Nurturly = () => {
                   </motion.div>
                 ))}
               </div>
-            </WhiteCard>
+            </Section>
           </div>
         </section>
 
         {/* ═══════ RESULT ═══════ */}
-        <section id="result" className={`${SECTION_PX} ${SECTION_PY}`}>
+        <section id="result" className={`${SECTION_PX} ${SECTION_GAP}`}>
           <div className={`mx-auto ${MAX_W}`}>
-            <WhiteCard>
+            <Section>
               <SectionHeader eyebrow="RESULT" title={<>Our team won <span style={{ color: PINK }}>Runner-Up & People's Choice Awards</span>, securing <span style={{ color: PINK }}>$5,000</span> in funding to advance Nurturly.</>} />
               <p className={`${BODY} mb-3`}>Creating Nurturly was a meaningful journey of growth, teamwork, and dedication to creating real impact.</p>
               <p className={`${BODY} mb-3`}>Seeing moms resonate with Nurturly's mission was one of the most rewarding moments of this project. We won <span className={BODY_STRONG}>Runner-Up & People's Choice</span> award at <span className={BODY_STRONG}>TECH+INNOVATION JAM</span>, <span className={BODY_STRONG}>securing $5,000</span> in funding to continue building Nurturly.</p>
               <p className={`${BODY} mb-6`}>This experience deepened my belief in <span className={BODY_STRONG}>empathy-driven UX</span> and <span className={BODY_STRONG}>research-backed design</span>, and we're now continuing to develop our MVP.</p>
               <motion.img src={teamAwards} alt="Team holding award checks" className="w-full rounded-xl max-w-[700px] mx-auto" {...fadeInUp} />
-            </WhiteCard>
+            </Section>
           </div>
         </section>
 
