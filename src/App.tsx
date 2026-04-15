@@ -263,7 +263,7 @@ const App = () => {
                   <MacWin title="About" delay={0.12}>
                     <div className="p-5 md:p-6">
                       <div className="flex items-start gap-4">
-                        <img src={memojiImg} alt="Hyebin memoji" className="h-24 w-24 flex-shrink-0 object-contain drop-shadow-md" style={{ background: "transparent" }} />
+                        <img src={memojiImg} alt="Hyebin memoji" className="h-32 w-32 flex-shrink-0 object-contain drop-shadow-md" style={{ background: "transparent" }} />
                         <div>
                           <p className="text-[15px] font-semibold leading-6 text-black/80">I turn ambiguity into clear, trustworthy products that drive real business impact.</p>
                           <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-black/[0.04] px-3 py-1 text-[14px] font-semibold text-black/60">
