@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
@@ -43,6 +44,77 @@ const SectionHeader = ({ eyebrow, title }: { eyebrow: string; title: string }) =
   </div>
 );
 
+/* ── Photo Shuffle Widget ── */
+const PhotoShuffleWidget = ({ hobbies }: { hobbies: { image: string; caption: string }[] }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex(prev => (prev + 1) % hobbies.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [hobbies.length]);
+
+  return (
+    <div className="flex flex-col items-center gap-6">
+      {/* Main photo stack */}
+      <div className="relative h-[400px] w-[320px] sm:h-[480px] sm:w-[380px]">
+        {hobbies.map((h, i) => {
+          const offset = (i - currentIndex + hobbies.length) % hobbies.length;
+          const isActive = offset === 0;
+          const zIndex = hobbies.length - offset;
+          const rotate = offset === 0 ? 0 : offset === 1 ? 4 : offset === 2 ? -3 : 6;
+          const scale = isActive ? 1 : 1 - offset * 0.04;
+          const y = offset * 8;
+
+          return (
+            <motion.div
+              key={h.caption}
+              className="absolute inset-0 cursor-pointer overflow-hidden rounded-[24px] bg-white"
+              style={{
+                zIndex,
+                boxShadow: isActive
+                  ? "0 20px 60px rgba(0,0,0,0.15), 0 4px 16px rgba(0,0,0,0.08)"
+                  : "0 8px 24px rgba(0,0,0,0.08)",
+                border: "1px solid rgba(0,0,0,0.06)",
+              }}
+              animate={{
+                rotate,
+                scale,
+                y,
+                opacity: offset > 2 ? 0 : 1,
+              }}
+              transition={{ type: "spring", stiffness: 80, damping: 20 }}
+              onClick={() => setCurrentIndex((currentIndex + 1) % hobbies.length)}
+            >
+              <div className="h-[75%] overflow-hidden">
+                <img src={h.image} alt={h.caption} className="h-full w-full object-cover" />
+              </div>
+              <div className="flex h-[25%] items-center px-6">
+                <p className="text-[16px] leading-snug text-black/60">{h.caption}</p>
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+
+      {/* Dots */}
+      <div className="flex items-center gap-2">
+        {hobbies.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrentIndex(i)}
+            className={`h-2 rounded-full transition-all duration-300 ${
+              i === currentIndex ? "w-6 bg-[#4338CA]" : "w-2 bg-black/15"
+            }`}
+            aria-label={`Show photo ${i + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const hobbies = [
   { image: hobbyTravel, caption: "✈️ Loves to travel and experience new culture" },
   { image: hobbyPeople, caption: "🤝 Enjoys meeting different people and stories" },
@@ -66,7 +138,7 @@ const workValues = [
 
 const About = () => {
   return (
-    <div className="overflow-x-hidden font-sans" style={{ background: "linear-gradient(180deg, #E8E0F0 0%, #DDE4F0 25%, #E0ECF0 50%, #F0EDE6 75%, #F5F0EB 100%)" }}>
+    <div className="overflow-x-hidden font-sans" style={{ background: "linear-gradient(180deg, #DDD5EE 0%, #DDE4F0 20%, #E0ECF0 45%, #F0EDE6 70%, #F5F0EB 90%, #2A2545 95%, #1a1a2e 100%)" }}>
       <Navigation />
 
       <main id="main-content" role="main">
@@ -86,11 +158,11 @@ const About = () => {
                   <img src={aboutProfile} alt="Hyebin Park smiling at camera" className="w-full max-w-sm rounded-xl shadow-lg" />
                 </motion.div>
                 <motion.div className="space-y-5" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}>
-                  <p className="text-lg text-black/70 leading-relaxed">Hi, I'm Hyebin Park, but you can call me Bibi 👋</p>
-                  <p className="text-[16px] text-black/50 leading-relaxed">
+                  <p className="text-[18px] text-black/70 leading-relaxed">Hi, I'm Hyebin Park, but you can call me Bibi 👋</p>
+                  <p className="text-[16px] text-black/55 leading-relaxed">
                     I'm a <span className="font-semibold text-black/80">strategic product designer</span> who turns complex problems in <span className="font-semibold text-black/80">emerging tech</span> into tangible <span className="font-semibold text-black/80">business impact</span>.
                   </p>
-                  <p className="text-[16px] text-black/50 leading-relaxed">
+                  <p className="text-[16px] text-black/55 leading-relaxed">
                     As a Master's student in <span className="font-semibold text-black/80">Human-Computer Interaction</span> at the University of Michigan, I specialize in bridging <span className="font-semibold text-black/80">user needs, technical possibilities, and business goals</span>.
                   </p>
                   <a
@@ -108,21 +180,21 @@ const About = () => {
         </section>
 
         {/* Experience */}
-        <section id="experience" className="px-4 py-20 sm:px-8 md:px-10" aria-labelledby="exp-heading">
+        <section id="experience" className="px-4 py-28 sm:px-8 sm:py-36 md:px-10" aria-labelledby="exp-heading">
           <div className="mx-auto max-w-[1000px]">
             <MacWin title="Finder — Experience">
               <div className="p-6 sm:p-8 md:p-10">
                 <SectionHeader eyebrow="Experience" title="What I've been exploring and learning 🚀" />
                 <div className="space-y-5">
                   {experiences.map((exp, i) => (
-                    <motion.div key={exp.title} className="flex gap-5 rounded-xl bg-[#f7f8fa] p-5" style={{ border: "1px solid rgba(0,0,0,0.04)" }}
+                    <motion.div key={exp.title} className="flex gap-5 rounded-xl bg-[#f7f8fa] p-6" style={{ border: "1px solid rgba(0,0,0,0.04)" }}
                       initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}
                     >
-                      <img src={exp.image} alt={exp.title} className="hidden h-16 w-16 flex-shrink-0 rounded-xl object-cover sm:block" />
+                      <img src={exp.image} alt={exp.title} className="hidden h-20 w-20 flex-shrink-0 rounded-full object-cover sm:block" />
                       <div>
-                        <p className="text-[14px] font-medium text-[#4338CA]">{exp.period}</p>
-                        <h3 className="mt-1 text-[16px] font-semibold text-black/80">{exp.title}</h3>
-                        <p className="mt-1.5 text-[14px] leading-relaxed text-black/45">{exp.description}</p>
+                        <p className="text-[14px] font-semibold text-[#4338CA]">{exp.period}</p>
+                        <h3 className="mt-1 text-[18px] font-bold text-black/80">{exp.title}</h3>
+                        <p className="mt-2 text-[15px] leading-relaxed text-black/50">{exp.description}</p>
                       </div>
                     </motion.div>
                   ))}
@@ -133,20 +205,20 @@ const About = () => {
         </section>
 
         {/* How I Work */}
-        <section className="px-4 py-20 sm:px-8 md:px-10" aria-labelledby="how-heading">
+        <section className="px-4 py-28 sm:px-8 sm:py-36 md:px-10" aria-labelledby="how-heading">
           <div className="mx-auto max-w-[1000px]">
             <MacWin title="Notes — How I Work">
               <div className="p-6 sm:p-8 md:p-10">
                 <SectionHeader eyebrow="Values" title="How I Work" />
-                <div className="grid gap-5 sm:grid-cols-3">
+                <div className="grid gap-6 sm:grid-cols-3">
                   {workValues.map((v, i) => (
-                    <motion.div key={v.title} className="rounded-xl bg-[#f7f8fa] p-5" style={{ border: "1px solid rgba(0,0,0,0.04)" }}
+                    <motion.div key={v.title} className="rounded-xl bg-[#f7f8fa] p-6" style={{ border: "1px solid rgba(0,0,0,0.04)" }}
                       initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
                     >
-                      <h3 className="mb-2 text-lg font-semibold text-black/80">
+                      <h3 className="mb-3 text-[18px] font-semibold text-black/80">
                         <span className="mr-2">{v.emoji}</span>{v.title}
                       </h3>
-                      <p className="text-[14px] leading-relaxed text-black/45">{v.description}</p>
+                      <p className="text-[15px] leading-relaxed text-black/50">{v.description}</p>
                     </motion.div>
                   ))}
                 </div>
@@ -155,26 +227,13 @@ const About = () => {
           </div>
         </section>
 
-        {/* Outside of Design */}
-        <section className="px-4 py-20 sm:px-8 md:px-10" aria-labelledby="hobbies-heading">
+        {/* Outside of Design — Photo Shuffle */}
+        <section className="px-4 py-28 sm:px-8 sm:py-36 md:px-10" aria-labelledby="hobbies-heading">
           <div className="mx-auto max-w-[1000px]">
-            <MacWin title="Photos — Outside of Design">
-              <div className="p-6 sm:p-8 md:p-10">
-                <SectionHeader eyebrow="Beyond Design" title="Outside of Design Work" />
-                <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-                  {hobbies.map((h, i) => (
-                    <motion.div key={h.caption} className="overflow-hidden rounded-xl bg-[#f7f8fa]" style={{ border: "1px solid rgba(0,0,0,0.04)" }}
-                      initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-                    >
-                      <div className="aspect-[3/4] overflow-hidden">
-                        <img src={h.image} alt={h.caption} className="h-full w-full object-cover transition-transform duration-300 hover:scale-105" />
-                      </div>
-                      <p className="p-3 text-[14px] leading-relaxed text-black/50">{h.caption}</p>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </MacWin>
+            <SectionHeader eyebrow="Beyond Design" title="Outside of Design Work" />
+            <div className="flex justify-center">
+              <PhotoShuffleWidget hobbies={hobbies} />
+            </div>
           </div>
         </section>
 
