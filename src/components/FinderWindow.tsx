@@ -8,10 +8,10 @@ interface FinderWindowProps { isOpen: boolean; onClose: () => void; category: st
 
 const categoryProjectMap: Record<string, string[]> = {
   "AI / ML": ["nurturly", "jstor"],
-  "Product Design": ["concord", "nurturly", "openoff", "gm"],
+  "Product Design": ["concord", "nurturly", "gm"],
   "Data & Dev Tools": ["concord"],
   "Fintech & Web3": ["concord"],
-  "UX Research": ["jstor", "nurturly", "openoff", "gm"],
+  "UX Research": ["jstor", "nurturly", "gm"],
 };
 
 export const FinderWindow = ({ isOpen, onClose, category }: FinderWindowProps) => {

@@ -6,8 +6,6 @@ import logoGm from "@/assets/logo-gm.png";
 import mockupGm from "@/assets/mockup-gm.png";
 import logoJstor from "@/assets/logo-jstor-new.png";
 import mockupJstor from "@/assets/mockup-jstor.png";
-import logoOpenoff from "@/assets/logo-openoff.png";
-import mockupOpenoff from "@/assets/mockup-openoff.png";
 
 export interface Project {
   id: string;
@@ -127,31 +125,6 @@ export const projects: Project[] = [
       "Identified systemic UX gaps",
       "Completed heuristic + usability audit",
       "Improved AI chatbot accessibility",
-    ],
-  },
-  {
-    id: "openoff",
-    title: "OpenOff",
-    description: "Real-Time Event Platform with Location-Based Discovery, QR Check-In, and Bump-to-Connect",
-    tags: ["Real-Time Interaction", "Location-Based UX", "0→1 Launch", "Mobile Design"],
-    highlights: [
-      "📈 250+ users onboarded with 30% engagement boost",
-      "📋 Informed by 243 survey responses and user insights",
-    ],
-    imageColor: "hsl(270, 50%, 92%)",
-    accentColor: "#7C3AED",
-    logo: logoOpenoff,
-    mockup: mockupOpenoff,
-    role: "Product Designer",
-    duration: "5 months",
-    team: "1 designer, 3 engineers",
-    challenge: "Event attendees needed better ways to discover events and connect with others in real-time.",
-    approach: "Gathered 243 survey responses, designed location-based discovery, and created innovative connection features.",
-    solution: "Built a mobile event platform with QR check-in and bump-to-connect functionality.",
-    impact: [
-      "Onboarded 250+ users",
-      "Achieved 30% engagement boost",
-      "Validated with 243 survey responses",
     ],
   },
 ];
