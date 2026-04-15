@@ -287,7 +287,7 @@ const App = () => {
 
                   {/* Folders */}
                   <aside aria-labelledby="folders-heading">
-                    <p id="folders-heading" className="mb-5 px-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-black/30">Project Folders</p>
+                    <p id="folders-heading" className="mb-5 px-1 text-[14px] font-semibold uppercase tracking-[0.22em] text-black/30">Project Folders</p>
                     <div className="grid grid-cols-3 gap-y-6 gap-x-4 sm:grid-cols-5 lg:grid-cols-3">
                       {folders.map((f, i) => (
                         <motion.button key={f.label} type="button" onClick={() => setFinderCategory(f.label)}
@@ -295,34 +295,22 @@ const App = () => {
                           initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.22 + i * 0.07 }}
                         >
                           <div className="transition-transform duration-200 group-hover:-translate-y-1"><DesktopFolderIcon /></div>
-                          <span className="text-[11px] font-medium leading-tight text-black/55">{f.label}</span>
+                          <span className="text-[14px] font-medium leading-tight text-black/55">{f.label}</span>
                         </motion.button>
                       ))}
                     </div>
                   </aside>
                 </div>
 
-                {/* Right: Puzzle as photo widget */}
-                <div className="lg:col-span-7">
+                {/* Right: Puzzle as floating desktop widget */}
+                <div className="lg:col-span-7 flex items-center justify-center">
                   <motion.div
-                    className="overflow-hidden rounded-[28px]"
-                    style={{
-                      background: "rgba(255,255,255,0.2)",
-                      backdropFilter: "blur(40px) saturate(1.8)",
-                      border: "1px solid rgba(255,255,255,0.35)",
-                      boxShadow: "0 16px 48px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.5)",
-                    }}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.55, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
                   >
-                    <div className="flex items-center justify-between px-5 pt-4 pb-1">
-                      <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-black/30">How I Work</p>
-                      <p className="text-[10px] font-medium text-black/20">Click to reveal ✨</p>
-                    </div>
-                    <div className="flex items-center justify-center px-4 pb-4">
-                      <PuzzleAnimation onAssembled={handlePuzzleAssembled} profileSrc={profileHero} />
-                    </div>
+                    <p className="mb-3 text-center text-[14px] font-semibold uppercase tracking-[0.2em] text-black/30">How I Work</p>
+                    <PuzzleAnimation onAssembled={handlePuzzleAssembled} profileSrc={profileHero} />
                   </motion.div>
                 </div>
               </div>
@@ -346,9 +334,9 @@ const App = () => {
                   <>
                     <div className="flex items-center gap-2 px-1">
                       {items.map(it => (
-                        <button key={it.label} onClick={it.action} className="flex flex-col items-center gap-1 px-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">
+                         <button key={it.label} onClick={it.action} className="flex flex-col items-center gap-1 px-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">
                           <div className="flex h-11 w-11 items-center justify-center rounded-[13px] text-lg shadow-md transition-transform duration-200 hover:scale-110 md:h-12 md:w-12" style={{ background: it.bg }}>{it.icon}</div>
-                          <span className="text-[9px] font-medium text-black/35">{it.label}</span>
+                          <span className="text-[14px] font-medium text-black/35">{it.label}</span>
                         </button>
                       ))}
                     </div>
@@ -356,7 +344,7 @@ const App = () => {
                     <div className="px-1">
                       <button onClick={contact.action} className="flex flex-col items-center gap-1 px-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">
                         <div className="flex h-11 w-11 items-center justify-center rounded-[13px] text-lg shadow-md md:h-12 md:w-12" style={{ background: contact.bg }}>{contact.icon}</div>
-                        <span className="text-[9px] font-medium text-black/35">{contact.label}</span>
+                        <span className="text-[14px] font-medium text-black/35">{contact.label}</span>
                       </button>
                     </div>
                   </>
