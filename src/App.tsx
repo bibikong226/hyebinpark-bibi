@@ -206,7 +206,7 @@ const App = () => {
   ];
 
   return (
-    <div className="overflow-x-hidden font-sans" style={{ background: "linear-gradient(180deg, #DDD5EE 0%, #DDE4F0 20%, #E0ECF0 45%, #F0EDE6 70%, #F5F0EB 100%)", maxWidth: "100vw" }}>
+    <div className="overflow-x-hidden font-sans" style={{ background: "linear-gradient(180deg, #DDD5EE 0%, #DDE4F0 20%, #E0ECF0 45%, #F0EDE6 70%, #F5F0EB 100%)", width: "100%", maxWidth: "100vw" }}>
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3 focus:z-[100] focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-black">Skip to main content</a>
 
       <Navigation onSearchOpen={() => setSearchOpen(true)} />
@@ -259,7 +259,7 @@ const App = () => {
               {/* Windows grid */}
               <div className="grid gap-6 sm:gap-10 lg:grid-cols-12 lg:items-start">
                 {/* Left: About + Folders */}
-                <div className="min-w-0 space-y-6 sm:space-y-8 lg:col-span-5">
+                <div className="min-w-0 space-y-6 sm:space-y-8 lg:col-span-5 overflow-hidden">
                   <MacWin title="About" delay={0.12}>
                     <div className="p-3 sm:p-5 md:p-6 overflow-hidden">
                       <div className="flex flex-col items-center gap-3 w-full sm:flex-row sm:items-start sm:gap-4">
