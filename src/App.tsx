@@ -216,7 +216,7 @@ const App = () => {
       <main id="main-content" role="main">
         {/* ═══════ HERO ═══════ */}
         <section
-          className="relative flex min-h-[920px] w-full flex-col overflow-hidden lg:min-h-screen"
+          className="relative flex min-h-[100dvh] w-full flex-col overflow-hidden lg:min-h-screen"
           style={{
             background: `
               radial-gradient(ellipse 70% 55% at 25% 15%, rgba(200,180,230,0.25) 0%, transparent 55%),
@@ -225,27 +225,27 @@ const App = () => {
           }}
           aria-label="Desktop hero"
         >
-          <div className="relative z-10 flex-1 px-4 pb-10 pt-8 sm:px-6 md:px-8 lg:px-12 lg:pb-56">
+          <div className="relative z-10 flex-1 px-4 pb-10 pt-6 sm:px-6 sm:pt-8 md:px-8 lg:px-12 lg:pb-56">
             <div className="mx-auto max-w-[1280px]">
 
               {/* Name + Headline */}
-              <div className="mb-24 flex flex-col items-center text-center lg:mb-32">
+              <div className="mb-12 flex flex-col items-center text-center sm:mb-16 lg:mb-32">
                 <h1
-                  className="pointer-events-none select-none text-[clamp(3.5rem,13vw,9rem)] font-black uppercase leading-[0.85] tracking-[-0.04em]"
+                  className="pointer-events-none select-none text-[clamp(2.5rem,13vw,9rem)] font-black uppercase leading-[0.85] tracking-[-0.04em]"
                   style={{ color: "rgba(0,0,0,0.12)" }}
                 >
                   HYEBIN PARK
                 </h1>
 
                 <motion.p
-                  className="mb-16 mt-14 rounded-full border border-black/[0.08] bg-white/50 px-5 py-2 text-[14px] font-bold uppercase tracking-[0.22em] text-black/70 backdrop-blur-md"
+                  className="mb-8 mt-6 rounded-full border border-black/[0.08] bg-white/50 px-4 py-1.5 text-[12px] font-bold uppercase tracking-[0.22em] text-black/70 backdrop-blur-md sm:mb-16 sm:mt-14 sm:px-5 sm:py-2 sm:text-[14px]"
                   initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.06 }}
                 >
                   Strategic AI Product Designer
                 </motion.p>
 
                 <motion.h2
-                  className="text-[clamp(2.2rem,6vw,5rem)] leading-[1.08] tracking-tight"
+                  className="text-[clamp(1.8rem,6vw,5rem)] leading-[1.08] tracking-tight"
                   initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
                 >
                   <span className="font-normal text-black/70">Turning</span>{" "}
@@ -257,16 +257,16 @@ const App = () => {
               </div>
 
               {/* Windows grid */}
-              <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
+              <div className="grid gap-6 sm:gap-10 lg:grid-cols-12 lg:items-start">
                 {/* Left: About + Folders */}
-                <div className="space-y-8 lg:col-span-5">
+                <div className="space-y-6 sm:space-y-8 lg:col-span-5">
                   <MacWin title="About" delay={0.12}>
-                    <div className="p-5 md:p-6">
-                      <div className="flex items-start gap-4">
-                        <img src={memojiImg} alt="Hyebin memoji" className="h-32 w-32 flex-shrink-0 object-contain drop-shadow-md" style={{ background: "transparent" }} />
+                    <div className="p-4 sm:p-5 md:p-6">
+                      <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-start sm:gap-4">
+                        <img src={memojiImg} alt="Hyebin memoji" className="h-24 w-24 flex-shrink-0 object-contain drop-shadow-md sm:h-32 sm:w-32" style={{ background: "transparent" }} />
                         <div>
-                          <p className="text-[15px] font-semibold leading-6 text-black/80">I turn ambiguity into clear, trustworthy products that drive real business impact.</p>
-                          <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-black/[0.04] px-3 py-1 text-[14px] font-semibold text-black/60">
+                          <p className="text-center text-[14px] font-semibold leading-6 text-black/80 sm:text-left sm:text-[15px]">I turn ambiguity into clear, trustworthy products that drive real business impact.</p>
+                          <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-black/[0.04] px-3 py-1 text-[13px] font-semibold text-black/60 sm:text-[14px]">
                             <span className="h-2 w-2 rounded-full bg-green-500" aria-hidden="true" />Open to work
                           </div>
                         </div>
