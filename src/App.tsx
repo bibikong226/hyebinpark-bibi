@@ -302,13 +302,15 @@ const App = () => {
 
                 {/* Right: Puzzle widget card */}
                 <div className="lg:col-span-7 flex items-start justify-center">
-                  <MacWin title="How I Work" delay={0.18} className="w-fit">
-                    <div className="px-5 py-5 md:px-6 md:py-6">
-                      <p className="mx-auto mb-5 max-w-[380px] text-center text-[14px] leading-relaxed text-black/55">
+                  <MacWin title="How I Work" delay={0.18} className="w-full lg:w-fit">
+                    <div className="px-3 py-4 sm:px-5 sm:py-5 md:px-6 md:py-6">
+                      <p className="mx-auto mb-4 max-w-[380px] text-center text-[13px] leading-relaxed text-black/55 sm:mb-5 sm:text-[14px]">
                         I bring together diverse perspectives — then piece them into clear, cohesive product experiences.
                       </p>
-                      <div className="relative flex items-center justify-center overflow-hidden rounded-[24px] bg-black/[0.03] px-6 py-8">
-                        <PuzzleAnimation onAssembled={handlePuzzleAssembled} profileSrc={profileHero} />
+                      <div className="relative flex items-center justify-center overflow-hidden rounded-[24px] bg-black/[0.03] px-2 py-4 sm:px-6 sm:py-8">
+                        <div className="w-full max-w-[480px] origin-center scale-[0.65] sm:scale-[0.85] md:scale-100">
+                          <PuzzleAnimation onAssembled={handlePuzzleAssembled} profileSrc={profileHero} />
+                        </div>
                       </div>
                     </div>
                   </MacWin>
@@ -318,8 +320,8 @@ const App = () => {
           </div>
 
           {/* Dock */}
-          <div className="relative z-20 px-4 pb-6 sm:px-6 md:px-8 lg:absolute lg:bottom-6 lg:left-1/2 lg:-translate-x-1/2 lg:px-0 lg:pb-0">
-            <div className="mx-auto flex w-fit items-center gap-0 rounded-2xl px-3 py-2" role="navigation" aria-label="Quick navigation dock"
+          <div className="relative z-20 px-2 pb-6 sm:px-6 md:px-8 lg:absolute lg:bottom-6 lg:left-1/2 lg:-translate-x-1/2 lg:px-0 lg:pb-0">
+            <div className="mx-auto flex w-fit items-center gap-0 overflow-x-auto rounded-2xl px-2 py-2 sm:px-3" role="navigation" aria-label="Quick navigation dock"
               style={{ background: "rgba(255,255,255,0.35)", backdropFilter: "blur(40px) saturate(1.8)", border: "1px solid rgba(255,255,255,0.45)", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.5)" }}>
               {(() => {
                 const items = [
@@ -332,19 +334,19 @@ const App = () => {
                 const contact = { icon: "✉️", label: "Contact", bg: "linear-gradient(135deg,#F87171,#DC2626)", action: () => (window.location.href = "mailto:hyebinp@umich.edu") };
                 return (
                   <>
-                    <div className="flex items-center gap-2 px-1">
+                    <div className="flex items-center gap-1 px-0.5 sm:gap-2 sm:px-1">
                       {items.map(it => (
-                         <button key={it.label} onClick={it.action} className="flex flex-col items-center gap-1 px-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">
-                          <div className="flex h-11 w-11 items-center justify-center rounded-[13px] text-lg shadow-md transition-transform duration-200 hover:scale-110 md:h-12 md:w-12" style={{ background: it.bg }}>{it.icon}</div>
-                          <span className="text-[14px] font-medium text-black/35">{it.label}</span>
+                         <button key={it.label} onClick={it.action} className="flex flex-col items-center gap-0.5 px-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:gap-1 sm:px-1">
+                          <div className="flex h-10 w-10 items-center justify-center rounded-[13px] text-base shadow-md transition-transform duration-200 hover:scale-110 sm:h-11 sm:w-11 md:h-12 md:w-12 md:text-lg" style={{ background: it.bg }}>{it.icon}</div>
+                          <span className="text-[11px] font-medium text-black/35 sm:text-[14px]">{it.label}</span>
                         </button>
                       ))}
                     </div>
-                    <div className="mx-2 h-8 w-px bg-black/[0.08]" />
-                    <div className="px-1">
-                      <button onClick={contact.action} className="flex flex-col items-center gap-1 px-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">
-                        <div className="flex h-11 w-11 items-center justify-center rounded-[13px] text-lg shadow-md md:h-12 md:w-12" style={{ background: contact.bg }}>{contact.icon}</div>
-                        <span className="text-[14px] font-medium text-black/35">{contact.label}</span>
+                    <div className="mx-1 h-8 w-px bg-black/[0.08] sm:mx-2" />
+                    <div className="px-0.5 sm:px-1">
+                      <button onClick={contact.action} className="flex flex-col items-center gap-0.5 px-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:gap-1 sm:px-1">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-[13px] text-base shadow-md sm:h-11 sm:w-11 md:h-12 md:w-12 md:text-lg" style={{ background: contact.bg }}>{contact.icon}</div>
+                        <span className="text-[11px] font-medium text-black/35 sm:text-[14px]">{contact.label}</span>
                       </button>
                     </div>
                   </>
