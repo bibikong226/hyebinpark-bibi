@@ -262,7 +262,7 @@ const App = () => {
                 <div className="min-w-0 space-y-6 sm:space-y-8 lg:col-span-5">
                   <MacWin title="About" delay={0.12}>
                     <div className="p-3 sm:p-5 md:p-6 overflow-hidden">
-                      <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-start sm:gap-4">
+                      <div className="flex flex-col items-center gap-3 w-full sm:flex-row sm:items-start sm:gap-4">
                         <img src={memojiImg} alt="Hyebin memoji" className="h-16 w-16 flex-shrink-0 object-contain drop-shadow-md sm:h-32 sm:w-32" style={{ background: "transparent" }} />
                         <div className="min-w-0 w-full">
                           <p className="text-center text-[12px] font-semibold leading-5 text-black/80 sm:text-left sm:text-[15px] sm:leading-6">I turn ambiguity into clear, trustworthy products that drive real business impact.</p>
