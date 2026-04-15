@@ -13,7 +13,7 @@ import hobbyPeople from "@/assets/hobby-people.png";
 import hobbyChallenges from "@/assets/hobby-challenges.png";
 import hobbyTheater from "@/assets/hobby-theater.jpg";
 
-/* ── Consistent Mac window ── */
+/* ── Mac window matching main page ── */
 const MacWin = ({ children, title }: { children: React.ReactNode; title: string }) => (
   <motion.div
     className="overflow-hidden rounded-2xl bg-white"
@@ -29,7 +29,7 @@ const MacWin = ({ children, title }: { children: React.ReactNode; title: string 
         <span className="h-3 w-3 rounded-full" style={{ background: "#FFBD2E" }} />
         <span className="h-3 w-3 rounded-full" style={{ background: "#28C840" }} />
       </div>
-      <span className="flex-1 text-center text-[11px] font-medium tracking-wide text-black/35">{title}</span>
+      <span className="flex-1 text-center text-[14px] font-medium tracking-wide text-black/35">{title}</span>
       <div className="w-[52px]" />
     </div>
     <div>{children}</div>
@@ -38,7 +38,7 @@ const MacWin = ({ children, title }: { children: React.ReactNode; title: string 
 
 const SectionHeader = ({ eyebrow, title }: { eyebrow: string; title: string }) => (
   <div className="mb-10 md:mb-14">
-    <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.3em] text-black/30">{eyebrow}</p>
+    <p className="mb-2 text-[14px] font-medium uppercase tracking-[0.3em] text-black/30">{eyebrow}</p>
     <h2 className="text-[clamp(28px,4vw,48px)] font-bold leading-[1.1] tracking-tight text-black/85">{title}</h2>
   </div>
 );
@@ -66,7 +66,7 @@ const workValues = [
 
 const About = () => {
   return (
-    <div className="overflow-x-hidden font-sans bg-[#f0f1f5]">
+    <div className="overflow-x-hidden font-sans" style={{ background: "linear-gradient(180deg, #E8E0F0 0%, #DDE4F0 25%, #E0ECF0 50%, #F0EDE6 75%, #F5F0EB 100%)" }}>
       <Navigation />
 
       <main id="main-content" role="main">
@@ -74,7 +74,7 @@ const About = () => {
         <section className="px-4 pt-16 pb-8 sm:px-8 md:px-10" aria-labelledby="about-heading">
           <div className="mx-auto max-w-[1000px]">
             <motion.div className="mb-10" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-              <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.3em] text-black/30">About</p>
+              <p className="mb-2 text-[14px] font-medium uppercase tracking-[0.3em] text-black/30">About</p>
               <h1 id="about-heading" className="text-[clamp(32px,5vw,56px)] font-bold tracking-tight text-black/85">
                 Meet Hyebin! 👋
               </h1>
@@ -87,16 +87,17 @@ const About = () => {
                 </motion.div>
                 <motion.div className="space-y-5" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}>
                   <p className="text-lg text-black/70 leading-relaxed">Hi, I'm Hyebin Park, but you can call me Bibi 👋</p>
-                  <p className="text-[15px] text-black/50 leading-relaxed">
+                  <p className="text-[16px] text-black/50 leading-relaxed">
                     I'm a <span className="font-semibold text-black/80">strategic product designer</span> who turns complex problems in <span className="font-semibold text-black/80">emerging tech</span> into tangible <span className="font-semibold text-black/80">business impact</span>.
                   </p>
-                  <p className="text-[15px] text-black/50 leading-relaxed">
+                  <p className="text-[16px] text-black/50 leading-relaxed">
                     As a Master's student in <span className="font-semibold text-black/80">Human-Computer Interaction</span> at the University of Michigan, I specialize in bridging <span className="font-semibold text-black/80">user needs, technical possibilities, and business goals</span>.
                   </p>
                   <a
                     href="https://drive.google.com/file/d/1l2V4pQCjAZhIhLyRmVh3m2QTw87yLI6P/view?usp=sharing"
                     target="_blank" rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full bg-[#4338CA] px-5 py-2.5 text-[13px] font-medium text-white transition-all hover:bg-[#3730A3]"
+                    className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[14px] font-medium text-white transition-all hover:opacity-90"
+                    style={{ background: "#4338CA" }}
                   >
                     View Resume <ArrowUpRight className="h-4 w-4" />
                   </a>
@@ -119,9 +120,9 @@ const About = () => {
                     >
                       <img src={exp.image} alt={exp.title} className="hidden h-16 w-16 flex-shrink-0 rounded-xl object-cover sm:block" />
                       <div>
-                        <p className="text-[11px] font-medium text-[#4338CA]">{exp.period}</p>
+                        <p className="text-[14px] font-medium text-[#4338CA]">{exp.period}</p>
                         <h3 className="mt-1 text-[16px] font-semibold text-black/80">{exp.title}</h3>
-                        <p className="mt-1.5 text-[13px] leading-relaxed text-black/45">{exp.description}</p>
+                        <p className="mt-1.5 text-[14px] leading-relaxed text-black/45">{exp.description}</p>
                       </div>
                     </motion.div>
                   ))}
@@ -145,7 +146,7 @@ const About = () => {
                       <h3 className="mb-2 text-lg font-semibold text-black/80">
                         <span className="mr-2">{v.emoji}</span>{v.title}
                       </h3>
-                      <p className="text-[13px] leading-relaxed text-black/45">{v.description}</p>
+                      <p className="text-[14px] leading-relaxed text-black/45">{v.description}</p>
                     </motion.div>
                   ))}
                 </div>
@@ -168,7 +169,7 @@ const About = () => {
                       <div className="aspect-[3/4] overflow-hidden">
                         <img src={h.image} alt={h.caption} className="h-full w-full object-cover transition-transform duration-300 hover:scale-105" />
                       </div>
-                      <p className="p-3 text-[12px] leading-relaxed text-black/50">{h.caption}</p>
+                      <p className="p-3 text-[14px] leading-relaxed text-black/50">{h.caption}</p>
                     </motion.div>
                   ))}
                 </div>
