@@ -180,7 +180,7 @@ export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProp
       <AnimatePresence>
         {phase === "photo" && profileSrc && (
           <motion.div
-            className="absolute inset-0 overflow-hidden rounded-2xl"
+            className="absolute inset-0 flex items-center justify-center overflow-hidden rounded-2xl"
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.96, transition: { duration: 0.4 } }}
@@ -189,8 +189,7 @@ export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProp
             <img
               src={profileSrc}
               alt="Hyebin Park"
-              className="h-full w-full object-cover object-top"
-              style={{ width: totalW, height: totalH }}
+              className="max-h-full max-w-full object-contain rounded-2xl"
             />
           </motion.div>
         )}
