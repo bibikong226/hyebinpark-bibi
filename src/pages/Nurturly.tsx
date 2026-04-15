@@ -168,7 +168,7 @@ const Nurturly = () => {
         </section>
 
         {/* ═══════ SUMMARY ═══════ */}
-        <section id="summary" className={`${SECTION_PX} ${SECTION_PY}`}>
+        <section id="summary" className={`${SECTION_PX} ${SECTION_GAP}`}>
           <div className={`mx-auto ${MAX_W}`}>
             <Section>
               <SectionHeader eyebrow="SUMMARY" title={<>Nurturly was created during the <span style={{ color: PINK }}>Tech Innovation Jam</span>, a competitive 5-week <span style={{ color: PINK }}>hackathon</span> at the University of Michigan.</>} />
@@ -188,7 +188,7 @@ const Nurturly = () => {
         </section>
 
         {/* ═══════ PROBLEM ═══════ */}
-        <section id="problem" className={`${SECTION_PX} ${SECTION_PY}`}>
+        <section id="problem" className={`${SECTION_PX} ${SECTION_GAP}`}>
           <div className={`mx-auto ${MAX_W}`}>
             <Section>
               <SectionHeader eyebrow="PROBLEM" title={<>Pregnancy & Postpartum Support is <span style={{ color: PINK }}>Scattered, Confusing,</span> and Leaves <span style={{ color: PINK }}>Moms Feeling Alone.</span></>} />
@@ -231,7 +231,7 @@ const Nurturly = () => {
         </section>
 
         {/* ═══════ USER RESEARCH ═══════ */}
-        <section id="user-research" className={`${SECTION_PX} ${SECTION_PY}`}>
+        <section id="user-research" className={`${SECTION_PX} ${SECTION_GAP}`}>
           <div className={`mx-auto ${MAX_W} space-y-8`}>
 
             {/* Survey */}
@@ -290,7 +290,7 @@ const Nurturly = () => {
         </section>
 
         {/* ═══════ DESIGN STRATEGY / PRINCIPLES ═══════ */}
-        <section id="principles" className={`${SECTION_PX} ${SECTION_PY}`}>
+        <section id="principles" className={`${SECTION_PX} ${SECTION_GAP}`}>
           <div className={`mx-auto ${MAX_W}`}>
             <Section>
               <SectionHeader eyebrow="DESIGN STRATEGY" title={<>So How Can Our <span style={{ color: PINK }}>Design</span> Truly <span style={{ color: PINK }}>Support Moms?</span></>} />
@@ -350,7 +350,7 @@ const Nurturly = () => {
         </section>
 
         {/* ═══════ IDEATION ═══════ */}
-        <section id="ideation" className={`${SECTION_PX} ${SECTION_PY}`}>
+        <section id="ideation" className={`${SECTION_PX} ${SECTION_GAP}`}>
           <div className={`mx-auto ${MAX_W}`}>
             <Section>
               <SectionHeader eyebrow="IDEATION" title={<>Visualized solutions through <span style={{ color: PINK }}>low-fidelity designs</span> to explore effective layouts and gather feedback.</>} />
@@ -360,7 +360,7 @@ const Nurturly = () => {
         </section>
 
         {/* Mid-fi */}
-        <section className={`${SECTION_PX} ${SECTION_PY}`}>
+        <section className={`${SECTION_PX} ${SECTION_GAP}`}>
           <div className={`mx-auto ${MAX_W}`}>
             <Section>
               <SectionHeader eyebrow="MID-FI WIREFRAME" title={<>Building on early concepts, I created <span style={{ color: PINK }}>mid-fidelity</span> prototypes to validate <span style={{ color: PINK }}>navigation logic and content prioritization.</span></>} />
@@ -370,7 +370,7 @@ const Nurturly = () => {
         </section>
 
         {/* ═══════ ITERATIONS ═══════ */}
-        <section id="iterations" className={`${SECTION_PX} ${SECTION_PY}`}>
+        <section id="iterations" className={`${SECTION_PX} ${SECTION_GAP}`}>
           <div className={`mx-auto ${MAX_W}`}>
             <Section>
               <SectionHeader eyebrow="DESIGN ITERATIONS" title={<>Through user testing and feedback, I iterated on <span style={{ color: PINK }}>key interaction points</span> to improve usability.</>} />
@@ -406,7 +406,7 @@ const Nurturly = () => {
         </section>
 
         {/* ═══════ HIGH-FI ═══════ */}
-        <section id="highfi" className={`${SECTION_PX} ${SECTION_PY}`}>
+        <section id="highfi" className={`${SECTION_PX} ${SECTION_GAP}`}>
           <div className={`mx-auto ${MAX_W}`}>
             <Section>
               <p className="mb-6 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.3em] text-black/30">HIGH-FI DESIGN</p>
@@ -428,7 +428,7 @@ const Nurturly = () => {
         </section>
 
         {/* ═══════ RESULT ═══════ */}
-        <section id="result" className={`${SECTION_PX} ${SECTION_PY}`}>
+        <section id="result" className={`${SECTION_PX} ${SECTION_GAP}`}>
           <div className={`mx-auto ${MAX_W}`}>
             <Section>
               <SectionHeader eyebrow="RESULT" title={<>Our team won <span style={{ color: PINK }}>Runner-Up & People's Choice Awards</span>, securing <span style={{ color: PINK }}>$5,000</span> in funding to advance Nurturly.</>} />
