@@ -1,5 +1,5 @@
-import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
-import { useEffect, useRef, useState, useCallback } from "react";
+import { motion, useInView, useReducedMotion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
 interface PuzzlePiece {
   label: string;
@@ -12,21 +12,22 @@ interface PuzzlePiece {
   startRotate: number;
 }
 
+/* 3 columns × 2 rows — wider, shorter, fits landscape */
 const pieces: PuzzlePiece[] = [
-  { label: "User", sublabel: "Needs", color: "#E8443A", row: 0, col: 0, startX: -35, startY: -25, startRotate: -8 },
-  { label: "Data", sublabel: "Complexity", color: "#F59E0B", row: 0, col: 1, startX: 35, startY: -30, startRotate: 7 },
-  { label: "Business", sublabel: "Goals", color: "#22C55E", row: 1, col: 0, startX: -40, startY: 5, startRotate: 6 },
-  { label: "Tech", sublabel: "Constraints", color: "#EC4899", row: 1, col: 1, startX: 38, startY: 8, startRotate: -7 },
-  { label: "Edge", sublabel: "Cases", color: "#8B5CF6", row: 2, col: 0, startX: -32, startY: 30, startRotate: 5 },
-  { label: "Emerging", sublabel: "Tech", color: "#3B82F6", row: 2, col: 1, startX: 30, startY: 35, startRotate: -6 },
+  { label: "User", sublabel: "Needs", color: "#E8443A", row: 0, col: 0, startX: -30, startY: -20, startRotate: -6 },
+  { label: "Data", sublabel: "Complexity", color: "#F59E0B", row: 0, col: 1, startX: 5, startY: -28, startRotate: 5 },
+  { label: "Business", sublabel: "Goals", color: "#22C55E", row: 0, col: 2, startX: 30, startY: -18, startRotate: -4 },
+  { label: "Tech", sublabel: "Constraints", color: "#EC4899", row: 1, col: 0, startX: -28, startY: 22, startRotate: 5 },
+  { label: "Edge", sublabel: "Cases", color: "#8B5CF6", row: 1, col: 1, startX: 8, startY: 30, startRotate: -5 },
+  { label: "Emerging", sublabel: "Tech", color: "#3B82F6", row: 1, col: 2, startX: 32, startY: 20, startRotate: 4 },
 ];
 
-const PIECE_W = 140;
-const PIECE_H = 95;
-const TAB_R = 13;
+const PIECE_W = 130;
+const PIECE_H = 100;
+const TAB_R = 12;
 const CORNER_R = 10;
-const COLS = 2;
-const ROWS = 3;
+const COLS = 3;
+const ROWS = 2;
 
 const PuzzlePieceSVG = ({ piece, index }: { piece: PuzzlePiece; index: number }) => {
   const hasTabRight = piece.col < COLS - 1;
@@ -74,43 +75,56 @@ interface PuzzleAnimationProps {
 
 export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, { once: false, margin: "-60px" });
   const prefersReducedMotion = useReducedMotion();
   const [phase, setPhase] = useState<"scattered" | "assembling" | "assembled" | "photo">(
     prefersReducedMotion ? "photo" : "scattered"
   );
   const timerRef = useRef<ReturnType<typeof setTimeout>>();
+  const hasTriggered = useRef(false);
 
   const clearTimer = () => {
     if (timerRef.current) clearTimeout(timerRef.current);
   };
 
-  const handleClick = useCallback(() => {
-    if (phase === "scattered") {
-      setPhase("assembling");
+  // Auto-trigger assembly when scrolled into view
+  useEffect(() => {
+    if (isInView && phase === "scattered" && !hasTriggered.current) {
+      hasTriggered.current = true;
+      const t = setTimeout(() => setPhase("assembling"), 600);
+      return () => clearTimeout(t);
     }
-  }, [phase]);
+  }, [isInView, phase]);
 
-  // Single unified state machine
+  // State machine
   useEffect(() => {
     clearTimer();
 
     if (phase === "assembling") {
-      timerRef.current = setTimeout(() => {
-        setPhase("assembled");
-      }, 2200);
+      timerRef.current = setTimeout(() => setPhase("assembled"), 2000);
     } else if (phase === "assembled") {
       timerRef.current = setTimeout(() => {
         setPhase("photo");
         onAssembled?.();
-      }, 800);
+      }, 700);
     } else if (phase === "photo") {
       timerRef.current = setTimeout(() => {
+        hasTriggered.current = false;
         setPhase("scattered");
-      }, 3500);
+      }, 4000);
     }
 
     return clearTimer;
   }, [phase, onAssembled]);
+
+  // Re-trigger when it comes back into view after scatter
+  useEffect(() => {
+    if (isInView && phase === "scattered" && !hasTriggered.current) {
+      hasTriggered.current = true;
+      const t = setTimeout(() => setPhase("assembling"), 800);
+      return () => clearTimeout(t);
+    }
+  }, [isInView, phase]);
 
   const totalW = COLS * PIECE_W + TAB_R;
   const totalH = ROWS * PIECE_H + TAB_R;
@@ -118,29 +132,11 @@ export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProp
   return (
     <div
       ref={containerRef}
-      className="relative cursor-pointer"
+      className="relative"
       style={{ width: totalW, height: totalH }}
       role="img"
-      aria-label="Click to assemble puzzle and reveal photo"
-      onClick={handleClick}
+      aria-label="Animated puzzle showing how Hyebin works"
     >
-      {/* Click hint */}
-      <AnimatePresence>
-        {phase === "scattered" && (
-          <motion.div
-            className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ delay: 0.8 }}
-          >
-            <span className="rounded-full bg-white/80 px-4 py-1.5 text-[14px] font-semibold text-black/50 shadow-sm backdrop-blur-md">
-              Click to assemble ✨
-            </span>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       {/* Puzzle pieces */}
       <AnimatePresence>
         {phase !== "photo" && pieces.map((piece, index) => {
@@ -169,9 +165,9 @@ export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProp
               exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.4 } }}
               transition={{
                 type: "spring",
-                stiffness: isAssembling ? 35 : 70,
+                stiffness: isAssembling ? 38 : 70,
                 damping: 18,
-                delay: isAssembling ? index * 0.12 : 0.03 + index * 0.05,
+                delay: isAssembling ? index * 0.1 : 0.03 + index * 0.04,
               }}
             >
               <PuzzlePieceSVG piece={piece} index={index} />
