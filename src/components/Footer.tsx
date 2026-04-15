@@ -19,7 +19,7 @@ export const Footer = () => {
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           >
             <h2 id="connect-heading" className="font-serif text-4xl italic text-white/90 md:text-5xl">Let's Connect</h2>
-            <p className="mx-auto mt-5 max-w-[420px] text-[16px] leading-[1.7] text-white/50">
+            <p className="mx-auto mt-5 max-w-[420px] text-[16px] leading-[1.7] text-white/80">
               I'm always excited to connect with fellow designers, researchers, and innovators. Let's talk! 👩‍💻
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-3">
@@ -43,13 +43,13 @@ export const Footer = () => {
           borderTop: "1px solid rgba(255,255,255,0.06)",
         }}
       >
-        <span className="font-bold uppercase tracking-[0.08em] text-white/40 text-[14px]">
+        <span className="font-bold uppercase tracking-[0.08em] text-white/70 text-[14px]">
           <span className="mr-1.5 opacity-40" aria-hidden="true">⌘</span>
           Hyebin Park
         </span>
         <div className="flex items-center gap-6">
           {[{ label: "Email", href: "mailto:hyebinp@umich.edu" }, { label: "LinkedIn", href: "https://www.linkedin.com/in/hyebinp/", ext: true }, { label: "Resume", href: CV_LINK, ext: true }].map(l => (
-            <a key={l.label} href={l.href} target={l.ext ? "_blank" : undefined} rel={l.ext ? "noopener noreferrer" : undefined} className="text-[14px] font-medium uppercase tracking-[0.18em] text-white/30 transition-colors hover:text-white/60">{l.label}</a>
+            <a key={l.label} href={l.href} target={l.ext ? "_blank" : undefined} rel={l.ext ? "noopener noreferrer" : undefined} className="text-[14px] font-medium uppercase tracking-[0.18em] text-white/60 transition-colors hover:text-white/90">{l.label}</a>
           ))}
         </div>
       </footer>
