@@ -299,11 +299,13 @@ const App = () => {
                 {/* Right: Puzzle widget card */}
                 <div className="lg:col-span-7 flex items-start justify-center">
                   <MacWin title="How I Work" delay={0.18} className="w-fit">
-                    <div className="flex flex-col items-center px-5 py-5 md:px-6 md:py-6">
-                      <p className="mb-4 text-[14px] leading-relaxed text-black/45 text-center max-w-[380px]">
+                    <div className="px-5 py-5 md:px-6 md:py-6">
+                      <p className="mx-auto mb-5 max-w-[380px] text-center text-[14px] leading-relaxed text-black/55">
                         I bring together diverse perspectives — then piece them into clear, cohesive product experiences.
                       </p>
-                      <PuzzleAnimation onAssembled={handlePuzzleAssembled} profileSrc={profileHero} />
+                      <div className="relative flex items-center justify-center overflow-hidden rounded-[24px] bg-black/[0.03] px-6 py-8">
+                        <PuzzleAnimation onAssembled={handlePuzzleAssembled} profileSrc={profileHero} />
+                      </div>
                     </div>
                   </MacWin>
                 </div>
