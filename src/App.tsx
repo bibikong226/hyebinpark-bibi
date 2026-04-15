@@ -202,7 +202,7 @@ const App = () => {
   ];
 
   return (
-    <div className="overflow-x-hidden font-sans" style={{ background: "linear-gradient(180deg, #E8E0F0 0%, #DDE4F0 25%, #E0ECF0 50%, #F0EDE6 75%, #F5F0EB 100%)" }}>
+    <div className="overflow-x-hidden font-sans" style={{ background: "linear-gradient(180deg, #DDD5EE 0%, #DDE4F0 20%, #E0ECF0 45%, #F0EDE6 70%, #F5F0EB 90%, #2A2545 95%, #1a1a2e 100%)" }}>
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3 focus:z-[100] focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-black">Skip to main content</a>
 
       <Navigation onSearchOpen={() => setSearchOpen(true)} />
@@ -228,7 +228,7 @@ const App = () => {
               <div className="mb-24 flex flex-col items-center text-center lg:mb-32">
                 <h1
                   className="pointer-events-none select-none text-[clamp(3.5rem,13vw,9rem)] font-black uppercase leading-[0.85] tracking-[-0.04em]"
-                  style={{ color: "rgba(0,0,0,0.18)" }}
+                  style={{ color: "rgba(0,0,0,0.10)" }}
                 >
                   HYEBIN PARK
                 </h1>

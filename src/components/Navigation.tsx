@@ -75,7 +75,7 @@ export const Navigation = ({ onSearchOpen }: NavigationProps) => {
                 <span className="rounded bg-black/[0.06] px-1 py-0.5 text-[9px] font-semibold text-black/30">⌘K</span>
               </button>
             )}
-            <a href="mailto:hyebinp@umich.edu" className="rounded-full bg-[#4338CA] px-4 py-1.5 text-[11px] font-medium text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">Contact</a>
+            <a href="mailto:hyebinp@umich.edu" className="rounded-full px-4 py-1.5 text-[11px] font-medium text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400" style={{ background: "#4338CA" }}>Contact</a>
           </div>
 
           <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="rounded-lg p-2 text-black/50 md:hidden" aria-label={isMenuOpen ? "Close menu" : "Open menu"} aria-expanded={isMenuOpen}>

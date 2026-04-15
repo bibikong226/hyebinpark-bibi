@@ -14,12 +14,12 @@ interface PuzzlePiece {
 
 /* 3 columns × 2 rows — wider, shorter, fits landscape */
 const pieces: PuzzlePiece[] = [
-  { label: "User", sublabel: "Needs", color: "#E8443A", row: 0, col: 0, startX: -30, startY: -20, startRotate: -6 },
-  { label: "Data", sublabel: "Complexity", color: "#F59E0B", row: 0, col: 1, startX: 5, startY: -28, startRotate: 5 },
-  { label: "Business", sublabel: "Goals", color: "#22C55E", row: 0, col: 2, startX: 30, startY: -18, startRotate: -4 },
-  { label: "Tech", sublabel: "Constraints", color: "#EC4899", row: 1, col: 0, startX: -28, startY: 22, startRotate: 5 },
-  { label: "Edge", sublabel: "Cases", color: "#8B5CF6", row: 1, col: 1, startX: 8, startY: 30, startRotate: -5 },
-  { label: "Emerging", sublabel: "Tech", color: "#3B82F6", row: 1, col: 2, startX: 32, startY: 20, startRotate: 4 },
+  { label: "User", sublabel: "Needs", color: "#E8443A", row: 0, col: 0, startX: -60, startY: -40, startRotate: -10 },
+  { label: "Data", sublabel: "Complexity", color: "#F59E0B", row: 0, col: 1, startX: 8, startY: -50, startRotate: 8 },
+  { label: "Business", sublabel: "Goals", color: "#22C55E", row: 0, col: 2, startX: 55, startY: -35, startRotate: -7 },
+  { label: "Tech", sublabel: "Constraints", color: "#EC4899", row: 1, col: 0, startX: -55, startY: 45, startRotate: 9 },
+  { label: "Edge", sublabel: "Cases", color: "#8B5CF6", row: 1, col: 1, startX: 12, startY: 55, startRotate: -8 },
+  { label: "Emerging", sublabel: "Tech", color: "#3B82F6", row: 1, col: 2, startX: 60, startY: 40, startRotate: 7 },
 ];
 
 const PIECE_W = 130;
@@ -117,14 +117,6 @@ export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProp
     return clearTimer;
   }, [phase, onAssembled]);
 
-  // Re-trigger when it comes back into view after scatter
-  useEffect(() => {
-    if (isInView && phase === "scattered" && !hasTriggered.current) {
-      hasTriggered.current = true;
-      const t = setTimeout(() => setPhase("assembling"), 800);
-      return () => clearTimeout(t);
-    }
-  }, [isInView, phase]);
 
   const totalW = COLS * PIECE_W + TAB_R;
   const totalH = ROWS * PIECE_H + TAB_R;
