@@ -117,7 +117,7 @@ const Nurturly = () => {
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
-    <div className="overflow-x-hidden font-sans" style={{ background: "linear-gradient(180deg, #F5E6F0 0%, #F0E4EE 15%, #EDE4F0 30%, #E8E4F0 50%, #F0EDE6 75%, #F5F0EB 100%)" }}>
+    <div className="overflow-x-hidden font-sans bg-white">
       <Navigation />
       <SectionNav sections={sections} />
 
