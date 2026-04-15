@@ -86,7 +86,7 @@ const SectionWindowHeader = ({ windowTitle, eyebrow, title, titleAccent, subtitl
           </>
         )}
       </h2>
-      {subtitle && <p className="mt-4 max-w-[560px] text-[16px] leading-7 text-black/50">{subtitle}</p>}
+      {subtitle && <p className="mt-4 text-[16px] leading-7 text-black/50">{subtitle}</p>}
     </div>
   </motion.div>
 );
@@ -363,7 +363,6 @@ const App = () => {
               title="Strategic"
               titleAccent="Outputs."
               subtitle="End-to-end product thinking across AI, research, fintech, and technically complex systems."
-              subtitleClassName="whitespace-nowrap"
             />
 
             <div className="mt-10 grid gap-8 md:grid-cols-2 lg:gap-10">
