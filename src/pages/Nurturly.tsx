@@ -87,7 +87,7 @@ const Section = ({ children, className = "" }: { children: React.ReactNode; clas
 /* ── Consistent section header ── */
 const SectionHeader = ({ eyebrow, title }: { eyebrow: string; title: React.ReactNode }) => (
   <div className="mb-6 md:mb-8">
-    <p className="mb-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.3em] text-black/30">{eyebrow}</p>
+    <p className="mb-2 text-sm font-semibold uppercase tracking-[0.3em] text-black/30">{eyebrow}</p>
     <h2 className="font-serif text-xl sm:text-2xl md:text-[28px] leading-[1.2] text-black/85">{title}</h2>
   </div>
 );
@@ -164,8 +164,8 @@ const Nurturly = () => {
                       { title: 'TEAM', content: '2 UX designers\nproduct manager\nbusiness analyst' },
                     ].map((item, i) => (
                       <div key={i} className="text-left">
-                        <h4 className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-black/35 mb-2">{item.title}</h4>
-                        <p className="text-xs sm:text-sm text-black/75 whitespace-pre-line leading-relaxed">{item.content}</p>
+                        <h4 className="text-sm font-semibold uppercase tracking-wider text-black/35 mb-2">{item.title}</h4>
+                        <p className="text-sm text-black/75 whitespace-pre-line leading-relaxed">{item.content}</p>
                       </div>
                     ))}
                   </motion.div>
@@ -212,7 +212,7 @@ const Nurturly = () => {
         <section id="solution" className={`${SECTION_PX} py-14 sm:py-20`} style={{ background: "#111" }}>
           <div className={`mx-auto ${MAX_W}`}>
             <div className="text-white mb-10">
-              <p className="mb-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.3em] text-white/40">SOLUTION</p>
+              <p className="mb-2 text-sm font-semibold uppercase tracking-[0.3em] text-white/40">SOLUTION</p>
               <h2 className="font-serif text-xl sm:text-2xl md:text-[28px] leading-[1.2] text-white/90">
                 <span style={{ color: PINK }}>Reliable</span> answers. <span style={{ color: PINK }}>Real connections.</span><br className="hidden sm:inline" />
                 A smarter way to navigate motherhood.
@@ -318,10 +318,10 @@ const Nurturly = () => {
                   { label: 'PAIN POINT 3', emoji: '🏊', title: 'Missing Connection', desc: 'Need empathetic 1:1 support' },
                 ].map((p, i) => (
                   <motion.div key={i} className="rounded-xl p-4 text-center" style={{ background: "rgba(219,39,119,0.04)", border: "1px solid rgba(219,39,119,0.10)" }} {...fadeInUp}>
-                    <p className="text-[10px] font-semibold uppercase tracking-wider mb-2" style={{ color: PINK }}>{p.label}</p>
+                    <p className="text-sm font-semibold uppercase tracking-wider mb-2" style={{ color: PINK }}>{p.label}</p>
                     <div className="text-2xl mb-2">{p.emoji}</div>
                     <h3 className="font-semibold text-sm mb-1 text-black/80">{p.title}</h3>
-                    <p className="text-xs sm:text-sm text-black/50">{p.desc}</p>
+                    <p className="text-sm text-black/50">{p.desc}</p>
                   </motion.div>
                 ))}
               </div>
@@ -334,10 +334,10 @@ const Nurturly = () => {
                   { label: 'DESIGN PRINCIPLE 3', emoji: '🤝', title: 'Foster Safety', desc: 'Create a judgment-free space where moms feel heard and safe.' },
                 ].map((p, i) => (
                   <motion.div key={i} className="rounded-xl p-4 text-center text-white" style={{ background: PINK }} {...fadeInUp}>
-                    <p className="text-[10px] font-semibold uppercase tracking-wider mb-2 text-white/70">{p.label}</p>
+                    <p className="text-sm font-semibold uppercase tracking-wider mb-2 text-white/70">{p.label}</p>
                     <div className="text-2xl mb-2">{p.emoji}</div>
                     <h3 className="font-semibold text-sm mb-1">{p.title}</h3>
-                    <p className="text-xs sm:text-sm text-white/80">{p.desc}</p>
+                    <p className="text-sm text-white/80">{p.desc}</p>
                   </motion.div>
                 ))}
               </div>
@@ -349,7 +349,7 @@ const Nurturly = () => {
         <section className={`${SECTION_PX} py-14 sm:py-20`} style={{ background: "#1a1a1a" }}>
           <div className={`mx-auto ${MAX_W} text-white`}>
             <div className="mb-8">
-              <p className="mb-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.3em] text-white/40">INTRODUCING NURTURLY</p>
+              <p className="mb-2 text-sm font-semibold uppercase tracking-[0.3em] text-white/40">INTRODUCING NURTURLY</p>
               <h2 className="font-serif text-xl sm:text-2xl md:text-[28px] leading-[1.2] text-white/90">
                 Through <span style={{ color: PINK }}>AI-powered features</span> and <span style={{ color: PINK }}>empathy-driven design,</span> Nurturly ensures moms feel <span style={{ color: PINK }}>supported, informed, and connected.</span>
               </h2>
@@ -390,19 +390,19 @@ const Nurturly = () => {
                 { num: "#3", subtitle: "Creating Meaningful Connections Between", accent: "Moms", first: communityFirstDesign, final: communityFinalDesign, firstQuote: '"I don\'t love swiping through too many people."', finalQuote: '"It\'s easier to find someone I relate to when they\'re grouped."', insight: <>By <span style={{ color: PINK }} className="font-semibold">surfacing shared traits</span> and <span style={{ color: PINK }} className="font-semibold">grouping similar users,</span> we made connections feel easier, faster, and more genuine.</> },
               ].map((iter, i) => (
                 <motion.div key={i} className={i < 2 ? "mb-14 pb-14 border-b border-black/[0.06]" : ""} {...fadeInUp}>
-                  <p className="text-[10px] font-semibold uppercase tracking-wider text-black/35 mb-1">DESIGN ITERATION {iter.num}</p>
+                  <p className="text-sm font-semibold uppercase tracking-wider text-black/35 mb-1">DESIGN ITERATION {iter.num}</p>
                   <h3 className="font-serif text-lg sm:text-xl md:text-2xl mb-5 text-black/85">{iter.subtitle} <span style={{ color: PINK }}>{iter.accent}</span></h3>
                   <div className="flex flex-col sm:flex-row gap-4 items-center">
                     <div className="flex-1 text-center">
                       <div className="flex items-center justify-center gap-2 mb-2"><span className="text-red-500 text-base font-bold">✗</span><span className="font-semibold text-sm text-black/70">First Design</span></div>
                       <img src={iter.first} alt="First design" className="max-w-[180px] sm:max-w-[200px] mx-auto mb-2" />
-                      <div className="bg-[#f7f8fa] p-2.5 rounded-lg max-w-[200px] mx-auto"><p className="text-xs italic text-black/50">{iter.firstQuote}</p></div>
+                      <div className="bg-[#f7f8fa] p-2.5 rounded-lg max-w-[200px] mx-auto"><p className="text-sm italic text-black/50">{iter.firstQuote}</p></div>
                     </div>
                     <div className="flex items-center justify-center py-2 sm:py-0"><span className="text-lg sm:rotate-0 rotate-90" style={{ color: PINK }}>→</span></div>
                     <div className="flex-1 text-center">
                       <div className="flex items-center justify-center gap-2 mb-2"><span className="text-green-600 text-base font-bold">✓</span><span className="font-semibold text-sm text-black/70">Final Design</span></div>
                       <img src={iter.final} alt="Final design" className="max-w-[180px] sm:max-w-[200px] mx-auto mb-2" />
-                      <div className="bg-[#f7f8fa] p-2.5 rounded-lg max-w-[200px] mx-auto"><p className="text-xs italic text-black/50">{iter.finalQuote}</p></div>
+                      <div className="bg-[#f7f8fa] p-2.5 rounded-lg max-w-[200px] mx-auto"><p className="text-sm italic text-black/50">{iter.finalQuote}</p></div>
                     </div>
                   </div>
                   <div className="p-3 rounded-xl mt-4" style={{ background: "rgba(219,39,119,0.06)", border: "1px solid rgba(219,39,119,0.15)" }}>
@@ -418,7 +418,7 @@ const Nurturly = () => {
         <section id="highfi" className={`${SECTION_PX} ${SECTION_GAP}`}>
           <div className={`mx-auto ${MAX_W}`}>
             <Section>
-              <p className="mb-6 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.3em] text-black/30">HIGH-FI DESIGN</p>
+              <p className="mb-6 text-sm font-semibold uppercase tracking-[0.3em] text-black/30">HIGH-FI DESIGN</p>
               <div className="space-y-12">
                 {[
                   { title: "AI chatbot that provides trustworthy resources", img: aiChatbotFeature },
@@ -452,7 +452,7 @@ const Nurturly = () => {
         {/* ═══════ REFLECTION (dark) ═══════ */}
         <section id="reflection" className={`${SECTION_PX} py-14 sm:py-20`} style={{ background: "#111" }}>
           <div className={`mx-auto ${MAX_W} text-white`}>
-            <p className="mb-6 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.3em] text-white/40">REFLECTION</p>
+            <p className="mb-6 text-sm font-semibold uppercase tracking-[0.3em] text-white/40">REFLECTION</p>
 
             <div className="mb-12">
               <h3 className="font-serif text-lg sm:text-xl md:text-2xl mb-5 text-white/90">What I Could've Done Better</h3>
