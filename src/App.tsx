@@ -55,19 +55,14 @@ const SectionWindowHeader = ({ windowTitle, eyebrow, title, titleAccent, subtitl
   windowTitle: string; eyebrow: string; title: string; titleAccent?: string; subtitle?: string;
 }) => (
   <motion.div
-    className="overflow-hidden rounded-2xl"
-    style={{
-      background: "rgba(255,255,255,0.25)",
-      backdropFilter: "blur(40px) saturate(1.8)",
-      border: "1px solid rgba(255,255,255,0.4)",
-      boxShadow: "0 12px 40px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.5)",
-    }}
+    className="overflow-hidden rounded-2xl bg-white"
+    style={{ border: "1px solid rgba(0,0,0,0.07)", boxShadow: "0 8px 28px rgba(0,0,0,0.05)" }}
     initial={{ opacity: 0, y: 16 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.45 }}
   >
-    <div className="flex items-center gap-2 border-b border-white/[0.15] px-4 py-2.5" aria-hidden="true">
+    <div className="flex items-center gap-2 border-b border-black/[0.06] px-4 py-2.5" aria-hidden="true">
       <div className="flex items-center gap-[7px]">
         <span className="h-3 w-3 rounded-full" style={{ background: "#FF5F57" }} />
         <span className="h-3 w-3 rounded-full" style={{ background: "#FFBD2E" }} />
@@ -226,7 +221,7 @@ const App = () => {
           }}
           aria-label="Desktop hero"
         >
-          <div className="relative z-10 flex-1 px-4 pb-10 pt-8 sm:px-6 md:px-8 lg:px-12 lg:pb-36">
+          <div className="relative z-10 flex-1 px-4 pb-10 pt-8 sm:px-6 md:px-8 lg:px-12 lg:pb-48">
             <div className="mx-auto max-w-[1280px]">
 
               {/* Name + Headline */}
@@ -249,10 +244,10 @@ const App = () => {
                   className="text-[clamp(2.2rem,6vw,5rem)] leading-[1.08] tracking-tight"
                   initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
                 >
-                  <span className="font-light text-black/60">Turning</span>{" "}
+                  <span className="font-normal text-black/50">Turning</span>{" "}
                   <span className="font-serif italic text-[#4338CA]">complexity</span>
                   <br />
-                  <span className="font-light text-black/60">into</span>{" "}
+                  <span className="font-normal text-black/50">into</span>{" "}
                   <span className="font-serif italic text-[#4338CA]">clarity</span>
                 </motion.h2>
               </div>
@@ -368,13 +363,8 @@ const App = () => {
               {projects.map((project, index) => {
                 const card = (
                   <motion.article
-                    className="group flex h-full flex-col overflow-hidden rounded-xl transition-all duration-300 hover:-translate-y-1.5"
-                    style={{
-                      background: "rgba(255,255,255,0.3)",
-                      backdropFilter: "blur(40px) saturate(1.8)",
-                      border: "1px solid rgba(255,255,255,0.45)",
-                      boxShadow: "0 8px 32px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.5)",
-                    }}
+                    className="group flex h-full flex-col overflow-hidden rounded-xl bg-white transition-all duration-300 hover:-translate-y-1.5"
+                    style={{ border: "1px solid rgba(0,0,0,0.06)", boxShadow: "0 2px 12px rgba(0,0,0,0.04)" }}
                     initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.08 }}
                   >
                     <div className="relative aspect-[16/9] w-full overflow-hidden" style={{ background: project.imageColor }}>
@@ -419,7 +409,7 @@ const App = () => {
             <SectionWindowHeader
               windowTitle="Notes — Collaboration"
               eyebrow="COLLABORATION"
-              title="Collaborator"
+              title="Trusted"
               titleAccent="Voices."
             />
 
@@ -427,13 +417,8 @@ const App = () => {
               {testimonials.map((t, i) => (
                 <motion.article
                   key={t.id}
-                  className="flex flex-col gap-4 rounded-xl p-6 md:p-7"
-                  style={{
-                    background: "rgba(255,255,255,0.3)",
-                    backdropFilter: "blur(40px) saturate(1.8)",
-                    border: "1px solid rgba(255,255,255,0.45)",
-                    boxShadow: "0 8px 32px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.5)",
-                  }}
+                  className="flex flex-col gap-4 rounded-xl bg-white p-6 md:p-7"
+                  style={{ border: "1px solid rgba(0,0,0,0.06)", boxShadow: "0 2px 12px rgba(0,0,0,0.04)" }}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -445,7 +430,7 @@ const App = () => {
                   <p className="text-[14px] leading-relaxed text-black/50">
                     {highlightKeywords(t.subtext, t.keywords)}
                   </p>
-                  <div className="mt-auto flex items-center gap-3 border-t border-white/[0.2] pt-4">
+                  <div className="mt-auto flex items-center gap-3 border-t border-black/[0.06] pt-4">
                     <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 text-[14px] font-semibold text-white">
                       {t.author.split(" ").map(n => n[0]).join("")}
                     </div>
