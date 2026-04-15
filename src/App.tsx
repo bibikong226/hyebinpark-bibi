@@ -173,6 +173,20 @@ const highlightKeywords = (text: string, keywords: string[]) => {
 
 /* ═══════ MAIN APP ═══════ */
 const App = () => {
+  // Debug: find overflowing elements
+  useEffect(() => {
+    const check = () => {
+      const docWidth = document.documentElement.clientWidth;
+      document.querySelectorAll('*').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.right > docWidth + 1 && rect.width > 10) {
+          console.log('OVERFLOW_FOUND:', el.tagName, el.className?.toString().substring(0, 80), 'right:', Math.round(rect.right), 'docWidth:', docWidth);
+        }
+      });
+      console.log('DOC_WIDTH:', docWidth, 'BODY_SCROLL:', document.body.scrollWidth);
+    };
+    setTimeout(check, 2000);
+  }, []);
   const [searchOpen, setSearchOpen] = useState(false);
   const [finderCategory, setFinderCategory] = useState<string | null>(null);
 
