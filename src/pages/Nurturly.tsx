@@ -466,8 +466,8 @@ const Nurturly = () => {
                     <div className="flex items-start gap-3">
                       <span className="text-lg">{item.emoji}</span>
                       <div>
-                        <h4 className="font-semibold text-sm mb-1 text-white/90">{item.title}</h4>
-                        <p className="text-sm text-white/50">{item.desc}</p>
+                        <h4 className="font-semibold text-base mb-1 text-white/90">{item.title}</h4>
+                        <p className="text-base text-white/50">{item.desc}</p>
                       </div>
                     </div>
                   </motion.div>
@@ -487,8 +487,8 @@ const Nurturly = () => {
                     <div className="flex items-start gap-3">
                       <span className="text-lg">{item.emoji}</span>
                       <div>
-                        <h4 className="font-semibold text-sm mb-1 text-white/90">{item.title}</h4>
-                        <p className="text-sm text-white/50">{item.desc}</p>
+                        <h4 className="font-semibold text-base mb-1 text-white/90">{item.title}</h4>
+                        <p className="text-base text-white/50">{item.desc}</p>
                       </div>
                     </div>
                   </motion.div>
