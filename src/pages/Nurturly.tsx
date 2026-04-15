@@ -123,49 +123,54 @@ const Nurturly = () => {
 
       <main id="main-content" role="main">
 
-        {/* ═══════ HERO ═══════ */}
-        <section id="hero" className={`${SECTION_PX} pt-8 pb-10 sm:pt-12 sm:pb-14`}>
-          <div className={`mx-auto ${MAX_W} text-center`}>
-            <motion.img src={nurturlyLogo} alt="Nurturly Logo" className="max-w-[180px] sm:max-w-[260px] md:max-w-[320px] mx-auto mb-4 sm:mb-6"
-              initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} />
-            <motion.p className={`${BODY} font-semibold text-black/70`}
-              initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
-              Designing an AI-driven platform that connects new moms<br className="hidden sm:inline" /> to personalized resources and peer support
-            </motion.p>
-          </div>
-        </section>
+        {/* Baby pink gradient zone: hero → project details */}
+        <div style={{ background: "linear-gradient(180deg, #F9E8F2 0%, #F5E0ED 40%, #F0DAE6 70%, #FFFFFF 100%)" }}>
 
-        {/* Hero Mockup */}
-        <section className={`${SECTION_PX} pb-10 sm:pb-14 md:px-12 lg:px-20`}>
-          <motion.div className={`rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 lg:p-10 mx-auto ${MAX_W}`} style={{ background: PINK }}
-            initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.3 }}>
-            <img src={newMockupImage} alt="Nurturly App Mockup" className="w-full h-auto hover:scale-105 transition-transform duration-500" />
-          </motion.div>
-        </section>
+          {/* ═══════ HERO ═══════ */}
+          <section id="hero" className={`${SECTION_PX} pt-8 pb-10 sm:pt-12 sm:pb-14`}>
+            <div className={`mx-auto ${MAX_W} text-center`}>
+              <motion.img src={nurturlyLogo} alt="Nurturly Logo" className="max-w-[180px] sm:max-w-[260px] md:max-w-[320px] mx-auto mb-4 sm:mb-6"
+                initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} />
+              <motion.p className={`${BODY} font-semibold text-black/70`}
+                initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
+                Designing an AI-driven platform that connects new moms<br className="hidden sm:inline" /> to personalized resources and peer support
+              </motion.p>
+            </div>
+          </section>
 
-        {/* Project Details — MacWin */}
-        <section className={`${SECTION_PX} pb-10 sm:pb-14`}>
-          <div className={`mx-auto ${MAX_W}`}>
-            <MacWin title="Finder — Project Details">
-              <div className="p-6 sm:p-8 md:p-10">
-                <motion.div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8"
-                  initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.5 }}>
-                  {[
-                    { title: 'SKILLS', content: 'User Research\nUX/UI Design\nInteractive Prototyping\nUsability Testing' },
-                    { title: 'MY ROLE', content: 'UX Design Lead' },
-                    { title: 'TIMELINE', content: '2 Months\nOct. 2024 - Nov. 2024' },
-                    { title: 'TEAM', content: '2 UX designers\nproduct manager\nbusiness analyst' },
-                  ].map((item, i) => (
-                    <div key={i} className="text-left">
-                      <h4 className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-black/35 mb-2">{item.title}</h4>
-                      <p className="text-xs sm:text-sm text-black/75 whitespace-pre-line leading-relaxed">{item.content}</p>
-                    </div>
-                  ))}
-                </motion.div>
-              </div>
-            </MacWin>
-          </div>
-        </section>
+          {/* Hero Mockup */}
+          <section className={`${SECTION_PX} pb-10 sm:pb-14 md:px-12 lg:px-20`}>
+            <motion.div className={`rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 lg:p-10 mx-auto ${MAX_W}`} style={{ background: PINK }}
+              initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.3 }}>
+              <img src={newMockupImage} alt="Nurturly App Mockup" className="w-full h-auto hover:scale-105 transition-transform duration-500" />
+            </motion.div>
+          </section>
+
+          {/* Project Details — MacWin */}
+          <section className={`${SECTION_PX} pb-14 sm:pb-20`}>
+            <div className={`mx-auto ${MAX_W}`}>
+              <MacWin title="Finder — Project Details">
+                <div className="p-6 sm:p-8 md:p-10">
+                  <motion.div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8"
+                    initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.5 }}>
+                    {[
+                      { title: 'SKILLS', content: 'User Research\nUX/UI Design\nInteractive Prototyping\nUsability Testing' },
+                      { title: 'MY ROLE', content: 'UX Design Lead' },
+                      { title: 'TIMELINE', content: '2 Months\nOct. 2024 - Nov. 2024' },
+                      { title: 'TEAM', content: '2 UX designers\nproduct manager\nbusiness analyst' },
+                    ].map((item, i) => (
+                      <div key={i} className="text-left">
+                        <h4 className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-black/35 mb-2">{item.title}</h4>
+                        <p className="text-xs sm:text-sm text-black/75 whitespace-pre-line leading-relaxed">{item.content}</p>
+                      </div>
+                    ))}
+                  </motion.div>
+                </div>
+              </MacWin>
+            </div>
+          </section>
+
+        </div>{/* end pink gradient zone */}
 
         {/* ═══════ SUMMARY ═══════ */}
         <section id="summary" className={`${SECTION_PX} ${SECTION_GAP}`}>
