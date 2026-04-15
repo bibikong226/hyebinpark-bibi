@@ -82,12 +82,12 @@ export const ProjectCard = ({
               ))}
             </div>
 
-            {/* Highlights with hover fill effect */}
-            <div className="flex flex-wrap gap-1.5 sm:gap-2">
+            {/* Highlights - consistent vertical stack */}
+            <div className="flex flex-col gap-1.5 sm:gap-2">
               {highlights.map((highlight, highlightIndex) => (
                 <div
                   key={highlightIndex}
-                  className="relative overflow-hidden px-2 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm rounded-md font-medium"
+                  className="relative overflow-hidden px-2 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm rounded-md font-medium w-fit"
                 >
                   <div className="absolute inset-0 bg-zinc-200" />
                   <div 
