@@ -316,7 +316,7 @@ const App = () => {
           {/* Dock */}
           <div className="relative z-20 px-4 pb-6 sm:px-6 md:px-8 lg:absolute lg:bottom-6 lg:left-1/2 lg:-translate-x-1/2 lg:px-0 lg:pb-0">
             <div className="mx-auto flex w-fit items-center gap-0 rounded-2xl px-3 py-2" role="navigation" aria-label="Quick navigation dock"
-              style={{ background: "rgba(255,255,255,0.2)", backdropFilter: "blur(40px) saturate(1.8)", border: "1px solid rgba(255,255,255,0.35)", boxShadow: "0 8px 32px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.5)" }}>
+              style={{ background: "rgba(255,255,255,0.35)", backdropFilter: "blur(40px) saturate(1.8)", border: "1px solid rgba(255,255,255,0.45)", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.5)" }}>
               {(() => {
                 const items = [
                   { icon: "📂", label: "Work", bg: "linear-gradient(135deg,#6366F1,#4F46E5)", action: () => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" }) },

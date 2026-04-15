@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { Layout } from "@/components/Layout";
+import { Navigation } from "@/components/Navigation";
+import { Footer } from "@/components/Footer";
 import aboutProfile from "@/assets/about-profile.jpg";
 import expMichigan from "@/assets/exp-michigan.png";
 import expConcord from "@/assets/exp-concord.png";
@@ -62,17 +63,18 @@ const workValues = [
   { title: "Creativity", emoji: "✨", description: "Exploring innovative approaches and emerging technologies to solve complex design challenges" },
 ];
 
-const SECTION_SPACING = "px-4 py-12 sm:px-8 sm:py-14 md:px-10";
+const SECTION_SPACING = "px-4 py-14 sm:px-8 sm:py-16 md:px-10";
 
 const About = () => {
   return (
-    <Layout>
+    <div className="overflow-x-hidden font-sans" style={{ background: "linear-gradient(180deg, #DDD5EE 0%, #DDE4F0 20%, #E0ECF0 45%, #F0EDE6 70%, #F5F0EB 100%)" }}>
+      <Navigation />
       {/* Hero */}
       <section className="px-4 pt-8 pb-4 sm:px-8 md:px-10" aria-labelledby="about-heading">
         <div className="mx-auto max-w-[1000px]">
           <motion.div className="mb-8" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <p className="mb-2 text-[14px] font-medium uppercase tracking-[0.3em] text-white/40">About</p>
-            <h1 id="about-heading" className="text-[clamp(32px,5vw,56px)] font-bold tracking-tight text-white/90">
+            <p className="mb-2 text-[14px] font-medium uppercase tracking-[0.3em] text-black/40">About</p>
+            <h1 id="about-heading" className="text-[clamp(32px,5vw,56px)] font-bold tracking-tight text-black/85">
               Meet Hyebin! 👋
             </h1>
           </motion.div>
@@ -184,7 +186,8 @@ const About = () => {
           </MacWin>
         </div>
       </section>
-    </Layout>
+      <Footer />
+    </div>
   );
 };
 
