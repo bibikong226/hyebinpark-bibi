@@ -261,11 +261,11 @@ const App = () => {
                 {/* Left: About + Folders */}
                 <div className="space-y-6 sm:space-y-8 lg:col-span-5">
                   <MacWin title="About" delay={0.12}>
-                    <div className="p-4 sm:p-5 md:p-6">
+                    <div className="p-3 sm:p-5 md:p-6">
                       <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-start sm:gap-4">
-                        <img src={memojiImg} alt="Hyebin memoji" className="h-20 w-20 flex-shrink-0 object-contain drop-shadow-md sm:h-32 sm:w-32" style={{ background: "transparent" }} />
-                        <div className="min-w-0">
-                          <p className="text-center text-[13px] font-semibold leading-5 text-black/80 sm:text-left sm:text-[15px] sm:leading-6">I turn ambiguity into clear, trustworthy products that drive real business impact.</p>
+                        <img src={memojiImg} alt="Hyebin memoji" className="h-16 w-16 flex-shrink-0 object-contain drop-shadow-md sm:h-32 sm:w-32" style={{ background: "transparent" }} />
+                        <div className="min-w-0 flex-1">
+                          <p className="text-center text-[12px] font-semibold leading-5 text-black/80 sm:text-left sm:text-[15px] sm:leading-6">I turn ambiguity into clear, trustworthy products that drive real business impact.</p>
                           <div className="mt-2 inline-flex items-center gap-2 rounded-full bg-black/[0.04] px-3 py-1 text-[12px] font-semibold text-black/60 sm:mt-3 sm:text-[14px]">
                             <span className="h-2 w-2 rounded-full bg-green-500" aria-hidden="true" />Open to work
                           </div>
