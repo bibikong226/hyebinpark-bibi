@@ -256,8 +256,8 @@ const App = () => {
                 </motion.h2>
               </div>
 
-              {/* Windows grid */}
-              <div className="grid gap-6 sm:gap-10 lg:grid-cols-12 lg:items-start">
+              {/* Windows grid — overlap puzzle over About on desktop */}
+              <div className="relative grid gap-6 sm:gap-10 lg:grid-cols-12 lg:items-start">
                 {/* About widget */}
                 <div className="order-1 lg:col-span-5 lg:row-span-1">
                   <MacWin title="About" delay={0.12}>
