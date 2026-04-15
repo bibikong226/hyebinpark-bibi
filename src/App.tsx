@@ -229,9 +229,9 @@ const App = () => {
             <div className="mx-auto max-w-[1280px]">
 
               {/* Name + Headline */}
-              <div className="mb-12 flex flex-col items-center text-center sm:mb-16 lg:mb-32">
+              <div className="mb-12 flex flex-col items-center text-center sm:mb-16 lg:mb-32 overflow-hidden w-full">
                 <h1
-                  className="pointer-events-none select-none text-[clamp(2.5rem,13vw,9rem)] font-black uppercase leading-[0.85] tracking-[-0.04em]"
+                  className="pointer-events-none select-none text-[clamp(2.5rem,11vw,9rem)] font-black uppercase leading-[0.85] tracking-[-0.04em] w-full"
                   style={{ color: "rgba(0,0,0,0.12)" }}
                 >
                   HYEBIN PARK
