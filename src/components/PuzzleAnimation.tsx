@@ -117,14 +117,6 @@ export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProp
     return clearTimer;
   }, [phase, onAssembled]);
 
-  // Re-trigger when it comes back into view after scatter
-  useEffect(() => {
-    if (isInView && phase === "scattered" && !hasTriggered.current) {
-      hasTriggered.current = true;
-      const t = setTimeout(() => setPhase("assembling"), 800);
-      return () => clearTimeout(t);
-    }
-  }, [isInView, phase]);
 
   const totalW = COLS * PIECE_W + TAB_R;
   const totalH = ROWS * PIECE_H + TAB_R;
