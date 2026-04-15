@@ -76,7 +76,7 @@ const SectionWindowHeader = ({ windowTitle, eyebrow, title, titleAccent, subtitl
       <div className="w-[52px]" />
     </div>
     <div className="px-8 py-8 md:px-10 md:py-10">
-      <p className="mb-3 text-[14px] font-medium uppercase tracking-[0.3em] text-black/30">{eyebrow}</p>
+      <p className="mb-3 text-[14px] font-medium uppercase tracking-[0.3em] text-black/45">{eyebrow}</p>
       <h2 className="text-[clamp(40px,6vw,72px)] font-black leading-[1] tracking-tight text-black/90">
         {title}
         {titleAccent && (
@@ -86,7 +86,7 @@ const SectionWindowHeader = ({ windowTitle, eyebrow, title, titleAccent, subtitl
           </>
         )}
       </h2>
-      {subtitle && <p className="mt-4 text-[16px] leading-7 text-black/50">{subtitle}</p>}
+      {subtitle && <p className="mt-4 text-[16px] leading-7 text-black/60">{subtitle}</p>}
     </div>
   </motion.div>
 );
