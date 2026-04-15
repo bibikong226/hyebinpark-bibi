@@ -173,7 +173,7 @@ export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProp
         {phase === "photo" && profileSrc && (
           <motion.div
             className="absolute flex items-center justify-center overflow-hidden rounded-2xl"
-            style={{ left: PADDING, top: PADDING, width: totalW, height: totalH }}
+            style={{ left: PADDING - 16, top: PADDING - 16, width: totalW + 32, height: totalH + 32 }}
             initial={{ opacity: 0, scale: 0.97 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.97, transition: { duration: 0.35 } }}
@@ -182,7 +182,7 @@ export const PuzzleAnimation = ({ onAssembled, profileSrc }: PuzzleAnimationProp
             <img
               src={profileSrc}
               alt="Hyebin Park"
-              className="max-h-full max-w-full object-contain rounded-2xl"
+              className="h-full w-full object-cover rounded-2xl"
             />
           </motion.div>
         )}
