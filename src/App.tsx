@@ -256,10 +256,10 @@ const App = () => {
                 </motion.h2>
               </div>
 
-              {/* Windows grid — overlap puzzle over About on desktop */}
-              <div className="relative grid gap-6 sm:gap-10 lg:grid-cols-12 lg:items-start">
-                {/* About widget */}
-                <div className="order-1 lg:col-span-5 lg:row-span-1">
+              {/* Windows grid */}
+              <div className="grid gap-6 sm:gap-10 lg:grid-cols-12 lg:items-start">
+                {/* Left: About + Folders */}
+                <div className="space-y-6 sm:space-y-8 lg:col-span-5">
                   <MacWin title="About" delay={0.12}>
                     <div className="p-4 sm:p-5 md:p-6">
                       <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-start sm:gap-4">
@@ -282,24 +282,8 @@ const App = () => {
                       </div>
                     </div>
                   </MacWin>
-                </div>
 
-                {/* How I Work — appears 2nd on mobile, right column on desktop */}
-                <div className="order-2 lg:order-3 lg:col-span-7 lg:col-start-4 lg:-ml-16 lg:mt-8 relative z-10 flex items-start justify-center">
-                  <MacWin title="How I Work" delay={0.18} className="w-fit">
-                    <div className="px-5 py-5 md:px-6 md:py-6">
-                      <p className="mx-auto mb-5 max-w-[380px] text-center text-[14px] leading-relaxed text-black/55">
-                        I bring together diverse perspectives — then piece them into clear, cohesive product experiences.
-                      </p>
-                      <div className="relative flex items-center justify-center overflow-hidden rounded-[24px] bg-black/[0.03] px-6 py-8">
-                        <PuzzleAnimation onAssembled={handlePuzzleAssembled} profileSrc={profileHero} />
-                      </div>
-                    </div>
-                  </MacWin>
-                </div>
-
-                {/* Folders — appears 3rd on mobile, below About on desktop */}
-                <div className="order-3 lg:order-2 lg:col-span-5">
+                  {/* Folders */}
                   <aside aria-labelledby="folders-heading">
                     <p id="folders-heading" className="mb-5 px-1 text-[14px] font-semibold uppercase tracking-[0.22em] text-black/50">Project Folders</p>
                     <div className="grid grid-cols-3 gap-y-6 gap-x-4 sm:grid-cols-5 lg:grid-cols-3">
@@ -314,6 +298,20 @@ const App = () => {
                       ))}
                     </div>
                   </aside>
+                </div>
+
+                {/* Right: Puzzle widget card */}
+                <div className="lg:col-span-7 flex items-start justify-center">
+                  <MacWin title="How I Work" delay={0.18} className="w-fit">
+                    <div className="px-5 py-5 md:px-6 md:py-6">
+                      <p className="mx-auto mb-5 max-w-[380px] text-center text-[14px] leading-relaxed text-black/55">
+                        I bring together diverse perspectives — then piece them into clear, cohesive product experiences.
+                      </p>
+                      <div className="relative flex items-center justify-center overflow-hidden rounded-[24px] bg-black/[0.03] px-6 py-8">
+                        <PuzzleAnimation onAssembled={handlePuzzleAssembled} profileSrc={profileHero} />
+                      </div>
+                    </div>
+                  </MacWin>
                 </div>
               </div>
             </div>
