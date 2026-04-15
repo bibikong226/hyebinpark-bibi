@@ -257,7 +257,7 @@ const App = () => {
               </div>
 
               {/* Windows grid */}
-              <div className="grid gap-6 overflow-hidden sm:gap-10 lg:grid-cols-12 lg:items-start">
+              <div className="grid gap-6 sm:gap-10 lg:grid-cols-12 lg:items-start">
                 {/* Left: About + Folders */}
                 <div className="min-w-0 space-y-6 sm:space-y-8 lg:col-span-5">
                   <MacWin title="About" delay={0.12}>
