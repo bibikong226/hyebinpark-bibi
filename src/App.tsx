@@ -266,7 +266,7 @@ const App = () => {
                       <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-start sm:gap-4">
                         <img src={memojiImg} alt="Hyebin memoji" className="h-24 w-24 flex-shrink-0 object-contain drop-shadow-md sm:h-44 sm:w-44" style={{ background: "transparent" }} />
                         <div>
-                          <p className="text-center text-[11px] font-semibold leading-[1.5] text-black/80 sm:text-left sm:text-[15px] sm:leading-6">I turn ambiguity into clear, trustworthy products that drive real business impact.</p>
+                          <p className="text-center text-[14px] font-medium leading-[1.5] text-black/85 sm:text-left sm:text-[16px] sm:leading-[1.45]">Turning ambiguity into products that drive real impact.</p>
                           <div className="mt-2 inline-flex items-center gap-2 rounded-full bg-black/[0.04] px-3 py-1 text-[11px] font-semibold text-black/60 sm:mt-3 sm:text-[14px]">
                             <span className="h-2 w-2 rounded-full bg-green-500" aria-hidden="true" />Open to work
                           </div>
@@ -304,8 +304,8 @@ const App = () => {
                 <div className="min-w-0 w-full overflow-hidden lg:col-span-7 flex items-start justify-center">
                   <MacWin title="How I Work" delay={0.18} className="w-full lg:w-fit">
                     <div className="px-3 py-3 sm:px-5 sm:py-5 md:px-6 md:py-6">
-                      <p className="mx-auto mb-3 max-w-[380px] text-center text-[13px] font-medium leading-relaxed text-black/80 sm:mb-5 sm:text-[15px]">
-                        I bring together scattered ideas, conflicting needs, and complex systems then shape them into impactful products
+                      <p className="mx-auto mb-3 max-w-[380px] text-center text-[14px] font-medium leading-[1.5] text-black/85 sm:mb-5 sm:text-[16px] sm:leading-[1.45]">
+                        Shaping scattered ideas and complex systems into impactful products.
                       </p>
                       <div className="relative flex items-center justify-center overflow-hidden rounded-[16px] sm:rounded-[24px] bg-black/[0.03] px-1 py-2 sm:px-6 sm:py-8">
                         <div className="w-full max-w-[480px] origin-top scale-[0.55] sm:scale-[0.85] md:scale-100 mb-[-45%] sm:mb-0">
