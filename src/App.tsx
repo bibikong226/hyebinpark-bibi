@@ -305,7 +305,7 @@ const App = () => {
                   <MacWin title="How I Work" delay={0.18} className="w-full lg:w-fit">
                     <div className="px-3 py-3 sm:px-5 sm:py-5 md:px-6 md:py-6">
                       <p className="mx-auto mb-3 max-w-[380px] text-center text-[12px] leading-relaxed text-black/55 sm:mb-5 sm:text-[14px]">
-                        I bring together scattered ideas, conflicting needs, and complex systems — then shape them into products that feel effortless.
+                        I bring together scattered ideas, conflicting needs, and complex systems then shape them into impactful products
                       </p>
                       <div className="relative flex items-center justify-center overflow-hidden rounded-[16px] sm:rounded-[24px] bg-black/[0.03] px-1 py-2 sm:px-6 sm:py-8">
                         <div className="w-full max-w-[480px] origin-top scale-[0.55] sm:scale-[0.85] md:scale-100 mb-[-45%] sm:mb-0">
