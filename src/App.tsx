@@ -266,7 +266,7 @@ const App = () => {
                       <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-start sm:gap-4">
                         <img src={memojiImg} alt="Hyebin memoji" className="h-24 w-24 flex-shrink-0 object-contain drop-shadow-md sm:h-44 sm:w-44" style={{ background: "transparent" }} />
                         <div>
-                          <p className="text-center text-[14px] font-medium leading-[1.5] text-black/85 sm:text-left sm:text-[16px] sm:leading-[1.45]">I turn <span className="font-bold text-black underline decoration-black/30 decoration-2 underline-offset-4">ambiguity</span> into clear, trustworthy products that drive <span className="font-bold text-black underline decoration-black/30 decoration-2 underline-offset-4">real business impact</span>.</p>
+                          <p className="text-center text-[14px] font-medium leading-[1.5] text-black/85 sm:text-left sm:text-[16px] sm:leading-[1.45]">I turn <span className="font-bold text-indigo-600">ambiguity</span> into clear, trustworthy products that drive <span className="font-bold text-indigo-600">real business impact</span>.</p>
                           <div className="mt-2 inline-flex items-center gap-2 rounded-full bg-black/[0.04] px-3 py-1 text-[11px] font-semibold text-black/60 sm:mt-3 sm:text-[14px]">
                             <span className="h-2 w-2 rounded-full bg-green-500" aria-hidden="true" />Open to work
                           </div>
