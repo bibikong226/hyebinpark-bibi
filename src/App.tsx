@@ -357,7 +357,7 @@ const App = () => {
         </section>
 
         {/* ═══════ SELECTED WORK ═══════ */}
-        <section id="work" className="px-4 pt-20 pb-12 sm:px-8 sm:pt-24 sm:pb-16 md:px-10" aria-labelledby="work-heading">
+        <section id="work" className="px-4 pt-32 pb-24 sm:px-8 sm:pt-40 sm:pb-32 md:px-10 md:pt-48 md:pb-36" aria-labelledby="work-heading">
           <div className="mx-auto max-w-[1200px]">
             <SectionWindowHeader
               windowTitle="Finder — Selected Work"
@@ -412,7 +412,7 @@ const App = () => {
         </section>
 
         {/* ═══════ TESTIMONIALS ═══════ */}
-        <section id="collab" className="px-4 pt-12 pb-20 sm:px-8 sm:pt-16 sm:pb-24 md:px-10" aria-labelledby="collab-heading">
+        <section id="collab" className="px-4 pt-24 pb-32 sm:px-8 sm:pt-32 sm:pb-40 md:px-10 md:pt-36 md:pb-48" aria-labelledby="collab-heading">
           <div className="mx-auto max-w-[1200px]">
             <SectionWindowHeader
               windowTitle="Notes — Collaboration"
