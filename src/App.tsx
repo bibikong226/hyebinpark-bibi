@@ -276,7 +276,7 @@ const App = () => {
                         <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-black/30 sm:mb-3 sm:text-[14px] sm:tracking-[0.2em]">Experience designing & researching for</p>
                         <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                           {experienceLogos.map(logo => (
-                            <img key={logo.alt} src={logo.src} alt={logo.alt} className="h-9 w-9 rounded-lg bg-white object-contain p-1 sm:h-12 sm:w-12 sm:p-1.5" />
+                            <img key={logo.alt} src={logo.src} alt={logo.alt} className="h-9 w-9 object-contain sm:h-12 sm:w-12" />
                           ))}
                         </div>
                       </div>
