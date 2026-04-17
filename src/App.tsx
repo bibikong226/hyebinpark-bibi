@@ -264,7 +264,7 @@ const App = () => {
                   <MacWin title="About" delay={0.12}>
                     <div className="px-5 py-3 sm:p-5 md:p-6">
                       <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-start sm:gap-4">
-                        <img src={memojiImg} alt="Hyebin memoji" className="h-16 w-16 flex-shrink-0 object-contain drop-shadow-md sm:h-32 sm:w-32" style={{ background: "transparent" }} />
+                        <img src={memojiImg} alt="Hyebin memoji" className="h-24 w-24 flex-shrink-0 object-contain drop-shadow-md sm:h-44 sm:w-44" style={{ background: "transparent" }} />
                         <div>
                           <p className="text-center text-[11px] font-semibold leading-[1.5] text-black/80 sm:text-left sm:text-[15px] sm:leading-6">I turn ambiguity into clear, trustworthy products that drive real business impact.</p>
                           <div className="mt-2 inline-flex items-center gap-2 rounded-full bg-black/[0.04] px-3 py-1 text-[11px] font-semibold text-black/60 sm:mt-3 sm:text-[14px]">
@@ -276,7 +276,7 @@ const App = () => {
                         <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-black/30 sm:mb-3 sm:text-[14px] sm:tracking-[0.2em]">Experience designing & researching for</p>
                         <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                           {experienceLogos.map(logo => (
-                            <img key={logo.alt} src={logo.src} alt={logo.alt} className="h-6 w-6 rounded-lg object-contain sm:h-8 sm:w-8" />
+                            <img key={logo.alt} src={logo.src} alt={logo.alt} className="h-9 w-9 rounded-lg bg-white object-contain p-1 sm:h-12 sm:w-12 sm:p-1.5" />
                           ))}
                         </div>
                       </div>
