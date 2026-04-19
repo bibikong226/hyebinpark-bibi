@@ -1,7 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 
-const CV_LINK = "https://drive.google.com/file/d/1eJfszR-U-Q8KHsuMs1b4Vy68Mjd-uVjS/view?usp=sharing";
+const CV_LINK = "https://drive.google.com/file/d/1wkG1WktHhUqwPqQp43WCjYOMFmRYPY9T/view?usp=sharing";
 
 export const Footer = () => {
   return (
