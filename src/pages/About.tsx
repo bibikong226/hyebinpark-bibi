@@ -93,7 +93,7 @@ const About = () => {
                   As a Master's student in <span className="font-semibold text-black/80">Human-Computer Interaction</span> at the University of Michigan, I specialize in bridging <span className="font-semibold text-black/80">user needs, technical possibilities, and business goals</span>.
                 </p>
                 <a
-                  href="https://drive.google.com/file/d/1eJfszR-U-Q8KHsuMs1b4Vy68Mjd-uVjS/view?usp=sharing"
+                  href="https://drive.google.com/file/d/1wkG1WktHhUqwPqQp43WCjYOMFmRYPY9T/view?usp=sharing"
                   target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[14px] font-medium text-white transition-all hover:opacity-90"
                   style={{ background: "#4338CA" }}
